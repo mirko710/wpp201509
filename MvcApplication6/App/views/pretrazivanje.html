@@ -1,0 +1,441 @@
+﻿<section>
+ 
+    <div id="dialog-BigPicture" title="Zoom:">
+        <div data-bind="with: zoomItem">
+            <span class="col col-lg-32 imageHolder">
+                <img class="img-large" onerror="this.src = '/Content/images/fotonijepronadjen.png';" data-bind="    attr: { src: MC_Staza_slike }" />
+            </span>
+            <p class="col col-lg-16 textHolder" data-bind="html: kataloskaJedinica"></p>
+        </div>
+    </div>
+  
+    
+
+        <div class="sidebar-wrapper paddingTop paddingBottomDouble">
+            <h5 class="heading">Sužavanje pretrage</h5>
+            <!-- ko foreach: $root.refiners -->
+            <div class="sidebarBox border1 borderDarkerBottom paddingSmall marginLeftSmall marginRightSmall" data-bind="visible: podaci().length > 0, hasFocus: imaFokus">
+                <h5 class="inlinebox bold uppercase" data-bind="text: title"></h5>
+                <a class="mainColor floatRight inlinebox" data-bind="visible: recordCount() > 5, text: plus10() ? 'prvih 5' : 'prikaži sve', click: $root.refinerToggle"></a>
+
+                <div class="sidebarBoxLinks paddingTopSmall" data-bind="foreach: podaci">
+                    <span class="box mainLink paddingLeft paddingRight" data-bind="visible: odabrano && (($index() < 5 && !$parent.plus10()) || $parent.plus10())">
+                        <span data-bind="text: Pojam"></span>
+                        <span data-bind="text: ' (' + brojZapisa + ')', attr: { class: 'floatRight' }"></span>
+                    </span>
+
+                    
+                        <a class="box mainLink paddingLeft paddingRight" data-bind="click: $root.dodajRedakUpitaRefinerAND, visible: !odabrano && (($index() < 5 && !$parent.plus10()) || $parent.plus10())">
+                          <!--  <input  type="checkbox" data-bind="checked: checked, event:{changed: $root.dodajRedakUpitaILI}" />-->
+                  
+
+                            <span class="fa fa-square-o" data-bind="text: '', visible: !checked(), click: $root.dodajRedakUpitaRefinerOR, attr: { id: 'REFchkbox1_' + $index() }"></span>
+                            <span class="fa fa-check-square-o" data-bind="text: '', visible: checked(), click: $root.dodajRedakUpitaRefinerOR, attr: { id: 'REFchkbox2_' + $index() }"></span>
+                            
+                            
+                            <span data-bind="text: Pojam"></span>
+                            <span data-bind="text: ' (' + brojZapisa + ')', attr: { class: 'floatRight' }"></span>
+                        </a>
+                    
+
+
+
+
+
+                </div>
+            </div>
+            <!-- /ko -->
+            <div class="clear paddingBottomDouble"></div>
+        </div>
+
+    <div class="container glavni scrollable">
+        <div class="contentBoxHeader breadCrumbsHolder">
+            <span class="prevCrumb icon icon-home"> Dashboard</span>
+            <span class="crumbDivider">></span>
+            <span class="crumb"> Pretraživanje</span>
+        </div>
+
+        <div class="row noMargin marginTop">
+
+            <div class="col col-lg-25 contentBox noPadding" id="tabPretrazivanje">
+                <div class="col col col-lg-36 contentBoxHeader">
+                    <div class="col col-lg-8 link dropdownLink link-subtle right" data-bind="click: $root.openSearchHistory, css: searchHistoryOpened() == true ? 'opened' : ''">
+                        <span class="searchHistory" data-bind="text: myMessage"></span>
+                    </div>
+                    <div class="col col-lg-8 noPadding paddingLeft">
+                        <input class="form-control" placeholder="Novi upit" data-bind="value: $root.imeUpita" />
+                    </div>
+                    <div class="col col-lg-2 headerControls noPadding">
+                        <span title="spremi upit" class="col col-lg-18 button icon-save-disk icon-centered-save-disk" data-bind="click: $root.spremiUpit"></span>
+                        <span title="kopiraj upit" class="col col-lg-18 button icon-files icon-centered-icon-files" data-bind="click: $root.kopirajUpit"></span>
+                    </div>
+                </div>
+                <div class="col col-lg-36 contentBoxBody contentBoxBodySized">
+                    <div class="row noMargin labelsHolder">
+                        <div title="test" class="col col-lg-2 noPadding">i / ili</div>
+                        <div title="test" class="col col-lg-11 noPadding paddingRightSmall">kategorija</div>
+                        <div title="test" class="col col-lg-4 noPadding">operator</div>
+                        <div title="test" class="col col-lg-17">vrijednost</div>
+                        <div title="test" class="col col-lg-2 noPadding"></div>
+                    </div>
+                    <!-- ko foreach: redakUpita -->
+                    <div class="row noMargin ">
+                        <div class="col col-lg-2 styled-select noPadding paddingRightSmall"  data-bind="visible: $index() > 0">
+                            <div >
+                                <select class="form-control" data-bind=" options: $root.redOperatori, value: redOperator"></select>
+                            </div>
+                        </div>
+                        <div class="col col-lg-2 styled-select noPadding paddingRightSmall" >
+                            <div>
+                                <select class="form-control" data-bind=" options: ['', '(', '((', '((('], value: zagradaOtvorena, event: { change: $root.provjeriZagrade }, attr: { id: 'zagO_' + $index() }"></select>
+                            </div>
+                        </div>
+                        <div class="col col-lg-8 styled-select noPadding paddingRightSmall">
+                            <div>
+                                <select class="form-control" data-bind=" options: $root.redakKombo(), optionsText: 'Pojam', optionsValue: 'IDT', value: poljeIDT, event: { change: function () { $root.promjenaPolja($index, $data); } }"></select>
+                            </div>
+                        </div>
+                        <div class="col col-lg-3 styled-select noPadding">
+                            <div>
+                                <!--<select class="form-control" data-bind=" options: operatori, value: upitOperator, event: { change: function () { $root.changeOperator($index, $data); } }"></select>-->
+                                <select class="form-control" data-bind=" options: operatori, value: upitOperator, event: { change:  $root.changeOperator }"></select>
+                            </div>
+                        </div>
+                        <div class="col col-lg-17">
+                            <div class="col col-lg-34 noPadding form-control-noBorder" data-bind="event: { dblclick: function () { $root.zoviDialog($index(), $data); } }">
+                                <input class="form-control" id="Text3" data-bind="visible: combo() == 1, value: vrijednost1" />
+                                <input class="form-control" data-bind="attr: { id: 'upitRed_' + $index()},visible: combo() == 2,
+    NUAuto: {accValue:vrijednost2, tablica:termTablica}    " />
+                                <div class="styled-select">
+                                    <div>
+                                        <select class="form-control" data-bind="visible: combo() == 3, options: $root.DaNeOperators, value: vrijednost3"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-lg-2 noPadding chBoxHolderCol chBoxHolderColNew">
+                                <div data-bind="css: { odabrano: podZapisi }">
+                                    <div class="roundedTwo" data-bind="visible: combo() == 2">
+                                        <input class="chBox" type="checkbox" data-bind="checked: podZapisi, event: { click: $root.changePod }, attr: { id: 'c2hkbox_' + $index() }" />
+                                        <label title="uključi podređene pojmove" data-bind="attr: { for: 'c2hkbox_' + $index() }"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-lg-2 styled-select noPadding paddingRightSmall" >
+                            <div>
+                                 <select class="form-control" data-bind=" options: ['', ')', '))', ')))'], value: zagradaZatvorena, event: { change: $root.provjeriZagrade }, attr: { id: 'zagZ_' + $index() }"></select>
+                            </div>
+                        </div>
+
+                        <div class="col col-lg-2 noPadding addRemoveHolder">
+                            <!--<span id="btnPlus" class="button buttonDefault" data-bind="visible: $index() === ($parent.redakUpita().length - 1), click: $root.noviRedak"><span class="icon icon-plus"></span></span>-->
+                            <span id="Span1" class="button buttonDefault" data-bind=" click: $root.noviRedak"><span class="icon icon-plus"></span></span>
+                            <span id="btnDelRow" class="button buttonAlert right" data-bind="visible: $index() > 0 || $root.redakUpita().length > 1, click: $root.brisiRedak"><span class="icon icon-remove"></span></span>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <div class="row SearchControlsHolder">
+                        <span class="col-lg-6 col-lg-offset-11 button buttonDefault buttonIconed" data-bind="click: $root.pretrazi">
+                            <span class="col-lg-9 icon icon-search-find"></span>
+                            <span class="col-lg-27 buttonTitle">PRETRAŽI</span>
+                        </span>
+
+                        <span class="col-lg-6 col-lg-offset-1 button buttonSecondary buttonIconed" data-bind="click: $root.noviUpit">
+                            <span class="col-lg-9 icon icon-folder-add"></span>
+                            <span class="col-lg-27 buttonTitle">NOVI UPIT</span>
+                        </span>
+                    </div>
+                    <div class="searchHistoryBox">
+                        <div class="col-lg-8 noPadding fullHeightWithBorder">
+                            <ul class="searchHistoryTabs">
+                                <li class="Selected">spremljeni upiti</li>
+                                <li>nedavni upiti</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-28 noPadding searchHistoryContent">
+                            <ul class="searchList">
+                                <li>
+                                    <input placeholder="pretraži spremljene upite" />
+                                </li>
+                                <!-- ko foreach: selectUpit -->
+                                <li data-bind="attr: { 'data-value': ID }, click: $root.promjeniSelectUpit, value: ID">
+                                
+                                    <span class="deleteRow"><span class="icon-remove" data-bind="click:$root.brisiUpit"></span></span>
+                                    <span class="searchTitle" data-bind="text: ime"></span>
+                                    <span class="searchDesc" data-bind="text:opis"></span>
+                                </li>
+                                <!-- /ko -->
+                            </ul>
+                        </div>
+                        <select class="form-control" data-bind="options: $root.selectUpit, value: odabranUpitID, optionsText: 'ime', optionsValue: 'ID', optionsCaption: ' ' "></select>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-10 col-lg-offset-1 contentBox noPadding" id="tabPretrazivanjeControls">
+                <div class="col col col-lg-36 contentBoxHeader">
+                    <h2>Alati</h2>
+                </div>
+                <div class="col col-lg-36 contentBoxBody contentBoxBodySized">
+                    <div class="row">
+                        <span class="col-lg-12">
+                            <!--<span class="button buttonDefault buttonBlock buttonIconed" data-bind="click: $root.msDoc">-->
+                            <span class="button buttonDefault buttonBlock buttonIconed" data-bind="click: $root.skiniDoc">
+                                <span class="col-lg-9 icon icon-ptint"></span>
+                                <span class="col-lg-27 buttonTitle">Word</span>
+                            </span>
+                        </span>
+                        <span class="col-lg-12">
+                            <span class="button buttonDefault buttonBlock buttonIconed" >
+                                <span class="col-lg-9 icon icon-download" data-bind="click: $root.skiniPDF">PDF</span>
+                                <!--<a class="col-lg-27 buttonTitle" href="Content/xxxnekiPdf.pdf" download="user friendly ime pdf-a">PDF</a>-->
+                                
+                            </span>
+                        </span>
+                        <span class="col-lg-12">
+                            <span class="button buttonDefault buttonBlock buttonIconed" data-bind="click: $root.postaviNavigaciju">
+                                <span class="col-lg-9 icon icon-cog-gear"></span>
+                                <span class="col-lg-27 buttonTitle">NAPREDNO</span>
+                            </span>
+                        </span>
+                        <span class="col-lg-12">
+                            <span class="button buttonDefault buttonBlock buttonIconed" data-bind="text:'5'">
+                                <span class="col-lg-9 icon icon-cog-gear"></span>
+                                <span class="col-lg-27 buttonTitle">DialogShoW!</span>
+                            </span>
+                        </span>
+                      <input class="form-control" id="Text1" data-bind="
+    jqAutoAJAX: { autoFocus: true },
+    jqAutoQuery: testAutocomplete,
+    jqAutoSource: $root.jqAS,
+    jqAutoTablica:testTablica,
+        jqAutoValue: testAuto,
+        jqAutoSourceValue: 'Pojam',
+        jqAutoSourceInputValue: 'Pojam',
+        jqAutoSourceValue: 'IDT'    " />
+
+                        <input type="text" data-bind="value: testTablica " /><button data-bind="click:$root.chTab">CHTAB</button>
+
+
+ 
+
+                        <input class="form-control" id="Text1566F" data-bind="NUAuto: {accValue:testAuto, tablica: testTablica}" />
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+        </div>
+
+        <div class="yyyListResultsHolder contentBox" data-bind="visible: $root.viewMode() == 1 && totalCount() > 0">
+
+            <div data-bind="visible: totalCount() > 0" class="tableHeader">
+
+                <div class="chBoxHolder" data-bind="css: { odabrano: $root.checkAll }">
+                    <div class="roundedTwo">
+                        <input id="sAll2" class="chBox" type="checkbox" data-bind="checked: $root.checkAll, event: { change: $root.zaCheckAll }" />
+                        <label for="sAll2"></label>
+                    </div>
+                </div>
+
+
+                <div data-bind="visible: totalCount() > 0" class="totalResults"><span>odabrano / ukupno:</span><span class="totalResultsNumbers" data-bind="    text: brojOdabranih() + '/' + totalCount()"></span><span>rezultata</span></div>
+                <div class="choosePageHolder">
+                    <span class="">rezultata</span>
+                    <div class="styled-select">
+                        <select class="form-control" data-bind="value: $root.pageSize, event: { change: function () { $root.refreshPageSize() } }">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--ko template: { name: 'tmpPagination' } --><!-- /ko -->
+
+               <!-- <ul class="pagination" data-bind="visible: totalCount() > 0">
+                    <li class="col col-lg-4 noPadding" data-bind="style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChangeFL(-100) }"><<</a></li>
+                    <li class="col col-lg-4 noPadding" data-bind="visible: $root.pageMax() > 100, style: {width: $root.paginationColCount() + '%'}"><a href="#" data-bind="    click: function () { $root.pageChange(-100) }">-100</a></li>
+                    <li class="col col-lg-4 noPadding" data-bind="visible: $root.pageMax() > 10, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(-10) }">-10</a></li>
+                    <li class="col col-lg-4 noPadding paginationHighlight" data-bind="visible: $root.pageMax() > 1, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(-1) }"><</a></li>
+                    <li class="col col-lg-4 noPadding paginationNumber" data-bind="style: { width: $root.paginationColCount() + '%' }"><span data-bind="    text: $root.pageIndex() + '/' + $root.pageMax()"></span></li>
+                    <li class="col col-lg-4 noPadding paginationHighlight" data-bind="visible: $root.pageMax() > 1, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="click: function () { $root.pageChange(1) }">></a></li>
+                    <li class="col col-lg-4 noPadding" data-bind="visible: $root.pageMax() > 10, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="click: function () { $root.pageChange(10) }">+10</a></li>
+                    <li class="col col-lg-4 noPadding" data-bind="visible: $root.pageMax() > 100, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(100) }">+100</a></li>
+                    <li class="col col-lg-4 noPadding" data-bind="style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChangeFL(100) }">>></a></li>
+                </ul>-->
+                <div class="viewControls">
+                    <span class="listView button icon-list-2 icon-centered-icon-list-2 active" data-bind="click: function () { viewMode(1); }, css: { active: $root.viewMode() == 1 }"></span>
+                    <span class="thumbLargeView button icon-thumbnails-large icon-centered-icon-thumbnails-large" data-bind="click: function () { viewMode(2); }, css: { active: $root.viewMode() == 2 }"></span>
+                </div>
+            </div>
+
+
+
+
+            <table class="table resultsTable tablica tablica-condensed tablica-bordered tablica-striped tablica-hover">
+
+                <thead>
+                    <tr>
+                        <th style="width: 35px; position: relative; padding: 0;"></th>
+                        <th class="imgCell">Fotografija</th>
+                        <th>Inv. oznaka</th>
+                        <th>Naziv / vrsta</th>
+                        <th>Naslov</th>
+                        <th>Autor</th>
+                        <th>Datacija</th>
+                        <th>Mjere</th>
+                        <th>Tehnika,Materijal</th>
+                        <th>Zbirka</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: $root.rezultati">
+                    <tr data-bind="css: { odabrano: odabranoX }">
+                        <td style="width: 35px; position: relative;">
+                            <span class="rBroj" data-bind="text: (($root.pageIndex() - 1) * $root.pageSize()) + $index() + 1"></span>
+                            <div class="roundedTwo">
+                                <!--<input class="chBox" type="checkbox" data-bind="checkedValue: invBroj, checked: $root.odabrano, event: { change: $root.vidiOdabrano }, attr: { id: 'chkbox_' + $index() }" name="check" />-->
+                                <input class="chBox" type="checkbox" data-bind=" checked: odabranoX, event: { change: $root.vidiOdabrano }, attr: { id: 'chkbox_' + $index() }" name="check" />
+                                <label data-bind="attr: { for: 'chkbox_' + $index() }"></label>
+                            </div>
+                        </td>
+                        <td class="imgCell">
+                            <img src="#" class="img-thumbnail" onerror="this.src = '/Content/images/fotonijepronadjen.png';" data-bind="attr: { src: MC_Staza_slike }" />
+                            <div class="buttonHolder">
+                                <span class="top" data-bind="event: { click: function () { $root.gotoZapis(hash); } }">
+                                    <span class="icon icon-edit-write icon-centered"></span>
+                                </span>
+                                <span class="bottom" data-bind="event: { click: function () { $root.openBigPicture($index, $data); } }">
+                                    <span class="icon icon-search-find icon-centered"></span>
+                                </span>
+                            </div>
+                        </td>
+                        <td> <a class="link link-default invBroj" data-bind="attr: { href: hash }, html: KRT_Inventarni_broj"></a></td>
+                        <td> <span data-bind="text: nazivi" /></td>
+                        <td> <span data-bind="text: naslovi" /></td>
+                        <td> <span data-bind="text: Autori" /></td>
+                        <td> <span data-bind="text: Datacija" /></td>
+                        <td> <span data-bind="text: Mjere" /></td>
+                        <td> <span data-bind="text: Mit" /></td>
+                        <td> <span data-bind="text: zbirka" /></td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+
+
+
+            <div data-bind="visible: totalCount() > 0" class="tableFooter">
+                <!--ko template: { name: 'tmpPagination' } --><!-- /ko -->
+<!--                <ul class="pagination col col-lg-offset-1" data-bind="visible: totalCount() > 0">
+                    <li class="col col-lg-4 noPadding" data-bind="style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChangeFL(-100) }"><<</a></li>
+                    <li class="col col-lg-4 noPadding" data-bind="visible: $root.pageMax() > 100, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(-100) }">-100</a></li>
+                    <li class="col col-lg-4 noPadding" data-bind="visible: $root.pageMax() > 10, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(-10) }">-10</a></li>
+                    <li class="col col-lg-4 noPadding paginationHighlight" data-bind="visible: $root.pageMax() > 1, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(-1) }"><</a></li>
+                    <li class="col col-lg-4 noPadding paginationNumber" data-bind="style: { width: $root.paginationColCount() + '%' }"><span data-bind="    text: $root.pageIndex() + '/' + $root.pageMax()"></span></li>
+                    <li class="col col-lg-4 noPadding paginationHighlight" data-bind="visible: $root.pageMax() > 1, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(1) }">></a></li>
+                    <li class="col col-lg-4 noPadding" data-bind="visible: $root.pageMax() > 10, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(10) }">+10</a></li>
+                    <li class="col col-lg-4 noPadding" data-bind="visible: $root.pageMax() > 100, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(100) }">+100</a></li>
+                    <li class="col col-lg-4 noPadding" data-bind="style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChangeFL(100) }">>></a></li>
+                </ul>-->
+            </div>
+        </div>
+
+
+
+
+        <div class="yyyGridResultsHolder" data-bind="visible: $root.viewMode() == 2">
+            <div data-bind="visible: totalCount() > 0" class="tableHeader">
+
+                <div class="chBoxHolder" data-bind="css: { odabrano: $root.checkAll }">
+                    <div class="roundedTwo">
+                        <input id="sAll" class="chBox" type="checkbox" data-bind="checked: $root.checkAll, event: { change: $root.zaCheckAll }" />
+                        <label for="sAll"></label>
+                    </div>
+                </div>
+
+
+                <div data-bind="visible: totalCount() > 0" class="totalResults"><span>odabrano / ukupno:</span><span data-bind="    text: brojOdabranih() + '/' + totalCount()"></span></div>
+                <div class="choosePageHolder">
+                    <span class="">rezultata</span>
+                    <div class="styled-select">
+                        <select class="form-control"  data-bind="value: $root.pageSize, event: { change: function () { $root.refreshPageSize() } }">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                </div>
+                <!--ko template: { name: 'tmpPagination' } --><!-- /ko -->
+<!--                <ul class="pagination" data-bind="visible: totalCount() > 0">
+                    <li class="col col-lg-4 noPadding" data-bind="style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChangeFL(-100) }"><<</a></li>
+                    <li class="col col-lg-4 noPadding" data-bind="visible: $root.pageMax() > 100, style: {width: $root.paginationColCount() + '%'}"><a href="#" data-bind="    click: function () { $root.pageChange(-100) }">-100</a></li>
+                    <li class="col col-lg-4 noPadding" data-bind="visible: $root.pageMax() > 10, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(-10) }">-10</a></li>
+                    <li class="col col-lg-4 noPadding paginationHighlight" data-bind="visible: $root.pageMax() > 1, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(-1) }"><</a></li>
+                    <li class="col col-lg-4 noPadding paginationNumber" data-bind="style: { width: $root.paginationColCount() + '%' }"><span data-bind="    text: $root.pageIndex() + '/' + $root.pageMax()"></span></li>
+                    <li class="col col-lg-4 noPadding paginationHighlight" data-bind="visible: $root.pageMax() > 1, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="click: function () { $root.pageChange(1) }">></a></li>
+                    <li class="col col-lg-4 noPadding" data-bind="visible: $root.pageMax() > 10, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="click: function () { $root.pageChange(10) }">+10</a></li>
+                    <li class="col col-lg-4 noPadding" data-bind="visible: $root.pageMax() > 100, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(100) }">+100</a></li>
+                    <li class="col col-lg-4 noPadding" data-bind="style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChangeFL(100) }">>></a></li>
+                </ul>-->
+                <div class="viewControls">
+                    <span class="listView button icon-list-2 icon-centered-icon-list-2 active" data-bind="click: function () { viewMode(1); }, css: { active: $root.viewMode() == 1 }"></span>
+                    <span class="thumbLargeView button icon-thumbnails-large icon-centered-icon-thumbnails-large" data-bind="click: function () { viewMode(2); }, css: { active: $root.viewMode() == 2 }"></span>
+                </div>
+            </div>
+
+
+            <div class="row" data-bind="foreach: $root.rezultati">
+
+                <div class="col-lg-18 ItemHolder" data-bind="attr: { 'data-id': $index() }, css: { odabrano: odabranoX }">
+                    <span class="fullBlock"><span class="rBroj" data-bind="text: (($root.pageIndex() - 1) * $root.pageSize()) + $index() + 1"></span></span>
+                    <div class="col col-lg-2 chkBoxHolder">
+                        <div class="roundedTwo">
+                            <input class="chBox" type="checkbox" data-bind=" checked: $root.odabranoX, event: { change: $root.vidiOdabrano }, attr: { id: 'chkbox1_' + $index() }" />
+                            <label data-bind="attr: { for: 'chkbox1_' + $index() }"></label>
+                        </div>
+                    </div>
+                    <span class="col col-lg-14 imageHolder">
+                        <img class="img-thumbnail" onerror="this.src = '/Content/images/fotonijepronadjen.png';" data-bind="    attr: { src: MC_Staza_slike }" />
+                        <span>
+                            <!--<a class="iBroj" data-bind="attr: { href: hash }, html: KRT_Inventarni_broj"></a>-->
+                            <span class="iBroj" data-bind="attr: { href: hash }, html: KRT_Inventarni_broj"></span>
+                        </span>
+                    </span>
+                    <p class="col col-lg-20 textHolder" data-bind="html: kataloskaJedinica"></p>
+                </div>
+            </div>
+
+            <div data-bind="visible: totalCount() > 0" class="tableFooter">
+                <!--ko template: { name: 'tmpPagination' } --><!-- /ko -->
+<!--                <ul class="pagination col col-lg-offset-1" data-bind="visible: totalCount() > 0">
+                    <li class="col col-lg-4 noPadding" data-bind="style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChangeFL(-100) }"><<</a></li>
+                    <li class="col col-lg-4 noPadding" data-bind="visible: $root.pageMax() > 100, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(-100) }">-100</a></li>
+                    <li class="col col-lg-4 noPadding" data-bind="visible: $root.pageMax() > 10, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(-10) }">-10</a></li>
+                    <li class="col col-lg-4 noPadding paginationHighlight" data-bind="visible: $root.pageMax() > 1, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(-1) }"><</a></li>
+                    <li class="col col-lg-4 noPadding paginationNumber" data-bind="style: { width: $root.paginationColCount() + '%' }"><span data-bind="    text: $root.pageIndex() + '/' + $root.pageMax()"></span></li>
+                    <li class="col col-lg-4 noPadding paginationHighlight" data-bind="visible: $root.pageMax() > 1, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(1) }">></a></li>
+                    <li class="col col-lg-4 noPadding" data-bind="visible: $root.pageMax() > 10, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(10) }">+10</a></li>
+                    <li class="col col-lg-4 noPadding" data-bind="visible: $root.pageMax() > 100, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(100) }">+100</a></li>
+                    <li class="col col-lg-4 noPadding" data-bind="style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChangeFL(100) }">>></a></li>
+                </ul>-->
+            </div>
+        </div>
+
+    </div>
+</section>

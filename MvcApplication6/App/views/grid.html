@@ -1,0 +1,138 @@
+﻿<section>
+    
+
+    <table>
+        <tr>
+            <td>
+                <select class="form-control" data-bind="options: $root.tableChoice, value: $root.currentTable, event: { change: $root.changeTable }"></select>
+            </td>
+            <td>
+                <span>filter:</span><input class="form-control" data-bind="textInput:$root.filterText" />
+                <span>orderBy:</span><select class="form-control" data-bind="options: $root.orderByChoice,  optionsText: 'label', optionsValue: 'term',value: $root.currentOrderBy"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                 <div class="container glavni" id="treeScroll" style="height:450px;overflow-x:hidden;overflow-y:scroll ">
+                <table class="table table-striped">
+                    <tr>
+                        <td>
+                            <div id="nav-bar">
+
+                                <ul data-bind="template: { name: 'nodeTmpl', foreach: $root.treeView() }"></ul>
+                            </div>
+
+                        </td>
+                    </tr>
+                </table>
+</div>
+            </td>
+
+            
+            <td>
+                <div class="container glavni" id="divScroll" style="height:450px;overflow-x:hidden;overflow-y:scroll">
+                    <table class="table table-striped table-hover table-condensed table-bordered" >
+                    <thead>
+                        <tr>
+                            <th>IDT</th>
+                            <th>Pojam</th>
+                            <th>nadpojam</th>
+                            <th>napomena</th>
+                            <th>ucestalost</th>
+                        </tr>
+
+
+
+                    </thead>
+                    <tbody  data-bind="foreach: $root.tableView">
+                        <tr data-bind="click: function () { $root.currentIDT(IDT);}, attr: { id:'table_IDT' + IDT }">
+                            <td data-bind="text: IDT"></td>
+                            <td data-bind="text: Pojam"></td>
+                            <td data-bind="text: NadPojam"></td>
+                            <td data-bind="text: Napomena"></td>
+                            <td data-bind="text: Ucestalost"></td>
+    <!--                        <td >
+                                <input type="checkbox" data-bind="checked:Odabrano" />
+                            </td>-->
+                        </tr>
+
+
+                    </tbody>
+
+ 
+
+                </table>
+                    </div>
+
+            </td>
+        </tr>
+    </table>
+
+
+    <button>Novi</button> 
+    <button>Spremi</button> 
+    <button>Briši</button> 
+
+    <table data-bind="with: currentItem">
+        <tr>
+            <td>
+                <span>Pojam:</span>
+                <input class="form-control" data-bind="textInput: Pojam" />
+            </td>
+            </tr>
+        <tr>
+            <td>
+                <span>Nad pojam:</span>
+                                   <input class="form-control" id="Text24" data-bind="jqAuto: { autoFocus: true },
+    jqAutoSource: $root.tableView,
+    jqTerm: $root.dodajTerm,
+    jqTermTablica: $root.dodajTermTablica,
+    jqTablica: 'tbl_T_Nazivi',
+    jqModul: 'Nazivi',
+    jqAutoValue: Nad_IDT,
+    jqAutoSourceLabel: 'Pojam',
+    jqAutoSourceInputValue: 'Pojam',
+    jqAutoSourceValue: 'IDT' " />
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <span>Napomena:</span>
+                <textArea rows="5"  class ="form-control" data-bind="textInput: Napomena" />
+            </td>
+            </tr>
+        <tr>
+        <tr>
+            <td>
+                <span>Bilješke:</span>
+                <textArea rows="5"  class ="form-control" data-bind="textInput: Biljeske" />
+            </td>
+            </tr>
+        <tr>
+
+    </table>
+
+
+   <script id="nodeTmpl" type="text/html">
+        <li data-bind="click: $root.nodeExpander">
+            <div class="star-rating">
+                
+
+                <span class="tree-item" data-bind="text: Pojam, click: function () { $root.currentIDT(IDT); }, attr: { id: 'tree_IDT' + IDT }">"></span>
+
+
+               <!-- <span class=" tree-item">
+                    <a href="#" data-bind=" click: function () { $root.gotoZapis(IDT) }">Prvi</a>
+                </span>-->
+
+ 
+
+            </div>
+            <ul data-bind="template: { name: 'nodeTmpl', foreach: podTermini }"></ul>
+        </li>
+    </script>
+
+
+
+</section>

@@ -1,0 +1,56 @@
+﻿<section>
+    <div class="sidebar-wrapper">
+        <a class="brand" href="/">
+            <img src="../../Content/images/logo.png" />
+        </a>
+    </div>
+    <div class="page-content-wrapper">
+        <h2 class="page-title" data-bind="text: title"></h2>
+
+        <!--<button id="btnTrazi" class="btn btn-primary btn-sm" data-bind="click: $root.fillTreeNodes "><span class="glyphicon glyphicon-search"></span>fillTree</button>-->
+
+        <!--<p style ="color:#fff">... zbirke... parametri... statistika...  </p>-->
+        <div class="container glavni" style="height:600px;overflow-x:hidden;overflow-y:scroll ">
+         <table class="table table-striped" >
+             <tr>
+                 <td>
+        <div id="nav-bar">
+            <ul data-bind="template: { name: 'nodeTmpl', foreach: $root.treeNodes() }"></ul>
+        </div>
+
+            </td>
+        </tr>
+        </table>
+            </div>
+    </div>
+
+
+
+<script id="nodeTmpl" type="text/html">
+    <li data-bind="click: $root.FisExpanded" >
+        <div class="star-rating">
+            <span data-bind="css:{'fa':true, 'fa-star-o':$root.pocetnaZbirka()!=IDT,'fa-star':IDT==$root.pocetnaZbirka()}, click : $root.setPocetnaZbirka"></span>
+
+            <span class="tree-item" data-bind="text: Pojam"></span>
+            <span class="tree-item" data-bind="text: '( ' + brojZapisa "></span>
+            <span class="tree-item" data-bind="text: '/' + brojPodZapisa, visible: podNodes"></span>
+            <span class="tree-item" data-bind="text: ')'"></span>
+
+            <span class=" tree-item">
+                <a href="#" data-bind=" visible:brojZapisa>0,click: function () { $root.gotoZapis(prviZapis) }">Prvi</a>
+             </span>
+            
+            <span class=" tree-item">
+                <a href="#" data-bind=" visible:brojZapisa>0,click: function () { $root.gotoZapis(zadnjiZapis) }">Zadnji</a>
+            </span>
+
+</div>
+            <ul data-bind="template: { name: 'nodeTmpl', foreach: podNodes }"></ul>
+</li>
+</script>
+
+
+
+
+
+</section>

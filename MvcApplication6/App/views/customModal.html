@@ -1,0 +1,70 @@
+﻿<div  class="modal-content messageBoxz" style="max-width: 500px">
+    <div id="dialog-form2" title="Upis mjera za pretraživanje:">
+        <div id="Mjere" data-bind="foreach: $root.realFakeMjere">
+            <div class="yrow">
+                <div class="ycol-lg-4">
+                    <div>
+                        <div class="styled-select">
+                            <select class="dropdown ui-widget-content ui-corner-all" data-bind="options: $root.Selects.tbl_T_Dijelovi, optionsText: 'Pojam', optionsValue: 'IDT', value: MJR_IDT_Mjereni_dio, optionsCaption: ' '"></select>
+                            <!--<select class="dropdown ui-widget-content ui-corner-all" data-bind="options: $root.Dijelovi, optionsText: 'Pojam', optionsValue: 'IDT', value: MJR_IDT_Mjereni_dio, optionsCaption: ' '"></select>-->
+                            <!--<select class="form-control" data-bind="options: $root.Dijelovi, optionsText: 'Pojam', optionsValue: 'IDT', value: MJR_IDT_Mjereni_dio, optionsCaption: ' '"></select>-->
+                        </div>
+                        <span id="mjeraAlert1" style="color: red;" data-bind="text: $root.alertMjere()[0].poruka, visible: $root.alertMjere()[0].visible"></span>
+                    </div>
+                </div>
+
+                <div class="ycol-lg-3">
+                    <div>
+                        <div class="Ystyled-select">
+                            <!--<select class="form-control" data-bind="options: $root.Dimenzije, optionsText: 'Pojam', optionsValue: 'IDT', value: MJR_IDT_Dimenzija, optionsCaption: ' '"></select>-->
+                            <select class="dropdown ui-widget-content ui-corner-all" data-bind="options: $root.Selects.tbl_T_Dimenzije, optionsText: 'Pojam', optionsValue: 'IDT', value: MJR_IDT_Dimenzija, optionsCaption: ' '"></select>
+                        </div>
+                        <span id="mjeraAlert2" style="color: red;" data-bind="text: $root.alertMjere()[1].poruka, visible: $root.alertMjere()[1].visible"></span>
+                    </div>
+                </div>
+                <div class="ycol-lg-3">
+                    <div class="Ystyled-select">
+                        <select class="dropdown ui-widget-content ui-corner-all" data-bind="options: $root.MjereOperatori, optionsText: 'tekst', optionsValue: 'vrijednost', value: MJR_Operator"></select>
+                        <!--<select class="form-control" data-bind="options: $root.MjereOperatori, optionsText: 'tekst', optionsValue: 'vrijednost', value: MJR_Operator"></select>-->
+                    </div>
+                </div>
+                <div class="ycol-lg-2" style="display: inline">
+                    <input class="text-right ui-widget-content ui-corner-all" type="text" data-bind="value: MJR_Mjera" />
+                    <!--<input class="text-right form-control" type="text" data-bind="value: MJR_Mjera" />-->
+                    <span id="mjeraAlert3" style="color: red;" data-bind="text: $root.alertMjere()[2].poruka, visible: $root.alertMjere()[2].visible"></span>
+                </div>
+                <div class="ycol-lg-2" data-bind="visible: MJR_Operator() > 2" style="display: inline">
+                    <input class="text-right ui-widget-content ui-corner-all" type="text" data-bind="value: MJR_Mjera2" />
+                    <!--<input class="text-right form-control" type="text" data-bind="value: MJR_Mjera2" />-->
+                    <span id="mjeraAlert4" style="color: red;" data-bind="text: $root.alertMjere()[3].poruka, visible: $root.alertMjere()[3].visible"></span>
+                    <span id="mjeraAlert6" style="color: red;" data-bind="text: $root.alertMjere()[5].poruka, visible: $root.alertMjere()[5].visible"></span>
+                </div>
+
+                <div class="ycol-lg-3">
+                    <div>
+                        <div class="Ystyled-select">
+                            <!--<select class="form-control" data-bind="options: $root.Jedinice, optionsText: 'Pojam', optionsValue: 'IDT', value: MJR_IDT_Jedinica_mjere, optionsCaption: ' '"></select>-->
+                            <select class="dropdown ui-widget-content ui-corner-all" data-bind="options: $root.Selects.tbl_T_Jedinice_Mjere, optionsText: 'Pojam', optionsValue: 'IDT', value: MJR_IDT_Jedinica_mjere, optionsCaption: ' '"></select>
+                        </div>
+                        <span id="mjeraAlert5" style="color: red;" data-bind="text: $root.alertMjere()[4].poruka, visible: $root.alertMjere()[4].visible"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                            <span class="col-lg-12">
+                            <span class="button buttonDefault buttonBlock buttonIconed" data-bind="click: $root.provjeriMjere">
+                                <span class="col-lg-9 icon icon-cog-gear"></span>
+                                <span class="col-lg-27 buttonTitle">Spremi</span>
+                            </span>
+                        </span>
+                        <span class="col-lg-12">
+                            <span class="button buttonDefault buttonBlock buttonIconed" data-bind="click: $root.ok">
+                                <span class="col-lg-9 icon icon-cog-gear"></span>
+                                <span class="col-lg-27 buttonTitle">Zatvori bez!</span>
+                            </span>
+                        </span>
+
+
+</div>

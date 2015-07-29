@@ -1,0 +1,45 @@
+﻿<nav class="navbar navbar-default">
+    <div class="container-fluid insideBorder">
+        <div class="navbar-header">
+            
+            <div class="btn-group" data-bind="foreach: router.navigationModel">
+                <a data-bind="css: { active: isActive }, attr: { href: hash }, text: title"
+                    class="btn btn-info" href="#"></a>
+            </div>
+
+            <div class="nav navbar-nav navbar-right">
+                
+                    <div data-bind="visible: $root.rIsAuth()">
+                        <span data-bind="text: $root.rUserName()" />
+                        <!--<div data-bind="foreach: $root.rUserRoles"><span data-bind="    text: $data" /></div>-->
+                        <a href="#" class="btn btn-primary btn-sm active" role="button" data-bind="click: logout">Logout</a>
+                    </div>
+                    <!-- ko if: !$root.rIsAuth()-->
+
+                <form class="navbar-form pull-right">
+                       
+                            <input class="form-control" placeholder="username" name="email" type="text" data-bind="value: $root.userName">
+ 
+                        
+                            <input class="form-control" placeholder="Password" name="password" type="password" data-bind="value: $root.password">
+                        
+                        <!--<a href="#" class="btn btn-primary btn-sm active" role="button" data-bind="click: loginTry">Login</a>-->
+                        <input class="btn btn-sm btn-success" type="button" data-bind="click: loginTry" value="Login">
+                        <!--<input class="btn btn-lg btn-success btn-block" type="button" data-bind="click: isAuth" value="Test">-->
+                        <!--<input class="btn btn-lg btn-success btn-block" type="button" data-bind="click: logout" value="Logout">-->
+
+                    </form>
+                
+           
+			                <!--</div>
+			            </div>
+		            </div>
+	            </div>-->
+           <!-- /ko -->
+ </div>
+
+
+
+        </div>
+    </div>
+</nav>

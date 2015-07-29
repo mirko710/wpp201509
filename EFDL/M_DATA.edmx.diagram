@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b2fb855b4aa7476796fdf9be93587a78" Name="Diagram1">
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Autori_Discipline" Width="1.5" PointX="14.25" PointY="38.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Autori_Grupe" Width="1.5" PointX="5.25" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Autori_povijest" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Autori_Pseudonimi" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Brojevi_predmeta" Width="1.5" PointX="5.25" PointY="48.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Def_Forme" Width="1.5" PointX="4.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Def_Izbornik" Width="1.5" PointX="9.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Def_Izbornik_SEK" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Def_Jedinica_vremena" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Def_Polja_Upiti_Extra" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Def_Struktura" Width="1.5" PointX="11.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Def_Struktura_detalji" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Def_Struktura_iznimke" Width="1.5" PointX="13.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Def_Struktura_plus" Width="1.5" PointX="8.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Def_Struktura_upiti_refiners" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Def_Tipovi_knjiga" Width="1.5" PointX="0.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Def_Vrijeme" Width="1.5" PointX="15.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Inventarizacija" Width="1.5" PointX="8.25" PointY="47.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Ispisi" Width="1.5" PointX="15.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Ispisi_redci" Width="1.5" PointX="2.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Izlozbe_odrzavanja" Width="1.5" PointX="14.25" PointY="30.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Izlozbe_organizatori" Width="1.5" PointX="17.25" PointY="34.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Izrada" Width="1.5" PointX="5.25" PointY="42" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Kartica" Width="1.5" PointX="3" PointY="37" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Kataloska_jedinica" Width="1.5" PointX="5.25" PointY="51.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Kljucne_rijeci" Width="1.5" PointX="8.25" PointY="44.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Knjiga_ulaska" Width="1.5" PointX="5.25" PointY="58.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Knjiga_ulaska_Template" Width="1.5" PointX="7.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_KUL_brojevi" Width="1.5" PointX="10" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Log_Greske" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Log_promjena_smjestaja" Width="1.5" PointX="17.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Media_collector" Width="1.5" PointX="5.25" PointY="70.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Mjere" Width="1.5" PointX="8.25" PointY="52.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Nalaziste_datacija" Width="1.5" PointX="19.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Naslovi" Width="1.5" PointX="11.25" PointY="48.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Natpisi_i_oznake" Width="1.5" PointX="11.25" PointY="42.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Nazivi" Width="1.5" PointX="11.25" PointY="52.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Nazivlje" Width="1.5" PointX="21.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Ocuvanost" Width="1.5" PointX="8.25" PointY="39.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Operatori" Width="1.5" PointX="22.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Parametri_za_Ispisi_redci" Width="1.5" PointX="22.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Parametri_za_korisnike" Width="1.5" PointX="22.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Pod_Oznake" Width="1.5" PointX="22.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_PopisParametara" Width="1.5" PointX="22.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Povijest_predmeta" Width="1.5" PointX="14.25" PointY="47" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Predmeti_u_zbirkama" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Pripadnosti" Width="1.5" PointX="11.25" PointY="55.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Reference" Width="1.5" PointX="14.25" PointY="41.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Reprodukcijska_prava" Width="1.5" PointX="22.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Sadrzaj" Width="1.5" PointX="5.25" PointY="109" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Srodni_nazivi" Width="1.5" PointX="22.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Autori" Width="1.5" PointX="3" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Dijelovi" Width="1.5" PointX="6" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Dimenzije" Width="1.5" PointX="6" PointY="75.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Drzave" Width="1.5" PointX="12" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Izlozbe" Width="1.5" PointX="9" PointY="33" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Izlozbe_institucije" Width="1.5" PointX="12" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Izlozbe_organizatori" Width="1.5" PointX="15" PointY="24.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Izvori_nabave" Width="1.5" PointX="23.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Jedinice_Mjere" Width="1.5" PointX="6" PointY="80.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Jezici" Width="1.5" PointX="9" PointY="27.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Kategorija_vrijednosti" Width="1.5" PointX="24.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Kljucne_rijeci" Width="1.5" PointX="6" PointY="30.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Kustosi" Width="1.5" PointX="6" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Mape" Width="1.5" PointX="24.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Materijali" Width="1.5" PointX="6" PointY="86.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Mjesta" Width="1.5" PointX="0.75" PointY="26.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Mjesta_opis" Width="1.5" PointX="24.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Motivi" Width="1.5" PointX="24.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Nacini_prikupljanja" Width="1.5" PointX="17.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Nalaziste" Width="1.5" PointX="25.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Nalaziste_vrsta" Width="1.5" PointX="26.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Nazivi" Width="1.5" PointX="9" PointY="77.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Nazivi_opis" Width="1.5" PointX="26.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Ocuvanosti" Width="1.5" PointX="6" PointY="36.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Ornamenti" Width="1.5" PointX="26.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Osobe_i_inst_odrednice" Width="1.5" PointX="19.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Osobe_i_institucije" Width="1.5" PointX="12" PointY="28.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Pojmovnik" Width="1.5" PointX="27.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Povezanosti" Width="1.5" PointX="12" PointY="64.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Pribavljanje" Width="1.5" PointX="21.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Pripadnosti" Width="1.5" PointX="9" PointY="88.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Reference" Width="1.5" PointX="27.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Reference_oblik" Width="1.5" PointX="12" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Sadrzaj_predmet" Width="1.5" PointX="28.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Sakupljaci" Width="1.5" PointX="0.75" PointY="47.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Smjestaj" Width="1.5" PointX="9" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Smjestaj_privremeni" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Smjestaj_privremeni_vrsta" Width="1.5" PointX="28.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Smjestaj_stalni" Width="1.5" PointX="28.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Stupanj_dovrsenosti" Width="1.5" PointX="29.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Tehnike" Width="1.5" PointX="9" PointY="61" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Uloge_autora" Width="1.5" PointX="3" PointY="63.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Uporabe" Width="1.5" PointX="12" PointY="69.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Valute" Width="1.5" PointX="12" PointY="75.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Virtualne_zbirke" Width="1.5" PointX="29.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Vremenske_odrednice" Width="1.5" PointX="23.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Vrste_brojeva" Width="1.5" PointX="3" PointY="74.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Vrste_datoteka" Width="1.5" PointX="30.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Vrste_naslova" Width="1.5" PointX="9" PointY="72.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Vrste_natpisa" Width="1.5" PointX="9" PointY="66.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Vrste_naziva" Width="1.5" PointX="9" PointY="83" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Vrste_odgovornosti" Width="1.5" PointX="3" PointY="68.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Vrste_organizacije_izlozbe" Width="1.5" PointX="15" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Vrste_reference" Width="1.5" PointX="12" PointY="59" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Vrste_sadrzaja" Width="1.5" PointX="30.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_T_Zbirke" Width="1.5" PointX="30.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Teren_sezona" Width="1.5" PointX="25.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_U_Dijelovi_predmeta" Width="1.5" PointX="5.25" PointY="112.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_U_Materijali_u_dijelovima" Width="1.5" PointX="8.25" PointY="57.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_U_Predmeti_na_izlozbama" Width="1.5" PointX="11.25" PointY="39.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Update" Width="1.5" PointX="30.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Upiti" Width="1.5" PointX="17.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Upiti_redci" Width="1.5" PointX="20" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.tbl_Vrijednosti" Width="1.5" PointX="14.25" PointY="53.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.vw_Kartica" Width="1.5" PointX="27.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.vw_Stuff_ALL" Width="1.5" PointX="29.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.vw_T_Autori" Width="1.5" PointX="31.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.vw_T_Izvori_nabave" Width="1.5" PointX="31.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.vw_T_Kustosi" Width="1.5" PointX="31.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.vw_T_Osobe_i_inst_odrednice" Width="1.5" PointX="31.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.vw_T_Sakupljaci" Width="1.5" PointX="31.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="M_DATA_Model.vw_Web_Rezultati" Width="1.5" PointX="32.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Autori_Discipline_ID_Autor" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Autori_Discipline_ID_Disciplina" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Autori_Grupe_ID_Autor" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Autori_Grupe_ID_Grupa" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Autori_Pseudonimi_ID_Autor" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Autori_Pseudonimi_ID_Pseudonim" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Brojevi_predmeta_BRP_IDT_Vrsta" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Brojevi_predmeta_ID_Broj" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Inventarizacija_ID_Broj" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Inventarizacija_INV_ID_Inventirao" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Izlozbe_odrzavanja_ID_IZL_Institucija" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Izlozbe_odrzavanja_IDT_IZL_drzava" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Izlozbe_odrzavanja_IDT_IZL_mjesto" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Izlozbe_odrzavanja_IDT_Izlozbe" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Izlozbe_organizatori_ID_IZL_organizator" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Izlozbe_organizatori_IDT_IZL_vrsta_org" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Izlozbe_organizatori_IDT_Izlozbe" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Izrada_ID_Broj" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Izrada_IZR_ID_Autor" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Izrada_IZR_IDT_Mjesto" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Izrada_IZR_IDT_Uloga" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Izrada_IZR_IDT_Vrsta_odgovornosti" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.FK_tbl_Kartica_tbl_T_Sakupljaci" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Kataloska_jedinica_ID_Broj" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Kljucne_rijeci_ID_Broj" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Knjiga_ulaska_ID_Broj" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Media_collector_ID_Broj" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Mjere_ID_Broj" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Naslovi_ID_Broj" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Natpisi_i_oznake_ID_Broj" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Nazivi_ID_Broj" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Ocuvanost_ID_Broj" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Povijest_predmeta_ID_Broj" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Pripadnosti_ID_Broj" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Reference_ID_Broj" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Sadrzaj_ID_Broj" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_U_Dijelovi_predmeta_ID_Broj" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_U_Materijali_u_dijelo_ID_Broj" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_U_Predmeti_na_izlozba_ID_Broj" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Vrijednosti_ID_Broj" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.FK_tbl_Kljucne_rijeci_KLJ_IDT_Kljucna_rijec" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.FK_tbl_Knjiga_ulaska_tbl_Knjiga_ulaska" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.FK_tbl_KUL_brojevi_tbl_Knjiga_ulaska_Template" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Mjere_MJR_IDT_Dimenzija" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Mjere_MJR_IDT_Jedinica_mjere" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Mjere_MJR_IDT_Mjereni_dio" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.FK_tbl_Naslovi_NSL_IDT_Jezik_naslova" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.FK_tbl_Naslovi_NSL_IDT_Vrsta_naslova" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.FK_tbl_Natpisi_i_oznake_NIO_IDT_Jezik" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.FK_tbl_Natpisi_i_oznake_NIO_IDT_Smjestaj" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Natpisi_i_oznake_NIO_IDT_Tehnika" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Natpisi_i_oznake_NIO_IDT_Vrsta" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Nazivi_NAZ_IDT_Naziv_predmeta" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Nazivi_NAZ_IDT_Vrsta_naziva" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Ocuvanost_OCU_IDT_Ocuvanost" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Povijest_predmeta_POV_ID_Osoba_institucija" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Povijest_predmeta_POV_IDT_Mjesto" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Povijest_predmeta_POV_IDT_Uporaba" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Povijest_predmeta_POV_IDT_Vrsta_povezanosti" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.FK_tbl_Predmeti_u_zbirkama_tbl_Predmeti_u_zbirkama" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Pripadnosti_PRI_IDT_Pripadnost" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Reference_REF_IDT_Oblik_reference" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Reference_REF_IDT_Vrsta_reference" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_T_Autori_IDT_Mjesto" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_T_Autori_R_IDT_Mjesto" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_T_Autori_S_IDT_Mjesto" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_U_Materijali_u_dijelo_U_IDT_Dio_predmeta" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_U_Predmeti_na_izlozba_PNI_IDT_Izlozbe" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_U_Materijali_u_dijelo_U_IDT_Materijal" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_U_Materijali_u_dijelo_U_IDT_Tehnika" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Vrijednosti_VRI_IDT_Valuta_iznos" ManuallyRouted="false" />
+        <AssociationConnector Association="M_DATA_Model.tbl_Upiti_redci_FK00" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="M_DATA_Model.vw_Zbirke_prva_zadnja_zbroj" Width="1.5" PointX="0.15618786409319743" PointY="22.782104130267214" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

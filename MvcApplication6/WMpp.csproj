@@ -1,0 +1,1421 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3EF5CB75-531A-45B8-991F-13D1D808BCC8}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WMpp</RootNamespace>
+    <AssemblyName>MvcApplication6</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <JSLintSkip>
+    </JSLintSkip>
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Breeze.WebApi, Version=1.4.0.0, Culture=neutral, PublicKeyToken=f6085f1a45e2ac59, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Breeze.Server.WebApi.Core.1.4.14\lib\Breeze.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Breeze.WebApi.EF, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Breeze.Server.WebApi.EF.1.4.14\lib\Breeze.WebApi.EF.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Edm.5.6.4\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.OData.5.6.4\lib\net40\Microsoft.Data.OData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.DocumentObjectModel, Version=1.32.4334.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\MigraDoc.DocumentObjectModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering, Version=1.32.4334.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\MigraDoc.Rendering.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering, Version=1.32.4334.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\MigraDoc.RtfRendering.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\PdfSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\PdfSharp.Charting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Spatial, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Spatial.5.6.4\lib\net40\System.Spatial.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Entity">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.ApplicationServices">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.OData">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.OData.4.0.30506\lib\net40\System.Web.Http.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.40804.0\lib\net40\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Abstractions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Transactions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.EnterpriseServices">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.5.3\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0.6\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.2.0.20710.0\lib\net40\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.2.0.20710.0\lib\net40\WebMatrix.WebData.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountsByTxt.cs" />
+    <Compile Include="App_Start\BreezeWebApiConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\WMppConfig.cs" />
+    <Compile Include="App_Start\WMppRouteConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FileUploadController.cs" />
+    <Compile Include="Controllers\TerminologyController.cs" />
+    <Compile Include="Controllers\WebApiSQLController.cs" />
+    <Compile Include="Controllers\regRezController.cs" />
+    <Compile Include="Controllers\NavigacijaPlusController.cs" />
+    <Compile Include="Controllers\GetRowNumberController.cs" />
+    <Compile Include="Controllers\NoviZapisController.cs" />
+    <Compile Include="Controllers\WMppStartUpController.cs" />
+    <Compile Include="Controllers\BreezeController.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="TerminologyClasses.cs" />
+    <Compile Include="fileUplad.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="mDoc.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchEngine.cs" />
+    <Compile Include="SEClasses.cs" />
+    <Compile Include="zaPDF.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\main.js" />
+    <Content Include="App\viewmodels\popupVrijeme.js" />
+    <Content Include="App\services\registracijaNavigator.js" />
+    <Content Include="App\services\upisNavigator.js" />
+    <Content Include="App\services\webWorker.js" />
+    <Content Include="App\services\dataService.js" />
+    <Content Include="App\services\logger.js" />
+    <Content Include="App\services\webWorkerOldBreeze.js" />
+    <Content Include="App\viewmodels\popupMjere.js" />
+    <Content Include="App\viewmodels\customModal.js" />
+    <Content Include="App\viewmodels\login.js" />
+    <Content Include="App\viewmodels\pretrazivanje.js" />
+    <Content Include="App\viewmodels\grid.js" />
+    <Content Include="App\viewmodels\home.js" />
+    <Content Include="App\viewmodels\shell.js" />
+    <Content Include="App\viewmodels\upisPodataka.js" />
+    <Content Include="App\views\popupVrijeme.html" />
+    <Content Include="App\views\popupMjere.html" />
+    <Content Include="App\views\customModal.html" />
+    <Content Include="App\views\login.html" />
+    <Content Include="App\views\oldPretrazivanje.html" />
+    <Content Include="App\views\home.html" />
+    <Content Include="App\views\grid.html" />
+    <Content Include="App\views\pretrazivanje.html" />
+    <Content Include="App\views\upisPodataka.html" />
+    <Content Include="App\views\footer.html" />
+    <Content Include="App\views\nav.html" />
+    <Content Include="App\views\shell.html" />
+    <Content Include="Content\app.css" />
+    <Content Include="Content\applicationStyle.css" />
+    <Content Include="Content\applicationStyle.min.css" />
+    <Content Include="Content\applicationStyle\applicationStyle.css" />
+    <Content Include="Content\applicationStyle\applicationStyle.min.css" />
+    <Content Include="Content\applicationStyle\fonts.css" />
+    <Content Include="Content\applicationStyle\fonts.min.css" />
+    <Content Include="Content\applicationStyle\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\applicationStyle\fonts\mpp.svg" />
+    <Content Include="Content\applicationStyle\layout.css" />
+    <Content Include="Content\applicationStyle\layout.min.css" />
+    <Content Include="Content\applicationStyle\mediaQueries.css" />
+    <Content Include="Content\applicationStyle\mediaQueries.min.css" />
+    <Content Include="Content\applicationStyle\resetStyles.css" />
+    <Content Include="Content\applicationStyle\resetStyles.min.css" />
+    <Content Include="Content\black.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrapCustom.css" />
+    <Content Include="Content\bootstrap\bootstrap.css" />
+    <Content Include="Content\bootstrap\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\ico\apple-touch-icon-114-precomposed.png" />
+    <Content Include="Content\bootstrap\ico\apple-touch-icon-144-precomposed.png" />
+    <Content Include="Content\bootstrap\ico\apple-touch-icon-57-precomposed.png" />
+    <Content Include="Content\bootstrap\ico\apple-touch-icon-72-precomposed.png" />
+    <Content Include="Content\bootstrap\ico\favicon.ico" />
+    <Content Include="Content\bootstrap\ico\favicon.png" />
+    <Content Include="Content\bootstrap\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="Content\bootstrap\less\tests\buttons.html" />
+    <Content Include="Content\bootstrap\less\tests\css-tests.css" />
+    <Content Include="Content\bootstrap\less\tests\css-tests.html" />
+    <Content Include="Content\bootstrap\less\tests\forms-responsive.html" />
+    <Content Include="Content\bootstrap\less\tests\forms.html" />
+    <Content Include="Content\bootstrap\less\tests\navbar-fixed-top.html" />
+    <Content Include="Content\bootstrap\less\tests\navbar-static-top.html" />
+    <Content Include="Content\bootstrap\less\tests\navbar.html" />
+    <Content Include="Content\custom.css" />
+    <Content Include="Content\durandal.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\ie10mobile.css" />
+    <Content Include="Content\images\boxBg.jpg" />
+    <Content Include="Content\images\drag.png" />
+    <Content Include="Content\images\fotonijepridruzen.jpg" />
+    <Content Include="Content\images\fotonijepridruzen.png" />
+    <Content Include="Content\images\fotonijepronadjen.jpg" />
+    <Content Include="Content\images\fotonijepronadjen.png" />
+    <Content Include="Content\images\grayLinen.jpg" />
+    <Content Include="Content\images\icon.png" />
+    <Content Include="Content\images\ios-startup-image-landscape.png" />
+    <Content Include="Content\images\ios-startup-image-portrait.png" />
+    <Content Include="Content\images\kockice.png" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\logo2.png" />
+    <Content Include="Content\images\old_icon.png" />
+    <Content Include="Content\images\redLinen.jpg" />
+    <Content Include="Content\light.css" />
+    <Content Include="Content\new.css" />
+    <Content Include="Content\NewStyle.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
+    <Content Include="Content\white.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="ClassDiagram2.cd" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\alerts.less" />
+    <Content Include="Content\badges.less" />
+    <Content Include="Content\bootstrap.less" />
+    <Content Include="Content\breadcrumbs.less" />
+    <Content Include="Content\button-groups.less" />
+    <Content Include="Content\buttons.less" />
+    <Content Include="Content\carousel.less" />
+    <Content Include="Content\close.less" />
+    <Content Include="Content\code.less" />
+    <Content Include="Content\component-animations.less" />
+    <Content Include="Content\dropdowns.less" />
+    <Content Include="Content\forms.less" />
+    <Content Include="Content\glyphicons.less" />
+    <Content Include="Content\grid.less" />
+    <Content Include="Content\input-groups.less" />
+    <Content Include="Content\jumbotron.less" />
+    <Content Include="Content\labels.less" />
+    <Content Include="Content\list-group.less" />
+    <Content Include="Content\media.less" />
+    <Content Include="Content\mixins.less" />
+    <Content Include="Content\modals.less" />
+    <Content Include="Content\navbar.less" />
+    <Content Include="Content\navs.less" />
+    <Content Include="Content\normalize.less" />
+    <Content Include="Content\pager.less" />
+    <Content Include="Content\pagination.less" />
+    <Content Include="Content\panels.less" />
+    <Content Include="Content\popovers.less" />
+    <Content Include="Content\print.less" />
+    <Content Include="Content\progress-bars.less" />
+    <Content Include="Content\responsive-embed.less" />
+    <Content Include="Content\responsive-utilities.less" />
+    <Content Include="Content\scaffolding.less" />
+    <Content Include="Content\tables.less" />
+    <Content Include="Content\theme.less" />
+    <Content Include="Content\thumbnails.less" />
+    <Content Include="Content\tooltip.less" />
+    <Content Include="Content\type.less" />
+    <Content Include="Content\utilities.less" />
+    <Content Include="Content\variables.less" />
+    <Content Include="Content\wells.less" />
+    <Content Include="Content\bootstrap\alerts.less" />
+    <Content Include="Content\bootstrap\badges.less" />
+    <Content Include="Content\bootstrap\bootstrap.less" />
+    <Content Include="Content\bootstrap\breadcrumbs.less" />
+    <Content Include="Content\bootstrap\button-groups.less" />
+    <Content Include="Content\bootstrap\buttons.less" />
+    <Content Include="Content\bootstrap\carousel.less" />
+    <Content Include="Content\bootstrap\close.less" />
+    <Content Include="Content\bootstrap\code.less" />
+    <Content Include="Content\bootstrap\component-animations.less" />
+    <Content Include="Content\bootstrap\dropdowns.less" />
+    <Content Include="Content\bootstrap\forms.less" />
+    <Content Include="Content\bootstrap\glyphicons.less" />
+    <Content Include="Content\bootstrap\grid.less" />
+    <Content Include="Content\bootstrap\input-groups.less" />
+    <Content Include="Content\bootstrap\jumbotron.less" />
+    <Content Include="Content\bootstrap\labels.less" />
+    <Content Include="Content\bootstrap\less\accordion.less" />
+    <Content Include="Content\bootstrap\less\alerts.less" />
+    <Content Include="Content\bootstrap\less\bootstrap.less" />
+    <Content Include="Content\bootstrap\less\breadcrumbs.less" />
+    <Content Include="Content\bootstrap\less\button-groups.less" />
+    <Content Include="Content\bootstrap\less\buttons.less" />
+    <Content Include="Content\bootstrap\less\carousel.less" />
+    <Content Include="Content\bootstrap\less\close.less" />
+    <Content Include="Content\bootstrap\less\code.less" />
+    <Content Include="Content\bootstrap\less\component-animations.less" />
+    <Content Include="Content\bootstrap\less\dropdowns.less" />
+    <Content Include="Content\bootstrap\less\forms.less" />
+    <Content Include="Content\bootstrap\less\grid.less" />
+    <Content Include="Content\bootstrap\less\hero-unit.less" />
+    <Content Include="Content\bootstrap\less\labels-badges.less" />
+    <Content Include="Content\bootstrap\less\layouts.less" />
+    <Content Include="Content\bootstrap\less\media.less" />
+    <Content Include="Content\bootstrap\less\mixins.less" />
+    <Content Include="Content\bootstrap\less\modals.less" />
+    <Content Include="Content\bootstrap\less\navbar.less" />
+    <Content Include="Content\bootstrap\less\navs.less" />
+    <Content Include="Content\bootstrap\less\pager.less" />
+    <Content Include="Content\bootstrap\less\pagination.less" />
+    <Content Include="Content\bootstrap\less\popovers.less" />
+    <Content Include="Content\bootstrap\less\progress-bars.less" />
+    <Content Include="Content\bootstrap\less\reset.less" />
+    <Content Include="Content\bootstrap\less\responsive-1200px-min.less" />
+    <Content Include="Content\bootstrap\less\responsive-767px-max.less" />
+    <Content Include="Content\bootstrap\less\responsive-768px-979px.less" />
+    <Content Include="Content\bootstrap\less\responsive-navbar.less" />
+    <Content Include="Content\bootstrap\less\responsive-utilities.less" />
+    <Content Include="Content\bootstrap\less\responsive.less" />
+    <Content Include="Content\bootstrap\less\scaffolding.less" />
+    <Content Include="Content\bootstrap\less\sprites.less" />
+    <Content Include="Content\bootstrap\less\tables.less" />
+    <Content Include="Content\bootstrap\less\thumbnails.less" />
+    <Content Include="Content\bootstrap\less\tooltip.less" />
+    <Content Include="Content\bootstrap\less\type.less" />
+    <Content Include="Content\bootstrap\less\utilities.less" />
+    <Content Include="Content\bootstrap\less\variables.less" />
+    <Content Include="Content\bootstrap\less\wells.less" />
+    <Content Include="Content\bootstrap\list-group.less" />
+    <Content Include="Content\bootstrap\media.less" />
+    <Content Include="Content\bootstrap\mixins.less" />
+    <Content Include="Content\bootstrap\mixins\alerts.less" />
+    <Content Include="Content\bootstrap\mixins\background-variant.less" />
+    <Content Include="Content\bootstrap\mixins\border-radius.less" />
+    <Content Include="Content\bootstrap\mixins\buttons.less" />
+    <Content Include="Content\bootstrap\mixins\center-block.less" />
+    <Content Include="Content\bootstrap\mixins\clearfix.less" />
+    <Content Include="Content\bootstrap\mixins\forms.less" />
+    <Content Include="Content\bootstrap\mixins\gradients.less" />
+    <Content Include="Content\bootstrap\mixins\grid-framework.less" />
+    <Content Include="Content\bootstrap\mixins\grid.less" />
+    <Content Include="Content\bootstrap\mixins\hide-text.less" />
+    <Content Include="Content\bootstrap\mixins\image.less" />
+    <Content Include="Content\bootstrap\mixins\labels.less" />
+    <Content Include="Content\bootstrap\mixins\list-group.less" />
+    <Content Include="Content\bootstrap\mixins\nav-divider.less" />
+    <Content Include="Content\bootstrap\mixins\nav-vertical-align.less" />
+    <Content Include="Content\bootstrap\mixins\opacity.less" />
+    <Content Include="Content\bootstrap\mixins\pagination.less" />
+    <Content Include="Content\bootstrap\mixins\panels.less" />
+    <Content Include="Content\bootstrap\mixins\progress-bar.less" />
+    <Content Include="Content\bootstrap\mixins\reset-filter.less" />
+    <Content Include="Content\bootstrap\mixins\resize.less" />
+    <Content Include="Content\bootstrap\mixins\responsive-visibility.less" />
+    <Content Include="Content\bootstrap\mixins\size.less" />
+    <Content Include="Content\bootstrap\mixins\tab-focus.less" />
+    <Content Include="Content\bootstrap\mixins\table-row.less" />
+    <Content Include="Content\bootstrap\mixins\text-emphasis.less" />
+    <Content Include="Content\bootstrap\mixins\text-overflow.less" />
+    <Content Include="Content\bootstrap\mixins\vendor-prefixes.less" />
+    <Content Include="Content\bootstrap\modals.less" />
+    <Content Include="Content\bootstrap\navbar.less" />
+    <Content Include="Content\bootstrap\navs.less" />
+    <Content Include="Content\bootstrap\normalize.less" />
+    <Content Include="Content\bootstrap\pager.less" />
+    <Content Include="Content\bootstrap\pagination.less" />
+    <Content Include="Content\bootstrap\panels.less" />
+    <Content Include="Content\bootstrap\popovers.less" />
+    <Content Include="Content\bootstrap\print.less" />
+    <Content Include="Content\bootstrap\progress-bars.less" />
+    <Content Include="Content\bootstrap\responsive-embed.less" />
+    <Content Include="Content\bootstrap\responsive-utilities.less" />
+    <Content Include="Content\bootstrap\scaffolding.less" />
+    <Content Include="Content\bootstrap\tables.less" />
+    <Content Include="Content\bootstrap\theme.less" />
+    <Content Include="Content\bootstrap\thumbnails.less" />
+    <Content Include="Content\bootstrap\tooltip.less" />
+    <Content Include="Content\bootstrap\type.less" />
+    <Content Include="Content\bootstrap\utilities.less" />
+    <Content Include="Content\bootstrap\variables.less" />
+    <Content Include="Content\bootstrap\wells.less" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\toastr.css.map">
+      <DependentUpon>toastr.css</DependentUpon>
+    </Content>
+    <Content Include="Content\applicationStyle.css.map" />
+    <Content Include="Content\applicationStyle.less" />
+    <Content Include="Content\applicationStyle\applicationStyle.css.map" />
+    <Content Include="Content\applicationStyle\applicationStyle.less" />
+    <Content Include="Content\applicationStyle\buttons.less" />
+    <Content Include="Content\applicationStyle\fonts.css.map" />
+    <Content Include="Content\applicationStyle\fonts.less" />
+    <Content Include="Content\applicationStyle\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\applicationStyle\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\applicationStyle\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\applicationStyle\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\applicationStyle\fonts\mpp.eot" />
+    <Content Include="Content\applicationStyle\fonts\mpp.ttf" />
+    <Content Include="Content\applicationStyle\fonts\mpp.woff" />
+    <Content Include="Content\applicationStyle\layout.css.map" />
+    <Content Include="Content\applicationStyle\layout.less" />
+    <Content Include="Content\applicationStyle\mixins.less" />
+    <Content Include="Content\applicationStyle\mixins\border-radius.less" />
+    <Content Include="Content\applicationStyle\mixins\buttons.less" />
+    <Content Include="Content\applicationStyle\normalize.less" />
+    <Content Include="Content\applicationStyle\resetStyles.css.map" />
+    <Content Include="Content\applicationStyle\resetStyles.less" />
+    <Content Include="Content\applicationStyle\tables.less" />
+    <Content Include="Content\applicationStyle\variables.less" />
+    <Content Include="Content\bootstrap\bootstrap.css.map" />
+    <Content Include="Content\applicationStyle\mediaQueries.css.map" />
+    <Content Include="Content\applicationStyle\mediaQueries.less" />
+    <Content Include="Content\slikTest.docx" />
+    <Content Include="Content\slikTestTab.docx" />
+    <Content Include="Content\slikTestTab2.docx" />
+    <Content Include="ClassDiagram3.cd" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
+    <None Include="Properties\PublishProfiles\mmm.pubxml" />
+    <None Include="Properties\PublishProfiles\nwe.pubxml" />
+    <None Include="Properties\PublishProfiles\wpluplus.pubxml" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\7636-E.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 1.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 10.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 100.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 101.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 102.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 103.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 104.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 105.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 106.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 107.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 108.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 1084.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 1085.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 1086.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 1087.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 1088.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 1089.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 109.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 1090.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 1091.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 1092.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 1093a.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 1093b.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 1093c.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 1094.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 1095.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 1096.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 1097.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 1098.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 1099.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 11.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 110.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 1100.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 111.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 112.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 113.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 114.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 115.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 12.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 123.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 124.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 125.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 126.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 127.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 129.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 13.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 14.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 140.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 15.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16835.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16836.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16837.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16838.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16839.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16840.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16842.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16843.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16844.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16845.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16846.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16848.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16849.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16850.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16851.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16852.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16853.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16854.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16855.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16856.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16857.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16858.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16859.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16860.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16862.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16863.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16864.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16865.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16866.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16867.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16868.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16869.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16870.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16901.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16902.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16902_1.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16904.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16905.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16906.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16907.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16908.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16909.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16910.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16911.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16912.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16913.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16914.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16915.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16916.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16917.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16918.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16919.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16920.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16921.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16922.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16923.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16924.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16925.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16926.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16927.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16928.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16929.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16930.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16931.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16932.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16933.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16934.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16935.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16936.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16937.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16938.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16939.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16940.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16941.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16942.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16943.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16944.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16945.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16946.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16947.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16948.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16949.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16950.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16951.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16952.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16953.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16954.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16955.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16956.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16981.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16982.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 16983.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 17.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 18.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 187.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 188.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 189.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 19.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 191.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 192.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 19246.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 19246_1.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 19248.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 19248_1.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 19249.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 19250.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 19251.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 19252.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 19253.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 19253_1.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 19254.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 19254_1.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 19255.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 19255_1.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 19256.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 19256_1.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 193.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 194.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 195.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 196.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 2.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 20.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 207.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 208.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 209.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 21.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 210.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 211.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 212.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 213.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 215.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 216.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 217.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 22.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 225.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 226.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 23.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 233.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 234.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 235.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 25.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 26.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 268.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 269.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 27.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 270.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 271.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 272.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 28.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 284.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 286.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 287.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 288.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 289.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 29.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 290.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 291.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 292.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 293.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 294.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 295.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 296.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 298.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 299.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 3.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 30.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 300.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 301.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 302.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 303.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 304.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 305.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 306.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 307.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 31.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 316.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 317.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 318.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 319.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 32.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 320.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 321.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 322.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 323.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 339.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 34.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 340.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 341.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 344.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 345.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 346.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 347.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 348.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 349.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 35.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 350.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 351.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 352.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 353.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 354.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 355.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 356.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 357.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 358.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 359.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 360.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 361.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 362.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 363.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 37.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 370.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 371.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 38.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 387.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 389.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 39.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 390.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 391.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 392.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 393.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 394.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 395.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 396.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 397.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 398.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 399.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 4.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 40.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 400.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 401.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 41.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 42.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 43.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 44.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 45.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 46.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 47.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 48.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 49.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 51.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 52.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 53.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 54.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 55.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 56.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 57.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 58.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 59.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 6.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 60.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 61.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 62.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 63.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 64.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 65.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 66.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 67.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 68.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 69.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 7.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 70.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 71.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 72.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 73.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 74.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 746.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 747.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 748.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 749.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 750.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 751.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 752.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 753.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 754.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 755.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 760.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 761.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 762.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 8.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 803.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 804.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 806.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 807.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 808.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 810.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 811.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 812.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 813.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 814.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 815.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 819.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 820.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 85.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 866.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 867.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 868.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 869.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 870.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 872.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 873.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 874.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 875.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 876.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 877.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 878.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 879.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 880.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 881.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 882.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 883.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 884.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 885.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 886.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 887.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 888.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 889.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 89.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 890.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 891.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 892.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 893.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 894.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 895.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 896.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 897.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 898.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 899.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 9.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 90.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 900.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 901.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 902.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 903.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 904.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 905.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 906.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 907.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 908.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 909.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 91.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 910.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 911.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 912.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 913.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 914.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 915.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 916.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 92.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 93.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 94.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 95.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 96.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 97.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 98.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-AZ 99.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 116.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 117.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 118.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 119.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 120.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 121.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 122.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 128.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 130.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 131.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 132.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13232.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13233.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13234.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13235.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13236.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13237.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13238.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13239.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13240.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13241.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13258.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13259.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13260.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13261.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13262.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13263.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 133.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13307.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13308.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13309.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13310.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13311.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13312.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13313.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13314.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13315.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13316.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13317.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13318.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13319.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13320.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13321.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13322.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13323.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13324.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13325.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13326.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13327.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13328.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13329.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13330.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13331.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13332.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13333.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13334.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13335.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13336.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13347.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13348.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13349.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13350.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13351.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13352.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13354.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13355.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13356.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13357.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13358_1.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13360.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13362.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13363.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13368.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 134.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13477.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13478.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13479.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13481.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13482.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 135.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13518.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 13520.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 136.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 137.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 138.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 139.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 141.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 142.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 143.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 144.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 145.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 146.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 147.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 148.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 149.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 150.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 152.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 153.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 154.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 155.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 156.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 157.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 158.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 162.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 163.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 164.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 165.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 166.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 167.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 168.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16801.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16803.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16804.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16805.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16806.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16807.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16808.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16809.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16810.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16811.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16812.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16813.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16814.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16815.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16816.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16817.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16818.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16819.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16820.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16821.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16822.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16823.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16824.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16825.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16826.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16828.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16829.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16830.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16831.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16832.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16833.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16834.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16957.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16958.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16960.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16964.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16965.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16966.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 16967.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 170.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 171.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 173.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 174.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 175.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 176.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 177.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 178.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 179.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 180.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 181.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 182.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 183.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 184.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 185.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 186.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 19206.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 19207.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 19208.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 19209.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 19210.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 19211.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 19212.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 19213.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 19214.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 19215.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 19216.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 19217.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 19218.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 19219.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 19220.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 19245.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 197.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 198.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 201.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 220.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 223.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 236.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 237.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 238.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 239.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 240.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 241.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 242.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 243.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 244.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 245.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 246.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 247.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 248.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 249.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 250.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 251.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 252.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 253.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 254.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 255.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 256.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 257.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 259.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 260.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 261.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 262.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 263.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 265.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 266.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 267.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 274.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 275.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 276.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 277.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 278.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 279.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 280.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 281.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 282.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 283.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 308.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-HZ 309.JPG" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\AO-SZ 21451.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\b-start-monaco-2012-3.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\ferr-alon-barc-2013-2.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\hrt-kart-monaco-2012-11.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\hrt-kart-monaco-2012-2.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\merc-rosb-barc-2013-5.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\merc-schu-monaco-2012-41.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\pic_maru_melb_2012.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\pic_maru_melb_2012_3.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\redb_vett_melb_2012-25.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\redb_vett_melb_2012-31.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\saub-pere-monaco-2012-32.jpg" />
+    <Content Include="Mmedia\Antička zbirka %28AO%29\saub_koba_melb_2012.jpg" />
+    <Content Include="Mmedia\Likovna zbirka %28KPO%29\7599-E.jpg" />
+    <Content Include="Mmedia\Prapovijesna zbirka %28AO%29\7672-E.jpg" />
+    <Content Include="Mmedia\Zbirka igračaka i igara %28KPO%29\knjiznica.jpg" />
+    <Content Include="Mmedia\Zbirka igračaka i igara %28KPO%29\kupaona.jpg" />
+    <Content Include="Mmedia\Zbirka igračaka i igara %28KPO%29\mpp-thumbs.jpg" />
+    <Content Include="Mmedia\Zbirka igračaka i igara %28KPO%29\novi meni.jpg" />
+    <Content Include="Mmedia\Zbirka igračaka i igara %28KPO%29\prozor1.jpg" />
+    <Content Include="Mmedia\Zbirka igračaka i igara %28KPO%29\prozor2.jpg" />
+    <Content Include="Mmedia\Zbirka igračaka i igara %28KPO%29\zbirkagrafika.jpg" />
+    <Content Include="Mmedia\Zbirka upload\5735Aa.jpg" />
+    <Content Include="Mmedia\Zbirka upload\5792-E.jpg" />
+    <Content Include="Mmedia\Zbirka upload\5882Aa.jpg" />
+    <Content Include="Mmedia\Zbirka upload\5883Aa.jpg" />
+    <Content Include="Mmedia\Zbirka upload\7033-E.JPG" />
+    <Content Include="Mmedia\Zbirka upload\7471-E.jpg" />
+    <Content Include="Mmedia\Zbirka upload\7557-E.jpg" />
+    <Content Include="Mmedia\Zbirka upload\P4120267.JPG" />
+    <Content Include="Mmedia\Zbirka upload\P4120282.JPG" />
+    <Content Include="Mmedia\Zbirka upload\P4120285.JPG" />
+    <Content Include="Scripts\almond-custom.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\breeze.debug.js" />
+    <Content Include="Scripts\breeze.min.js" />
+    <Content Include="Scripts\durandal\activator.js" />
+    <Content Include="Scripts\durandal\app.js" />
+    <Content Include="Scripts\durandal\binder.js" />
+    <Content Include="Scripts\durandal\composition.js" />
+    <Content Include="Scripts\durandal\events.js" />
+    <Content Include="Scripts\durandal\plugins\dialog.js" />
+    <Content Include="Scripts\durandal\plugins\history.js" />
+    <Content Include="Scripts\durandal\plugins\http.js" />
+    <Content Include="Scripts\durandal\plugins\observable.js" />
+    <Content Include="Scripts\durandal\plugins\router.js" />
+    <Content Include="Scripts\durandal\plugins\serializer.js" />
+    <Content Include="Scripts\durandal\plugins\widget.js" />
+    <Content Include="Scripts\durandal\system.js" />
+    <Content Include="Scripts\durandal\transitions\entrance.js" />
+    <Content Include="Scripts\durandal\viewEngine.js" />
+    <Content Include="Scripts\durandal\viewLocator.js" />
+    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\jquery-ui-1.11.2.js" />
+    <Content Include="Scripts\jquery-ui-1.11.2.min.js" />
+    <Content Include="Scripts\jquery.slimscroll.js" />
+    <Content Include="Scripts\jqueydemo.js" />
+    <Content Include="Scripts\knockout-3.3.0.debug.js" />
+    <Content Include="Scripts\knockout-3.3.0.js" />
+    <Content Include="Scripts\knockout-jqAutocomplete.js" />
+    <Content Include="Scripts\knockout-sortable.js" />
+    <Content Include="Scripts\knockout-sortable.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\q.js" />
+    <Content Include="Scripts\q.min.js" />
+    <Content Include="Scripts\r.js" />
+    <Content Include="Scripts\require.js" />
+    <Content Include="Scripts\require2.js" />
+    <Content Include="Scripts\text.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="userConfig.txt" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\WMppStartUp\index.cshtml" />
+    <Content Include="Views\WMppStartUp\_splash.cshtml" />
+    <Content Include="Scripts\jquery-2.1.4.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Classes\" />
+    <Folder Include="Models\" />
+    <Folder Include="sysmmedia\300\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EFDL\EFDL.csproj">
+      <Project>{33897927-da7c-4ff8-b513-d0367d9678c0}</Project>
+      <Name>EFDL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>58504</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:61950/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.                                                                                      
+       Other similar extension points exist, see Microsoft.Common.targets.                                                                                                                
+  <Target Name="BeforeBuild">                                                                                                                                                             
+  </Target>                                                                                                                                                                               
+  <Target Name="AfterBuild">                                                                                                                                                              
+  </Target> -->
+</Project>

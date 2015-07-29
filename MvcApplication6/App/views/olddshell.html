@@ -1,0 +1,36 @@
+﻿    <nav class="navbar navbar-default navbar-fixed-top">
+        <a class="brand" href="/">W</a>
+        <div class="mainMenuHolder">
+            <!-- ko foreach: router.navigationModel-->
+            <a class="menuLink" data-bind="css: { active: isActive }, attr: { href: hash }" href="#"><span class="icon icon-home"></span><span data-bind="text: title"></span></a>
+            <!-- /ko -->
+        </div>
+        <div class="navbar-right">
+            <span class="whitePage" onclick="document.getElementById('pagestyle').setAttribute('href', 'Content/white.css');"></span>
+            <span class="blackPage" onclick="document.getElementById('pagestyle').setAttribute('href', 'Content/black.css');"></span>
+            <div data-bind="visible: $root.rIsAuth()">
+                <a class="closeButton" role="button" href="#">
+                    <span class="glyphicon glyphicon-off"></span>
+                    Logout
+                </a>
+            </div>
+            <!-- ko if: !$root.rIsAuth()-->
+            <form class="navbar-form pull-right">
+                <input class="form-control" placeholder="username" name="email" type="text" data-bind="value: $root.userName">
+                <input class="form-control" placeholder="Password" name="password" type="password" data-bind="value: $root.password">
+                <input class="btn btn-sm btn-success" type="button" data-bind="click: loginTry" value="Login">
+            </form>
+            <!-- /ko -->
+        </div>
+    </nav>
+
+    <div class="wrapper" data-bind="router: { transition: 'entrance', cacheViews: false }"></div>
+<div class="Overlay">
+    <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>

@@ -1,0 +1,565 @@
+﻿<section>
+    <div id="dialog-BigPicture" title="Zoom:">
+        <div data-bind="with: zoomItem">
+            <span class="col col-sm-32 imageHolder">
+                <img class="img-large" onerror="this.src = '/Content/images/fotonijepronadjen.png';" data-bind="    attr: { src: MC_Staza_slike }" />
+            </span>
+            <p class="col col-sm-16 textHolder" data-bind="html: kataloskaJedinica"></p>
+        </div>
+    </div>
+    <div id="dialog-form2" title="Upis mjera za pretraživanje:">
+        <div id="Mjere" data-bind="foreach: $root.realFakeMjere">
+            <div class="yrow">
+                <div class="ycol-lg-4">
+                    <div style="width: 100px; display: inline">
+                        <div class="styled-select">
+                            <select class="dropdown ui-widget-content ui-corner-all" data-bind="options: $root.Dijelovi, optionsText: 'Pojam', optionsValue: 'IDT', value: MJR_IDT_Mjereni_dio, optionsCaption: ' '"></select>
+                            <!--<select class="form-control" data-bind="options: $root.Dijelovi, optionsText: 'Pojam', optionsValue: 'IDT', value: MJR_IDT_Mjereni_dio, optionsCaption: ' '"></select>-->
+                        </div>
+                        <span id="mjeraAlert1" style="color: red; visibility: hidden"></span>
+                    </div>
+                </div>
+
+                <div class="ycol-lg-3">
+                    <div style="width: 100px; display: inline">
+                        <div class="Ystyled-select">
+                            <!--<select class="form-control" data-bind="options: $root.Dimenzije, optionsText: 'Pojam', optionsValue: 'IDT', value: MJR_IDT_Dimenzija, optionsCaption: ' '"></select>-->
+                            <select class="dropdown ui-widget-content ui-corner-all" data-bind="options: $root.Dimenzije, optionsText: 'Pojam', optionsValue: 'IDT', value: MJR_IDT_Dimenzija, optionsCaption: ' '"></select>
+                        </div>
+                        <span id="mjeraAlert2" style="color: red; visibility: hidden"></span>
+                    </div>
+                </div>
+                <div class="ycol-lg-3">
+                    <div class="Ystyled-select">
+                        <select class="dropdown ui-widget-content ui-corner-all" data-bind="options: $root.MjereOperatori, optionsText: 'tekst', optionsValue: 'vrijednost', value: MJR_Operator"></select>
+                        <!--<select class="form-control" data-bind="options: $root.MjereOperatori, optionsText: 'tekst', optionsValue: 'vrijednost', value: MJR_Operator"></select>-->
+                    </div>
+                </div>
+                <div class="ycol-lg-2" style="display: inline">
+                    <input class="text-right ui-widget-content ui-corner-all" type="text" data-bind="value: MJR_Mjera" />
+                    <!--<input class="text-right form-control" type="text" data-bind="value: MJR_Mjera" />-->
+                    <span id="mjeraAlert3" style="color: red; visibility: hidden"></span>
+                </div>
+                <div class="ycol-lg-2" data-bind="visible: MJR_Operator() > 2" style="display: inline">
+                    <input class="text-right ui-widget-content ui-corner-all" type="text" data-bind="value: MJR_Mjera2" />
+                    <!--<input class="text-right form-control" type="text" data-bind="value: MJR_Mjera2" />-->
+                    <span id="mjeraAlert4" style="color: red; visibility: hidden"></span>
+                    <span id="mjeraAlert6" style="color: red; visibility: hidden"></span>
+                </div>
+
+                <div class="ycol-lg-3">
+                    <div style="width: 100px; display: inline">
+                        <div class="Ystyled-select">
+                            <!--<select class="form-control" data-bind="options: $root.Jedinice, optionsText: 'Pojam', optionsValue: 'IDT', value: MJR_IDT_Jedinica_mjere, optionsCaption: ' '"></select>-->
+                            <select class="dropdown ui-widget-content ui-corner-all" data-bind="options: $root.Jedinice, optionsText: 'Pojam', optionsValue: 'IDT', value: MJR_IDT_Jedinica_mjere, optionsCaption: ' '"></select>
+                        </div>
+                        <span id="mjeraAlert5" style="color: red; visibility: hidden"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="dialog-form" title="Upis vremena za pretraživanje:">
+        <p class="validateTips">Datum u obliku dd.mm.gggg ili d.m.gggg</p>
+
+
+
+        <span id="vrijemeAlert" style="color: red; visibility: hidden">Krivi format upisa vremena.</span>
+
+
+
+        <div id="Izrada" data-bind="foreach: $root.realFakeVrijeme">
+
+            <div class="yrow">
+                <div class="ycol-lg-3">
+                    <div>
+                        <select class="dropdown ui-widget-content ui-corner-all" data-bind="attr: { id: 'komboPeriod_' + ID() }, options: $root.Vremena, optionsText: 'tekst', optionsValue: 'vrijednost', value: IZR_Period"></select>
+                    </div>
+                </div>
+
+                <div class="ycol-lg-2">
+                    <div>
+                        <select class="dropdown ui-widget-content ui-corner-all" data-bind="attr: { id: 'komboVrijemeOpis2_' + ID() }, options: $root.postaviOpis1, value: IZR_Vrijeme_opis"></select>
+                    </div>
+                </div>
+
+                <div class="ycol-lg-5">
+                    <input class="text-right ui-widget-content ui-corner-all" data-bind="attr: { id: 'inputVrijeme_' + ID() }, value: IZR_Vrijeme_vrijednost" />
+                </div>
+
+                <div class="ycol-lg-2">
+                    <div>
+                        <select class="dropdown ui-widget-content ui-corner-all" data-bind="attr: { id: 'komboVrijemeJedinica_' + ID() }, options: $root.VrijemeJedinica, value: IZR_Vrijeme_jedinica, event: { change: function () { $root.setOpis($data, 1); } }"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="row" data-bind="visible: IZR_Period() > 2">
+                <div class="ycol-lg-3">
+                    <div><span>do</span></div>
+                </div>
+
+                <div class="ycol-lg-2">
+                    <div>
+                        <select id="komboVrijemeOpis2" class="dropdown ui-widget-content ui-corner-all" data-bind="attr: { id: 'komboVrijemeOpis2_' + ID() }, options: $root.postaviOpis2, value: IZR_Vrijeme_opis2"></select>
+                    </div>
+
+                </div>
+
+                <div class="ycol-lg-5">
+                    <input class="text-right ui-widget-content ui-corner-all" data-bind="attr: { id: 'inputVrijeme2_' + ID() }, value: IZR_Vrijeme_vrijednost2" />
+                </div>
+
+                <div class="ycol-lg-2">
+                    <div>
+                        <select class="dropdown ui-widget-content ui-corner-all" data-bind="attr: { id: 'komboVrijemeJedinica2_' + ID() }, options: $root.VrijemeJedinica, value: IZR_Vrijeme_jedinica2, event: { change: function () { $root.setOpis($data, 2); } }"></select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+        <div class="sidebar-wrapper paddingTop paddingBottomDouble">
+            <h5 class="heading">Sužavanje pretrage</h5>
+            <!-- ko foreach: $root.refiners -->
+            <div class="sidebarBox border1 borderDarkerBottom paddingSmall marginLeftSmall marginRightSmall" data-bind="visible: podaci().length > 0, hasFocus: imaFokus">
+                <h5 class="inlinebox bold uppercase" data-bind="text: title"></h5>
+                <a class="mainColor floatRight inlinebox" data-bind="visible: podaci().length > 5, text: plus10() ? 'prvih 5' : 'prikaži sve', click: $root.flipPlus10"></a>
+
+                <div class="sidebarBoxLinks paddingTopSmall" data-bind="foreach: podaci">
+                    <span class="box mainLink paddingLeft paddingRight" data-bind="visible: odabrano && (($index() < 5 && !$parent.plus10()) || $parent.plus10())">
+                        <span data-bind="text: Pojam"></span>
+                        <span data-bind="text: ' (' + brojZapisa + ')', attr: { class: 'floatRight' }"></span>
+                    </span>
+                    <a class="box mainLink paddingLeft paddingRight" data-bind="click: $root.dodajRedakUpita, visible: !odabrano && (($index() < 5 && !$parent.plus10()) || $parent.plus10())">
+                        <span data-bind="text: Pojam"></span>
+                        <span data-bind="text: ' (' + brojZapisa + ')', attr: { class: 'floatRight' }"></span>
+                    </a>
+                </div>
+            </div>
+            <!-- /ko -->
+            <div class="clear paddingBottomDouble"></div>
+        </div>
+
+    <div class="container glavni scrollable">
+        <div class="contentBoxHeader breadCrumbsHolder">
+            <span class="prevCrumb icon icon-home"> Dashboard</span>
+            <span class="crumbDivider">></span>
+            <span class="crumb"> Pretraživanje</span>
+        </div>
+
+        <div class="row noMargin marginTop">
+
+            <div class="col col-sm-25 contentBox noPadding" id="tabPretrazivanje">
+                <div class="col col col-sm-36 contentBoxHeader">
+                    <div class="col col-sm-8 link dropdownLink link-subtle right" data-bind="click: $root.openSearchHistory, css: searchHistoryOpened() == true ? 'opened' : ''">
+                        <span class="searchHistory" data-bind="text: myMessage"></span>
+                    </div>
+                    <div class="col col-sm-8 noPadding paddingLeft">
+                        <input class="form-control" placeholder="Novi upit" data-bind="value: $root.imeUpita" />
+                    </div>
+                    <div class="col col-sm-2 headerControls noPadding">
+                        <span title="spremi upit" class="col col-sm-18 button icon-save-disk icon-centered-save-disk" data-bind="click: $root.spremiUpit"></span>
+                        <span title="kopiraj upit" class="col col-sm-18 button icon-files icon-centered-icon-files" data-bind="click: $root.kopirajUpit"></span>
+                    </div>
+                </div>
+                <div class="col col-sm-36 contentBoxBody contentBoxBodySized">
+                    <div class="row noMargin labelsHolder">
+                        <div title="test" class="col col-sm-1 noPadding">i / ili</div>
+                        <div title="test" class="col col-sm-11 noPadding paddingRightSmall">kategorija</div>
+                        <div title="test" class="col col-sm-4 noPadding">operator</div>
+                        <div title="test" class="col col-sm-18">nekaj</div>
+                        <div title="test" class="col col-sm-2 noPadding"></div>
+                    </div>
+                    <!-- ko foreach: redakUpita -->
+                    <div class="row noMargin ">
+                      
+                            <div class="col col-sm-1 noPadding chBoxHolderCol">
+                                <div data-bind="css: { odabrano: redOperator }">
+                                    <div class="roundedTwo" data-bind="visible: $index() > 0">
+                                        <input class="chBox" type="checkbox" data-bind="checked: redOperator, event: { click: $root.changeRedOperator }, attr: { id: 'c1hkbox_' + $index() }" />
+                                        <label data-bind="attr: { for: 'c1hkbox_' + $index() }"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        <div class="col col-sm-11 styled-select noPadding paddingRightSmall">
+                            <div>
+                                <select class="form-control" data-bind=" options: $root.redakKombo(), optionsText: 'Pojam', optionsValue: 'IDT', value: poljeIDT, event: { change: function () { $root.vidiIzbor($index, $data); } }"></select>
+                            </div>
+                        </div>
+                        <div class="col col-sm-4 styled-select noPadding">
+                            <div>
+                                <select class="form-control" data-bind=" options: operatori, value: upitOperator, event: { change: function () { $root.changeOperator($index, $data); } }"></select>
+                            </div>
+                        </div>
+                        <div class="col col-sm-18 noPadding paddingRightSmall">
+                            <div class="col col-sm-2 noPadding chBoxHolderCol">
+                                <div data-bind="css: { odabrano: podZapisi }">
+                                    <div class="roundedTwo" data-bind="visible: combo() == 2">
+                                        <input class="chBox" type="checkbox" data-bind="checked: podZapisi, event: { click: $root.changePod }, attr: { id: 'c2hkbox_' + $index() }" />
+                                        <label data-bind="attr: { for: 'c2hkbox_' + $index() }"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col col-sm-34 noPadding" data-bind="event: { dblclick: function () { $root.zoviDialog($index, $data); } }">
+                                <input class="form-control" id="Text3" data-bind="visible: combo() == 1, value: vrijednost1" />
+                                <input class="form-control" id="autoKombo" data-bind="visible: combo() == 2, jqAutoUpit: { autoFocus: true, minLength: 2 },
+    jqAutoSource: termTablica,
+    jqAutoValue: vrijednost2,
+    jqAutoSourceLabel: 'Pojam',
+    jqAutoSourceInputValue: 'Pojam',
+    jqAutoSelectsSource:$root.Selects,
+    jqAutoSourceValue: 'IDT'" />
+                                <div class="styled-select">
+                                    <div>
+                                        <select class="form-control" data-bind="visible: combo() == 3, options: $root.DaNeOperators, value: vrijednost3"></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-sm-2 noPadding addRemoveHolder">
+                            <span id="btnPlus" class="button buttonDefault" data-bind="visible: $index() === ($parent.redakUpita().length - 1), click: $root.noviRedak"><span class="icon icon-plus"></span></span>
+                            <span id="btnDelRow" class="button buttonAlert right" data-bind="visible: $index() > 0 || $root.redakUpita().length > 1, click: $root.brisiRedak"><span class="icon icon-remove"></span></span>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <div class="row SearchControlsHolder">
+                        <span class="col-sm-6 col-sm-offset-11 button buttonDefault buttonIconed" data-bind="click: $root.pretrazi">
+                            <span class="col-sm-9 icon icon-search-find"></span>
+                            <span class="col-sm-27 buttonTitle">PRETRAŽI</span>
+                        </span>
+
+                        <span class="col-sm-6 col-sm-offset-1 button buttonSecondary buttonIconed" data-bind="click: $root.noviUpit">
+                            <span class="col-sm-9 icon icon-folder-add"></span>
+                            <span class="col-sm-27 buttonTitle">NOVI UPIT</span>
+                        </span>
+                    </div>
+                    <div class="searchHistoryBox">
+                        <div class="col-sm-8 noPadding fullHeightWithBorder">
+                            <ul class="searchHistoryTabs">
+                                <li class="Selected">spremljeni upiti</li>
+                                <li>nedavni upiti</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-28 noPadding searchHistoryContent">
+                            <ul class="searchList">
+                                <li>
+                                    <input placeholder="pretraži spremljene upite" />
+                                </li>
+                                <!-- ko foreach: selectUpit -->
+                                <li data-bind="attr: { 'data-value': ID }, click: $root.promjeniSelectUpit, value: ID">
+                                
+                                    <span class="deleteRow"><span class="icon-remove" data-bind="click:$root.brisiUpit"></span></span>
+                                    <span class="searchTitle" data-bind="text: ime"></span>
+                                    <span class="searchDesc" data-bind="text:opis"></span>
+                                </li>
+                                <!-- /ko -->
+                            </ul>
+                        </div>
+                        <select class="form-control" data-bind="options: $root.selectUpit, value: odabranUpitID, optionsText: 'ime', optionsValue: 'ID', optionsCaption: ' ' "></select>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-10 col-sm-offset-1 contentBox noPadding" id="tabPretrazivanjeControls">
+                <div class="col col col-sm-36 contentBoxHeader">
+                    <h2>Kontrole / Akcije</h2>
+                </div>
+                <div class="col col-sm-36 contentBoxBody contentBoxBodySized">
+                    <div class="row">
+                        <span class="col-sm-12">
+                            <span class="button buttonDefault buttonBlock buttonIconed" data-bind="click: $root.msDoc">
+                                <span class="col-sm-9 icon icon-ptint"></span>
+                                <span class="col-sm-27 buttonTitle">ISPISI</span>
+                            </span>
+                        </span>
+                        <span class="col-sm-12">
+                            <span class="button buttonDefault buttonBlock buttonIconed" data-bind="click: $root.pretrazi">
+                                <span class="col-sm-9 icon icon-download"></span>
+                                <a class="col-sm-27 buttonTitle" href="Content/nekiPdf.pdf" download="user friendly ime pdf-a">PDF</a>
+                            </span>
+                        </span>
+                        <span class="col-sm-12">
+                            <span class="button buttonDefault buttonBlock buttonIconed" data-bind="click: $root.pretrazi">
+                                <span class="col-sm-9 icon icon-cog-gear"></span>
+                                <span class="col-sm-27 buttonTitle">ALATI</span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+        <div class="yyyListResultsHolder contentBox" data-bind="visible: $root.viewMode() == 1 && totalCount() > 0">
+
+            <div data-bind="visible: totalCount() > 0" class="tableHeader">
+
+                <div class="chBoxHolder" data-bind="css: { odabrano: $root.checkAll }">
+                    <div class="roundedTwo">
+                        <input id="sAll2" class="chBox" type="checkbox" data-bind="checked: $root.checkAll, event: { change: $root.zaCheckAll }" />
+                        <label for="sAll2"></label>
+                    </div>
+                </div>
+
+
+                <div data-bind="visible: totalCount() > 0" class="totalResults"><span>odabrano / ukupno:</span><span data-bind="    text: brojOdabranih() + '/' + totalCount()"></span></div>
+                <div class="choosePageHolder">
+                    <span class="">rezultata</span>
+                    <div class="styled-select">
+                        <select class="form-control" data-bind="value: $root.pageSize, event: { change: function () { $root.refreshPageSize() } }">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                </div>
+                <ul class="pagination" data-bind="visible: totalCount() > 0">
+                    <li class="col col-sm-4 noPadding" data-bind="style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChangeFL(-100) }"><<</a></li>
+                    <li class="col col-sm-4 noPadding" data-bind="visible: $root.pageMax() > 100, style: {width: $root.paginationColCount() + '%'}"><a href="#" data-bind="    click: function () { $root.pageChange(-100) }">-100</a></li>
+                    <li class="col col-sm-4 noPadding" data-bind="visible: $root.pageMax() > 10, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(-10) }">-10</a></li>
+                    <li class="col col-sm-4 noPadding paginationHighlight" data-bind="visible: $root.pageMax() > 1, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(-1) }"><</a></li>
+                    <li class="col col-sm-4 noPadding paginationNumber" data-bind="style: { width: $root.paginationColCount() + '%' }"><span data-bind="    text: $root.pageIndex() + '/' + $root.pageMax()"></span></li>
+                    <li class="col col-sm-4 noPadding paginationHighlight" data-bind="visible: $root.pageMax() > 1, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="click: function () { $root.pageChange(1) }">></a></li>
+                    <li class="col col-sm-4 noPadding" data-bind="visible: $root.pageMax() > 10, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="click: function () { $root.pageChange(10) }">+10</a></li>
+                    <li class="col col-sm-4 noPadding" data-bind="visible: $root.pageMax() > 100, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(100) }">+100</a></li>
+                    <li class="col col-sm-4 noPadding" data-bind="style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChangeFL(100) }">>></a></li>
+                </ul>
+                <div class="viewControls">
+                    <span class="listView button icon-list-2 icon-centered-icon-list-2 active" data-bind="click: function () { viewMode(1); }, css: { active: $root.viewMode() == 1 }"></span>
+                    <span class="thumbLargeView button icon-thumbnails-large icon-centered-icon-thumbnails-large" data-bind="click: function () { viewMode(2); }, css: { active: $root.viewMode() == 2 }"></span>
+                </div>
+            </div>
+
+
+
+
+            <table class="table resultsTable tablica tablica-condensed tablica-bordered tablica-striped tablica-hover">
+
+                <thead>
+                    <tr>
+                        <th style="width: 35px; position: relative; padding: 0;"></th>
+                        <th class="imgCell">Inv. oznaka</th>
+                        <th>Naziv / vrsta</th>
+                        <th>Naslov</th>
+                        <th>Autor</th>
+                        <th>Datacija</th>
+                        <th>Mjere</th>
+                        <th>Tehnika,Materijal</th>
+                        <th>Zbirka</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: $root.rezultati">
+                    <tr data-bind="css: { odabrano: odabranoX }">
+                        <td style="width: 35px; position: relative;">
+                            <span class="rBroj" data-bind="text: (($root.pageIndex() - 1) * $root.pageSize()) + $index() + 1"></span>
+                            <div class="roundedTwo">
+                                <!--<input class="chBox" type="checkbox" data-bind="checkedValue: invBroj, checked: $root.odabrano, event: { change: $root.vidiOdabrano }, attr: { id: 'chkbox_' + $index() }" name="check" />-->
+                                <input class="chBox" type="checkbox" data-bind=" checked: odabranoX, event: { change: $root.vidiOdabrano }, attr: { id: 'chkbox_' + $index() }" name="check" />
+                                <label data-bind="attr: { for: 'chkbox_' + $index() }"></label>
+                            </div>
+                        </td>
+                        <td class="imgCell">
+                            <div class="sl-slider-wrapper">
+                                <div class="sl-slider">
+                                    <div class="sl-slides-wrapper">
+                                        <div class="sl-slide sl-slide-horizontal" data-slice2-scale="2" data-slice1-scale="2" data-slice2-rotation="-25" data-slice1-rotation="-25" data-orientation="horizontal" style="display: block;">
+                                            <span class="link link-default invBroj" data-bind="attr: { href: hash }, html: KRT_Inventarni_broj"></span>
+                                            <img src="#" class="img-thumbnail" onerror="this.src = '/Content/images/fotonijepronadjen.png';" data-bind="attr: { src: MC_Staza_slike }" />
+                                        </div>
+                                        <div class="sl-slide sl-slide-horizontal" data-slice2-scale="2" data-slice1-scale="2" data-slice2-rotation="-25" data-slice1-rotation="-25" data-orientation="horizontal" style="display: none;">
+                                            <div class="buttonHolder">
+                                                <span class="top" data-bind="event: { click: function () { $root.gotoZapis(hash); } }">
+                                                    <span class="icon icon-edit-write icon-centered"></span>
+                                                </span>
+                                                <span class="bottom" data-bind="event: { click: function () { $root.openBigPicture($index, $data); } }">
+                                                    <span class="icon icon-search-find icon-centered"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td> <span data-bind="text: nazivi" /></td>
+                        <td> <span data-bind="text: naslovi" /></td>
+                        <td> <span data-bind="text: Autori" /></td>
+                        <td> <span data-bind="text: Datacija" /></td>
+                        <td> <span data-bind="text: Mjere" /></td>
+                        <td> <span data-bind="text: Mit" /></td>
+                        <td> <span data-bind="text: zbirka" /></td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+
+
+
+            <div data-bind="visible: totalCount() > 0" class="tableFooter">
+                <ul class="pagination col col-sm-offset-1" data-bind="visible: totalCount() > 0">
+                    <li class="col col-sm-4 noPadding" data-bind="style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChangeFL(-100) }"><<</a></li>
+                    <li class="col col-sm-4 noPadding" data-bind="visible: $root.pageMax() > 100, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(-100) }">-100</a></li>
+                    <li class="col col-sm-4 noPadding" data-bind="visible: $root.pageMax() > 10, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(-10) }">-10</a></li>
+                    <li class="col col-sm-4 noPadding paginationHighlight" data-bind="visible: $root.pageMax() > 1, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(-1) }"><</a></li>
+                    <li class="col col-sm-4 noPadding paginationNumber" data-bind="style: { width: $root.paginationColCount() + '%' }"><span data-bind="    text: $root.pageIndex() + '/' + $root.pageMax()"></span></li>
+                    <li class="col col-sm-4 noPadding paginationHighlight" data-bind="visible: $root.pageMax() > 1, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(1) }">></a></li>
+                    <li class="col col-sm-4 noPadding" data-bind="visible: $root.pageMax() > 10, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(10) }">+10</a></li>
+                    <li class="col col-sm-4 noPadding" data-bind="visible: $root.pageMax() > 100, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(100) }">+100</a></li>
+                    <li class="col col-sm-4 noPadding" data-bind="style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChangeFL(100) }">>></a></li>
+                </ul>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="yyyGridResultsHolder" data-bind="visible: $root.viewMode() == 2">
+            <div data-bind="visible: totalCount() > 0" class="tableHeader">
+
+                <div class="chBoxHolder" data-bind="css: { odabrano: $root.checkAll }">
+                    <div class="roundedTwo">
+                        <input id="sAll" class="chBox" type="checkbox" data-bind="checked: $root.checkAll, event: { change: $root.zaCheckAll }" />
+                        <label for="sAll"></label>
+                    </div>
+                </div>
+
+
+                <div data-bind="visible: totalCount() > 0" class="totalResults"><span>odabrano / ukupno:</span><span data-bind="    text: brojOdabranih() + '/' + totalCount()"></span></div>
+                <div class="choosePageHolder">
+                    <span class="">rezultata</span>
+                    <div class="styled-select">
+                        <select class="form-control">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                </div>
+                <ul class="pagination" data-bind="visible: totalCount() > 0">
+                    <li class="col col-sm-4 noPadding" data-bind="style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChangeFL(-100) }"><<</a></li>
+                    <li class="col col-sm-4 noPadding" data-bind="visible: $root.pageMax() > 100, style: {width: $root.paginationColCount() + '%'}"><a href="#" data-bind="    click: function () { $root.pageChange(-100) }">-100</a></li>
+                    <li class="col col-sm-4 noPadding" data-bind="visible: $root.pageMax() > 10, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(-10) }">-10</a></li>
+                    <li class="col col-sm-4 noPadding paginationHighlight" data-bind="visible: $root.pageMax() > 1, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(-1) }"><</a></li>
+                    <li class="col col-sm-4 noPadding paginationNumber" data-bind="style: { width: $root.paginationColCount() + '%' }"><span data-bind="    text: $root.pageIndex() + '/' + $root.pageMax()"></span></li>
+                    <li class="col col-sm-4 noPadding paginationHighlight" data-bind="visible: $root.pageMax() > 1, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="click: function () { $root.pageChange(1) }">></a></li>
+                    <li class="col col-sm-4 noPadding" data-bind="visible: $root.pageMax() > 10, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="click: function () { $root.pageChange(10) }">+10</a></li>
+                    <li class="col col-sm-4 noPadding" data-bind="visible: $root.pageMax() > 100, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(100) }">+100</a></li>
+                    <li class="col col-sm-4 noPadding" data-bind="style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChangeFL(100) }">>></a></li>
+                </ul>
+                <div class="viewControls">
+                    <span class="listView button icon-list-2 icon-centered-icon-list-2 active" data-bind="click: function () { viewMode(1); }, css: { active: $root.viewMode() == 1 }"></span>
+                    <span class="thumbLargeView button icon-thumbnails-large icon-centered-icon-thumbnails-large" data-bind="click: function () { viewMode(2); }, css: { active: $root.viewMode() == 2 }"></span>
+                </div>
+            </div>
+
+
+            <div class="row" data-bind="foreach: $root.rezultati">
+
+                <div class="col-sm-18 ItemHolder" data-bind="attr: { 'data-id': $index() }, css: { odabrano: odabranoX }">
+                    <span class="fullBlock"><span class="rBroj" data-bind="text: (($root.pageIndex() - 1) * $root.pageSize()) + $index() + 1"></span></span>
+                    <div class="col col-sm-2 chkBoxHolder">
+                        <div class="roundedTwo">
+                            <input class="chBox" type="checkbox" data-bind=" checked: $root.odabranoX, event: { change: $root.vidiOdabrano }, attr: { id: 'chkbox1_' + $index() }" />
+                            <label data-bind="attr: { for: 'chkbox1_' + $index() }"></label>
+                        </div>
+                    </div>
+                    <span class="col col-sm-14 imageHolder">
+                        <img class="img-thumbnail" onerror="this.src = '/Content/images/fotonijepronadjen.png';" data-bind="    attr: { src: MC_Staza_slike }" />
+                        <span>
+                            <!--<a class="iBroj" data-bind="attr: { href: hash }, html: KRT_Inventarni_broj"></a>-->
+                            <span class="iBroj" data-bind="attr: { href: hash }, html: KRT_Inventarni_broj"></span>
+                        </span>
+                    </span>
+                    <p class="col col-sm-20 textHolder" data-bind="html: kataloskaJedinica"></p>
+                </div>
+            </div>
+
+            <div data-bind="visible: totalCount() > 0" class="tableFooter">
+                <ul class="pagination col col-sm-offset-1" data-bind="visible: totalCount() > 0">
+                    <li class="col col-sm-4 noPadding" data-bind="style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChangeFL(-100) }"><<</a></li>
+                    <li class="col col-sm-4 noPadding" data-bind="visible: $root.pageMax() > 100, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(-100) }">-100</a></li>
+                    <li class="col col-sm-4 noPadding" data-bind="visible: $root.pageMax() > 10, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(-10) }">-10</a></li>
+                    <li class="col col-sm-4 noPadding paginationHighlight" data-bind="visible: $root.pageMax() > 1, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(-1) }"><</a></li>
+                    <li class="col col-sm-4 noPadding paginationNumber" data-bind="style: { width: $root.paginationColCount() + '%' }"><span data-bind="    text: $root.pageIndex() + '/' + $root.pageMax()"></span></li>
+                    <li class="col col-sm-4 noPadding paginationHighlight" data-bind="visible: $root.pageMax() > 1, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(1) }">></a></li>
+                    <li class="col col-sm-4 noPadding" data-bind="visible: $root.pageMax() > 10, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(10) }">+10</a></li>
+                    <li class="col col-sm-4 noPadding" data-bind="visible: $root.pageMax() > 100, style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChange(100) }">+100</a></li>
+                    <li class="col col-sm-4 noPadding" data-bind="style: { width: $root.paginationColCount() + '%' }"><a href="#" data-bind="    click: function () { $root.pageChangeFL(100) }">>></a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</section>

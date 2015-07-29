@@ -1,0 +1,477 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{33897927-DA7C-4FF8-B513-D0367D9678C0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EFDL</RootNamespace>
+    <AssemblyName>EFDL</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="M_DATA.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>M_DATA.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="M_DATA.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="M_DATA.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>M_DATA.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tbl_Autori_Discipline.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Autori_Grupe.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Autori_povijest.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Autori_Pseudonimi.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Brojevi_predmeta.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Def_Forme.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Def_Izbornik.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Def_Izbornik_SEK.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Def_Jedinica_vremena.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Def_Polja_Upiti_Extra.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Def_Struktura.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Def_Struktura_detalji.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Def_Struktura_iznimke.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Def_Struktura_plus.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Def_Struktura_upiti_refiners.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Def_Tipovi_knjiga.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Def_Vrijeme.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Inventarizacija.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Ispisi.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Ispisi_redci.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Izlozbe_odrzavanja.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Izlozbe_organizatori.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Izrada.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Kartica.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Kataloska_jedinica.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Kljucne_rijeci.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Knjiga_ulaska.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Knjiga_ulaska_Template.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_KUL_brojevi.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Log_Greske.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Log_promjena_smjestaja.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Media_collector.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Mjere.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Nalaziste_datacija.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Naslovi.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Natpisi_i_oznake.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Nazivi.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Nazivlje.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Ocuvanost.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Operatori.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Parametri_za_Ispisi_redci.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Parametri_za_korisnike.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Pod_Oznake.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_PopisParametara.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Povijest_predmeta.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Predmeti_u_zbirkama.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Pripadnosti.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Reference.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Reprodukcijska_prava.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Sadrzaj.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Srodni_nazivi.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Teren_sezona.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Autori.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Dijelovi.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Dimenzije.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Drzave.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Izlozbe.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Izlozbe_institucije.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Izlozbe_organizatori.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Izvori_nabave.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Jedinice_Mjere.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Jezici.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Kategorija_vrijednosti.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Kljucne_rijeci.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Kustosi.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Mape.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Materijali.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Mjesta.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Mjesta_opis.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Motivi.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Nacini_prikupljanja.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Nalaziste.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Nalaziste_vrsta.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Nazivi.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Nazivi_opis.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Ocuvanosti.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Ornamenti.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Osobe_i_institucije.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Osobe_i_inst_odrednice.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Pojmovnik.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Povezanosti.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Pribavljanje.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Pripadnosti.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Reference.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Reference_oblik.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Sadrzaj_predmet.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Sakupljaci.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Smjestaj.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Smjestaj_privremeni.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Smjestaj_privremeni_vrsta.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Smjestaj_stalni.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Stupanj_dovrsenosti.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Tehnike.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Uloge_autora.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Uporabe.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Valute.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Virtualne_zbirke.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Vremenske_odrednice.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Vrste_brojeva.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Vrste_datoteka.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Vrste_naslova.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Vrste_natpisa.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Vrste_naziva.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Vrste_odgovornosti.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Vrste_organizacije_izlozbe.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Vrste_reference.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Vrste_sadrzaja.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_T_Zbirke.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Update.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Upiti.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Upiti_redci.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_U_Dijelovi_predmeta.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_U_Materijali_u_dijelovima.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_U_Predmeti_na_izlozbama.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Vrijednosti.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_Mjesta_DohvatiSve_Result.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_Zbirke_DohvatiSve_Result.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_Kartica.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_Stuff_ALL.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_T_Autori.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_T_Izvori_nabave.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_T_Kustosi.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_T_Osobe_i_inst_odrednice.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_T_Sakupljaci.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_Web_Rezultati.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_Zbirke_prva_zadnja_zbroj.cs">
+      <DependentUpon>M_DATA.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="M_DATA.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>M_DATA.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="M_DATA.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>M_DATA.edmx</DependentUpon>
+      <LastGenOutput>M_DATA.Context.cs</LastGenOutput>
+    </None>
+    <None Include="M_DATA.edmx.diagram">
+      <DependentUpon>M_DATA.edmx</DependentUpon>
+    </None>
+    <None Include="M_DATA.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>M_DATA.edmx</DependentUpon>
+      <LastGenOutput>M_DATA.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

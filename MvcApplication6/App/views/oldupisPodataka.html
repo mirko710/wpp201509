@@ -1,0 +1,236 @@
+﻿<section>
+    
+    <div class="sidebar-wrapper paddingTop paddingBottomDouble">
+        <h5 class="heading">
+            Kategorije za registraciju
+            <span class="widnowButton">
+                <a href="#" data-bind="click: $root.minimize">
+                    <span style="color: silver" class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+            </span>
+        </h5>
+        <div class="greyHeader" data-bind="foreach: $root.cTest()">
+            <!--<span data-bind="    text: cUkupno() - cPerfect() + '/' + cUkupno()"></span>-->
+            <span data-bind="text: cUkupno() - cPerfect()"></span>
+            <button id="Button13" class="btn btn-primary btn-sm" data-bind="click: function ($data) { $root.currentBrojid(movePrevNotPerfect()); }"><span class="glyphicon glyphicon-step-backward"></span></button><button id="Button14" class="btn btn-primary btn-sm" data-loading-text="..." data-bind=" click: function ($data) { $root.currentBrojid(moveNextNotPerfect()); }"><span class="glyphicon glyphicon-step-forward"></span></button><button id="Button16" class="btn btn-primary btn-sm btn-yellow" data-loading-text="..." data-bind=" click: $root.XsaveChanges"><span class="glyphicon glyphicon-refresh"></span></button>
+        </div>
+
+        <div class="sidebarBox paddingSmall marginLeftSmall marginRightSmall" data-bind="foreach: $root.cTest()">
+
+            <div class="sidebarBoxLinks paddingTopSmall" data-bind="foreach: imePolja">
+                <a class="box mainLink paddingLeft paddingRight" data-bind="css: { 'listItem': true, 'missing': (!$parent.realData()[$parent.pozicija()][$data]) }, click: function ($data) { $root.postaviFokusUDF($parent.imeTmpl[$index()],$parent.imeFld[$index()]); }">
+                    <span data-bind="text: $parent.imeLabel[$index()]"></span>
+                    <span data-bind="text: '(' + ($parent.cUkupno() - $parent.counters[$data]) + ')', attr: { class: 'floatRight' }"></span>
+                </a>
+            </div>
+        </div>
+
+        <h5 class="heading">
+            Skupine podataka
+            <span class="widnowButton">
+                <a href="#" data-bind="click: $root.minimize">
+                    <span style="color: silver" class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+            </span>
+        </h5>
+        <div id="muver" class="widnow">
+            <div class="widnowBox">
+                <ul data-bind="sortable: {data:forme, afterMove:$root.spremiForme}" class="list-group">
+                    <li class="list-group-item" data-bind="click: $root.postaviFokus" style="cursor: pointer">
+                        <i class="fa fa-arrows"></i>
+                        <span class="listItemTitle" data-bind="text: title"></span>
+                        <span class="badge" data-bind="text: recordCount"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container glavni scrollable">
+        <div class="contentBoxHeader breadCrumbsHolder">
+            <span class="prevCrumb icon icon-home"> Dashboard</span>
+            <span class="crumbDivider">></span>
+            <span class="crumb"> M++</span>
+        </div>
+        <div class="row subHeader noMargin marginTop">
+            <div class="col-lg-3 styled-select3">
+                <select class="form-control form-control3 " data-bind="options: $root.Selects.tbl_T_Zbirke, optionsText: 'Pojam', optionsValue: 'IDT', value: zbNewIndex, event:{ change: $root.komboZbirkaChanged}"></select>
+            </div>
+            <div class="col-lg-3">
+                <input class="form-control form-control3" id="Text2" data-bind=" event: { dblclick: function () { alert('hh'); } }, jqAuto: { autoFocus: true },
+    jqAutoSource: $root.selZapisi,
+    //jqAutoQuery: $root.filterQuery,
+    jqAutoValue: currentBrojid,
+    jqAutoSourceLabel: 'KRT_Inventarni_broj',
+    jqAutoSourceInputValue: 'KRT_Inventarni_broj',
+    jqAutoSourceValue: 'ID_Broj'" />
+            </div>
+            <div class="col-lg-6">
+                <button id="Button6" class="btn btn-primary btn-sm" data-bind="click: navFirst"><span class="glyphicon glyphicon-fast-backward"></span></button><button id="Button7" class="btn btn-primary btn-sm" data-bind="    click: navPrev"><span class="glyphicon glyphicon-step-backward"></span></button>
+                <span class="btn-ItemNumber" style="display: inline-block; width: 100px; text-align: center;" data-bind="text: recIndex() + 1 + '/' + recMax()"></span>
+                <button id="Button8" class="btn btn-primary btn-sm" data-loading-text="..." data-bind="click: navNext"><span class="glyphicon glyphicon-step-forward"></span></button>
+                <button id="Button9" class="btn btn-primary btn-sm" data-bind="click: navLast"><span class="glyphicon glyphicon-fast-forward"></span></button>
+                <button class="btn btn-success btn-addNew btn-sm" data-toggle="modal" data-target="#addNewZapis"><span class="glyphicon glyphicon-plus"></span></button>
+                <button id="Button10" class="btn btn-danger btn-sm" data-bind="click: delRecord"><span class="glyphicon glyphicon-trash"></span></button>
+                <button id="Button11" class="btn btn-success btn-save btn-sm" data-bind="click: $root.saveChanges, enable: $root.mijenjanoFlag">Spremi</button>
+                <button id="Button1" class="btn btn-warning btn-sm" data-bind="click: $root.undoChanges, enable: $root.mijenjanoFlag"><span class="fa fa-undo"></span></button>
+                <!--<button id="Button15" class="btn btn-success btn-sm" data-bind="click: $root.saveChanges">Spremi</button>-->
+            </div>
+        </div>
+
+        <div id="glavniUpis" class="container glavni">
+            <div class="row marginTop">
+                <div class="col-sm-29" id="divScroll" style="overflow: scroll; height: 840px">
+                    <!--ko foreach: $root.forme -->
+                    <div class="col col col-sm-36 contentBox noPadding" data-bind="hasFocus: imaFokus">
+                        <div class="col col col-sm-36 contentBoxHeader" data-bind="attr: { id: 'sidro' + tmpl() }">
+                            <h2 data-bind="text: title"></h2>
+                            <a data-bind="attr: { name: tmpl() }"></a>
+
+                            <span class="glyphicon glyphicon-chevron-up buttonSecondary hideIt" data-bind="click: $root.minimize"></span>
+
+                            <!--<button data-bind="click: function () { $root.prevRow($index()); }"><</button><span data-bind="    text: odabrano()+1 + '/' + recordCount()"> </span><button data-bind="    click: function () { $root.nextRow($index()); }">></button>-->
+                            <div class="subControls" data-bind="visible: buttonBox()">
+                                <!--<span class="button buttonAlert buttonIconed" data-bind="click: function () { $root.deleteZapisSubform($index(), odabrano()); }"><span class="col-sm-36 icon icon-trash-bin"></span></span>-->
+                                <span class="button buttonAlert buttonIconed" data-bind="click: function () { $root.deleteZapisSubform($data); }"><span class="col-sm-36 icon icon-trash-bin"></span></span>
+                                <!--<span class="button buttonDefault buttonIconed" data-bind="visible: title()!='Media', click: function () { $root.createZapisSubform($index()); }"><span class="icon icon-plus-1"></span><span class="buttonTitle">dodaj zapis</span></span>-->
+                                <span class="button buttonDefault buttonIconed" data-bind="visible: title() != 'Media', click: function () { $root.createZapisSubform($data); }"><span class="icon icon-plus-1"></span><span class="buttonTitle">dodaj zapis</span></span>
+                                <span class="button buttonDefault buttonIconed" data-bind="visible: title() == 'Media', click: function () { $root.createZapisSubform($data); }"><span class="icon icon-plus-1"></span><span class="buttonTitle">pridruži fotografiju</span></span>
+
+                            </div>
+                        </div>
+                        <div class="col col-sm-36 contentBoxBody">
+                            <!--ko template: { name: tmpl() } --><!-- /ko -->
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+
+                <div class="col-lg-7 rightColumn">
+
+                    <div id="Kartica" class="col col-lg-36 contentBox noPadding">
+                        <div class="col col-lg-36 contentBoxHeader">
+                            <h2>Ključni podaci</h2>
+                            <span class="glyphicon glyphicon-chevron-up buttonSecondary hideIt" data-bind="click: $root.minimize"></span>
+                        </div>
+                        <div class="col col-lg-36 contentBoxBody">
+                            <div class="row noMargin autoHeight" data-bind="foreach: fullKartica">
+                                <div class="row noMargin labelsHolder">
+                                    <div class="col col-lg-36">Inv. oznaka</div>
+                                </div>
+                                <div class="row noMargin">
+                                    <input id="invOznaka" type="text" class="form-control" data-bind="value: KRT_Inventarni_broj" />
+                                </div>
+                                <div class="row noMargin labelsHolder">
+                                    <div class="col col-lg-36">Zbirka</div>
+                                </div>
+                                <div class="row noMargin styled-select">
+                                    <div><select id="selZbirka" class="form-control form-control2" data-bind="options: $root.Selects.tbl_T_Zbirke, optionsText: 'Pojam', optionsValue: 'IDT', value: KRT_IDT_Zbirka"></select></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MediaPreview" class="col col col-lg-36 contentBox noPadding">
+                        <div class="col col col-lg-36 contentBoxHeader">
+                            <h2>Media</h2>
+                            <span class="glyphicon glyphicon-chevron-up buttonSecondary hideIt" data-bind="click: $root.minimize"></span>
+                        </div>
+                        <div class="col col-lg-36 contentBoxBody">
+                            <div data-bind="template: 'tmpMedia2'"></div>
+                        </div>
+                    </div>
+
+                    <div id="Kataloska" class="col col-lg-36 contentBox noPadding">
+                        <div class="col col-lg-36 contentBoxHeader">
+                            <h2>Kataloška jedinica</h2>
+                            <span class="glyphicon glyphicon-chevron-up buttonSecondary hideIt" data-bind="click: $root.minimize"></span>
+                        </div>
+                        <div class="col col-lg-36 contentBoxBody">
+                            <textarea readonly rows="15" wrap="soft" style="width: 99%" data-bind="value: $root.selK1" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    <div class="modal fade " id="addNewZapis" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Kreiraj novi zapis</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" style="width: 300px" class="form-control" data-bind="value: prijedlogInvBroja" placeholder="novi broj..." />
+                    <select class="form-control" style="width: 500px" data-bind="options: $root.Selects.tbl_T_Zbirke, optionsText: 'Pojam', optionsValue: 'IDT', value: zbNewIndex"></select>
+                    <!--<button id="Button6" data-bind="    click: function () { $root.newRec($root.zbNewIndex(),$root.prijedlogInvBroja() ); }">Novi</button>-->
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bind="    click: function () { $root.newRec($root.zbNewIndex(), $root.prijedlogInvBroja()); $('#addNewZapis').modal('hide'); }">Novi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade " id="dodajTerm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="H1">Dodaj termin</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- <input type="text" style="width:300px" class="form-control" data-bind="value: prijedlogInvBroja" />
+                    <select class="form-control" style="width:500px" data-bind="options: $root.Selects.Zbirke, optionsText: 'Pojam', optionsValue: 'IDT', value: zbNewIndex"></select>
+                    <button id="Button6" data-bind="    click: $root.dodajTermin" >Dodaj</button>-->
+                    dodaj <span data-bind="text: $root.dodajTerm()"></span>u <span data-bind="    text: $root.dodajTermTablica()"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bind=" click: function () { $root.dodajTermin; $('#dodajTerm').modal('hide'); }">Novi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade " id="uploadStart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="H2">Upload fotografija</h4>
+                </div>
+                <div class="modal-body">
+                    <!--<div data-bind="foreach: { data: photke, beforeRemove: beforeRemoveSlot }">-->
+                    <ul data-bind="sortable: photke ">
+                        <li>
+                            <!--<input type="file" accept="image/*" data-bind="file: imageFile, fileObjectURL: imageObjectURL, fileBinaryData: imageBinary" multiple/>-->
+                            <div data-bind="if: imageObjectURL">
+                                <img class="thumb" width="100px" height="100px" data-bind="attr: { src: imageObjectURL }" />
+                                <div>
+                                    <input type="checkbox" data-bind="checked: odabrano" />
+                                </div>
+                                <div><span data-bind="text: odabrano"></span></div>
+                            </div>
+                            <div>Size: <span data-bind="text: fileSize"></span>&nbsp;bytes</div>
+                            <div>file: <span data-bind="text: imageFile"></span></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+
+                    <input type="file" accept="image/*" data-bind=" event: { change: function () { $root.uploadImage($element.files) } }" multiple />
+                    <button type="button" data-bind="visible: $root.photke().length > 0, click: function () { $root.uploadStart(); $('#uploadStart').modal('hide'); }">Upload odabrane</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

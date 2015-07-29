@@ -1,0 +1,83 @@
+﻿// Button variants
+//
+// Easily pump out default styles, as well as :hover, :focus, :active,
+// and disabled options for all buttons
+
+.button-variant(@color; @background; @border) {
+  color: @color;
+  background-color: @background;
+  border-color: @border;
+
+  &:hover,
+  &:focus,
+  &.focus,
+  &:active,
+  &.active,
+  .open > .dropdown-toggle& {
+    color: @color;
+    background-color: darken(@background, 5%);
+        border-color: darken(@border, 6%);
+  }
+  &:active,
+  &.active,
+  .open > .dropdown-toggle& {
+    background-image: none;
+  }
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active {
+      background-color: @background;
+          border-color: @border;
+    }
+  }
+  &.buttonIconed > .buttonTitle {
+            border-left:solid 1px darken(@border, 12%);
+            color: inherit;
+        } 
+  &.buttonIconed > .icon { 
+            border-right:solid 1px lighten(@border, 12%);
+            color: inherit;
+            float: left;
+            padding: 0 7px;
+        }
+  &.buttonIconed:hover > .buttonTitle {
+            border-left:solid 1px darken(@border, 24%);           
+        } 
+  &.buttonIconed:hover > .icon { 
+            border-right:solid 1px lighten(@border, 1%);
+        }
+}
+
+// Button sizes
+.button-size(@padding-vertical; @padding-horizontal; @font-size; @line-height; @border-radius; @icon-font-size; @icon-line-height;)
+  when (@font-size > 0) {
+  padding: @padding-vertical @padding-horizontal;
+  font-size: @font-size;
+  line-height: @line-height;
+  border-radius: @border-radius;
+  }
+
+
+.button-size(@padding-vertical; @padding-horizontal; @font-size; @line-height; @border-radius; @icon-font-size; @icon-line-height; @icon-line-height-icon;) 
+    when (@icon-font-size > 0) {
+	    
+        padding: @padding-vertical @padding-horizontal;
+        & > .buttonTitle {
+          line-height: @icon-line-height;
+          float: left;
+          padding: 0 12px;
+        } 
+        > .icon { 
+          font-size: @icon-font-size;
+          line-height: @icon-line-height-icon;
+          padding:0;
+          height: @icon-line-height-icon - 4;
+        }
+    }
+

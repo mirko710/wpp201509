@@ -466,11 +466,20 @@
             ko.bindingHandlers.NUAuto = {
                 init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
                     var allBindings = allBindingsAccessor();
-                    var bigTablica = ko.observable(allBindings.NUAuto.tablica()) || 'tbl_T_Nazivi';
-                    var accValue = allBindings.NUAuto.accValue || '';
+                    var bigTablica = ko.observable();
+                    if (ko.isObservable(allBindings.NUAuto.tablica)) {
+                        bigTablica(allBindings.NUAuto.tablica() || 'tbl_T_Nazivi');
                         allBindings.NUAuto.tablica.subscribe(function (newValue) {
                             bigTablica(newValue);
                         })
+                    } else {
+                        bigTablica(allBindings.NUAuto.tablica);
+                    }
+
+ 
+
+                    var accValue = allBindings.NUAuto.accValue || '';
+
                     var getJsonAutocomplete = function (tablicaPojam, returnVal) {
 
                         //tablica = 'tbl_T_Nazivi';
@@ -520,21 +529,23 @@
                     ko.applyBindingAccessorsToNode(element, {
                         jqAuto: function () {
                             return {
-                                    source: getJsonAutocomplete,
-                                    options: {
-                                        dlookup: getJsonDlookup,
-                                        tablica: bigTablica || 'tbl_T_Nazivi'
-                                    },
-                                    value: accValue,
-                                    inputProp: 'Pojam',
-                                    labelProp: 'Pojam',
-                                    valueProp: 'IDT'}
+                                source: getJsonAutocomplete,
+                                options: {
+                                    dlookup: getJsonDlookup,
+                                    tablica: bigTablica || 'tbl_T_Nazivi'
+                                },
+                                value: accValue,
+                                inputProp: 'Pojam',
+                                labelProp: 'Pojam',
+                                valueProp: 'IDT'}
                         }
                     }, bindingContext);
 
                     return { controlsDescendantBindings: true };
                 }
-            };
+            
+            }
+            
            
 
             ko.bindingHandlers.jqAutoAJAX = {

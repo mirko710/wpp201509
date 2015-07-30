@@ -227,11 +227,10 @@ $(function () {
 
             var primeData = function () {
             
-                var promise = Q.all([
+               // var promise = Q.all([
                 //console.log(my.vm.testLoader()),getAutori(),getUpitAutori(),getDefForme(),
-                console.log(my.vm.testLoader()), getDefForme(),
-                my.vm.getKartica()]);
-                getUserName().then(function () {
+               // console.log(my.vm.testLoader()), getDefForme(), my.vm.getKartica()]);
+               return getUserName().then(function () {
                     parametri.ucitajParametre()
                     .then(function(){
                         console.log(parametri.Vrijednost("S_DEFAULT_ZBIRKA"));
@@ -241,7 +240,7 @@ $(function () {
                 });
             
             
-                return promise.then(success);
+                //return promise.then(success);
 
                 function success() {
                     return true;

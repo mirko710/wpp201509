@@ -204,7 +204,8 @@
         // alert("cmpaGotov");
         logger.log(title + ' View compcomplActivated', null, title, true);
         if (firstLoad) {
-            data.loadTerminologyWebWorker();
+            data.loadedTerminology(true);
+            //data.loadTerminologyWebWorker();
             firstLoad = false;
         }
         

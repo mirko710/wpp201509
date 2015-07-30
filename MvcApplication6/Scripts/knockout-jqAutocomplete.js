@@ -24,6 +24,19 @@
             //override with options passed in binding
             ko.utils.extend(config, options.options);
 
+
+            ////
+            if (options.options != undefined) {
+                if (typeof options.options.dlookup === "function" && !ko.isObservable(options.options.dlookup)) {
+                    var xValue = options.value();
+                    var retVal = ko.observable();
+                    options.options.dlookup.call(this, xValue, retVal)
+                        .then(function (response) {
+                            element.value = response;
+                        })
+                }
+            }
+
             //get source from a function (can be remote call)
             if (typeof options.source === "function" && !ko.isObservable(options.source)) {
                 config.source = function(request, response) {
@@ -61,13 +74,15 @@
             };
 
             //user made a change without selecting a value from the list
-            config.change = function(event, ui) {
+            config.change = function (event, ui) {
+                
                 if (!ui.item || !ui.item.actual) {
                     options.value(event.target && event.target.value);
 
                     if (ko.isWriteableObservable(options.dataValue)) {
                         options.dataValue(null);
                     }
+
                 }
 
                 if (existingChange) {
@@ -105,6 +120,13 @@
             // find the appropriate value for the input
             sources = unwrap(options.source);
             propNames = self.getPropertyNames(valueAccessor);
+            if (options.options != undefined) {
+                if (typeof options.options.update === "function" && !ko.isObservable(options.options.update)) {
+                    var xValue = options.value();
+                    var retVal = ko.observable();
+                    options.options.update.call(this, xValue, retVal)
+                }
+            }
 
             // if there is local data, then try to determine the appropriate value for the input
             if ($.isArray(sources) && propNames.value) {
@@ -114,24 +136,16 @@
                 ) || value;
             }
 
-            if (typeof options.options.dlookup === "function" && !ko.isObservable(options.options.dlookup)) {
-                var xValue = value;
-                var retVal=ko.observable();
-                options.options.dlookup.call(this,xValue,retVal)
-                    .then(function (response) {
-                        element.value = response;
-                    })
-
-            } else {
+ 
 
                 if (propNames.input && value && typeof value === "object") {
                     element.value = value[propNames.input];
                 }
                 else {
-                    element.value = value;
+                     element.value = value;
                 }
             }
-        };
+ 
 
         //if dealing with local data, the default filtering function
         this.defaultFilter = function(item, term) {

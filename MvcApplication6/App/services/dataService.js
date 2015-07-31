@@ -38,7 +38,7 @@ $(function () {
             jedinice = ko.observableArray([]),
             fullkartica = ko.observableArray([]),
             defStruktura = ko.observableArray([]),
-            protoForme = ko.observableArray([]),
+           // protoForme = ko.observableArray([]),
             mijenjanoFlag = ko.observable(false),
             autori = ko.observableArray([]),
             currentAutor = ko.observable(),
@@ -220,7 +220,7 @@ $(function () {
 
             my.em.hasChangesChanged.subscribe(function (eventArgs) {
                 //alert(my.em.hasChanges());
-                console.log(eventArgs);
+                //console.log(eventArgs);
                 mijenjanoFlag(my.em.hasChanges());
 
                 });
@@ -235,7 +235,6 @@ $(function () {
                     .then(function(){
                         console.log(parametri.Vrijednost("S_DEFAULT_ZBIRKA"));
                     });
-                
                     getUserRoles();
                 });
             
@@ -361,19 +360,21 @@ $(function () {
 
         
             var getDefForme = function () {
+                var ber = Q.defer();
                 var query = breeze.EntityQuery.from("tbl_Def_Forme");
-            
- 
 
-                return my.em.executeQuery(query)
+                my.em.executeQuery(query)
                         .then(querySucceeded)
                         .fail(queryFailed);
                 function querySucceeded(data) {
-                    my.vm.protoForme(data.results);
+                   // my.vm.protoForme(data.results);
+                    ber.resolve(data.results);
                 }
                 function queryFailed(error) {
+                    ber.resolve(false);
                     alert("Query failed(def forme): " + error.message);
                 }
+                return ber.promise;
 
             }
 
@@ -570,11 +571,12 @@ $(function () {
                 //if (i1 == 7)//Registracija iz Pretrazivanja
                 //if (i1 == 8)//zbirkeZa Homepage
                 //if (i1 == 9)//registracija po zbirci
-                parametar = "3";
-                if (vrstaPoziva == 6 || vrstaPoziva == 7) parametar = navigacijaIzPretrazivanja();
+                var outParametar = "3";
+                if (vrstaPoziva == 6 || vrstaPoziva == 7) outParametar = navigacijaIzPretrazivanja();
+                if (vrstaPoziva == 9) outParametar = parametar;
                 var req = $.ajax({
                     type: 'GET',
-                    url: adresaAPI + '?i1=' + vrstaPoziva + '&i2=2&i3=' + parametar,
+                    url: adresaAPI + '?i1=' + vrstaPoziva + '&i2=2&i3=' + outParametar,
                     dataType: 'json',
                     contentType: 'application/json',
                     success: function (response, text) {
@@ -3011,7 +3013,7 @@ $(function () {
                 getJsonPOSTPager: getJsonPOSTPager,
                 getJsonPOSTALT: getJsonPOSTALT,
                 getDefForme: getDefForme,
-                protoForme: protoForme,
+                //protoForme: protoForme,
                 //upisiParametar: upisiParametar,
                 getJsonPOSTALTNOEF: getJsonPOSTALTNOEF,
                 getJsonPOSTPagerNOEF: getJsonPOSTPagerNOEF,

@@ -377,15 +377,10 @@
 
  
         //def zbirka i za forme
-        var prefForm = null;
-        var prefFormKOD = null;
         var pocZbirka = null;
 
-        prefForm = data.parametri.Vrijednost("S_WEB_FORME");
         pocZbirka = data.parametri.Vrijednost("S_default_zbirka");
         
-
-  
 
 
         if (!pocZbirka) {
@@ -399,6 +394,22 @@
             }
         }
 
+ 
+
+        ////
+      
+
+
+    }
+
+    function postaviForme(forme) {
+        //def zbirka i za forme
+        var prefForm = null;
+        var prefFormKOD = null;
+        
+
+        prefForm = data.parametri.Vrijednost("S_WEB_FORME");
+        
         if (!prefForm) {
             prefForm = prefFormKOD;
         }
@@ -407,20 +418,12 @@
 
         }
 
-        ////
-        postaviForme(prefForm);
-
-
-    }
-
-    function postaviForme(prefForm) {
-
- 
 
         var redoslijedFormi = prefForm.split("#");
 
         $.each(redoslijedFormi, function (index, value) {
-            var tmpForm = ko.utils.arrayFirst(data.protoForme(), function (kitem) {
+            //var tmpForm = ko.utils.arrayFirst(data.protoForme(), function (kitem) {
+            var tmpForm = ko.utils.arrayFirst(forme, function (kitem) {
                 return kitem.ID() == value;
             });
 
@@ -454,11 +457,16 @@
             if (regNav.firstLoad) {
                 regNav.init();
             }
+            ucitajParametreZaKorisnike();
 
+            data.getDefForme()
+                .then(function (forme) {
+                    postaviForme(forme);
+                });
             firstLoad = false;
             //console.log(data.Selects.Kljucne_rijeci[0]);
 
-            ucitajParametreZaKorisnike();
+           
 
             zbIndex.subscribe(function (newValue) {
                 isLoading(false);

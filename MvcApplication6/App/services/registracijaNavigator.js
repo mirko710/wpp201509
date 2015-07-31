@@ -47,11 +47,11 @@ define(['services/dataService'],
         function findIndex(brojid) {
             var tmpIndex = -1;
             if (podaciZaRegistraciju().length > 0) {
-                var nadjeno = ko.utils.arrayFirst(podaciZaRegistraciju().realData(), function (item) {
+                var nadjeno = ko.utils.arrayFirst(podaciZaRegistraciju()[0].realData(), function (item) {
                     return item.ID_Broj == brojid;
                 })
                 if (nadjeno) {
-                    tmpIndex = podaciZaRegistraciju().realData().indexOf(nadjeno);
+                    tmpIndex = podaciZaRegistraciju()[0].realData().indexOf(nadjeno);
                 }
             }
 
@@ -67,12 +67,12 @@ define(['services/dataService'],
                 data.getZbirka(ulazIDBroj()).then(function (promjenaZbirke) {
                     currentZbirkaIDT(promjenaZbirke);
                     navigacijaZaRegistraciju(promjenaZbirke).then(function () {
-                        podaciZaRegistraciju.sync(ulazIDBroj());
+                        podaciZaRegistraciju()[0].sync(ulazIDBroj());
                         feder.resolve(true);
                     })
                 })
             } else {
-                podaciZaRegistraciju.sync(ulazIDBroj());
+                podaciZaRegistraciju()[0].sync(ulazIDBroj());
                 feder.resolve(true);
             }
 
@@ -161,8 +161,10 @@ define(['services/dataService'],
             that.moveNextNotPerfect = function () {
                 var ber = Q.defer();
                 var tmp = that.pozicija() + 1;
+                var nextNotPerfect=true;
                 //alert(that.realData()[tmp][x]);
-                while ((that.realData()[tmp].imaMaterijala && that.realData()[tmp].imaMjera && that.realData()[tmp].imaNaslov && that.realData()[tmp].imaNaziv && that.realData()[tmp].imaFotku && that.realData()[tmp].imaDataciju) && (tmp < that.cUkupno() - 1)) {
+                while (nextNotPerfect && (tmp < that.cUkupno() - 1)) {
+                    nextNotPerfect = (that.realData()[tmp].imaMaterijala && that.realData()[tmp].imaMjera && that.realData()[tmp].imaNaslov && that.realData()[tmp].imaNaziv && that.realData()[tmp].imaFotku && that.realData()[tmp].imaDataciju);
                     //if ((that.realData()[tmp].imaMaterijala && that.realData()[tmp].imaMjera && that.realData()[tmp].imaNaslov && that.realData()[tmp].imaNaziv && that.realData()[tmp].imaFotku && that.realData()[tmp].imaDataciju)) {
                     //if (that.realData()[tmp][x]);
                     tmp++;

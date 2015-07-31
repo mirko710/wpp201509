@@ -735,6 +735,7 @@ namespace WMpp
         {
             var termList = new List<termDropDown>();
             if (!string.IsNullOrEmpty(tablica) && !string.IsNullOrEmpty(term))
+                //provjerit da li je pravo ime tablice, očistit term (drop, delete, -- ;
             {
 
                 using (SqlConnection scon = new SqlConnection(conn))

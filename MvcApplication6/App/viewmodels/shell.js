@@ -158,7 +158,7 @@
             //jqAutoSourceLabel -- the property that should be displayed in the possible choices
             //jqAutoSourceInputValue -- the property that should be displayed in the input box
             //jqAutoSourceValue -- the property to use for the value
-            ko.bindingHandlers.jqAuto0 = {
+            ko.bindingHandlers.jqAuto = {
                 init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
                     var options = valueAccessor() || {},
                         allBindings = allBindingsAccessor(),
@@ -463,22 +463,22 @@
             };
 
 
-            ko.bindingHandlers.NUAuto = {
+            ko.bindingHandlers.upitiAutocomplete = {
                 init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
                     var allBindings = allBindingsAccessor();
                     var bigTablica = ko.observable();
-                    if (ko.isObservable(allBindings.NUAuto.tablica)) {
-                        bigTablica(allBindings.NUAuto.tablica() || 'tbl_T_Nazivi');
-                        allBindings.NUAuto.tablica.subscribe(function (newValue) {
+                    if (ko.isObservable(allBindings.upitiAutocomplete.tablica)) {
+                        bigTablica(allBindings.upitiAutocomplete.tablica() || 'tbl_T_Nazivi');
+                        allBindings.upitiAutocomplete.tablica.subscribe(function (newValue) {
                             bigTablica(newValue);
                         })
                     } else {
-                        bigTablica(allBindings.NUAuto.tablica);
+                        bigTablica(allBindings.upitiAutocomplete.tablica);
                     }
 
  
 
-                    var accValue = allBindings.NUAuto.accValue || '';
+                    var accValue = allBindings.upitiAutocomplete.accValue || '';
 
                     var getJsonAutocomplete = function (tablicaPojam, returnVal) {
 
@@ -527,7 +527,7 @@
                         return req;
                     }
                     ko.applyBindingAccessorsToNode(element, {
-                        jqAuto: function () {
+                        jqAutoComplete: function () {
                             return {
                                 source: getJsonAutocomplete,
                                 options: {

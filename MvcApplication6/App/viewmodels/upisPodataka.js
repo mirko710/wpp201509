@@ -477,14 +477,10 @@
                             if (data > 0) {
                                 currentBrojid(data);
                                 upisNavigator.ulazIDBroj(data);
-                                
                             }
                             //regNav.ulazIDBroj(data);
                         })
-                    
-
                 }
-
             })
 
             komboIDBroj.subscribe(function(newValue){

@@ -210,5 +210,5 @@
         };
     };
 
-    ko.bindingHandlers.jqAuto = new JqAuto();
+    ko.bindingHandlers.jqAutoComplete = new JqAuto();
 });

@@ -12,7 +12,8 @@ $(function () {
     
         my.vm = function () {
             var navigacijaIzPretrazivanja = ko.observable("-1"),
-            loadedTerminology = ko.observable(false),
+            loadedTerminologyUpiti = ko.observable(false),
+            loadedTerminologyUpis = ko.observable(false),
             katalogMode = false,//B_KATALOG_MODE  u parametrima za korisnike
             adresaAPI = 'api/WebAPISQL',
             adresaAccount ='api/Account',
@@ -235,7 +236,7 @@ $(function () {
                     .then(function(){
                         console.log(parametri.Vrijednost("S_DEFAULT_ZBIRKA"));
                     });
-                    getUserRoles();
+                    //getUserRoles();
                 });
             
             
@@ -252,7 +253,7 @@ $(function () {
                             my.vm.Selects = tmpSelects;
 
                             myWorker.terminate();
-                            loadedTerminology(true);
+                            loadedTerminologyUpiti(true);
                         }
 
 
@@ -283,21 +284,25 @@ $(function () {
 
             var loadTerminologyWebWorker = function () {
                 var myWorker = new Worker("../App/services/webWorker.js"); // Init Worker
-
                 myWorker.onmessage = function (oEvent) { // On worker job finished
                     var tmpSelects = JSON.parse(oEvent.data);
-
                     my.vm.Selects = tmpSelects;
-
                     myWorker.terminate();
-                    loadedTerminology(true);
+                    loadedTerminologyUpiti(true);
                 }
-
-
                 myWorker.postMessage('WORK!');
-
             }
 
+            var loadTerminologyWebWorkerUpis = function () {
+                var myWorker = new Worker("../App/services/webWorkerUpis.js"); // Init Worker
+                myWorker.onmessage = function (oEvent) { // On worker job finished
+                    var tmpSelects = JSON.parse(oEvent.data);
+                    my.vm.Selects = tmpSelects;
+                    myWorker.terminate();
+                    loadedTerminologyUpis(true);
+                }
+                myWorker.postMessage('WORK!');
+            }
 
 
             var getFullTblSkp = function (brojid, tablica) {
@@ -563,7 +568,7 @@ $(function () {
             function getWebAPISQL(vrstaPoziva,parametar, returnValue) {
                 //i1
                 //if (i1 == 1)//defStruktura
-                //if (i1 ==2)//defVrijeme
+                //if (i1 == 2)//defVrijeme
                 //if (i1 == 3)//getUpiti
                 //if (i1 == 4)//getRefiners
                 //if (i1 == 5)//gettermBucket
@@ -3025,10 +3030,12 @@ $(function () {
                 getImeZbirke: getImeZbirke,
                 getWebAPISQL: getWebAPISQL,
                 getWebAPIAccounts: getWebAPIAccounts,
-                loadedTerminology: loadedTerminology,
+                loadedTerminologyUpiti: loadedTerminologyUpiti,
+                loadedTerminologyUpis: loadedTerminologyUpis,
                 navigacijaIzPretrazivanja: navigacijaIzPretrazivanja,
                 getNavRecordsUpit: getNavRecordsUpit,
                 loadTerminologyWebWorker: loadTerminologyWebWorker,
+                loadTerminologyWebWorkerUpis: loadTerminologyWebWorkerUpis,
                 stripSlashes: stripSlashes,
                 stazaSlike: stazaSlike,
                 getJsonRefreshGridPage: getJsonRefreshGridPage,

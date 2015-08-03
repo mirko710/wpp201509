@@ -3,8 +3,8 @@
         <div class="mainMenuHolder">
             <!-- ko foreach: router.navigationModel-->
             <a class="menuLink" data-bind="css: { active: isActive }, attr: { href: hash }" href="#"><span class="icon icon-home" data-bind=" visible: moduleId=='viewmodels/home'"></span>
-                <span class="fa fa-square-o" data-bind="visible: moduleId != 'viewmodels/home' && !$root.loadedTerminology()"></span>
-                <span class="fa fa-square" data-bind="visible: moduleId != 'viewmodels/home' && $root.loadedTerminology()"></span>
+                <span class="fa fa-square-o" data-bind="visible: moduleId != 'viewmodels/home' && !$root.loadedTerminologyUpis()"></span>
+                <span class="fa fa-square" data-bind="visible: moduleId != 'viewmodels/home' && $root.loadedTerminologyUpis()"></span>
                 <span data-bind="    text: title"></span></a>
             <!-- /ko -->
         </div>

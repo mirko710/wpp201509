@@ -39,7 +39,7 @@ namespace WMpp
             korisniciIzBaze = SEClasses.GetUserNames(conn);
 
             
-            string pathConfig = System.Web.HttpContext.Current.Server.MapPath("userConfig.txt");
+            string pathConfig = HttpContext.Current.Server.MapPath("userConfig.txt");
             if (File.Exists(pathConfig))
             {
 

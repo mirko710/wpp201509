@@ -291,12 +291,12 @@
 
     function canDeactivate() {
         //the router's activator calls this function to see if it can leave the screen
-        //logger.log(title + ' View DEActivated', null, title, true);
-        if (data.loadedTerminology()) {
+        ////logger.log(title + ' View DEActivated', null, title, true);
+        //if (data.loadedTerminology()) {
             return true;//app.showMessage('Are you sure you want to leave this page?', 'Navigate', ['Yes', 'No']);
-        } else {
-            return false;
-        }
+        //} else {
+        //    return false;
+        //}
     }
     //#endregion
 });

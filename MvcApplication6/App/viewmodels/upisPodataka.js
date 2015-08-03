@@ -451,6 +451,9 @@
         
         //var startID=43;
         if (firstLoad) {
+
+            //data.loadTerminologyWebWorkerUpis();
+
             if (upisNavigator.firstLoad) {
                 upisNavigator.init();
             }

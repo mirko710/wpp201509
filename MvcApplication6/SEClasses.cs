@@ -774,7 +774,7 @@ namespace WMpp
             return termList;
         }
 
-        public Dictionary<string, List<termDropDown>> GetTerms(string conn)
+        public Dictionary<string, List<termDropDown>> GetTerms(string conn,string uvjet)
         {
             var bucket = new Dictionary<string, List<termDropDown>>();
 
@@ -784,7 +784,7 @@ namespace WMpp
                 {
                     scom.Connection = scon;
                     scon.Open();
-                    scom.CommandText = "Select DISTINCT ime,T_Tbl from tbl_Def_struktura_upiti_refiners where not ime is null Order by ime";
+                    scom.CommandText = "Select DISTINCT ime,T_Tbl from tbl_Def_struktura_upiti_refiners where " + uvjet + " and not ime is null Order by ime";
                     SqlDataReader dr = scom.ExecuteReader();
                     var ntablice = new Dictionary<string, string>();
                     while (dr.Read())

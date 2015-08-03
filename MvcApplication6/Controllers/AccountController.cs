@@ -103,10 +103,7 @@ namespace WMpp.Controllers
 
             if (i == getParametri.testUserName)
             {
-                
-
                // HSS.Add("USID", WebSecurity.CurrentUserId + HSS.SessionID);
-
                 returnObject = WebSecurity.CurrentUserId;
             }
 

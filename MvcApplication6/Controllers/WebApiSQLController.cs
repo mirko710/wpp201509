@@ -12,11 +12,12 @@ namespace WMpp.Controllers
         //if (i1 ==2)//defVrijeme
         //if (i1 == 3)//getUpiti
         //if (i1 == 4)//getRefiners
-        //if (i1 == 5)//gettermBucket
+        //if (i1 == 5)//gettermBucketUpiti
         //if (i1 == 6)//getnavigacijaPretrazivanje
         //if (i1 == 7)//Registracija iz Pretrazivanja
         //if (i1 == 8)//zbirke
         //if (i1 == 9)//registracija po zbirci
+        //if (i1 == 10)//gettermBucketUpis
 
         public enum getApiOpcije
         {
@@ -28,7 +29,8 @@ namespace WMpp.Controllers
             getNavigacijaPretrazivanje,
             getRegistracijaPretrazivanje,
             getZbirkeZaHome,
-            getRegistracijaPoZbirci
+            getRegistracijaPoZbirci,
+            getTermBucketUpis
         }
 
 
@@ -265,8 +267,14 @@ namespace WMpp.Controllers
             if (gAO == getApiOpcije.getTermBucket)
             {
                 var bucket = new Dictionary<string, List<SEClasses.termDropDown>>();
-                bucket = SEC.GetTerms(conn);
+                bucket = SEC.GetTerms(conn," loadTable='upitSelect'");
                 returnObject= bucket;
+            }
+            if (gAO == getApiOpcije.getTermBucket)
+            {
+                var bucket = new Dictionary<string, List<SEClasses.termDropDown>>();
+                bucket = SEC.GetTerms(conn, " 1=1 ");
+                returnObject = bucket;
             }
 
 

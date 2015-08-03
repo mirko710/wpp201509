@@ -297,13 +297,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\main.js" />
+    <Content Include="App\services\webWorkerUpis.js" />
     <Content Include="App\viewmodels\popupVrijeme.js" />
     <Content Include="App\services\registracijaNavigator.js" />
     <Content Include="App\services\upisNavigator.js" />
     <Content Include="App\services\webWorker.js" />
     <Content Include="App\services\dataService.js" />
     <Content Include="App\services\logger.js" />
-    <Content Include="App\services\webWorkerOldBreeze.js" />
     <Content Include="App\viewmodels\popupMjere.js" />
     <Content Include="App\viewmodels\customModal.js" />
     <Content Include="App\viewmodels\login.js" />

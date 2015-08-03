@@ -13,7 +13,8 @@
             rUserRoles: dataService.realUserRoles,
             enterLogin: enterLogin,
             testUserName: testUserName,
-            loadedTerminology:dataService.loadedTerminology
+            loadedTerminologyUpiti: dataService.loadedTerminologyUpiti,
+            loadedTerminologyUpis: dataService.loadedTerminologyUpis,
            
         };
         

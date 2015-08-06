@@ -502,7 +502,7 @@
                     }
 
                     var getJsonDlookup = function (IDT, returnVal) {
-                        var propIDT = 31;
+                        var propIDT = -1;
                         //tablica = 'tbl_T_Nazivi';
                         if (ko.isObservable(IDT)) {
                             propIDT = IDT();
@@ -510,7 +510,7 @@
                         else {
                             propIDT = IDT;
                         }
-                        propIDT = propIDT || 31;
+                        propIDT = propIDT || -1;
                         var req = $.ajax({
                             type: 'GET',
                             url: "/api/WebApiSQL/?tablica=" + bigTablica() + "&IDT=" + propIDT + "&i2=2&i3=2&i4=2&i5=2&i6=2&i7=2&i8=2",

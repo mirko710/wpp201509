@@ -53,9 +53,38 @@ namespace WMpp
                 {
                     this.Nad_IDT = dr.GetInt32(dr.GetOrdinal("Nad_IDT"));
                 }
-                this.prviZapis = dr.GetInt32(dr.GetOrdinal("prvi"));
-                this.zadnjiZapis = dr.GetInt32(dr.GetOrdinal("zadnji"));
-                this.brojZapisa = dr.GetInt32(dr.GetOrdinal("zbroj"));
+
+                if (dr.IsDBNull(dr.GetOrdinal("prvi")))
+                {
+                    this.prviZapis = -1;
+                }
+                else
+                {
+                    this.prviZapis = dr.GetInt32(dr.GetOrdinal("prvi"));
+                }
+
+                if (dr.IsDBNull(dr.GetOrdinal("zadnji")))
+                {
+                    this.zadnjiZapis = -1;
+                }
+                else
+                {
+                    this.zadnjiZapis = dr.GetInt32(dr.GetOrdinal("zadnji"));
+                }
+
+                if (dr.IsDBNull(dr.GetOrdinal("zbroj")))
+                {
+                    this.brojZapisa = 0;
+                }
+                else
+                {
+                    this.brojZapisa = dr.GetInt32(dr.GetOrdinal("zbroj"));
+                }
+
+
+                //this.prviZapis = dr.GetInt32(dr.GetOrdinal("prvi"));
+                // this.zadnjiZapis = dr.GetInt32(dr.GetOrdinal("zadnji"));
+                //this.brojZapisa = dr.GetInt32(dr.GetOrdinal("zbroj"));
                 this.IDT = dr.GetInt32(dr.GetOrdinal("IDT"));
             }
 
@@ -347,10 +376,81 @@ namespace WMpp
                     }
                 }
             }
+            //sredi podzbirke
+
+
+            zbirke=srediPodZbirke(zbirke);
 
 
             return zbirke;
         }
+
+
+        public List<homeTreeZbirke> srediPodZbirke(List<homeTreeZbirke> zbirke)
+        {
+
+
+            var TI = new List<homeTreeZbirke>();
+
+            var  firstLevel = new List<homeTreeZbirke>();
+            var  underLevel = new List<homeTreeZbirke>();
+            firstLevel = zbirke.Where(z => z.Nad_IDT == null).OrderBy(p => p.Pojam).ToList();
+            underLevel = zbirke.Where(z => z.Nad_IDT != null).OrderBy(p => p.Pojam).ToList();
+
+
+            List<List<homeTreeZbirke>> hierarchyTemp = new List<List<homeTreeZbirke>>();
+
+            hierarchyTemp.Add(firstLevel);
+            hierarchyTemp.Add(underLevel);
+
+            int zbroj = 0;
+            do
+            {
+
+                var lowerLevels = underLevel.Where(y => firstLevel.Any(x => x.IDT == y.Nad_IDT)).OrderBy(z => z.Nad_IDT).OrderBy(z => z.Pojam).ToList();
+                zbroj = lowerLevels.Count();
+                if (zbroj > 0) hierarchyTemp.Add(lowerLevels);
+                firstLevel = lowerLevels;
+
+            } while (zbroj > 0);
+
+            for (var i = hierarchyTemp.Count - 1; i >= 0; i--)
+            {
+                for (var j = 0; j < hierarchyTemp[i].Count; j++)
+                {
+                    if (i == hierarchyTemp.Count - 1)
+                    {
+
+                        TI.Add(hierarchyTemp[i][j]);
+                    }
+                    else
+                    {
+                        var z = TI.FindAll(tt => tt.Nad_IDT == hierarchyTemp[i][j].IDT);
+
+                        if (z.Count > 0)
+                        {
+                            Console.WriteLine(z.Count);
+                        }
+
+
+                        hierarchyTemp[i][j].podNodes = z;
+                        TI.Add(hierarchyTemp[i][j]);
+
+
+                    }
+
+
+                }
+                if (i < hierarchyTemp.Count - 1)
+                {
+                    TI.RemoveRange(0, hierarchyTemp[i + 1].Count);
+                }
+            }
+
+
+            return TI;
+        }
+
 
 
         public SqlParameter DodajParametar()

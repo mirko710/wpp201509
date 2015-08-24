@@ -161,7 +161,7 @@
         var tempNodes;
 
         data.getWebAPISQL(8,-1, tempNodes).then(
-            function(tempNodes){
+            function (tempNodes) {
                 treeNodes(tempNodes);
             })
 

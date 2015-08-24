@@ -483,12 +483,12 @@
 
                     var getJsonAutocomplete = function (tablicaPojam, returnVal) {
 
-                        //tablica = 'tbl_T_Nazivi';
+                        //tablica = 'tbl_T_Nazivi';"Content-Type", "text/plain;charset=UTF-8"
                         var req = $.ajax({
                             type: 'GET',
-                            url: "/api/WebApiSQL/?tablica=" + bigTablica() + "&term=" + tablicaPojam.pojam,
+                            url: "/api/WebApiSQL/?tablica=" + bigTablica() + "&term=" + encodeURIComponent(tablicaPojam.pojam),
                             dataType: 'json',
-                            contentType: 'application/json',
+                            contentType: 'application/json;charset=UTF-8',
                             success: function (response, text) {
                                 returnVal(response);
                             },

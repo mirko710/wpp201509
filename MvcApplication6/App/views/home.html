@@ -32,8 +32,8 @@
             <span data-bind="css:{'fa':true, 'fa-star-o':$root.pocetnaZbirka()!=IDT,'fa-star':IDT==$root.pocetnaZbirka()}, click : $root.setPocetnaZbirka"></span>
 
             <span class="tree-item" data-bind="text: Pojam"></span>
-            <span class="tree-item" data-bind="text: '( ' + brojZapisa "></span>
-            <span class="tree-item" data-bind="text: '/' + brojPodZapisa, visible: podNodes"></span>
+            <span class="tree-item" data-bind="text: '(' + brojZapisa "></span>
+            <span class="tree-item" data-bind="text: '/' + brojPodZapisa, visible: podNodes.length>0"></span>
             <span class="tree-item" data-bind="text: ')'"></span>
 
             <span class=" tree-item">

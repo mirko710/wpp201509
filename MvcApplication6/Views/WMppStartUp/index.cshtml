@@ -369,10 +369,10 @@
                     <input id="inputNaslov" type="text" class="form-control" data-bind="value: NSL_Naslov" />
                 </div>
                 <div class="col col-lg-6 styled-select">
-                    <div><select id="selectVrstaNaslova" class="form-control form-control2" data-bind="options: $root.Selects.tbl_T_Vrste_naslova, optionsText: 'Pojam', optionsValue: 'IDT', value: NSL_IDT_Vrsta_naslova"></select></div>
+                    <div><select id="selectVrstaNaslova" class="form-control form-control2" data-bind="options: $root.Selects.tbl_T_Vrste_naslova, optionsText: 'Pojam', optionsValue: 'IDT', value: NSL_IDT_Vrsta_naslova, optionsCaption: 'Please select...'"></select></div>
                 </div>
                 <div class="col col-lg-6 styled-select">
-                    <div><select id="selectJezik" class="form-control form-control2" data-bind="options: $root.Selects.tbl_T_Jezici, optionsText: 'Pojam', optionsValue: 'IDT', value: NSL_IDT_Jezik_naslova"></select></div>
+                    <div><select id="selectJezik" class="form-control form-control2" data-bind="options: $root.Selects.tbl_T_Jezici, optionsText: 'Pojam', optionsValue: 'IDT', value: NSL_IDT_Jezik_naslova, optionsCaption: 'Please select...'"></select></div>
                 </div>
             </div>
         </div>
@@ -597,7 +597,16 @@
 
 
 
+    <script type="text/html" id="tmpMedia2">
 
+        <div class="row noMargin autoHeight" data-bind="foreach: $root.selMmedia">
+            <div id="tbl_Media_Collector_86919" class="col-lg-36 mmediaItem" data-bind="attr: { id: 'tbl_Media_Collector_' + AutoBroj() }, visible:MC_Identity">
+                <div class="col-lg-36 mmediaImgHolder">
+                    <img class="mmedia-thumbnail" data-bind="attr: { src: $root.stazaSlike($data.MC_Staza_slike) }, click: function (data, event) { $root.postaviFokusUDF('tmpMedia'); }">
+                </div>
+            </div>
+        </div>
+    </script>
     <script type="text/html" id="tmpMedia">
         <div class="row noMargin autoHeight" data-bind="foreach: data">
             <div class="col-lg-9 mmediaItem" data-bind="attr: { id: 'tbl_Media_Collector_' + AutoBroj() }, click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
@@ -808,16 +817,7 @@
 
 
 
-    <script type="text/html" id="tmpMedia2">
 
-        <div class="row noMargin autoHeight" data-bind="foreach: $root.selMmedia">
-            <div id="tbl_Media_Collector_86919" class="col-lg-36 mmediaItem" data-bind="attr: { id: 'tbl_Media_Collector_' + AutoBroj() }, visible:MC_Identity">
-                <div class="col-lg-36 mmediaImgHolder">
-                    <img class="mmedia-thumbnail" data-bind="attr: { src: $root.stazaSlike($data.MC_Staza_slike) }, click: function (data, event) { $root.postaviFokusUDF('tmpMedia'); }">
-                </div>
-            </div>
-        </div>
-    </script>
 
     <script type="text/html" id="tmpRefiner">
         <div data-bind="foreach: $parent.podaci">

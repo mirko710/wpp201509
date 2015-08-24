@@ -434,6 +434,7 @@ namespace WMpp
 
 
                         hierarchyTemp[i][j].podNodes = z;
+                        hierarchyTemp[i][j].brojPodZapisa = z.Sum(y => y.brojPodZapisa) + z.Sum(y => y.brojZapisa);
                         TI.Add(hierarchyTemp[i][j]);
 
 
@@ -820,7 +821,7 @@ namespace WMpp
                         }
                         else
                         {
-                            termFound = "nije našao";
+                            termFound = "";// "nije našao";
                         }
                     }
                     scon.Close();

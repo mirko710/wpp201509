@@ -219,12 +219,24 @@ $(function () {
                                { 'dIme': 'dimenzije', 'ime': 'Dimenzije', 'izvor': 'tbl_T_Dimenzije' }];
 
 
+
+            //my.em.entityChanged.subscribe(function (changeArgs) {
+            //    var action = changeArgs.entityAction;
+
+            //    if (action === breeze.EntityAction.EntityStateChange) {
+            //        var entity = changeArgs.entity;
+            //        var newEntityState = entity.entityAspect.entityState;
+            //        // ... do something ...
+            //    }
+
+            //});
+
             my.em.hasChangesChanged.subscribe(function (eventArgs) {
                 //alert(my.em.hasChanges());
                 //console.log(eventArgs);
                 mijenjanoFlag(my.em.hasChanges());
 
-                });
+            });
 
             var primeData = function () {
             

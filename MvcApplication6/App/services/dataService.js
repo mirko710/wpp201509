@@ -1570,7 +1570,14 @@ $(function () {
 
             function stazaSlike(data) {
 
-                var tmpslik = data;
+                var tmpslik = "";
+
+                if (ko.isObservable(data)) {
+                    tmpslik = data();
+                } else {
+                    tmpslik = data;
+                }
+                
                 var slikPath = "../Content/images/fotonijepridruzen.png";
                 if (tmpslik != "") {
                     var n = stripSlashes(tmpslik);

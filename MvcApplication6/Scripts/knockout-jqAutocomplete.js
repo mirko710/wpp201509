@@ -143,6 +143,7 @@
                 }
                 else {
                      element.value = value;
+                    //element.value = null;
                 }
             }
  

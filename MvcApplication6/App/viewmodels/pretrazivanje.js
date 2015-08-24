@@ -798,8 +798,9 @@
                     //    return item.IDT === data.poljeIDT;
                     //})
                     var xdata = mapRedakUpita(data);
-
-                    redakUpita.push(xdata);
+                    if (xdata.combo() == 2 && xdata.vrijednost2() != null) {
+                        redakUpita.push(xdata);
+                    }
 
                 })
                 refreshGrid();
@@ -837,6 +838,12 @@
         redakUpita.vrijednost2(inputData.vrijednost2);
         redakUpita.vrijednost3(inputData.vrijednost3);
         redakUpita.vrijednost4(inputData.vrijednost4);
+
+        if (redakUpita.combo() == 2 && typeof redakUpita.vrijednost2() != "number") {
+            //alert("null nema kajsadovo?");
+            redakUpita.vrijednost2(null);
+        }
+
         if (defStrukturaRedak.T_Tbl) {
             redakUpita.termTablica(defStrukturaRedak.T_Tbl);
         } else {
@@ -1069,7 +1076,7 @@
             z.mjereRedak(ko.toJSON(data.mjereRedak()));
 
 
-            if (!data.vrijednost1() && !data.vrijednost2() && data.upitOperator() != 'upisan' && data.upitOperator() != 'pridružena') {
+            if (!data.vrijednost1() && (!data.vrijednost2() || typeof data.vrijednost2()!="number") && data.upitOperator() != 'upisan' && data.upitOperator() != 'pridružena') {
                 //console.log("nnn");  ne pretražuj
             } else {
                 nx.push(z);

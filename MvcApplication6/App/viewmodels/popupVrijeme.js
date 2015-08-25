@@ -1,6 +1,7 @@
 define(['plugins/dialog', 'services/dataService'],
     function (dialog,data) {
 
+        var otvoreno = ko.observable(false);
         var fakeUpitRow;
         var vrijemeSetupParam = {
             Vremena: [{ 'tekst': 'prije', 'vrijednost': 1 }, { 'tekst': 'poslije', 'vrijednost': 2 }, { 'tekst': 'od', 'vrijednost': 3 }],
@@ -71,20 +72,19 @@ define(['plugins/dialog', 'services/dataService'],
         var firstLoad = true;
 
         var popupVrijeme = {
-            vrijemeSetupParam: vrijemeSetupParam,
-
-
-            fakeVrijeme: fakeVrijeme,
+            vrijemeSetupParam:vrijemeSetupParam,
+            fakeVrijeme:fakeVrijeme,
             realFakeVrijeme:realFakeVrijeme,
-            postaviOpis1: postaviOpis1,
-            postaviOpis2: postaviOpis2,
+            postaviOpis1:postaviOpis1,
+            postaviOpis2:postaviOpis2,
             setOpis:setOpis,
             provjeriVrijeme:provjeriVrijeme,
             mapVrijemeRedak:mapVrijemeRedak,
             isValidDate:isValidDate,
             firstLoad:firstLoad,
-            init: init,
+            init:init,
             ok:ok,
+            otvoreno:otvoreno,
             show:show
         }
        
@@ -112,7 +112,6 @@ define(['plugins/dialog', 'services/dataService'],
                     })
                     //})
                 })
-  
                 firstLoad = false;
             }
         }
@@ -388,8 +387,6 @@ define(['plugins/dialog', 'services/dataService'],
             } else {
                 $("#vrijemeAlert").css('visibility', 'visible');
             }
-
-
             
             return valid;
         }
@@ -408,7 +405,7 @@ define(['plugins/dialog', 'services/dataService'],
             realFakeVrijeme.push(fejk);
             
             setOpis(realFakeVrijeme()[0], 1);
-
+            setOpis(realFakeVrijeme()[0], 2);
             
             return true;
         }
@@ -424,6 +421,7 @@ define(['plugins/dialog', 'services/dataService'],
 
         function show (nesto) {
             //opened = true;
+            otvoreno(true);
             fakeUpitRow = nesto;
             mapFakeVrijeme(nesto);
             return dialog.show(popupVrijeme);

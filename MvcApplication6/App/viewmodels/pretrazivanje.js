@@ -647,19 +647,22 @@
             //upitRedak.combo(1);
             rowOpenDialog(index);
             //dialog.dialog("open");
-            showModalVrijeme();
+            if (!popupVrijeme.otvoreno()) {
+                showModalVrijeme();
+            }
         }
         if (upitRedak.poljeIDT() == 8888) {
             rowOpenDialog(index);
-
+            upitRedak.combo(1);
             showModalMjere();
             //dialog2.dialog("open");
         }
     }
 
     function showModalVrijeme() {
-
+        
         popupVrijeme.show(redakUpita()[rowOpenDialog()]).then(function (response) {
+            popupVrijeme.otvoreno(false);
             if (response) {
                 //redakUpita()[rowOpenDialog()](response);
                 redakUpita()[rowOpenDialog()]=response;
@@ -751,18 +754,15 @@
                 //getJsonTermBucket(returnValue).then(function (b) {
                     //$.each(my.SelectsArrays, function (i, p) {
                     Selects = b;
-
                     //})
                 })
                   .then(function () {
-
-                                data.getWebAPISQL(3,-1,returnValue).then(function (b) {
+                      data.getWebAPISQL(3, -1, returnValue)
+                          .then(function (b) {
                                 //getUpitiNOEF(returnValue).then(function (b) {
-
                                     selectUpit(b);
                                     //alert(b[0].ime);
                                 })
-
                                 setVrijednost()
                                     .then(function (x) {
                                         promjenaPolja(0, x);
@@ -770,8 +770,7 @@
                                     })
                             })
                   })
- 
-        }
+         }
 
             
     }
@@ -1485,22 +1484,22 @@
     }
 
 
-    function  promjenaPolja(index,redakUpita) {
+    function  promjenaPolja(index,tmpRedakUpita) {
         //console.log(tada);
 
-        if (!redakUpita) {
+        if (!tmpRedakUpita) {
             return false;
         }
   
         var defStrukturaRedak = ko.utils.arrayFirst(defStruktura(), function (item) {
-            return item.IDT === redakUpita.poljeIDT();
+            return item.IDT === tmpRedakUpita.poljeIDT();
         })
 
 
         tablicaDef = defStrukturaRedak.T_Tbl;
 
-        redakUpita.tablica(defStrukturaRedak.Tablica);
-        redakUpita.polje(defStrukturaRedak.Naziv);
+        tmpRedakUpita.tablica(defStrukturaRedak.Tablica);
+        tmpRedakUpita.polje(defStrukturaRedak.Naziv);
         //redakUpita.operatori([]);
 
         var operatori = defStrukturaRedak.Napomena.split(";");
@@ -1510,27 +1509,30 @@
             testOperatori.push(data);
         })
 
-        if(testOperatori()!=redakUpita.operatori()){
-            redakUpita.operatori(testOperatori());
-            redakUpita.operatori.valueHasMutated();
+        if (testOperatori() != tmpRedakUpita.operatori()) {
+            tmpRedakUpita.operatori(testOperatori());
+            tmpRedakUpita.operatori.valueHasMutated();
         }
         
 
 
 
-        redakUpita.vrijednost2(null);
-        redakUpita.vrijednost4(null);
-        redakUpita.vrijemeRedak(null);
-        redakUpita.mjereRedak(null);
+        tmpRedakUpita.vrijednost2(null);
+        tmpRedakUpita.vrijednost4(null);
+        tmpRedakUpita.vrijemeRedak(null);
+        tmpRedakUpita.mjereRedak(null);
 
         if (defStrukturaRedak.T_Tbl) {
-            redakUpita.termTablica(defStrukturaRedak.T_Tbl);
+            tmpRedakUpita.termTablica(defStrukturaRedak.T_Tbl);
             //$("#redakUpita_" + index)
         } else {
-            redakUpita.termTablica("tbl_T_Zbirke");
+            tmpRedakUpita.termTablica("tbl_T_Zbirke");
         }
        // alert("changePolje");
-
+        if (tmpRedakUpita.poljeIDT() == 8888) {
+            rowOpenDialog(index());
+            showModalMjere();
+        }
         //zoviDialog(index(), redakUpita);
         
        // changeOperator(index, redakUpita);
@@ -1726,12 +1728,6 @@
         //        pretrazi();
         return true;
     }
-
-
-
- 
-
-
 
 
     function  postaviViewMode(x) {
@@ -1940,17 +1936,6 @@
     //activate();
 
  
-
-
-
-
-    
-
-
-
-
-
-
 
 
     function sloziForme () {

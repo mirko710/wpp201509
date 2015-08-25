@@ -4,14 +4,6 @@
 	
 	
 	
-//	SELECT     TOP (100) PERCENT dbo.vw_Zbirke_prva_zadnja_zbroj_PRIM.zbroj, tbl_Kartica_1.ID_Broj AS prvi, dbo.tbl_Kartica.ID_Broj AS zadnji, //dbo.tbl_T_Zbirke.Pojam, dbo.tbl_T_Zbirke.Nad_IDT, 
-//                      dbo.tbl_T_Zbirke.IDT
-//FROM         dbo.vw_Zbirke_prva_zadnja_zbroj_PRIM INNER JOIN
-//                      dbo.tbl_Kartica AS tbl_Kartica_1 ON dbo.vw_Zbirke_prva_zadnja_zbroj_PRIM.prvi = tbl_Kartica_1.KRT_SORT_Inv_br INNER JOIN
-//                      dbo.tbl_Kartica ON dbo.vw_Zbirke_prva_zadnja_zbroj_PRIM.zadnji = dbo.tbl_Kartica.KRT_SORT_Inv_br LEFT OUTER JOIN
-//                      dbo.tbl_T_Zbirke ON dbo.vw_Zbirke_prva_zadnja_zbroj_PRIM.KRT_IDT_Zbirka = dbo.tbl_T_Zbirke.IDT
-//ORDER BY dbo.tbl_T_Zbirke.Pojam
-	
     var treeNodes = ko.observableArray([]);
 
     var cTest = ko.observableArray();
@@ -111,19 +103,10 @@
                             zaSejvat.push(pdata);
                             data.saveChangesLimited(zaSejvat());
                         }
-
-                        
                     }
-
                 }
             })
-            //alert('poslijE! ' + tempPZ);
-
-
         }
-
-
-
     }
 
 
@@ -174,13 +157,6 @@
         {
             pocetnaZbirka(tempPZ.split('#')[1]);
         }        
-
-
-        //vm.getZbirkeZaTreeView('j', treeNodes)
-        //.then(function () {
-            
-        //    console.log(treeNodes());
-        //})
     }
 
     var testPodnodes=function(){
@@ -197,7 +173,6 @@
                 podNodes(a, data['IDT']);
             })
         }
-
     }
 
     var compositionComplete = function () {
@@ -208,9 +183,7 @@
             data.loadTerminologyWebWorker();
             firstLoad = false;
         }
-        
         fillTreeNodes();
-       
     }
  
 
@@ -278,11 +251,7 @@
     }
     //#region Internal Methods
     function activate() {
-
-       
         logger.log(title + ' View Activated', null, title, true);
-
-
         return true;
     }
 

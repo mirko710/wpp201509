@@ -20,7 +20,7 @@
             </div>
             <!-- ko if: !$root.rIsAuth()-->
             <form class="navbar-form pull-right">
-                <input class="form-control" placeholder="username" name="email" type="text" data-bind="value: $root.userName">
+                <input class="form-control" placeholder="username" name="email" id="userName" type="text" data-bind="value: $root.userName">
                 <!--<input class="form-control" placeholder="Password" name="password" type="password" data-bind="value: $root.password, valueUpdate: 'afterkeydown', event: { keydown: enterLogin }">-->
                 <input class="form-control" placeholder="Password" name="password" type="password" data-bind="textInput: $root.password, event: { keydown: enterLogin }">
                 <input class="button buttonDefault" type="button" data-bind="click: loginTry" value="Login">

@@ -1,4 +1,4 @@
-﻿<div  class="modal-content" style="max-width: 500px">
+﻿<div  class="modal-content" style="max-width: 500px; height:800px">
     <div class="modal-body" id="dialog-form" title="Upis vremena za pretraživanje:">
         <p class="validateTips">Datum u obliku dd.mm.gggg ili d.m.gggg</p>
 
@@ -19,7 +19,7 @@
 
                 <div class="ycol-lg-2">
                     <div>
-                        <select class="dropdown ui-widget-content ui-corner-all" data-bind="attr: { id: 'komboVrijemeOpis2_' + ID() }, options: $root.postaviOpis1, value: IZR_Vrijeme_opis"></select>
+                        <select class="dropdown ui-widget-content ui-corner-all" data-bind="attr: { id: 'komboVrijemeOpis_' + ID() }, options: $root.postaviOpis1, value: IZR_Vrijeme_opis"></select>
                     </div>
                 </div>
 
@@ -51,7 +51,7 @@
 
                 <div class="ycol-lg-2">
                     <div>
-                        <select class="dropdown ui-widget-content ui-corner-all" data-bind="attr: { id: 'komboVrijemeJedinica2_' + ID() }, options: $root.VrijemeJedinica, value: IZR_Vrijeme_jedinica2, event: { change: function () { $root.setOpis($data, 2); } }"></select>
+                        <select class="dropdown ui-widget-content ui-corner-all" data-bind="attr: { id: 'komboVrijemeJedinica2_' + ID() }, options: $root.vrijemeSetupParam.VrijemeJedinica, value: IZR_Vrijeme_jedinica2, event: { change: function () { $root.setOpis($data, 2); } }"></select>
                     </div>
                 </div>
             </div>

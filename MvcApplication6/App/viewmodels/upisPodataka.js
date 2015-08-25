@@ -337,6 +337,7 @@
             } else {
                 logger.logError('Ulogirajte se...', null, title, true);
                 deferred.resolve({ 'redirect': '/' });
+                $("#userName").focus();
             }
             return deferred.promise();
         }));

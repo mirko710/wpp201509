@@ -1,11 +1,24 @@
-﻿define(['durandal/app', 'services/logger', 'services/dataService', 'plugins/router', 'viewmodels/popupVrijeme', 'viewmodels/popupMjere','services/pretrazivanjeRefineri'],
-    function (app, logger, data, router, popupVrijeme, popupMjere,refinersService) {
+﻿define(['durandal/app', 'services/logger', 'services/dataService', 'plugins/router', 'viewmodels/popupVrijeme', 'viewmodels/popupMjere'],
+    function (app, logger, data, router, popupVrijeme, popupMjere) {
 
     var my = this || {};
 
     var modalMjere = new popupMjere("Mjere modal");
 
- 
+    var refinerModel = function (title, filter, template, imaFokus, odabrano, recordCount, fieldIDT) {
+        this.title = ko.observable(title);
+        this.filter = ko.observable(filter);
+        this.template = ko.observable(template);
+        this.imaFokus = ko.observable(imaFokus);
+        this.odabrano = ko.observable(odabrano);
+        this.recordCount = ko.observable(recordCount);
+        this.fieldIDT = ko.observable(fieldIDT);
+        this.podaci = ko.observableArray([]);
+        this.plus10 = ko.observable(false);
+        this.cont = ko.observable(true);
+    }
+
+
     var redakUpitaModel = function () {
         this.poljeIDT = ko.observable(null);
         this.polje = ko.observable(null);
@@ -25,6 +38,18 @@
         this.zagradaOtvorena= ko.observable(null);
         this.zagradaZatvorena=ko.observable(null);
     }
+
+    var refinerPodaciModel = function () {
+        this.kategorija = '';
+        this.Pojam = '';
+        this.IDT = -1;
+        this.brojZapisa = -1;
+        this.odabrano = false;
+        this.checked = ko.observable(false);
+    }
+
+
+
 
     var saveUpitModel = function () {
         var that = this;
@@ -78,6 +103,7 @@
     var pageIndex= ko.observable(0);
     var recordCount= ko.observable(0);
     var sifra= ko.observable("x");
+    var refinersLinkovi= ko.observableArray([]);
     var polja= ['tbl_Izrada.IZR_IDT_Mjesto', 'tbl_Nazivi.NAZ_IDT_Naziv_predmeta', 'tbl_Inventarizacija.INV_ID_Inventirao'];
     var operatori= ['<', '>', '=', '<=', '=>', 'sadrži'];
     
@@ -93,6 +119,7 @@
     var firstload= true;
     var odabrano= ko.observableArray([]);
     var podIDT= ko.observableArray([]);
+    var refiners= ko.observableArray([]);
 
     var paginationColCount = ko.observable(4);
     var paginationColWidth = ko.observable(11);
@@ -158,13 +185,13 @@
 
 
 
-        refinerToggle: refinersService.refinerToggle,
-        refiners: refinersService.refiners,
+
+        refiners: refiners,
         minimize: minimize,
 
         dodajRedakUpitaRefinerAND: dodajRedakUpitaRefinerAND,
         dodajRedakUpitaRefinerOR: dodajRedakUpitaRefinerOR,
-        
+        refinerToggle: refinerToggle,
 
         redakUpita: redakUpita,
         redakKombo: redakKombo,
@@ -657,10 +684,7 @@
             
             firstPass = false;
             
-            if (refinersService.firstLoad) {
-                refinersService.init();
-            }
-
+            
             
 
             if (modalMjere.firstLoad) {
@@ -677,15 +701,15 @@
 
             // alert(this.firstload);
 
-            ////refinersi
-            //data.getWebAPISQL(4,-1, returnValue).then(function (b) {
-            ////getDefRefNOEF().then(function (b) {
-            //    $.each(b, function (i, p) {
-            //        var tmpRefiner = new refinerModel(p['title'], p['filter'], p['template'],false,0,0,p['fieldIDT']);
+            //refinersi
+            data.getWebAPISQL(4,-1, returnValue).then(function (b) {
+            //getDefRefNOEF().then(function (b) {
+                $.each(b, function (i, p) {
+                    var tmpRefiner = new refinerModel(p['title'], p['filter'], p['template'],false,0,0,p['fieldIDT']);
                    
-            //        refiners.push(tmpRefiner);
-            //    })
-            //})
+                    refiners.push(tmpRefiner);
+                })
+            })
 
             sloziForme();
 
@@ -1521,7 +1545,99 @@
     //    }
     //}
 
+    function fillRefiner(refiner) {
+        // console.log(refinersLinkovi());
+        var deferFunc = Q.defer();
+        var tmpPlus10=refiner.plus10();
+        var brojZapisa = 5;
+        if (refiner.recordCount() > 0) {
+            if (refiner.recordCount() != refiner.podaci().length && refiner.plus10()) {
+                brojZapisa = refiner.recordCount();
+            } else {
+                deferFunc.resolve(true);
+                return deferFunc.promise;
+            }
+        }
 
+            var xtemp = ko.observableArray([]);
+            var i = 0;
+            var tmpData = ko.utils.arrayFilter(refinersLinkovi(), function (item) {
+                return item.kategorija === refiner.filter();
+            })
+
+            ko.utils.arrayForEach(tmpData, function (item) {
+                
+                if (i < brojZapisa) {
+                    if (item.kategorija === refiner.filter()) {
+                        var rfP = new refinerPodaciModel()
+                        
+                        rfP.IDT = item.IDT;
+                        rfP.kategorija = item.kategorija;
+                        rfP.Pojam = item.Pojam;
+                        rfP.brojZapisa = item.brojZapisa;
+                        rfP.odabrano = false;
+                        rfP.checked(false);
+                        $.each(redakUpita(), function (index, rData) {
+                            //if (data.fieldIDT() == rData.poljeIDT() && rData.vrijednost2() == item.IDT && rData.redOperator() == " AND ") {
+                            //    rfP.odabrano = true;
+                            //}
+                            //if (data.fieldIDT() == rData.poljeIDT() && rData.vrijednost2() == item.IDT && rData.redOperator() == " OR ") {
+                            if (refiner.fieldIDT() == rData.poljeIDT() && rData.vrijednost2() == item.IDT) {
+                                rfP.checked(true);
+                            }
+                        });
+                        xtemp().push(rfP);
+                    };
+                }
+                i++;
+
+                if (i == tmpData.length ) {
+                    refiner.podaci(xtemp());
+                    refiner.recordCount(tmpData.length);
+
+                    deferFunc.resolve(true);
+                }
+
+            })
+        
+        
+        return deferFunc.promise;
+        
+    }
+
+    function fillRefiners() {
+        // console.log(refinersLinkovi());
+        var deferFunc = Q.defer();
+        var lastIndex = refiners().length;
+
+        $.each(refiners(), function (index, data) {
+            data.podaci([]);
+            data.recordCount(0);
+            fillRefiner(data);
+
+            if (index == lastIndex - 1) {
+                deferFunc.resolve(true);
+            }
+        })
+        //console.log(refiners());
+        return deferFunc.promise;
+        //alert(refiners()[0]['podaci']());
+    }
+
+
+    function  refinerToggle(data) {
+        var tmp = data.plus10();
+        var overlay = $(".Overlay");
+        data.plus10(!tmp);
+        if (data.plus10()) {
+            overlay.addClass("visible");
+            fillRefiner(data)
+                .then(function () {
+                    overlay.removeClass("visible");
+                })
+        }
+        return true;
+    }
 
  
     function dodajRedakUpitaRefinerOR(odabraniRefiner, event) {
@@ -1551,7 +1667,7 @@
     function dodajRedakUpitaRefiner(odabraniRefiner, operator) {
 
 
-        var odabraniRefinerNad = ko.utils.arrayFirst(refinersService.refiners(), function (item) {
+        var odabraniRefinerNad = ko.utils.arrayFirst(refiners(), function (item) {
             return item.filter() === odabraniRefiner.kategorija;
         })
 
@@ -1723,7 +1839,7 @@
 
 
         // alert(recordCount());
-        refinersService.refinersLinkovi(rezultatiPlusRefineri['part2']);
+        refinersLinkovi(rezultatiPlusRefineri['part2']);
 
 
         rezultati([]);
@@ -1739,13 +1855,8 @@
             }
         }
 
-        refinersService.fillRefiners(redakUpita())
+        fillRefiners()
         .then(function () {
-             //$.each(redakUpita(), function (index, rData) {
-             //    if (refiner.fieldIDT() == rData.poljeIDT() && rData.vrijednost2() == item.IDT) {
-             //        rfP.checked(true);
-             //    }
-             //});
             deferFunc.resolve(true);
         })
 

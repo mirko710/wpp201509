@@ -186,7 +186,8 @@
             }
             V1 += jedinica.Pojam;
             fakeUpitRow.vrijednost1(V1);
-
+            fakeUpitRow.combo(1);
+            fakeUpitRow.mjereRedak(realFakeMjere()[0]);
             //realFakeMjere([]);
             //fejk = new fakeMjere();
             //realFakeMjere.push(fejk);

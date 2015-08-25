@@ -1618,6 +1618,7 @@ namespace WMpp
                             string mj2 = redak.vrijednost4.Split(';')[3];
                             string jedinica = redak.vrijednost4.Split(';')[4];
                             double faktor = DlookupInt("Select Sort From dbo.tbl_T_Jedinice_mjere where idt=" + jedinica);
+                            if (faktor < 0) faktor = -1 / faktor;
                             double Mjera1 = double.Parse(mj1) / faktor;
                             double Mjera2 = double.Parse(mj2) / faktor;
 

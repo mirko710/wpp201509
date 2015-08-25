@@ -27,15 +27,10 @@
         this.checked = ko.observable(false);
     }
 
-
-
-
-    var firstPass = true;
-
-
+    var tmpRedakUpita = ko.observableArray([]);
     var refinersLinkovi= ko.observableArray([]);
  
-    var firstload= true;
+    var firstLoad= true;
     var refiners= ko.observableArray([]);
 
 
@@ -57,9 +52,10 @@
         jqAS:jqAS,
         chTab:chTab,
         title: title,
-        activate: activate,
-
-
+        init: init,
+        firstLoad:firstLoad,
+        fillRefiners:fillRefiners,
+        refinersLinkovi:refinersLinkovi,
         refiners: refiners,
         dodajRedakUpitaRefinerAND: dodajRedakUpitaRefinerAND,
         dodajRedakUpitaRefinerOR: dodajRedakUpitaRefinerOR,
@@ -69,13 +65,13 @@
 
 
 
-    function  activate() {
+    function  init() {
 
-        if (firstPass) {
+        if (firstLoad) {
 
-            firstPass = false;
+            firstLoad = false;
 
-
+            var returnValue;
             //refinersi
             data.getWebAPISQL(4, -1, returnValue).then(function (b) {
                 //getDefRefNOEF().then(function (b) {
@@ -121,7 +117,7 @@
                         rfP.brojZapisa = item.brojZapisa;
                         rfP.odabrano = false;
                         rfP.checked(false);
-                        $.each(redakUpita(), function (index, rData) {
+                        $.each(tmpRedakUpita(), function (index, rData) {
                             if (refiner.fieldIDT() == rData.poljeIDT() && rData.vrijednost2() == item.IDT) {
                                 rfP.checked(true);
                             }
@@ -140,8 +136,10 @@
         return deferFunc.promise;
      }
 
-    function fillRefiners() {
+    function fillRefiners(tmpUpiti) {
         
+        tmpRedakUpita(tmpUpiti);
+
         var deferFunc = Q.defer();
         var lastIndex = refiners().length;
 

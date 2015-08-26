@@ -111,9 +111,6 @@
         
         regPrev:regPrev,
         regNext: regNext,
-        //getMjesta: data.getMjesta,
-
-       
         
         selZaKomboOdabirInvBroja: upisNavigator.selZaKomboOdabirInvBroja,
 
@@ -131,7 +128,7 @@
         recIndex: upisNavigator.recIndex,
         zbIndex: zbIndex,
         delRowByID:data.delRowByID,
-        createZapis: data.createZapis,
+        //createZapis: data.createZapis,
 
         createZapisSubform:createZapisSubform,
         createTermin: data.createTermin,

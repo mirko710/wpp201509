@@ -800,6 +800,5 @@ namespace WMpp.Controllers
             {
                 return _contextProvider.SaveChanges(saveBundle);
             }
-       
-    }
+       }
 }

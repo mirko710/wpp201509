@@ -481,25 +481,9 @@
                 refreshGrid();
             })
 
-
-
-
-            //currentPolje.subscribe(function (newValue) {
-            //    //logger.log('subscribe' + newValue, null, title, true);
-            //    currentTTablica('Nazivi');
-            //    //currentVrijednost(data.Selects[currentTTablica()]);
-            //    currentVrijednost(Selects[currentTTablica()]);
-
-            //})
-            // return data.getDef().then(data.getTerminoloske('Mjesta')).then(data.getTerminoloske('Nazivi')).then(function(){setVrijednost().then(function(x){vidiIzbor(x);});});
-
-
-
-
             var returnValue;
             //var pare = ty;
             return data.getWebAPISQL(1,-1,returnValue).then(function (b) {
-            //return getDefNOEF(returnValue).then(function (b) {
                 defStruktura(b);
             })
             .then(function () {
@@ -1068,11 +1052,6 @@
 
         refinersService.fillRefiners(redakUpitaService.redakUpita())
         .then(function () {
-             //$.each(redakUpita(), function (index, rData) {
-             //    if (refiner.fieldIDT() == rData.poljeIDT() && rData.vrijednost2() == item.IDT) {
-             //        rfP.checked(true);
-             //    }
-             //});
             deferFunc.resolve(true);
         })
 

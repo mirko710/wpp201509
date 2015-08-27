@@ -307,7 +307,6 @@
     <Content Include="App\services\dataService.js" />
     <Content Include="App\services\logger.js" />
     <Content Include="App\viewmodels\popupMjere.js" />
-    <Content Include="App\viewmodels\customModal.js" />
     <Content Include="App\viewmodels\login.js" />
     <Content Include="App\services\pretrazivanjeRefineri.js" />
     <Content Include="App\viewmodels\pretrazivanje.js" />

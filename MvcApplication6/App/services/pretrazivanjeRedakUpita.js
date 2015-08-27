@@ -156,7 +156,6 @@
             retVal = false;
         }
 
-
         return retVal;
             
 
@@ -200,10 +199,7 @@
             zoviDialog(index, upitRedak);
         } else {
             upitRedak.vrijednost1(null);
-
         }
-
-
         return true;
 
     }
@@ -214,7 +210,6 @@
         if (upitRedak.poljeIDT() == 9999) {
             //upitRedak.combo(1);
             rowOpenDialog(index);
-            //dialog.dialog("open");
             if (!popupVrijeme.otvoreno()) {
                 showModalVrijeme();
             }
@@ -222,8 +217,10 @@
         if (upitRedak.poljeIDT() == 8888) {
             rowOpenDialog(index);
             upitRedak.combo(1);
-            showModalMjere();
-            //dialog2.dialog("open");
+            if (!modalMjere.otvoreno()) {
+                showModalMjere();
+            }
+            //showModalMjere();
         }
     }
 
@@ -242,7 +239,8 @@
 
     function showModalMjere() {
 
-            modalMjere.show(redakUpita()[rowOpenDialog()]).then(function (response) {
+        modalMjere.show(redakUpita()[rowOpenDialog()]).then(function (response) {
+            modalMjere.otvoreno(false);
                 if (response) {
                     redakUpita()[rowOpenDialog()] = response;
                 }

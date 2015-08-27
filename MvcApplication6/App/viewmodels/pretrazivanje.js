@@ -149,6 +149,8 @@
         promjenaPolja: redakUpitaService.promjenaPolja,
         changeOperator: redakUpitaService.changeOperator,
         changePod: redakUpitaService.changePod,
+        zoviDialog:redakUpitaService.zoviDialog,
+
 
         DaNeOperators: redakUpitaService.DaNeOperators,
         noviRedak: redakUpitaService.noviRedak,
@@ -488,7 +490,7 @@
             })
             .then(function () {
                 data.getWebAPISQL(5,-1,returnValue).then(function (b) {
-                //getJsonTermBucket(returnValue).then(function (b) {
+                    //getJsonTermBucket(returnValue).then(function (b) {
                     //$.each(my.SelectsArrays, function (i, p) {
                     data.SelectsPretrazivanje = b;
                     //})
@@ -496,20 +498,21 @@
                   .then(function () {
                       data.getWebAPISQL(3, -1, returnValue)
                           .then(function (b) {
-                                //getUpitiNOEF(returnValue).then(function (b) {
-                                    selectUpit(b);
-                                    //alert(b[0].ime);
-                                })
-                                redakUpitaService.setVrijednost()
-                                    .then(function (x) {
-                                        redakUpitaService.promjenaPolja(0, x);
-                                        compositionComplete();
-                                    })
-                            })
+                              //getUpitiNOEF(returnValue).then(function (b) {
+                              selectUpit(b);
+                              //alert(b[0].ime);
+                                
+                              redakUpitaService.setVrijednost()
+                                  .then(function (x) {
+                                      redakUpitaService.promjenaPolja(0, x);
+                                      //compositionComplete();
+                                  })
+                          })
                   })
+            })
          }
 
-            
+        return true;
     }
 
 

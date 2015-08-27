@@ -15,7 +15,7 @@
     var MjereOperatori = [{ 'tekst': '=', 'vrijednost': 0 }, { 'tekst': 'manje od', 'vrijednost': 1 }, { 'tekst': 'veće od', 'vrijednost': 2 }, { 'tekst': 'između', 'vrijednost': 3 }];
     var MjereOperators = ['=', 'manje od', 'veće od', 'između'];
 
-    var opened = false;
+    var otvoreno = ko.observable(false);
     //var dialog2;
     var alertModel=function(){
         this.poruka = ko.observable('');
@@ -46,7 +46,7 @@
         this.provjeriMjere = provjeriMjere;
         this.Selects = data.SelectsPretrazivanje;
         this.alertMjere = alertMjere;
-        this.opened = opened;
+        this.otvoreno = otvoreno;
     }
 
 
@@ -77,7 +77,6 @@
                                 z.MJR_IDT_Jedinica_mjere,
                                 z.MJR_IDT_Mjereni_dio,
                                 z.MJR_IDT_Dimenzija);
-
         return tmpM;
     }
 
@@ -160,13 +159,13 @@
 
 
             fakeUpitRow.vrijednost4(V4);
-            var dio = ko.utils.arrayFirst(data.Selects['tbl_T_Dijelovi'], function (item) {
+            var dio = ko.utils.arrayFirst(data.SelectsPretrazivanje['tbl_T_Dijelovi'], function (item) {
                 return item.IDT === tmp['MJR_IDT_Mjereni_dio']()
             })
-            var dimenzija = ko.utils.arrayFirst(data.Selects['tbl_T_Dimenzije'], function (item) {
+            var dimenzija = ko.utils.arrayFirst(data.SelectsPretrazivanje['tbl_T_Dimenzije'], function (item) {
                 return item.IDT === tmp['MJR_IDT_Dimenzija']()
             })
-            var jedinica = ko.utils.arrayFirst(data.Selects['tbl_T_Jedinice_Mjere'], function (item) {
+            var jedinica = ko.utils.arrayFirst(data.SelectsPretrazivanje['tbl_T_Jedinice_Mjere'], function (item) {
                 return item.IDT === tmp['MJR_IDT_Jedinica_mjere']()
             })
 //            redakUpita()[rowOpenDialog()].mjereRedak(response.r1);
@@ -188,6 +187,7 @@
             fakeUpitRow.vrijednost1(V1);
             fakeUpitRow.combo(1);
             fakeUpitRow.mjereRedak(realFakeMjere()[0]);
+            fakeUpitRow.upitOperator(MjereOperators[realFakeMjere()[0]['MJR_operator']]);
             //realFakeMjere([]);
             //fejk = new fakeMjere();
             //realFakeMjere.push(fejk);
@@ -212,7 +212,6 @@
                 }
             }
         }
-
         return valid;
     }
 
@@ -234,14 +233,14 @@
 
 
    popupMjere.prototype.ok = function () {
-        opened = false;
+        otvoreno(false);
         dialog.close(this,null);
     }
 
  
 
    popupMjere.prototype.show = function (nesto) {
-       opened = true;
+       otvoreno(true);
        fakeUpitRow = nesto;
        mapFejkRow(nesto);
        

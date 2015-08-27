@@ -16,7 +16,7 @@ $(function () {
             loadedTerminologyUpis = ko.observable(false),
             katalogMode = false,//B_KATALOG_MODE  u parametrima za korisnike
             adresaAPI = 'api/WebAPISQL',
-            adresaAccount ='api/Account',
+            adresaAccount = 'api/Account',
             lockedMmedia = false,
             userName = ko.observable(null),
             realIsAuth = ko.observable(false),
@@ -33,8 +33,9 @@ $(function () {
             currentBrojid = ko.observable(),
             isLoaded = false,
             testLoader = ko.observable(88),
-            tempBrojid = ko.observable(-1),
-            Selects = [];
+            tempBrojid = ko.observable(-1);
+            var Selects = ko.observableArray([]);
+            var SelectsPretrazivanje = [];
 
             var parametriModel = function () {
                 that = this;
@@ -231,7 +232,8 @@ $(function () {
                         var myWorker = new Worker("../App/services/webWorker.js"); // Init Worker
                         myWorker.onmessage = function (oEvent) { // On worker job finished
                             var tmpSelects = JSON.parse(oEvent.data);
-                            my.vm.Selects = tmpSelects;
+                            //my.vm.Selects = tmpSelects;
+                            my.vm.Selects(tmpSelects);
                             myWorker.terminate();
                             loadedTerminologyUpiti(true);
                         }
@@ -262,7 +264,7 @@ $(function () {
                 var myWorker = new Worker("../App/services/webWorker.js"); // Init Worker
                 myWorker.onmessage = function (oEvent) { // On worker job finished
                     var tmpSelects = JSON.parse(oEvent.data);
-                    my.vm.Selects = tmpSelects;
+                    my.vm.SelectsPretrazivanje = tmpSelects;
                     myWorker.terminate();
                     loadedTerminologyUpiti(true);
                 }
@@ -273,7 +275,8 @@ $(function () {
                 var myWorker = new Worker("../App/services/webWorkerUpis.js"); // Init Worker
                 myWorker.onmessage = function (oEvent) { // On worker job finished
                     var tmpSelects = JSON.parse(oEvent.data);
-                    my.vm.Selects = tmpSelects;
+                    //my.vm.Selects = tmpSelects;
+                    my.vm.Selects(tmpSelects);
                     myWorker.terminate();
                     loadedTerminologyUpis(true);
                 }
@@ -1726,19 +1729,19 @@ $(function () {
                 }
 
 
-                saveChanges = function () {
+                var saveChanges = function () {
                     var ber = Q.defer();
                     my.em.saveChanges().then(function(){ber.resolve(true);}).fail(function (error) { alert("Failed save to server: " + error.message); });
                     return ber.promise;
                 }
 
-                saveChangesLimited = function (n) {
+                var saveChangesLimited = function (n) {
                     var ber = Q.defer();
                     my.em.saveChanges(n).then(function () { ber.resolve(true); }).fail(function (error) { alert("Failed save to server: " + error.message); });
                     return ber.promise;
                 }
 
-                undoChanges = function () {
+                var undoChanges = function () {
                     my.em.rejectChanges();
                 }
 
@@ -1762,6 +1765,7 @@ $(function () {
                 createTermin: createTermin,
 
                 Selects: Selects,
+                SelectsPretrazivanje:SelectsPretrazivanje,
                 //SelectsArrays: SelectsArrays,
                 getExportFullKartica: getExportFullKartica,
                 isLoaded: isLoaded,

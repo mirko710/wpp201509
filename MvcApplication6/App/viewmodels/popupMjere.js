@@ -44,7 +44,7 @@
         this.realFakeMjere=realFakeMjere;
         this.mapMjereRedak=mapMjereRedak;
         this.provjeriMjere = provjeriMjere;
-        this.Selects = data.Selects;
+        this.Selects = data.SelectsPretrazivanje;
         this.alertMjere = alertMjere;
         this.opened = opened;
     }
@@ -52,7 +52,7 @@
 
     function init() {
         if (firstLoad) {
-            fejk = new fakeMjere();
+            var fejk = new fakeMjere();
             realFakeMjere.push(fejk);
             realFakeMjere()[0]['MJR_IDT_Mjereni_dio'](49);
             alertMjereModel(['','','','','','']);

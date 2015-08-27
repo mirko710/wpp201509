@@ -270,7 +270,7 @@ namespace WMpp.Controllers
                 bucket = SEC.GetTerms(conn," loadTable='upitSelect'");
                 returnObject= bucket;
             }
-            if (gAO == getApiOpcije.getTermBucket)
+            if (gAO == getApiOpcije.getTermBucketUpis)
             {
                 var bucket = new Dictionary<string, List<SEClasses.termDropDown>>();
                 bucket = SEC.GetTerms(conn, " 1=1 ");

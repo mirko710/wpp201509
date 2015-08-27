@@ -411,7 +411,7 @@
         })
 
 
-        tablicaDef = defStrukturaRedak.T_Tbl;
+        var tablicaDef = defStrukturaRedak.T_Tbl;
 
         tmpRedakUpita.tablica(defStrukturaRedak.Tablica);
         tmpRedakUpita.polje(defStrukturaRedak.Naziv);

@@ -184,7 +184,7 @@
         stazaSlike: data.stazaSlike,
 
 
-        Selects: data.Selects,//[],
+        Selects: data.SelectsPretrazivanje,//[],
         upitiMenu: upitiMenu,
 
         attached: attached,
@@ -490,7 +490,7 @@
                 data.getWebAPISQL(5,-1,returnValue).then(function (b) {
                 //getJsonTermBucket(returnValue).then(function (b) {
                     //$.each(my.SelectsArrays, function (i, p) {
-                    Selects = b;
+                    data.SelectsPretrazivanje = b;
                     //})
                 })
                   .then(function () {
@@ -689,7 +689,7 @@
 
 
     function  getJsonPOSTSpremiASUpit(redakUpiti, upitID,returnValue) {
-        var xd = pripremiRedakZaSpremanje();
+        var xd = redakUpitaService.pripremiRedakZaSpremanje();
         //console.log(xd);
         var req = $.ajax({
             type: 'POST',
@@ -752,7 +752,7 @@
     function  getJsonPOSTSpremiUpit(redakUpiti, ime,opis,upitID,returnObject) {
         //console.log(xd);
         if (upitID == undefined) upitID = -1;
-        var xd = pripremiRedakZaSpremanje();
+        var xd = redakUpitaService.pripremiRedakZaSpremanje();
         var req = $.ajax({
             type: 'POST',
             url: adresaAPI + '?ime=' + ime + '&upitID=' + upitID,
@@ -856,13 +856,7 @@
 
     }
 
-        
-
-
-
-
- 
-
+  
     function postJsonPretrazivanje(redakUpiti, staraSifra, pageSize) {
 
         var nx = redakUpitaService.pripremiRedakZaSpremanje();
@@ -870,10 +864,6 @@
         var t1 = ko.observable();
         t1({ 'staraSifra': opisUpita(), 'pageSize': recordCount(), 'upiti': nx });
         var upitParametri = ko.toJSON(t1);
-
-        
-        
-
         //console.log(xd);
         var req = $.ajax({
             type: 'POST',
@@ -888,20 +878,13 @@
             error: function (text, error) {
                 // alert('!!!!!!greška pri dohvatu podataka' + error + text);
                 alert(error);
-                // that._deactivateLoader();
             },
             cancel: function () {
                 //that._deactivateLoader();
             }
         });
-
-
-
-        //req.then(function (resp) { rezultati(resp) });
         return req;
     }
-
-
 
     function  rezLink(x) {
         //var hash = '#test' + x.ID_Broj;
@@ -934,19 +917,9 @@
     }
 
  
-
- 
- 
-
     function  postaviViewMode(x) {
         return viewMode(x);
     }
-
-
-    
-
-
- 
 
 
     function  pageChangeFL(modifier) {
@@ -1004,7 +977,7 @@
     function  mapToRez(rezultatiPlusRefineri) {
         //console.log(rez);
 
-        rezultatiPretrazivanja = rezultatiPlusRefineri['part1'];
+        var rezultatiPretrazivanja = rezultatiPlusRefineri['part1'];
 
         sifra(rezultatiPlusRefineri['sifra']);
 

@@ -56,7 +56,7 @@
             <span class="subHeaderLabel">Odabir zbirke</span>
             <div class="subHeaderContainer styled-select styled-select3">
                 <div>
-                    <select class="form-control" data-bind="options: $root.Selects.tbl_T_Zbirke, optionsText: 'Pojam', optionsValue: 'IDT', value: zbNewIndex, event:{ change: $root.komboZbirkaChanged}, optionsCaption: '...'"></select>
+                    <select class="form-control" data-bind="options: $root.Selects().tbl_T_Zbirke, optionsText: 'Pojam', optionsValue: 'IDT', value: zbNewIndex, event:{ change: $root.komboZbirkaChanged}, optionsCaption: '...'"></select>
                 </div>
             </div>
 
@@ -144,7 +144,7 @@
                                     <div class="col col-lg-36">Zbirka</div>
                                 </div>
                                 <div class="row noMargin styled-select">
-                                    <div><select id="selZbirka" class="form-control form-control2" data-bind="options: $root.Selects.tbl_T_Zbirke, optionsText: 'Pojam', optionsValue: 'IDT', value: KRT_IDT_Zbirka"></select></div>
+                                    <div><select id="selZbirka" class="form-control form-control2" data-bind="options: $root.Selects().tbl_T_Zbirke, optionsText: 'Pojam', optionsValue: 'IDT', value: KRT_IDT_Zbirka"></select></div>
                                 </div>
                             </div>
                         </div>
@@ -186,7 +186,7 @@
                 </div>
                 <div class="modal-body">
                     <input type="text" style="width: 300px" class="form-control" data-bind="value: prijedlogInvBroja" placeholder="novi broj..." />
-                    <select class="form-control" style="width: 500px" data-bind="options: $root.Selects.tbl_T_Zbirke, optionsText: 'Pojam', optionsValue: 'IDT', value: zbNewIndex"></select>
+                    <select class="form-control" style="width: 500px" data-bind="options: $root.Selects().tbl_T_Zbirke, optionsText: 'Pojam', optionsValue: 'IDT', value: zbNewIndex"></select>
                     <!--<button id="Button6" data-bind="    click: function () { $root.newRec($root.zbNewIndex(),$root.prijedlogInvBroja() ); }">Novi</button>-->
 
                 </div>
@@ -207,7 +207,7 @@
                 </div>
                 <div class="modal-body">
                     <!-- <input type="text" style="width:300px" class="form-control" data-bind="value: prijedlogInvBroja" />
-                    <select class="form-control" style="width:500px" data-bind="options: $root.Selects.Zbirke, optionsText: 'Pojam', optionsValue: 'IDT', value: zbNewIndex"></select>
+                    <select class="form-control" style="width:500px" data-bind="options: $root.Selects().Zbirke, optionsText: 'Pojam', optionsValue: 'IDT', value: zbNewIndex"></select>
                     <button id="Button6" data-bind="    click: $root.dodajTermin" >Dodaj</button>-->
                     dodaj <span data-bind="text: $root.dodajTerm()"></span>u <span data-bind="    text: $root.dodajTermTablica()"></span>
                 </div>

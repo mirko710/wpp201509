@@ -97,9 +97,6 @@ define(['services/dataService', 'services/registracijaNavigator'],
         function forceRefreshPoIDBroju() {
 
             var feder = Q.defer();
-            //var tmpIndex = findIndex(ulazIDBroj());
-
-            //if (tmpIndex < 0) {
                 data.getZbirka(currentIDBroj()).then(function (promjenaZbirke) {
                     currentZbirkaIDT(promjenaZbirke);
                     data.getNavRecords(promjenaZbirke, internalNavigator).then(function () {
@@ -109,15 +106,8 @@ define(['services/dataService', 'services/registracijaNavigator'],
                         feder.resolve(true);
                     })
                 })
-            //} else {
-            //    recIndex(tmpIndex);
-            //    feder.resolve(true);
-           // }
-
 
             return feder.promise;
-
-
         }
 
 
@@ -142,10 +132,7 @@ define(['services/dataService', 'services/registracijaNavigator'],
                 feder.resolve(true);
             }
 
-
             return feder.promise;
-
-
         }
 
 

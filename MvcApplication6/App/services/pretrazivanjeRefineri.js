@@ -251,20 +251,6 @@
     }
 
 
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
     function  makniCrticu(x) {
         var tmp = "";
         if (x) {
@@ -275,11 +261,6 @@
         }
         return tmp;
     }
-
-
-
-
-
 
     return vm;
 

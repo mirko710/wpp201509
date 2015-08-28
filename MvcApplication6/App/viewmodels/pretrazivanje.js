@@ -98,6 +98,7 @@
         activate: activate,
         canActivate: canActivate,
         compositionComplete: compositionComplete,
+        attached: attached,
 
         testTablica:testTablica,
         testAutocomplete:data.getJsonAutocompleteER,
@@ -118,11 +119,6 @@
         
         odabrano: odabrano,
 
-        //userName: data.userName,
-        //password: data.password,
-        //rUserName: data.realUserName,
-        //rIsAuth: data.realIsAuth,
-        //rUserRoles: data.realUserRoles,
         router: router,
         logout: logout,
 
@@ -183,7 +179,7 @@
         Selects: data.SelectsPretrazivanje,//[],
         upitiMenu: upitiMenu,
 
-        attached: attached,
+        
         searchHistoryOpened: searchHistoryOpened,
         myMessage: myMessage,
 

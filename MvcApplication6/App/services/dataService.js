@@ -175,36 +175,7 @@ $(function () {
             }
 
             ];
-    //{ U_IDT_Materijal: 1, U_IDT_Tehnika: 1, U_IDT_Dio_predmeta: 49 }
-           //// var SelectsArrays = [{ 'dIme': 'zbirke', 'ime': 'Zbirke', 'izvor': 'tbl_T_Zbirke' },
-           //                    { 'dIme': 'jedinice', 'ime': 'Jedinice', 'izvor': 'tbl_T_Jedinice_mjere' },
-           //                    {'dIme': 'dijelovi', 'ime': 'Dijelovi', 'izvor': 'tbl_T_Dijelovi' },
-           //                    { 'dIme': 'vrste_naziva', 'ime': 'Vrste_naziva', 'izvor': 'tbl_T_Vrste_naziva' },
-           //                    {'dIme': 'vrste_naslova', 'ime': 'Vrste_naslova', 'izvor': 'tbl_T_Vrste_naslova' },
-           //                    { 'dIme': 'vrste_odgovornosti', 'ime': 'Vrste_odgovornosti', 'izvor': 'tbl_T_Vrste_odgovornosti' },
-           //                    { 'dIme': 'uloge_autora', 'ime': 'Uloge_autora', 'izvor': 'tbl_T_Uloge_Autora' },
-           //                    { 'dIme': 'jezici', 'ime': 'Jezici', 'izvor': 'tbl_T_Jezici' },
-           //                    { 'dIme': 'materijali', 'ime': 'Materijali', 'izvor': 'tbl_T_Materijali' },
-           //                    { 'dIme': 'tehnike', 'ime': 'Tehnike', 'izvor': 'tbl_T_Tehnike' },
-           //                    { 'dIme': 'mjesta', 'ime': 'Mjesta', 'izvor': 'tbl_T_Mjesta' },
-           //                    { 'dIme': 'nazivi', 'ime': 'Nazivi', 'izvor': 'tbl_T_Nazivi' },
-           //                    { 'dIme': 'sadrzaj_predmet', 'ime': 'Sadrzaj_predmet', 'izvor': 'tbl_T_Sadrzaj_predmet' },
-           //                    { 'dIme': 'vrste_sadrzaja', 'ime': 'Vrste_sadrzaja', 'izvor': 'tbl_T_Vrste_sadrzaja' },
-           //                    { 'dIme': 'vremenske_odrednice', 'ime': 'Vremenske_odrednice', 'izvor': 'tbl_T_Vremenske_odrednice' },
-           //                    { 'dIme': 'osobe_i_inst_odrednice', 'ime': 'Osobe_i_inst_odrednice', 'izvor': 'vw_T_Osobe_i_inst_odrednice' },
-           //                    { 'dIme': 'sakupljaci', 'ime': 'Sakupljaci', 'izvor': 'vw_T_Sakupljaci' },
-           //                    { 'dIme': 'nacini_prikupljanja', 'ime': 'Nacini_prikupljanja', 'izvor': 'tbl_T_Nacini_prikupljanja' },
-           //                    { 'dIme': 'nalaziste', 'ime': 'Nalaziste', 'izvor': 'tbl_T_Nalaziste' },
-           //                    { 'dIme': 'kljucne_rijeci', 'ime': 'Kljucne_rijeci', 'izvor': 'tbl_T_Kljucne_rijeci' },
-           //                    { 'dIme': 'smjestaj_stalni', 'ime': 'Smjestaj_stalni', 'izvor': 'tbl_T_Smjestaj_stalni' },
-           //                    { 'dIme': 'smjestaj_privremeni', 'ime': 'Smjestaj_privremeni', 'izvor': 'tbl_T_Smjestaj_privremeni' },
-           //                    { 'dIme': 'smjestaj_privremeni_vrsta', 'ime': 'Smjestaj_privremeni_vrsta', 'izvor': 'tbl_T_Smjestaj_privremeni_vrsta' },
-           //                    { 'dIme': 'kustosi', 'ime': 'Kustosi', 'izvor': 'vw_T_Kustosi' },
-           //                    { 'dIme': 'izvori_nabave', 'ime': 'Izvori_nabave', 'izvor': 'vw_T_Izvori_nabave' },
-           //                    { 'dIme': 'ocuvanosti', 'ime': 'Ocuvanosti', 'izvor': 'tbl_T_Ocuvanosti' },
-           //                    { 'dIme': 'valute', 'ime': 'Valute', 'izvor': 'tbl_T_Valute' },
-           //                    { 'dIme': 'pribavljanje', 'ime': 'Pribavljanje', 'izvor': 'tbl_T_Pribavljanje' }, //{"pribavljanje","tbl_T_Pribavljanje"}
-           //                    { 'dIme': 'dimenzije', 'ime': 'Dimenzije', 'izvor': 'tbl_T_Dimenzije' }];
+ 
 
 
 
@@ -445,6 +416,7 @@ $(function () {
                 //if (i1 == 7)//Registracija iz Pretrazivanja
                 //if (i1 == 8)//zbirkeZa Homepage
                 //if (i1 == 9)//registracija po zbirci
+                //if (i1 == 10)//gettermBucketUpis
                 var outParametar = "3";
                 if (vrstaPoziva == 6 || vrstaPoziva == 7) outParametar = navigacijaIzPretrazivanja();
                 if (vrstaPoziva == 9) outParametar = parametar;

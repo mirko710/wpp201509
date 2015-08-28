@@ -559,8 +559,8 @@
                
                 if (data.navigacijaIzPretrazivanja() != "-1") {
                 //alert(newValue);
-                        data.getNavRecordsUpit(selZaKomboOdabirInvBroja).then(function(){
-                            recMax(selZaKomboOdabirInvBroja().length);
+                    data.getNavRecordsUpit(upisNavigator.selZaKomboOdabirInvBroja).then(function () {
+                        recMax(upisNavigator.selZaKomboOdabirInvBroja().length);
                             recIndex(1);
 //                            upisNavigator.currentZbirkaIDT(zbIndex);
                             upisNavigator.ulazIDBroj(parseInt(id))
@@ -754,9 +754,9 @@
         }
 
  //// dio ua upis Navigaciju
-        if (selZaKomboOdabirInvBroja().length == 0 || !selZaKomboOdabirInvBroja) {
+        if (upisNavigator.selZaKomboOdabirInvBroja().length == 0 || !upisNavigator.selZaKomboOdabirInvBroja) {
             //alert("getnavrekordz" + zbIndex());
-            data.getNavRecords(zbIndex(), selZaKomboOdabirInvBroja).then(function () { recMax(selZaKomboOdabirInvBroja().length); });
+            data.getNavRecords(zbIndex(), upisNavigator.selZaKomboOdabirInvBroja).then(function () { recMax(upisNavigator.selZaKomboOdabirInvBroja().length); });
         };
 
 
@@ -765,7 +765,7 @@
        // alert(manualNav);
         if (!manualNav) {
             //alert('ček malo broj zapisa...');
-            recIndex(findFirst(selZaKomboOdabirInvBroja(), currentBrojid()));
+            recIndex(findFirst(upisNavigator.selZaKomboOdabirInvBroja(), currentBrojid()));
         };
 
 
@@ -794,11 +794,11 @@
     /// ne znam još...
     function findFirst(aray, term) {
         
-        var brojid = ko.utils.arrayFirst(selZaKomboOdabirInvBroja(), function (item) {
+        var brojid = ko.utils.arrayFirst(upisNavigator.selZaKomboOdabirInvBroja(), function (item) {
             return item.ID_Broj == term;
         })
 
-        return selZaKomboOdabirInvBroja.indexOf(brojid);
+        return upisNavigator.selZaKomboOdabirInvBroja.indexOf(brojid);
     }
 
     ///sredit refreshanje za upisNavigaciju i regNavigaciju

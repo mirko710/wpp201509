@@ -403,7 +403,11 @@ define(['plugins/dialog', 'services/dataService'],
             }
            
             realFakeVrijeme.push(fejk);
-            
+            //var ind = ko.utils.arrayFirst(MjereOperatori, function (item) {
+            //    return item.tekst === nesto.upitOperator();
+            //})
+            //realFakeVrijeme()[0]['MJR_Operator'](ind.vrijednost);
+
             setOpis(realFakeVrijeme()[0], 1);
             setOpis(realFakeVrijeme()[0], 2);
             

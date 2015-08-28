@@ -167,12 +167,7 @@
             var jedinica = ko.utils.arrayFirst(data.SelectsPretrazivanje['tbl_T_Jedinice_Mjere'], function (item) {
                 return item.IDT === tmp['MJR_IDT_Jedinica_mjere']()
             })
-//            redakUpita()[rowOpenDialog()].mjereRedak(response.r1);
-  //          var tmpOperator = response.r1['MJR_Operator']();
-    //        var tmpOperatorString = redakUpita()[rowOpenDialog()].operatori()[tmpOperator];
-      //      redakUpita()[rowOpenDialog()].upitOperator(tmpOperatorString);
-        //    redakUpita()[rowOpenDialog()].vrijednost1(response.vrijednost1);
-          //  redakUpita()[rowOpenDialog()].vrijednost4(response.vrijednost4);
+
 
 
             V1 += dio.Pojam + " ";
@@ -186,7 +181,7 @@
             fakeUpitRow.vrijednost1(V1);
             fakeUpitRow.combo(1);
             fakeUpitRow.mjereRedak(realFakeMjere()[0]);
-            fakeUpitRow.upitOperator(MjereOperators[realFakeMjere()[0]['MJR_operator']]);
+            fakeUpitRow.upitOperator(MjereOperators[realFakeMjere()[0]['MJR_Operator']()]);
             //realFakeMjere([]);
             //fejk = new fakeMjere();
             //realFakeMjere.push(fejk);
@@ -224,9 +219,12 @@
         } else {
             fejk = new fakeMjere();
         }
-                    //fejk['MJR_IDT_Mjereni_dio'](49);
-                    //fejk['MJR_Operator'](ind);
                     realFakeMjere.push(fejk);
+
+                    var ind = ko.utils.arrayFirst(MjereOperatori, function (item) {
+                        return item.tekst === nesto.upitOperator();
+                    })
+                    realFakeMjere()[0]['MJR_Operator'](ind.vrijednost);
                     return true;
    }
 

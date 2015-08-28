@@ -335,7 +335,7 @@ $(function () {
 
             //izbrisano getAutori
 
-            load = function () {
+           var load = function () {
                 console.log('load kontekst');
                 return 'eee';
             }

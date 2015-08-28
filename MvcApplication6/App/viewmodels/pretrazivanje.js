@@ -22,7 +22,7 @@
     var brojOdabranih=ko.observable();
     var zoomItem= ko.observable();
 
-
+    var dialogZoom;
     var promjenaMenuUpiti= ko.observable(0);
     var upitiMenu= [{ ID: 1, label: 'Novi' }, { ID: 2, label: 'Briši' }, { ID: 3, label: 'Save as...' }, { ID: 4, label: 'Spremi' }];
     var Dimenzije= ko.observableArray([]);
@@ -116,30 +116,24 @@
         downloadURLOLD: alati.downloadURLOLD,
         downloadURL: alati.downloadURL,
         
-        //showModalMjere: showModalMjere,
-        //showModalVrijeme:showModalVrijeme,
         odabrano: odabrano,
 
-        userName: data.userName,
-        password: data.password,
-        rUserName: data.realUserName,
-        rIsAuth: data.realIsAuth,
-        rUserRoles: data.realUserRoles,
+        //userName: data.userName,
+        //password: data.password,
+        //rUserName: data.realUserName,
+        //rIsAuth: data.realIsAuth,
+        //rUserRoles: data.realUserRoles,
         router: router,
         logout: logout,
 
        
         Dijelovi: Dijelovi,
         Dimenzije: Dimenzije,
-       
         Jedinice: Jedinice,
 
         refinerToggle: refinersService.refinerToggle,
         refiners: refinersService.refiners,
         minimize: minimize,
-
-        //dodajRedakUpitaRefinerAND: redakUpitaService.dodajRedakUpitaRefinerAND,
-        //dodajRedakUpitaRefinerOR: redakUpitaService.dodajRedakUpitaRefinerOR,
 
         dodajRedakUpitaRefinerAND: dodajRedakUpitaRefinerAND,
         dodajRedakUpitaRefinerOR: dodajRedakUpitaRefinerOR,
@@ -206,6 +200,13 @@
         provjeriZagrade: redakUpitaService.provjeriZagrade,
         postaviNavigaciju: postaviNavigaciju
     }
+
+
+    function logout() {
+        data.logout()
+        .then(function () { data.isAuthenticated(); });
+        return true;
+    };
 
 
     function postaviNavigaciju() {
@@ -324,33 +325,6 @@
         return;
     }
 
-
-
-
-    function loginTry() {
-        data.login(data.userName(), data.password()).then(function () {
-            data.getUserName();
-        })
-        .then(function () { data.isAuthenticated(); })
-        .then(function () { getRoles(); });
-        return true;
-    }
-
-    function   getRoles() {
-        console.log(data.getUserRoles());
-        return true;
-    }
-
-    function  isAuth() {
-        console.log(data.isAuthenticated());
-        return true;
-    }
-
-    function  logout() {
-        data.logout()
-        .then(function () { data.isAuthenticated(); });
-        return true;
-    }
 
 
 

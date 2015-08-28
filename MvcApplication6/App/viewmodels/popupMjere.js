@@ -57,7 +57,6 @@
             realFakeMjere()[0]['MJR_IDT_Mjereni_dio'](49);
             alertMjereModel(['','','','','','']);
             firstLoad = false;
-            opened = false;
         }
     }
 

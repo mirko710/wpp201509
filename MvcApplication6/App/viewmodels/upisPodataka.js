@@ -157,47 +157,23 @@
         formModel: formModel,
         bindingComplete:bindingComplete,
 
-        userName: data.userName,
+ 
         router: router,
-        userName: data.userName,
-        password: data.password,
-        loginTry: loginTry,
-        isAuth: isAuth,
+        //userName: data.userName,
+        //password: data.password,
+        //loginTry: loginTry,
+        //isAuth: isAuth,
         logout: logout,
-        rUserName: data.realUserName,
-        rIsAuth: data.realIsAuth,
-        rUserRoles: data.realUserRoles,
+        //rUserName: data.realUserName,
+        //rIsAuth: data.realIsAuth,
+        //rUserRoles: data.realUserRoles,
         attached: attached,
         compositionComplete: compositionComplete,
         openNewRecordDialog: openNewRecordDialog
     }
     return vm;
 
-    function loginTry() {
-        data.login(data.userName(), data.password()).then(function () {
-            data.getUserName();
-            data.parametri.ucitajParametre();
-        })
-        .then(function () { data.isAuthenticated(); })
-        .then(function () { getRoles(); });
-        return true;
-    };
-    function getRoles() {
-        console.log(data.getUserRoles());
-        return true;
-    };
-    function isAuth() {
-        console.log(data.isAuthenticated());
-        return true;
-    };
-    function logout() {
-        data.logout()
-        .then(function () { data.isAuthenticated(); });
-        return true;
-    };
 
-
- 
     function formModel(ID,title,tmpl,tablica,imaFokus,odabrano,recordCount,buttonBox,cont,data) {
         var that = this;
         that.ID = ko.observable(ID || null);
@@ -243,7 +219,11 @@
         return ber.promise;
     }
 
-
+    function logout() {
+        data.logout()
+        .then(function () { data.isAuthenticated(); });
+        return true;
+    };
 
 
 
@@ -278,8 +258,9 @@
         if (katalogMode) {
             var inputi = $("#glavniUpis :input");
             inputi.prop("disabled", true);
+            //kataloskaPrikaz
+            $("#kataloskaPrikaz").prop("disabled", false);
         }
- 
     }
 
 
@@ -338,7 +319,6 @@
             }
             return deferred.promise();
         }));
-
     }
 
 
@@ -378,8 +358,6 @@
         var pocZbirka = null;
 
         pocZbirka = data.parametri.Vrijednost("S_default_zbirka");
-        
-
 
         if (!pocZbirka) {
             zbIndex(231);
@@ -391,13 +369,7 @@
                 zbIndex(parseInt(pocZbirka.split('#')[1]));
             }
         }
-
- 
-
         ////
-      
-
-
     }
 
     function postaviForme(forme) {
@@ -755,11 +727,7 @@
             brojid = y;// startID();
         }
 
- 
-
- 
-
-        ///Napuni podatke za forme
+         ///Napuni podatke za forme
         ////sve kaj je vezano za tbl_Kartica ide preko nje...
         $.each(vm.forme(), function (i, p) {
             //alert(i + vm.forme()[i]['title']());
@@ -1063,12 +1031,7 @@
         return regNav.navigacijaZaRegistraciju(zbIndex()).then(function () {
             regNav.podaciZaRegistraciju()[0].sync(currentBrojid());
         })
-
-
     }
-
-
-
 
 
     /// u upload...
@@ -1375,89 +1338,6 @@
 
 
 
-    ///za brisanje
-    function ZaBrisat_brojKomadaZaSubform(x) {
-        var y = 0;
-        //alert('prošo za broj');
-        var frmOdabrano = -1;
-        // alert(x + vm.selNazivi().length);
-        for (var i = 0; i < forme().length; i++) {
-            
-            if (forme()[i]['tmpl']() == x) {
-                frmOdabrano = i;//alert(forme()[i]['tmpl']() + ' ' + x);
-            }
-        }
-
-
-        switch (x) {
-            case 'tmpNazivi':
-                //alert(x + vm.selNazivi().length);
-                y = vm.selNazivi().length;
-                break;
-            case 'tmpNaslovi':
-                //alert(x + vm.selNaslovi().length);
-                y = vm.selNaslovi().length;
-                break;
-            case 'tmpPodOznake':
-                //alert(x + vm.selNaslovi().length);
-                y = vm.selPodOznake().length;
-                break;
-            case 'tmpIzrada':
-                //alert(x + vm.selIzrada().length);
-                y = vm.selIzrada().length;
-                break;
-            case 'tmpMaterijali':
-                //alert(x + vm.selMat().length);
-                y = vm.selMat().length;
-                break;
-            case 'tmpMjere':
-                //alert(x + vm.selMjere().length);
-                y = vm.selMjere().length;
-                break;
-            case 'tmpMedia':
-                //alert(x + vm.selMjere().length);
-                y = vm.selMmedia().length;
-                break;
-            case 'tmpNalazista':
-                //alert(x + vm.selMjere().length);
-                y = 1;
-                break;
-            case 'tmpInventarizacija':
-                //alert(x + vm.selMjere().length);
-                y = vm.selInventarizacija().length;
-                break;
-            case 'tmpStanje':
-                //alert(x + vm.selMjere().length);
-                y = vm.selOcuvanost().length;
-                break;
-            case 'tmpOpis':
-                //alert(x + vm.selMjere().length);
-                y = 1;
-                break;
-            case 'tmpNabava':
-                //alert(x + vm.selMjere().length);
-                y = 1;
-                break;
-            case 'tmpSmjestaj':
-                //alert(x + vm.selMjere().length);
-                y = 1;
-                break;
-            case 'tmpRazdoblje':
-                //alert(x + vm.selMjere().length);
-                y = vm.selKljucneRijeci().length;
-                break;
-
-            default:
-                alert('defo');
-                y = 0;
-        }
-
-        if (frmOdabrano > -1 && y > 0) {
-           // alert(frmOdabrano);
-            forme()[frmOdabrano]['recordCount'](y);
-        }
-        return y;
-    }
 
     ////ostaje
     function createZapisSubform(x) {

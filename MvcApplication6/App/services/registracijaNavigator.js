@@ -287,7 +287,7 @@ define(['services/dataService'],
             var c = new newNavModel();
             c.realData(response);
             c.cUkupno(response.length);
-
+            var cDat;
             //imaDataciju] [bit],[imaFotku] [bit],[imaAutora] [bit],[imaMjesta] [bit],[imaNaziv] [bit],[imaNaslov] [bit],[imaMjera] [bit],[imaMaterijala] [bit])
             for (var i = 0; i < c.imePolja.length; i++) {
 

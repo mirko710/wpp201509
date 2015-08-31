@@ -980,7 +980,7 @@
 
 
         // alert(recordCount());
-        refinersService.refinersLinkovi(rezultatiPlusRefineri['part2']);
+     
 
 
         rezultati([]);
@@ -996,6 +996,7 @@
             }
         }
 
+        refinersService.refinersLinkovi(rezultatiPlusRefineri['part2']);
         refinersService.fillRefiners(redakUpitaService.redakUpita())
         .then(function () {
             deferFunc.resolve(true);

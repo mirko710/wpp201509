@@ -417,9 +417,10 @@ $(function () {
                 //if (i1 == 8)//zbirkeZa Homepage
                 //if (i1 == 9)//registracija po zbirci
                 //if (i1 == 10)//gettermBucketUpis
+                //if (i1 == 11)//getrefinerspovrsti
                 var outParametar = "3";
                 if (vrstaPoziva == 6 || vrstaPoziva == 7) outParametar = navigacijaIzPretrazivanja();
-                if (vrstaPoziva == 9) outParametar = parametar;
+                if (vrstaPoziva == 9 || vrstaPoziva==11) outParametar = parametar;
                 var req = $.ajax({
                     type: 'GET',
                     url: adresaAPI + '?i1=' + vrstaPoziva + '&i2=2&i3=' + outParametar,

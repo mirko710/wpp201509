@@ -1,5 +1,5 @@
 ﻿define(['durandal/app', 'services/logger', 'services/dataService'],
-    function (app, logger, data) {
+    function (app, logger, dataService) {
 
     var my = this || {};
 
@@ -73,7 +73,7 @@
 
             var returnValue;
             //refinersi
-            data.getWebAPISQL(4, -1, returnValue).then(function (b) {
+            dataService.getWebAPISQL(4, -1, returnValue).then(function (b) {
                 //getDefRefNOEF().then(function (b) {
                 $.each(b, function (i, p) {
                     var tmpRefiner = new refinerModel(p['title'], p['filter'], p['template'], false, 0, 0, p['fieldIDT']);
@@ -136,6 +136,34 @@
         return deferFunc.promise;
      }
 
+
+    function fillRefinerSkraceno(refiner,poljeIDT,i) {
+        var deferFunc = Q.defer();
+        var n=0
+        ko.utils.arrayForEach(refiner, function (item) {
+                    var rfP = new refinerPodaciModel()
+                    rfP.IDT = item.IDT;
+                    //rfP.kategorija = item.kategorija;
+                    rfP.Pojam = item.Pojam;
+                    rfP.brojZapisa = item.brojZapisa;
+                    rfP.odabrano = false;
+                    rfP.checked(false);
+                    $.each(tmpRedakUpita(), function (index, rData) {
+                        if (poljeIDT == rData.poljeIDT() && rData.vrijednost2() == item.IDT) {
+                            rfP.checked(true);
+                        }
+                    });
+                    n++;
+                    if (n == refiner.length - 1) {
+                        deferFunc.resolve(true);
+                    }
+                    refiners()[i].podaci.push(rfP);
+                
+        })
+        return deferFunc.promise;
+    }
+
+
     function fillRefiners(tmpUpiti) {
         
         tmpRedakUpita(tmpUpiti);
@@ -143,17 +171,34 @@
         var deferFunc = Q.defer();
         var lastIndex = refiners().length;
 
-        $.each(refiners(), function (index, data) {
-            data.podaci([]);
-            data.recordCount(0);
-            fillRefiner(data);
-            if (index == lastIndex - 1) {
+        for (var i = 0; i < lastIndex; i++) {
+            refiners()[i].podaci([]);
+            fillRefinerSkraceno(refinersLinkovi()[i].podaci,refiners()[i].fieldIDT(),i);
+            //refiners()[i].podaci(filRefTemp);
+            refiners()[i].recordCount(refinersLinkovi()[i].recordCount);
+            if (refiners()[i].recordCount() > 5) {
+                refiners()[i].plus10(false);
+            }
+            if (i == lastIndex - 1) {
                 deferFunc.resolve(true);
             }
-        })
+        }
+
+
+
+        //$.each(refiners(), function (index, data) {
+        //    data.podaci([]);
+        //    data.recordCount(0);
+        //    fillRefiner(data);
+        //    if (index == lastIndex - 1) {
+        //        deferFunc.resolve(true);
+        //    }
+        //})
         
         return deferFunc.promise;
     }
+
+
 
 
     function  refinerToggle(data) {
@@ -161,11 +206,20 @@
         var overlay = $(".Overlay");
         data.plus10(!tmp);
         if (data.plus10()) {
-            overlay.addClass("visible");
-            fillRefiner(data)
-                .then(function () {
-                    overlay.removeClass("visible");
-                })
+            if (data.recordCount() != data.podaci().length) {
+                overlay.addClass("visible");
+                var retVal;
+                dataService.getWebAPISQL(11, data.filter(), retVal).then(
+                    function (podaci) {
+                        var i = refiners().indexOf(data);
+                        refiners()[i].podaci([]);
+                        fillRefinerSkraceno(podaci, data.fieldIDT, i)
+                        //fillRefiner(data);
+                    })
+                    .then(function () {
+                        overlay.removeClass("visible");
+                    })
+            }
         }
         return true;
     }

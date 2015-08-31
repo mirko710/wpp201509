@@ -14,6 +14,7 @@ namespace WMpp
     {
         public static List<upitiDefinicije> upitiPravilaM = new List<upitiDefinicije>();
         public static List<upitiDefinicije> upitiPravilaS = new List<upitiDefinicije>();
+        public static List<refinerModel> refineriSve = new List<refinerModel>();
         public static List<defStrukt> poljaUpit = new List<defStrukt>();
         public static int brojParametara = 0;
         public static List<SqlParameter> parametriZaUpit = new List<SqlParameter>();
@@ -155,10 +156,16 @@ namespace WMpp
 
         public class refinerModel
         {
+            public refinerModel()
+            {
+                podaci = new List<refiner>();
+            }
             public string title { get; set; }
             public string filter { get; set; }
             public string template { get; set; }
             public int fieldIDT { get; set; }
+            public int recordCount { get; set; }
+            public List<refiner> podaci { get; set; }
         };
 
         public class defStrukt
@@ -204,14 +211,14 @@ namespace WMpp
 
         public class defVrijeme
         {
-            public string DFV_Opis {get; set;}
-            public string DFV_St_od {get; set;}
-            public string DFV_St_do {get; set;}
-            public string DFV_G_od {get; set;}
-            public string DFV_G_do {get; set;}
-            public Boolean DFV_St_plus {get; set;}
-            public string DFV_Mj_od {get; set;}
-            public string DFV_Mj_do {get; set;}
+            public string DFV_Opis { get; set; }
+            public string DFV_St_od { get; set; }
+            public string DFV_St_do { get; set; }
+            public string DFV_G_od { get; set; }
+            public string DFV_G_do { get; set; }
+            public Boolean DFV_St_plus { get; set; }
+            public string DFV_Mj_od { get; set; }
+            public string DFV_Mj_do { get; set; }
             public Boolean Vidljiv { get; set; }
         }
 
@@ -239,7 +246,7 @@ namespace WMpp
             public string VIZ_Trajanje_priloga { get; set; }
         }
 
-        public class  rezultati
+        public class rezultati
         {
             public int ID_Broj { get; set; }
             public string KRT_Inventarni_broj { get; set; }
@@ -288,7 +295,7 @@ namespace WMpp
 
         public class refiner
         {
-            public string kategorija { get; set; }
+            //public string kategorija { get; set; }
             public string Pojam { get; set; }
             public int? IDT { get; set; }
             public int? brojZapisa { get; set; }
@@ -297,7 +304,7 @@ namespace WMpp
         public class doubleLoad
         {
             public virtual ICollection<rezultati> part1 { get; set; }
-            public virtual ICollection<refiner> part2 { get; set; }
+            public virtual ICollection<refinerModel> part2 { get; set; }
             public int brojZapisa { get; set; }
             public System.Guid sifra { get; set; }
         }
@@ -379,7 +386,7 @@ namespace WMpp
             //sredi podzbirke
 
 
-            zbirke=srediPodZbirke(zbirke);
+            zbirke = srediPodZbirke(zbirke);
 
 
             return zbirke;
@@ -392,8 +399,8 @@ namespace WMpp
 
             var TI = new List<homeTreeZbirke>();
 
-            var  firstLevel = new List<homeTreeZbirke>();
-            var  underLevel = new List<homeTreeZbirke>();
+            var firstLevel = new List<homeTreeZbirke>();
+            var underLevel = new List<homeTreeZbirke>();
             firstLevel = zbirke.Where(z => z.Nad_IDT == null).OrderBy(p => p.Pojam).ToList();
             underLevel = zbirke.Where(z => z.Nad_IDT != null).OrderBy(p => p.Pojam).ToList();
 
@@ -533,10 +540,10 @@ namespace WMpp
                     scom.CommandText = @"SELECT Korisnik_UserName,Vrijednost FROM tbl_Parametri_za_korisnike WHERE Parametar=@parameterName AND (Korisnik_UserName=@kod OR  Korisnik_UserName=@userName)";
                     scom.Parameters.AddWithValue("@kod", "KOD");
                     scom.Parameters.AddWithValue("@userName", userName);
-                    scom.Parameters.AddWithValue("@parameterName",imeParametra);
+                    scom.Parameters.AddWithValue("@parameterName", imeParametra);
 
-                    
-                    var dr=  scom.ExecuteReader();
+
+                    var dr = scom.ExecuteReader();
                     if (dr.HasRows)
                     {
                         while (dr.Read())
@@ -557,8 +564,8 @@ namespace WMpp
                 }
             }
 
-            vrijednost =String.IsNullOrEmpty(userVrijednost) ? (String.IsNullOrEmpty(kodVrijednost) ?"NE" : kodVrijednost): userVrijednost;
-            
+            vrijednost = String.IsNullOrEmpty(userVrijednost) ? (String.IsNullOrEmpty(kodVrijednost) ? "NE" : kodVrijednost) : userVrijednost;
+
 
             return vrijednost;
 
@@ -566,13 +573,22 @@ namespace WMpp
 
 
 
-        public List<refiner> FillRefiner(SqlDataReader dr)
+        public List<refinerModel> FillRefiner(SqlDataReader dr, int kolikoPrvih = 5)
         {
-            List<refiner> refi = new List<refiner>();
+            //List<refiner> refi = new List<refiner>();
+
+
+            foreach (refinerModel r in refineriSve)
+            {
+                r.recordCount = 0;
+                r.podaci.Clear();
+            }
+
+
             while (dr.Read())
             {
                 SEClasses.refiner tmp = new SEClasses.refiner();
-                tmp.kategorija = dr["kategorija"].ToString();
+                string tmpKategorija = dr["kategorija"].ToString();
                 tmp.Pojam = dr["Pojam"].ToString();
 
                 if (dr.IsDBNull(dr.GetOrdinal("IDT")))
@@ -593,8 +609,76 @@ namespace WMpp
                     tmp.brojZapisa = dr.GetInt32(dr.GetOrdinal("brojZapisa"));
                 }
 
+
+                int i = refineriSve.FindIndex(x => x.filter == tmpKategorija);
+                refineriSve[i].recordCount++;
+
+                if (refineriSve[i].podaci.Count < kolikoPrvih)
+                {
+                    refineriSve[i].podaci.Add(tmp);
+                }
+
+
+                //refi.Add(tmp);
+            }
+
+            //return refi;
+            return refineriSve;
+        }
+
+
+        public List<refiner> GetRefinerePoKategoriji(string conn, string kategorija)
+        {
+            var refi = new List<refiner>();
+            using (SqlConnection scon = new SqlConnection(conn))
+            {
+                using (SqlCommand scom = new SqlCommand())
+                {
+                    SqlDataReader dr;
+                    scom.Connection = scon;
+                    scon.Open();
+                    string refinerQry = "SELECT * FROM [dbo].[naziviRefiner_odabrano_poVrsti] (N'" + currentSifra + "','" + kategorija + "')";
+                    scom.CommandText = refinerQry;
+                    dr = scom.ExecuteReader();
+                    refi = FillRefinerPoKategoriji(dr);
+                    dr.Close();
+                }
+            }
+            return refi;
+        }
+
+
+
+        public List<refiner> FillRefinerPoKategoriji(SqlDataReader dr)
+        {
+            var refi = new List<refiner>();
+
+            while (dr.Read())
+            {
+                SEClasses.refiner tmp = new SEClasses.refiner();
+                //tmp.kategorija = dr["kategorija"].ToString();
+                tmp.Pojam = dr["Pojam"].ToString();
+
+                if (dr.IsDBNull(dr.GetOrdinal("IDT")))
+                {
+                    tmp.IDT = -1;
+                }
+                else
+                {
+                    tmp.IDT = dr.GetInt32(dr.GetOrdinal("IDT"));
+                }
+
+                if (dr.IsDBNull(dr.GetOrdinal("brojZapisa")))
+                {
+                    tmp.brojZapisa = -1;
+                }
+                else
+                {
+                    tmp.brojZapisa = dr.GetInt32(dr.GetOrdinal("brojZapisa"));
+                }
                 refi.Add(tmp);
             }
+
             return refi;
         }
 
@@ -692,7 +776,7 @@ namespace WMpp
 
 
 
-        public List<SEClasses.refinerModel> GetRefiners(string conn)
+        public List<refinerModel> GetRefiners(string conn)
         {
             List<refinerModel> zzz = new List<refinerModel>();
 
@@ -710,6 +794,8 @@ namespace WMpp
                 }
                 scon.Close();
             }
+
+            refineriSve = zzz;
             return zzz;
 
         }
@@ -1235,9 +1321,10 @@ namespace WMpp
                     scom.Parameters.AddRange(parametriZaUpit.ToArray());
                     s1.brojZapisa = scom.ExecuteNonQuery();
 
-
+                    
                     string refinerQry = "SELECT * FROM [dbo].[naziviRefiner_odabrano] (N'" + sifra + "')";
-                    var refi = new List<refiner>();
+                    //string refinerQry = "SELECT * FROM [dbo].[naziviRefiner_odabrano_top5] (N'" + sifra + "')";
+                    var refi = new List<refinerModel>();
                     scom.CommandText = refinerQry;
                     dr = scom.ExecuteReader();
                     refi = FillRefiner(dr);
@@ -1260,28 +1347,6 @@ namespace WMpp
                     s1.part1 = wry;// qry.Take(upit.pageSize).ToList();
                     s1.sifra = sifra;
 
-                    if (refi.Count() > 1000)
-                    {
-                        var xxx = new List<refiner>(refi);
-                        int katCount = 0;
-                        string katCur = "";
-                        foreach (refiner z in xxx)
-                        {
-                            if (katCur != z.kategorija)
-                            {
-                                katCur = z.kategorija;
-                                katCount = 0;
-                            }
-                            else
-                            {
-                                katCount++;
-                                if (katCount > 50)
-                                {
-                                    refi.Remove(z);
-                                };
-                            }
-                        }
-                    }
 
                     s1.part2 = refi;// zzz.ToList();
 

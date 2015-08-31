@@ -18,6 +18,7 @@ namespace WMpp.Controllers
         //if (i1 == 8)//zbirke
         //if (i1 == 9)//registracija po zbirci
         //if (i1 == 10)//gettermBucketUpis
+        //if (i1 == 11)//getRefinerePoKategoriji
 
         public enum getApiOpcije
         {
@@ -30,10 +31,9 @@ namespace WMpp.Controllers
             getRegistracijaPretrazivanje,
             getZbirkeZaHome,
             getRegistracijaPoZbirci,
-            getTermBucketUpis
+            getTermBucketUpis,
+            getRefinerePoKategoriji
         }
-
-
 
         string conn = ConfigurationManager.ConnectionStrings["M_DATA"].ToString();
 
@@ -255,6 +255,13 @@ namespace WMpp.Controllers
                 var upiti = new List<SEClasses.saveUpit>();
                 upiti = SEC.UcitajUpite(conn);
                 returnObject= upiti;
+            }
+
+            if (gAO == getApiOpcije.getRefinerePoKategoriji)
+            {
+                var zzz = new List<SEClasses.refiner>();
+                zzz = SEC.GetRefinerePoKategoriji(conn,  i3);
+                returnObject = zzz;
             }
 
             if (gAO == getApiOpcije.getRefiners)

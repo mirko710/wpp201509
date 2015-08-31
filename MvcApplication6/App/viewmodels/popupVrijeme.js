@@ -230,6 +230,9 @@ define(['plugins/dialog', 'services/dataService'],
             }
             if (n.IZR_Period() == 3) {
                 var d2 = n.IZR_Vrijeme_vrijednost2();
+                if (d2 == null || d2 == 'undefined' || d2 == "") {
+                    return -1;
+                }
                 if (d2.charAt(d2.length - 1) == '.') {
                     d2 = d2.substring(0, d2.length - 1);
                     //vm.realFakeRow()[0]['IZR_Vrijeme_vrijednost'](vrijeme1);
@@ -371,7 +374,7 @@ define(['plugins/dialog', 'services/dataService'],
                 }
 
                 if (realFakeVrijeme()[0]['IZR_Period']() == 3) {
-                    fakeUpitRow.upitOperator("izmeðu");
+                    fakeUpitRow.upitOperator(encodeURIComponent(vrijemeSetupParam.VrijemeOperators[2]));
                     //                alert(realFakeRow()[0]['IZR_Vrijeme_od']() + '-' + realFakeRow()[0]['IZR_Vrijeme_do2']());
                     fakeUpitRow.vrijednost4(realFakeVrijeme()[0]['IZR_Vrijeme_od']() + '-' + realFakeVrijeme()[0]['IZR_Vrijeme_do']());
                     fakeUpitRow.vrijednost1(vrijeme1 + ' - ' + vrijeme2);
@@ -403,10 +406,16 @@ define(['plugins/dialog', 'services/dataService'],
             }
            
             realFakeVrijeme.push(fejk);
-            //var ind = ko.utils.arrayFirst(MjereOperatori, function (item) {
-            //    return item.tekst === nesto.upitOperator();
-            //})
+            var ind = ko.utils.arrayFirst(vrijemeSetupParam.Vremena, function (item) {
+                return item.tekst === nesto.upitOperator();
+            })
+            if (ind == null) {
+               // ind = vrijemeSetupParam.Vremena[0];
+                // if (nesto.upitOperator() == 'izmeðu') ind = vrijemeSetupParam.Vremena[2];
+                ind = vrijemeSetupParam.Vremena[2];
+            }
             //realFakeVrijeme()[0]['MJR_Operator'](ind.vrijednost);
+            realFakeVrijeme()[0]['IZR_Period'](ind.vrijednost);
 
             setOpis(realFakeVrijeme()[0], 1);
             setOpis(realFakeVrijeme()[0], 2);

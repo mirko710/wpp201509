@@ -230,7 +230,11 @@
             popupVrijeme.otvoreno(false);
             if (response) {
                 //redakUpita()[rowOpenDialog()](response);
-                redakUpita()[rowOpenDialog()]=response;
+                redakUpita()[rowOpenDialog()] = response;
+                if (response['vrijemeRedak']()['IZR_Period']() == 3) {
+                    redakUpita()[rowOpenDialog()]['upitOperator']("između");
+                }
+                
             }
         })
         return true;

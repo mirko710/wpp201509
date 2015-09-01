@@ -211,7 +211,7 @@
                     function (podaci) {
                         var i = refiners().indexOf(data);
                         refiners()[i].podaci([]);
-                        fillRefinerSkraceno(podaci, data.fieldIDT, i)
+                        fillRefinerSkraceno(podaci, data.fieldIDT(), i)
                         //fillRefiner(data);
                     })
                     .then(function () {

@@ -29,6 +29,7 @@
     var Jedinice= ko.observableArray([]);
     var Dijelovi=ko.observableArray([]);
     
+    var firstAttachUpiti = true;
 
     var DaNeOperators = ['DA', 'NE'];
 
@@ -99,6 +100,8 @@
         canActivate: canActivate,
         compositionComplete: compositionComplete,
         attached: attached,
+        binding: binding,
+        bindingComplete:bindingComplete,
 
         testTablica:testTablica,
         testAutocomplete:data.getJsonAutocompleteER,
@@ -196,7 +199,14 @@
         provjeriZagrade: redakUpitaService.provjeriZagrade,
         postaviNavigaciju: postaviNavigaciju
     }
-
+    function bindingComplete() {
+        console.log("bindingComplete");
+        console.log(redakUpitaService.redakUpita());
+    }
+    function binding() {
+        console.log("binding");
+        console.log(redakUpitaService.redakUpita());
+    }
 
     function logout() {
         data.logout()
@@ -325,6 +335,16 @@
 
 
     function attached() {
+
+        if (firstAttachUpiti) {
+            redakUpitaService.setVrijednost()
+                 .then(function (x) {
+                     redakUpitaService.promjenaPolja(0, x);
+                 });
+            firstAttachUpiti = false;
+        }
+
+
         if (true) {
 
             $(".sidebar-wrapper").slimScroll({
@@ -379,6 +399,11 @@
         $("#hardLoad").on("click", (function (event) {
             event.stopPropagation();
         }))
+
+        console.log("compComplete");
+        console.log(redakUpitaService.redakUpita());
+
+
     }
 
 
@@ -412,7 +437,7 @@
 
 
     function  activate() {
-
+       // var rDefer = Q.defer();
         if (firstPass) {
             
             firstPass = false;
@@ -438,39 +463,105 @@
                 refreshGrid();
             })
 
-            var returnValue;
+            
             //var pare = ty;
-            return data.getWebAPISQL(1,-1,returnValue).then(function (b) {
-                defStruktura(b);
-            })
-            .then(function () {
-                data.getWebAPISQL(5,-1,returnValue).then(function (b) {
-                    //getJsonTermBucket(returnValue).then(function (b) {
-                    //$.each(my.SelectsArrays, function (i, p) {
-                    data.SelectsPretrazivanje = b;
-                    //})
-                })
-                  .then(function () {
-                      data.getWebAPISQL(3, -1, returnValue)
-                          .then(function (b) {
-                              //getUpitiNOEF(returnValue).then(function (b) {
-                              selectUpit(b);
-                              //alert(b[0].ime);
-                                
-                              redakUpitaService.setVrijednost()
-                                  .then(function (x) {
-                                      redakUpitaService.promjenaPolja(0, x);
-                                      //compositionComplete();
-                                  })
-                          })
-                  })
-            })
-         }
 
-        return true;
+        //    var returnValue;
+        //    //var pare = ty;
+        //    return data.getWebAPISQL(1, -1, returnValue).then(function (b) {
+        //        defStruktura(b);
+        //    })
+        //    .then(function () {
+        //        data.getWebAPISQL(5, -1, returnValue).then(function (b) {
+        //            //getJsonTermBucket(returnValue).then(function (b) {
+        //            //$.each(my.SelectsArrays, function (i, p) {
+        //            data.SelectsPretrazivanje = b;
+        //            //})
+        //        })
+        //          .then(function () {
+        //              data.getWebAPISQL(3, -1, returnValue)
+        //                  .then(function (b) {
+        //                      //getUpitiNOEF(returnValue).then(function (b) {
+        //                      selectUpit(b);
+        //                      //alert(b[0].ime);
+
+        //                      redakUpitaService.setVrijednost()
+        //                          .then(function (x) {
+        //                              redakUpitaService.promjenaPolja(0, x);
+        //                              //compositionComplete();
+        //                          })
+        //                  })
+        //          })
+        //    })
+        //}
+
+       // return true;
+            //return Q.all([loadDefStruktura(), loadSelectsPretrazivanje(), loadUpite()])
+
+
+            return loadDefStruktura()
+                    .then(loadSelectsPretrazivanje())
+                    .then(loadUpite());
+
+
+            //.then(function(){
+            //    redakUpitaService.setVrijednost()
+            //        .then(function (x) {
+            //            redakUpitaService.promjenaPolja(0, x);
+            //            //compositionComplete();
+
+            //           // rDefer.resolve(true);
+            //        })
+            //})
+
+            //return data.getWebAPISQL(1, -1, returnValue)
+            //    .then(function (b) {
+            //    defStruktura(b);
+
+            //    data.getWebAPISQL(5,-1,returnValue).then(function (b) {
+            //        data.SelectsPretrazivanje = b;
+
+            //    })
+            //      .then(function () {
+            //          data.getWebAPISQL(3, -1, returnValue)
+            //              .then(function (b) {
+            //                  selectUpit(b);
+                                
+            //                  redakUpitaService.setVrijednost()
+            //                      .then(function (x) {
+            //                          redakUpitaService.promjenaPolja(0, x);
+            //                          //compositionComplete();
+            //                      })
+            //              })
+            //      })
+            //})
+        } 
+
+        return true
     }
 
+    function loadDefStruktura() {
+        var returnValue;
+        return data.getWebAPISQL(1, -1, returnValue)
+            .then(function (b) {
+                defStruktura(b);
+            });
+    }
 
+    function loadSelectsPretrazivanje() {
+        var returnValue;
+        return data.getWebAPISQL(5, -1, returnValue).then(function (b) {
+            data.SelectsPretrazivanje = b;
+        })
+    }
+
+    function loadUpite() {
+        var returnValue;
+        return data.getWebAPISQL(3, -1, returnValue)
+            .then(function (b) {
+                selectUpit(b);
+            });
+    }
 
 
     function zaOdabranUpitSubscribe(newValue) {
@@ -695,18 +786,6 @@
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
     function  getJsonPOSTSpremiUpit(redakUpiti, ime,opis,upitID,returnObject) {
         //console.log(xd);
         if (upitID == undefined) upitID = -1;
@@ -718,8 +797,7 @@
             data: xd,// JSON.stringify(redakUpiti),
             contentType: 'application/json',
             success: function (response, text) {
-                    
-                if (upitID == -1) {
+                 if (upitID == -1) {
                     //odabranUpitID(response);
                     returnObject = response;
                 }

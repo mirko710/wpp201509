@@ -261,7 +261,7 @@
         var defStrukturaRedak = ko.utils.arrayFirst(defStruktura(), function (item) {
             return item.IDT === inputData.poljeIDT;
         })
-        var redakUpita = new redakUpitaModel();
+        var redakUpitaEx = new redakUpitaModel();
 
         var operatori = defStrukturaRedak.Napomena.split(";");
         var testOperatori = ko.observableArray([]);
@@ -270,49 +270,49 @@
             testOperatori.push(data);
         })
 
-        if (testOperatori() != redakUpita.operatori()) {
-            redakUpita.operatori(testOperatori());
+        if (testOperatori() != redakUpitaEx.operatori()) {
+            redakUpitaEx.operatori(testOperatori());
         }
 
 
-        redakUpita.combo(inputData.combo);
-        redakUpita.poljeIDT(inputData.poljeIDT);
-        redakUpita.polje(inputData.polje);
-        redakUpita.tablica(inputData.tablica);
-        redakUpita.vrijednost1(inputData.vrijednost1);
-        redakUpita.vrijednost2(inputData.vrijednost2);
-        redakUpita.vrijednost3(inputData.vrijednost3);
-        redakUpita.vrijednost4(inputData.vrijednost4);
+        redakUpitaEx.combo(inputData.combo);
+        redakUpitaEx.poljeIDT(inputData.poljeIDT);
+        redakUpitaEx.polje(inputData.polje);
+        redakUpitaEx.tablica(inputData.tablica);
+        redakUpitaEx.vrijednost1(inputData.vrijednost1);
+        redakUpitaEx.vrijednost2(inputData.vrijednost2);
+        redakUpitaEx.vrijednost3(inputData.vrijednost3);
+        redakUpitaEx.vrijednost4(inputData.vrijednost4);
 
-        if (redakUpita.combo() == 2 && typeof redakUpita.vrijednost2() != "number") {
+        if (redakUpitaEx.combo() == 2 && typeof redakUpitaEx.vrijednost2() != "number") {
             //alert("null nema kajsadovo?");
-            redakUpita.vrijednost2(null);
+            redakUpitaEx.vrijednost2(null);
         }
 
         if (defStrukturaRedak.T_Tbl) {
-            redakUpita.termTablica(defStrukturaRedak.T_Tbl);
+            redakUpitaEx.termTablica(defStrukturaRedak.T_Tbl);
         } else {
-            redakUpita.termTablica("tbl_T_Zbirke");
+            redakUpitaEx.termTablica("tbl_T_Zbirke");
         }
 
-        redakUpita.upitOperator(inputData.upitOperator);
-        redakUpita.redOperator(inputData.redOperator);
-        redakUpita.podZapisi(inputData.podZapisi);
-        redakUpita.zagradaOtvorena(inputData.zagradaOtvorena || null);
-        redakUpita.zagradaZatvorena(inputData.zagradaZatvorena || null);
+        redakUpitaEx.upitOperator(inputData.upitOperator);
+        redakUpitaEx.redOperator(inputData.redOperator);
+        redakUpitaEx.podZapisi(inputData.podZapisi);
+        redakUpitaEx.zagradaOtvorena(inputData.zagradaOtvorena || null);
+        redakUpitaEx.zagradaZatvorena(inputData.zagradaZatvorena || null);
 
-        redakUpita.vrijemeRedak(null);
+        redakUpitaEx.vrijemeRedak(null);
         if (inputData.vrijemeRedak != undefined && inputData.vrijemeRedak != null && inputData.vrijemeRedak != "" && inputData.vrijemeRedak != "null") {
-            redakUpita.vrijemeRedak(popupVrijeme.mapVrijemeRedak(inputData.vrijemeRedak));
+            redakUpitaEx.vrijemeRedak(popupVrijeme.mapVrijemeRedak(inputData.vrijemeRedak));
         }
 
-        redakUpita.mjereRedak(null);
+        redakUpitaEx.mjereRedak(null);
         if (inputData.mjereRedak != undefined && inputData.mjereRedak != null && inputData.mjereRedak != "" && inputData.mjereRedak != "null") {
-            redakUpita.mjereRedak(modalMjere.mapMjereRedak(inputData.mjereRedak));
+            redakUpitaEx.mjereRedak(modalMjere.mapMjereRedak(inputData.mjereRedak));
         }
 
 
-        return redakUpita;
+        return redakUpitaEx;
 
     }
 
@@ -406,58 +406,60 @@
 
     function  promjenaPolja(index,tmpRedakUpita) {
         //console.log(tada);
-
+        var ferd = Q.defer()
+        
         if (!tmpRedakUpita) {
-            return false;
-        }
-  
-        var defStrukturaRedak = ko.utils.arrayFirst(defStruktura(), function (item) {
-            return item.IDT === tmpRedakUpita.poljeIDT();
-        })
-
-
-        var tablicaDef = defStrukturaRedak.T_Tbl;
-
-        tmpRedakUpita.tablica(defStrukturaRedak.Tablica);
-        tmpRedakUpita.polje(defStrukturaRedak.Naziv);
-        //redakUpita.operatori([]);
-
-        var operatori = defStrukturaRedak.Napomena.split(";");
-        var testOperatori = ko.observableArray([]);
-        
-        $.each(operatori, function (index, data) {
-            testOperatori.push(data);
-        })
-
-        if (testOperatori() != tmpRedakUpita.operatori()) {
-            tmpRedakUpita.operatori(testOperatori());
-            tmpRedakUpita.operatori.valueHasMutated();
-        }
-        
-
-
-
-        tmpRedakUpita.vrijednost2(null);
-        tmpRedakUpita.vrijednost4(null);
-        tmpRedakUpita.vrijemeRedak(null);
-        tmpRedakUpita.mjereRedak(null);
-
-        if (defStrukturaRedak.T_Tbl) {
-            tmpRedakUpita.termTablica(defStrukturaRedak.T_Tbl);
-            //$("#redakUpita_" + index)
+            ferd.resolve(false);
         } else {
-            tmpRedakUpita.termTablica("tbl_T_Zbirke");
-        }
-       // alert("changePolje");
-        if (tmpRedakUpita.poljeIDT() == 8888) {
-            rowOpenDialog(index());
-            showModalMjere();
-        }
-        //zoviDialog(index(), redakUpita);
-        
-       // changeOperator(index, redakUpita);
 
-        return true;
+            var defStrukturaRedak = ko.utils.arrayFirst(defStruktura(), function (item) {
+                return item.IDT === tmpRedakUpita.poljeIDT();
+            })
+
+
+            var tablicaDef = defStrukturaRedak.T_Tbl;
+
+            tmpRedakUpita.tablica(defStrukturaRedak.Tablica);
+            tmpRedakUpita.polje(defStrukturaRedak.Naziv);
+            //redakUpita.operatori([]);
+
+            var operatori = defStrukturaRedak.Napomena.split(";");
+            var testOperatori = ko.observableArray([]);
+
+            $.each(operatori, function (index, data) {
+                testOperatori.push(data);
+            })
+
+            if (testOperatori() != tmpRedakUpita.operatori()) {
+                tmpRedakUpita.operatori(testOperatori());
+                tmpRedakUpita.operatori.valueHasMutated();
+            }
+
+
+
+
+            tmpRedakUpita.vrijednost2(null);
+            tmpRedakUpita.vrijednost4(null);
+            tmpRedakUpita.vrijemeRedak(null);
+            tmpRedakUpita.mjereRedak(null);
+
+            if (defStrukturaRedak.T_Tbl) {
+                tmpRedakUpita.termTablica(defStrukturaRedak.T_Tbl);
+                //$("#redakUpita_" + index)
+            } else {
+                tmpRedakUpita.termTablica("tbl_T_Zbirke");
+            }
+            // alert("changePolje");
+            if (tmpRedakUpita.poljeIDT() == 8888) {
+                rowOpenDialog(index());
+                showModalMjere();
+            }
+            //zoviDialog(index(), redakUpita);
+            //redakUpita.valueHasMutated();
+            // changeOperator(index, redakUpita);
+            ferd.resolve(true);
+        }
+        return ferd.promise;
     }
 
 

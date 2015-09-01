@@ -4,7 +4,7 @@
     var my = this || {};
 
     var modalMjere = new popupMjere("Mjere modal");
-
+    var otvoreneMjere = false;
     var redakUpitaModel = function () {
         this.poljeIDT = ko.observable(null);
         this.polje = ko.observable(null);
@@ -242,13 +242,16 @@
     }
 
     function showModalMjere() {
-
-        modalMjere.show(redakUpita()[rowOpenDialog()]).then(function (response) {
-            modalMjere.otvoreno(false);
+        if (!otvoreneMjere) {
+            otvoreneMjere = true;
+            modalMjere.show(redakUpita()[rowOpenDialog()]).then(function (response) {
+                modalMjere.otvoreno(false);
+                otvoreneMjere = false;
                 if (response) {
                     redakUpita()[rowOpenDialog()] = response;
                 }
             })
+        }
     }
 
 
@@ -462,7 +465,7 @@
 
 
 
-    function dodajRedakUpitaRefiner(odabraniRefiner, operator, odabraniRefinerNad) {
+    function dodajRedakUpitaRefiner(odabraniRefiner, operator) {
 
 
         //var odabraniRefinerNad = ko.utils.arrayFirst(refiners(), function (item) {
@@ -470,12 +473,13 @@
         //})
 
         var defStrukturaRedak = ko.utils.arrayFirst(defStruktura(), function (item) {
-            return item.IDT === odabraniRefinerNad.fieldIDT();
+            //return item.IDT === odabraniRefinerNad.fieldIDT();
+            return item.IDT === odabraniRefiner.nadIDT;
         })
 
         var noviRedakUpita = new redakUpitaModel();
 
-        noviRedakUpita.poljeIDT(odabraniRefinerNad.fieldIDT());
+        noviRedakUpita.poljeIDT(odabraniRefiner.nadIDT);
         
         noviRedakUpita.combo(2);
         noviRedakUpita.vrijednost2(odabraniRefiner['IDT']);//alert(tada.poljeIDT());

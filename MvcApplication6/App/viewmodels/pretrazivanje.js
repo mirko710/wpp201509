@@ -222,24 +222,24 @@
         event.stopPropagation();
         odabraniRefiner.checked(!odabraniRefiner.checked());
         zapamtiRefiner = odabraniRefiner.IDT + '%' + odabraniRefiner.kategorija;
-        var odabraniRefinerNad = ko.utils.arrayFirst(refinersService.refiners(), function (item) {
-            return item.filter() === odabraniRefiner.kategorija;
-        })
+        //var odabraniRefinerNad = ko.utils.arrayFirst(refinersService.refiners(), function (item) {
+        //    return item.filter() === odabraniRefiner.kategorija;
+        //})
 
-        redakUpitaService.dodajRedakUpitaRefiner(odabraniRefiner, " OR ",odabraniRefinerNad);
+        redakUpitaService.dodajRedakUpitaRefiner(odabraniRefiner, " OR ");//,odabraniRefinerNad);
 
         return true;
     }
 
     function dodajRedakUpitaRefinerAND(odabraniRefiner, event) {
-        var odabraniRefinerNad = ko.utils.arrayFirst(refinersService.refiners(), function (item) {
-            return item.filter() === odabraniRefiner.kategorija;
-        })
+        //var odabraniRefinerNad = ko.utils.arrayFirst(refinersService.refiners(), function (item) {
+        //    return item.filter() === odabraniRefiner.kategorija;
+        //})
 
         //odabraniRefiner.checked(!odabraniRefiner.checked());
         zapamtiRefiner = odabraniRefiner.IDT + '%' + odabraniRefiner.kategorija;
 
-        redakUpitaService.dodajRedakUpitaRefiner(odabraniRefiner, " AND ",odabraniRefinerNad);
+        redakUpitaService.dodajRedakUpitaRefiner(odabraniRefiner, " AND ");//,odabraniRefinerNad);
 
         pretrazi();
 
@@ -425,21 +425,6 @@
                 redakUpitaService.init();
             }
 
-
-            //dialogTest=new 
-
-
-            // alert(this.firstload);
-
-            ////refinersi
-            //data.getWebAPISQL(4,-1, returnValue).then(function (b) {
-            ////getDefRefNOEF().then(function (b) {
-            //    $.each(b, function (i, p) {
-            //        var tmpRefiner = new refinerModel(p['title'], p['filter'], p['template'],false,0,0,p['fieldIDT']);
-                   
-            //        refiners.push(tmpRefiner);
-            //    })
-            //})
 
             sloziForme();
 

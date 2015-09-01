@@ -22,6 +22,7 @@
         this.kategorija = '';
         this.Pojam = '';
         this.IDT = -1;
+        this.nadIDT = -1;
         this.brojZapisa = -1;
         this.odabrano = false;
         this.checked = ko.observable(false);
@@ -57,10 +58,7 @@
         fillRefiners:fillRefiners,
         refinersLinkovi:refinersLinkovi,
         refiners: refiners,
-        dodajRedakUpitaRefinerAND: dodajRedakUpitaRefinerAND,
-        dodajRedakUpitaRefinerOR: dodajRedakUpitaRefinerOR,
         refinerToggle: refinerToggle,
-
     }
 
 
@@ -143,7 +141,7 @@
         ko.utils.arrayForEach(refiner, function (item) {
                     var rfP = new refinerPodaciModel()
                     rfP.IDT = item.IDT;
-                    //rfP.kategorija = item.kategorija;
+                    rfP.nadIDT = poljeIDT;
                     rfP.Pojam = item.Pojam;
                     rfP.brojZapisa = item.brojZapisa;
                     rfP.odabrano = false;
@@ -223,88 +221,7 @@
         }
         return true;
     }
-
  
-    function dodajRedakUpitaRefinerOR(odabraniRefiner, event) {
-        event.stopPropagation();
-        odabraniRefiner.checked(!odabraniRefiner.checked());
-        zapamtiRefiner = odabraniRefiner.IDT + '%' + odabraniRefiner.kategorija;
-
-        dodajRedakUpitaRefiner(odabraniRefiner, " OR ");
-    
-        return true;
-    }
-
-    function dodajRedakUpitaRefinerAND(odabraniRefiner, event) {
-
-        //odabraniRefiner.checked(!odabraniRefiner.checked());
-        zapamtiRefiner = odabraniRefiner.IDT + '%' + odabraniRefiner.kategorija;
-
-        dodajRedakUpitaRefiner(odabraniRefiner, " AND ");
-
-        pretrazi();
-
-        return true;
-    }
-
-
-
-    function dodajRedakUpitaRefiner(odabraniRefiner, operator) {
-
-
-        var odabraniRefinerNad = ko.utils.arrayFirst(refiners(), function (item) {
-            return item.filter() === odabraniRefiner.kategorija;
-        })
-
-        var defStrukturaRedak = ko.utils.arrayFirst(defStruktura(), function (item) {
-            return item.IDT === odabraniRefinerNad.fieldIDT();
-        })
-
-        var noviRedakUpita = new redakUpitaModel();
-
-        noviRedakUpita.poljeIDT(odabraniRefinerNad.fieldIDT());
-        
-        noviRedakUpita.combo(2);
-        noviRedakUpita.vrijednost2(odabraniRefiner['IDT']);//alert(tada.poljeIDT());
-
-        noviRedakUpita.tablica(defStrukturaRedak.Tablica);
-        noviRedakUpita.polje(defStrukturaRedak.Naziv);
-
-        noviRedakUpita.operatori([]);
-        var operatori = defStrukturaRedak.Napomena.split(";");
-        $.each(operatori, function (index, data) {
-            noviRedakUpita.operatori.push(data);
-        })
-
-        if (defStrukturaRedak.T_Tbl) {
-            noviRedakUpita.termTablica(defStrukturaRedak.T_Tbl);
-        } else {
-            noviRedakUpita.termTablica("tbl_T_Zbirke");
-        }
-
-        noviRedakUpita.redOperator(operator);
-
-
-        var zaBrisanjeAkoVecPostoji = false;
-        if (zaBrisanjeAkoVecPostoji) {
-            var zzz = ko.utils.arrayFirst(redakUpita(), function (item) {
-                return item.poljeIDT() == noviRedakUpita.poljeIDT() && item.vrijednost2() == noviRedakUpita.vrijednost2();
-            })
-
-            var indexUpita = redakUpita.indexOf(zzz);
-            if (indexUpita > -1) {
-                redakUpita.splice(indexUpita, 1);
-            } else {
-                redakUpita.push(noviRedakUpita);
-            }
-        } else {
-            redakUpita.push(noviRedakUpita);
-        }
-
-        return true;
-    }
-
-
     function  makniCrticu(x) {
         var tmp = "";
         if (x) {

@@ -153,6 +153,13 @@ namespace WMpp
             }
 
         }
+        public class refiner
+        {
+            //public int nadIDT { get; set; }
+            public string Pojam { get; set; }
+            public int? IDT { get; set; }
+            public int? brojZapisa { get; set; }
+        }
 
         public class refinerModel
         {
@@ -293,13 +300,7 @@ namespace WMpp
 
         }
 
-        public class refiner
-        {
-            //public string kategorija { get; set; }
-            public string Pojam { get; set; }
-            public int? IDT { get; set; }
-            public int? brojZapisa { get; set; }
-        }
+
 
         public class doubleLoad
         {
@@ -587,7 +588,7 @@ namespace WMpp
 
             while (dr.Read())
             {
-                SEClasses.refiner tmp = new SEClasses.refiner();
+                var tmp = new refiner();
                 string tmpKategorija = dr["kategorija"].ToString();
                 tmp.Pojam = dr["Pojam"].ToString();
 
@@ -609,9 +610,10 @@ namespace WMpp
                     tmp.brojZapisa = dr.GetInt32(dr.GetOrdinal("brojZapisa"));
                 }
 
-
+                //tmp.nadIDT = -1;
                 int i = refineriSve.FindIndex(x => x.filter == tmpKategorija);
                 refineriSve[i].recordCount++;
+                //tmp.nadIDT = refineriSve[i].fieldIDT;
 
                 if (refineriSve[i].podaci.Count < kolikoPrvih)
                 {

@@ -337,9 +337,18 @@
     function attached() {
 
         if (firstAttachUpiti) {
-            redakUpitaService.setVrijednost()
-                 .then(function (x) {
-                     redakUpitaService.promjenaPolja(0, x);
+ 
+                     data.getPocetnaZbirka()
+                     .then(function (zbIndex) {
+                         redakUpitaService.setVrijednost(zbIndex)
+                             //.then(function (x) {
+                               //  redakUpitaService.promjenaPolja(0, x,zbIndex);
+                         //redakUpitaService.redakUpita()[0]['vrijednost2'](zbIndex);
+                         //x.vrijednost2(zbIndex);
+                     //});
+
+
+                     //console.log(data.parametri);
                  });
             firstAttachUpiti = false;
         }
@@ -463,78 +472,79 @@
                 refreshGrid();
             })
 
-            
-            //var pare = ty;
+            if (false) {
+                //var pare = ty;
 
-        //    var returnValue;
-        //    //var pare = ty;
-        //    return data.getWebAPISQL(1, -1, returnValue).then(function (b) {
-        //        defStruktura(b);
-        //    })
-        //    .then(function () {
-        //        data.getWebAPISQL(5, -1, returnValue).then(function (b) {
-        //            //getJsonTermBucket(returnValue).then(function (b) {
-        //            //$.each(my.SelectsArrays, function (i, p) {
-        //            data.SelectsPretrazivanje = b;
-        //            //})
-        //        })
-        //          .then(function () {
-        //              data.getWebAPISQL(3, -1, returnValue)
-        //                  .then(function (b) {
-        //                      //getUpitiNOEF(returnValue).then(function (b) {
-        //                      selectUpit(b);
-        //                      //alert(b[0].ime);
+                //    var returnValue;
+                //    //var pare = ty;
+                //    return data.getWebAPISQL(1, -1, returnValue).then(function (b) {
+                //        defStruktura(b);
+                //    })
+                //    .then(function () {
+                //        data.getWebAPISQL(5, -1, returnValue).then(function (b) {
+                //            //getJsonTermBucket(returnValue).then(function (b) {
+                //            //$.each(my.SelectsArrays, function (i, p) {
+                //            data.SelectsPretrazivanje = b;
+                //            //})
+                //        })
+                //          .then(function () {
+                //              data.getWebAPISQL(3, -1, returnValue)
+                //                  .then(function (b) {
+                //                      //getUpitiNOEF(returnValue).then(function (b) {
+                //                      selectUpit(b);
+                //                      //alert(b[0].ime);
 
-        //                      redakUpitaService.setVrijednost()
-        //                          .then(function (x) {
-        //                              redakUpitaService.promjenaPolja(0, x);
-        //                              //compositionComplete();
-        //                          })
-        //                  })
-        //          })
-        //    })
-        //}
+                //                      redakUpitaService.setVrijednost()
+                //                          .then(function (x) {
+                //                              redakUpitaService.promjenaPolja(0, x);
+                //                              //compositionComplete();
+                //                          })
+                //                  })
+                //          })
+                //    })
+                //}
 
-       // return true;
-            //return Q.all([loadDefStruktura(), loadSelectsPretrazivanje(), loadUpite()])
-
+                // return true;
+                //return Q.all([loadDefStruktura(), loadSelectsPretrazivanje(), loadUpite()])
+            }
 
             return loadDefStruktura()
                     .then(loadSelectsPretrazivanje())
                     .then(loadUpite());
 
+            if (false) {
+                //.then(function(){
+                //    redakUpitaService.setVrijednost()
+                //        .then(function (x) {
+                //            redakUpitaService.promjenaPolja(0, x);
+                //            //compositionComplete();
 
-            //.then(function(){
-            //    redakUpitaService.setVrijednost()
-            //        .then(function (x) {
-            //            redakUpitaService.promjenaPolja(0, x);
-            //            //compositionComplete();
+                //           // rDefer.resolve(true);
+                //        })
+                //})
 
-            //           // rDefer.resolve(true);
-            //        })
-            //})
+                //return data.getWebAPISQL(1, -1, returnValue)
+                //    .then(function (b) {
+                //    defStruktura(b);
 
-            //return data.getWebAPISQL(1, -1, returnValue)
-            //    .then(function (b) {
-            //    defStruktura(b);
+                //    data.getWebAPISQL(5,-1,returnValue).then(function (b) {
+                //        data.SelectsPretrazivanje = b;
 
-            //    data.getWebAPISQL(5,-1,returnValue).then(function (b) {
-            //        data.SelectsPretrazivanje = b;
+                //    })
+                //      .then(function () {
+                //          data.getWebAPISQL(3, -1, returnValue)
+                //              .then(function (b) {
+                //                  selectUpit(b);
 
-            //    })
-            //      .then(function () {
-            //          data.getWebAPISQL(3, -1, returnValue)
-            //              .then(function (b) {
-            //                  selectUpit(b);
-                                
-            //                  redakUpitaService.setVrijednost()
-            //                      .then(function (x) {
-            //                          redakUpitaService.promjenaPolja(0, x);
-            //                          //compositionComplete();
-            //                      })
-            //              })
-            //      })
-            //})
+                //                  redakUpitaService.setVrijednost()
+                //                      .then(function (x) {
+                //                          redakUpitaService.promjenaPolja(0, x);
+                //                          //compositionComplete();
+                //                      })
+                //              })
+                //      })
+                //})
+            }
         } 
 
         return true
@@ -588,7 +598,7 @@
                     }
 
                 })
-                refreshGrid();
+                //refreshGrid();
             }
         }
     }

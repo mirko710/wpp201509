@@ -440,6 +440,10 @@
                         .then(function (forme) {
                             postaviForme(forme);
                         });
+
+                    startID(-1);
+
+
                     firstLoad = false;
                     //console.log(data.Selects.Kljucne_rijeci[0]);
 
@@ -523,8 +527,8 @@
 
                         } else {
                             if (startID() == -1) {
-                                var prviIzZbirke = data.getPrviIzZbirke(zbIndex()).
-                                    then(function (ydata) {
+                                var prviIzZbirke = data.getPrviIzZbirke(zbIndex())
+                                    .then(function (ydata) {
 
                                         currentBrojid(ydata);
                                         upisNavigator.ulazIDBroj(ydata);

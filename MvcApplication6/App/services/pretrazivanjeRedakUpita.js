@@ -404,7 +404,7 @@
         return true;
     }
 
-    function  promjenaPolja(index,tmpRedakUpita) {
+    function  promjenaPolja(index,tmpRedakUpita,vrijednost2) {
         //console.log(tada);
         var ferd = Q.defer()
         
@@ -438,7 +438,7 @@
 
 
 
-            tmpRedakUpita.vrijednost2(null);
+            tmpRedakUpita.vrijednost2(vrijednost2 || null);
             tmpRedakUpita.vrijednost4(null);
             tmpRedakUpita.vrijemeRedak(null);
             tmpRedakUpita.mjereRedak(null);
@@ -524,7 +524,7 @@
     }
 
 
-    function  setVrijednost() {
+    function  setVrijednost(pocetnaZbirka) {
         //console.log(data.defStruktura());
         redakKombo([]);
         redakKombo(defStruktura);
@@ -534,12 +534,15 @@
         xupit.combo(2);
         xupit.podZapisi(false);
         xupit.vrijednost1(null);
-        xupit.vrijednost2(null);
+        xupit.vrijednost2(pocetnaZbirka || null);
         xupit.vrijednost3(null);
         xupit.vrijednost4(null);
         xupit.upitOperator("=");
-        xupit.polje("Zbirka");
+        xupit.operatori(["=","<>"]);//.push("=");
+        xupit.polje("KRT_IDT_Zbirka");
         xupit.poljeIDT(131);
+        xupit.tablica("tbl_Kartica");
+        xupit.termTablica("tbl_T_Zbirke");
         redakUpita.push(xupit);
 
         ferd.resolve(xupit);

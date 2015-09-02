@@ -231,6 +231,29 @@ $(function () {
             }
 
 
+            var getPocetnaZbirka= function(){
+                var pocZbirka = null;
+                var zbIndex = 231;
+                var ferdef = Q.defer();
+                pocZbirka =parametri.Vrijednost("S_default_zbirka");
+
+                if (!pocZbirka) {
+                    zbIndex = 231;//stavit neku pravu zbirku...
+                    ferdef.resolve(zbIndex);
+                } else {
+                    if (pocZbirka.substr(0, 1) == "*") {
+                        zbIndex = parseInt(pocZbirka.substr(1));
+                        ferdef.resolve(zbIndex);
+                    }
+                    else {
+                        zbIndex = parseInt(pocZbirka.split('#')[1]);
+                        ferdef.resolve(zbIndex);
+                    }
+                }
+                return ferdef.promise;
+            }
+
+
             var loadTerminologyWebWorker = function () {
                 var myWorker = new Worker("../App/services/webWorker.js"); // Init Worker
                 myWorker.onmessage = function (oEvent) { // On worker job finished
@@ -1795,7 +1818,8 @@ $(function () {
                 stripSlashes: stripSlashes,
                 stazaSlike: stazaSlike,
                 getJsonRefreshGridPage: getJsonRefreshGridPage,
-                getZbirka: getZbirka
+                getZbirka: getZbirka,
+                getPocetnaZbirka: getPocetnaZbirka
             }
 
             return dataService;

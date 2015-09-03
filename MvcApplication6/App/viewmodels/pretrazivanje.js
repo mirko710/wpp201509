@@ -230,6 +230,7 @@
 
     function dodajRedakUpitaRefinerOR(odabraniRefiner, event) {
         event.stopPropagation();
+       // odabraniRefiner
         odabraniRefiner.checked(!odabraniRefiner.checked());
         zapamtiRefiner = odabraniRefiner.IDT + '%' + odabraniRefiner.kategorija;
         //var odabraniRefinerNad = ko.utils.arrayFirst(refinersService.refiners(), function (item) {

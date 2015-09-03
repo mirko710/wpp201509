@@ -496,6 +496,23 @@
 
                     var accValue = allBindings.upitiAutocomplete.accValue || '';
 
+
+                    var dodajTermin = function (tablicaPojam, returnVal) {
+                        var x = confirm('Želite li spremiti ' + $(element).val() + ' u terminološku?');
+                        if (x) {
+                            if (bigTablica() != 'wv_T_Autori') {
+                                return dataService.createTermin(bigTablica(), tablicaPojam, bigTablica());
+                            } else {
+
+                                return dataService.createOsoba(bigTablica(), tablicaPojam, bigTablica());
+
+                            }
+                        }
+                    }
+
+
+
+
                     var getJsonAutocomplete = function (tablicaPojam, returnVal) {
 
                         var tmpUrl = "/api/WebApiSQL/?tablica=" + bigTablica() + "&term=" + encodeURIComponent(tablicaPojam.pojam);
@@ -510,6 +527,7 @@
                             contentType: 'application/json;charset=UTF-8',
                             success: function (response, text) {
                                 returnVal(response);
+
                             },
                             error: function (text, error) {
                                 console.log(error);
@@ -552,6 +570,7 @@
                             return {
                                 source: getJsonAutocomplete,
                                 options: {
+                                    dodajTermin: dodajTermin,
                                     dlookup: getJsonDlookup,
                                     tablica: bigTablica || 'tbl_T_Nazivi'
                                 },

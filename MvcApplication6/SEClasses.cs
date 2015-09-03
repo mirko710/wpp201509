@@ -939,7 +939,7 @@ namespace WMpp
                         scom.Connection = scon;
                         scon.Open();
                         scom.CommandType = CommandType.Text;
-                        scom.CommandText = "SELECT * FROM [M_DATA_GMV_WEB].[dbo].[autocompletePoZbirci] (@tablica, @zbirkaIDT,  @trazi)";
+                        scom.CommandText = "SELECT * FROM [dbo].[autocompletePoZbirci] (@tablica, @zbirkaIDT,  @trazi)";
                         scom.Parameters.AddWithValue("@tablica", tablica);
                         scom.Parameters.AddWithValue("@zbirkaIDT", zbirkaIDT);
                         scom.Parameters.AddWithValue("@trazi", term);

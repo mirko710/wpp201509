@@ -1444,6 +1444,17 @@ $(function () {
 
             }
 
+            var createTerminOld = function (entity, pojam, ime) {
+
+                return dMax('IDT', ime)
+                .then(function (nIDT) { return Q.fcall(function () { return makeItSo(nIDT); }) });
+
+                function makeItSo(nIDT) {
+                    var newCust = my.em.createEntity(entity, { IDT: nIDT + 1, Pojam: pojam });
+                    my.em.saveChanges();
+                    return { IDT: nIDT + 1, Pojam: pojam }
+                }
+            }
 
             var createTermin = function (entity, pojam, ime) {
             
@@ -1452,8 +1463,11 @@ $(function () {
 
                     function makeItSo(nIDT) {
                         var newCust = my.em.createEntity(entity, { IDT: nIDT + 1, Pojam: pojam });
-                        my.em.saveChanges();
-                        return { IDT: nIDT + 1, Pojam: pojam }
+                        var z = [];
+                        z.push(newCust);
+                        my.em.saveChanges(z);
+                        //return { IDT: nIDT + 1, Pojam: pojam }
+                        return nIDT + 1;
                     }
                 }
         

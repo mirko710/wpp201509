@@ -29,7 +29,6 @@
             if (options.options != undefined) {
                 if (typeof options.options.dlookup === "function" && !ko.isObservable(options.options.dlookup)) {
                     var xValue = options.value();
-                    console.log("autocomplete " + xValue);
                     var retVal = ko.observable();
                     options.options.dlookup.call(this, xValue, retVal)
                         .then(function (response) {
@@ -143,8 +142,42 @@
                     element.value = value[propNames.input];
                 }
                 else {
-                     element.value = value;
-                    //element.value = null;
+                    if (options.value() == -9999) {
+                        //alert("dodaj termin");
+
+                        if (options.options != undefined) {
+                            if (typeof options.options.dlookup === "function" && !ko.isObservable(options.options.dodajTermin)) {
+                                var xValue = element.value;
+                                var retVal = ko.observable();
+                                options.options.dodajTermin.call(this, xValue, retVal)
+                                    .then(function (response) {
+                                       // value = response;
+                                        element.value = response;
+                                        //options
+
+                                        //options.options.dlookup.call(this, value, retVal)
+                                        //    .then(function (Nresponse) {
+                                        //        element.value = Nresponse;
+                                        //    })
+                                        //element.value = response;
+                                    })
+                            }
+                        }
+
+                    }
+                    if (options.options != undefined) {
+                        if (typeof options.options.dlookup === "function" && !ko.isObservable(options.options.dlookup)) {
+                            var xValue = options.value();
+                            var retVal = ko.observable();
+                            options.options.dlookup.call(this, xValue, retVal)
+                                .then(function (response) {
+                                    element.value = response;
+                                })
+                        }
+                    } else {
+                        element.value = value;
+                        //element.value = null;
+                    }
                 }
             }
  

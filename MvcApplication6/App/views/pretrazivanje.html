@@ -16,7 +16,9 @@
             <!-- ko foreach: $root.refiners -->
             <div class="sidebarBox border1 borderDarkerBottom paddingSmall marginLeftSmall marginRightSmall" data-bind="visible: podaci().length > 0, hasFocus: imaFokus">
                 <h5 class="inlinebox bold uppercase" data-bind="text: title"></h5>
-                <a class="mainColor floatRight inlinebox" data-bind="visible: recordCount() > 5, text: plus10() ? 'prvih 5' : 'prikaži sve', click: $root.refinerToggle"></a>
+                <!-- ko if:  recordCount() > 5  -->
+                <a class="mainColor floatRight inlinebox" data-bind=" text: plus10() ? 'prvih 5' : 'prikaži sve', click: $root.refinerToggle"></a>
+                <!-- /ko -->
 
                 <div class="sidebarBoxLinks paddingTopSmall" data-bind="foreach: podaci">
                     <span class="box mainLink paddingLeft paddingRight" data-bind="visible: odabrano && (($index() < 5 && !$parent.plus10()) || $parent.plus10())">
@@ -28,10 +30,12 @@
                         <a class="box mainLink paddingLeft paddingRight" data-bind="click: $root.dodajRedakUpitaRefinerAND, visible: !odabrano && (($index() < 5 && !$parent.plus10()) || $parent.plus10())">
                           <!--  <input  type="checkbox" data-bind="checked: checked, event:{changed: $root.dodajRedakUpitaILI}" />-->
                   
-
-                            <span class="fa fa-square-o" data-bind="text: '', visible: !checked(), click: $root.dodajRedakUpitaRefinerOR, attr: { id: 'REFchkbox1_' + $index() }"></span>
-                            <span class="fa fa-check-square-o" data-bind="text: '', visible: checked(), click: $root.dodajRedakUpitaRefinerOR, attr: { id: 'REFchkbox2_' + $index() }"></span>
-                            
+                            <!-- ko if:  !checked()  -->
+                            <span class="fa fa-square-o" data-bind="text: '',  click: $root.dodajRedakUpitaRefinerOR, attr: { id: 'REFchkbox1_' + $index() }"></span>
+                            <!-- /ko -->
+                            <!-- ko if: checked()  -->
+                            <span class="fa fa-check-square-o" data-bind="text: '',  click: $root.dodajRedakUpitaRefinerOR, attr: { id: 'REFchkbox2_' + $index() }"></span>
+                            <!-- /ko -->
                             
                             <span data-bind="text: Pojam"></span>
                             <span data-bind="text: ' (' + brojZapisa + ')', attr: { class: 'floatRight' }"></span>
@@ -105,21 +109,29 @@
                         </div>
                         <div class="col col-lg-17">
                             <div class="col col-lg-34 noPadding form-control-noBorder" data-bind="event: { dblclick: function () { $root.zoviDialog($index(), $data); } }">
-                                <input class="form-control" id="Text3" data-bind="visible: combo() == 1, value: vrijednost1" />
-                                <input class="form-control" data-bind="attr: { id: 'upitRed_' + $index()},visible: combo() == 2,
+                                <!-- ko if: combo() == 1  -->
+                                <input class="form-control" id="Text3" data-bind="value: vrijednost1" />
+                                <!--/ko-->
+                                <!-- ko if: combo() == 2  -->
+                                <input class="form-control" data-bind="attr: { id: 'upitRed_' + $index()},
     upitiAutocomplete: {accValue:vrijednost2, tablica:termTablica}    " />
+                                <!--/ko-->
+                                <!-- ko if: combo() == 3  -->
                                 <div class="styled-select">
                                     <div>
-                                        <select class="form-control" data-bind="visible: combo() == 3, options: $root.DaNeOperators, value: vrijednost3"></select>
+                                        <select class="form-control" data-bind=" options: $root.DaNeOperators, value: vrijednost3"></select>
                                     </div>
                                 </div>
+                                <!--/ko-->
                             </div>
                             <div class="col col-lg-2 noPadding chBoxHolderCol chBoxHolderColNew">
                                 <div data-bind="css: { odabrano: podZapisi }">
-                                    <div class="roundedTwo" data-bind="visible: combo() == 2">
+                                    <!-- ko if: combo() == 2  -->
+                                    <div class="roundedTwo">
                                         <input class="chBox" type="checkbox" data-bind="checked: podZapisi, event: { click: $root.changePod }, attr: { id: 'c2hkbox_' + $index() }" />
                                         <label title="uključi podređene pojmove" data-bind="attr: { for: 'c2hkbox_' + $index() }"></label>
                                     </div>
+                                    <!--/ko-->
                                 </div>
                             </div>
                         </div>

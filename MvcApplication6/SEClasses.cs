@@ -920,6 +920,55 @@ namespace WMpp
         }
 
 
+        public List<termDropDown> GetAutocompleteZaZbirku(string conn,string tablica,  string term,int zbirkaIDT)
+        {
+            var termList = new List<termDropDown>();
+            if (!string.IsNullOrEmpty(tablica) && !string.IsNullOrEmpty(term))
+            //provjerit da li je pravo ime tablice, očistit term (drop, delete, -- ;
+            {
+                term = term.Replace("--", "");
+                term = term.Replace(";", "");
+                term = term.Replace("drop", "");
+                term = term.Replace("select", "");
+                term = term.Replace("delete", "");
+
+                using (SqlConnection scon = new SqlConnection(conn))
+                {
+                    using (SqlCommand scom = new SqlCommand())
+                    {
+                        scom.Connection = scon;
+                        scon.Open();
+                        scom.CommandType = CommandType.Text;
+                        scom.CommandText = "SELECT * FROM [M_DATA_GMV_WEB].[dbo].[autocompletePoZbirci] (@tablica, @zbirkaIDT,  @trazi)";
+                        scom.Parameters.AddWithValue("@tablica", tablica);
+                        scom.Parameters.AddWithValue("@zbirkaIDT", zbirkaIDT);
+                        scom.Parameters.AddWithValue("@trazi", term);
+                        SqlDataReader dr = scom.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            var tmp = new termDropDown();
+                            tmp.Pojam = dr["Pojam"].ToString();
+                            tmp.IDT = dr.GetInt32(dr.GetOrdinal("IDT"));
+                            if (dr.IsDBNull(dr.GetOrdinal("Nad_IDT")))
+                            {
+                                tmp.Nad_IDT = null;
+                            }
+                            else
+                            {
+                                tmp.Nad_IDT = dr.GetInt32(dr.GetOrdinal("Nad_IDT"));
+                            }
+                            termList.Add(tmp);
+                        }
+                        dr.Close();
+
+                    }
+                    scon.Close();
+                }
+            }
+
+            return termList;
+        }
+
         public List<termDropDown> GetAutocomplete(string conn,string tablica,string term)
         {
             var termList = new List<termDropDown>();

@@ -29,6 +29,7 @@
             if (options.options != undefined) {
                 if (typeof options.options.dlookup === "function" && !ko.isObservable(options.options.dlookup)) {
                     var xValue = options.value();
+                    console.log("autocomplete " + xValue);
                     var retVal = ko.observable();
                     options.options.dlookup.call(this, xValue, retVal)
                         .then(function (response) {

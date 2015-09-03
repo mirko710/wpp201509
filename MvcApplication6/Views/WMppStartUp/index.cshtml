@@ -49,8 +49,11 @@
         <div id="Nazivi" data-bind="foreach: data">
             <div class="row noMargin" data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
             @*<div class="row noMargin" data-bind="click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
+                
                 <div class="col col-lg-30">
-                    <input class="form-control" id="Text24" data-bind="jqAuto: { autoFocus: true },
+                    <input class="form-control" data-bind="
+    upitiAutocomplete: {accValue: NAZ_IDT_Naziv_predmeta, tablica:'tbl_T_Nazivi',zbirkaIDT:$root.zbNewIndex, poZbirci:true}    " />
+                    @*<input class="form-control" id="Text24" data-bind="jqAuto: { autoFocus: true },
                 jqAutoSource: $root.Selects().tbl_T_Nazivi,
                 jqTerm: $root.dodajTerm,
                 jqTermTablica: $root.dodajTermTablica,
@@ -59,7 +62,7 @@
                 jqAutoValue: NAZ_IDT_Naziv_predmeta,
                 jqAutoSourceLabel: 'Pojam',
                 jqAutoSourceInputValue: 'Pojam',
-                jqAutoSourceValue: 'IDT' " />
+                jqAutoSourceValue: 'IDT' " />*@
                 </div>
                 <div class="col col-lg-6 styled-select">
                     <div><select class="form-control form-control2" data-bind="options: $root.Selects().tbl_T_Vrste_naziva, optionsText: 'Pojam', optionsValue: 'IDT', value: NAZ_IDT_Vrsta_naziva, optionsCaption: '...'"></select></div>
@@ -116,16 +119,20 @@
                 <div class="row noMargin autoHeight" data-bind="attr: { id: 'tbl_Ocuvanost_' + ID() }">
                     <div class="col-lg-18">
                         <div class="row noMargin">
-                            <input class="form-control" id="ocuvanostKombo" data-bind="jqAuto: { autoFocus: true },
-                                    jqAutoSource: $root.Selects().tbl_T_Ocuvanosti,
-                                    jqTerm: $root.dodajTerm,
-                                    jqTermTablica: $root.dodajTermTablica,
-                                    jqTablica: 'tbl_T_Ocuvanosti',
-                                    jqModul: 'Ocuvanosti',
-                                    jqAutoValue: OCU_IDT_Ocuvanost,
-                                    jqAutoSourceLabel: 'Pojam',
-                                    jqAutoSourceInputValue: 'Pojam',
-                                    jqAutoSourceValue: 'IDT' " />
+
+                            <input class="form-control" data-bind="
+    upitiAutocomplete: {accValue: OCU_IDT_Ocuvanost, tablica:'tbl_T_Ocuvanosti'}    " />
+
+                            @*<input class="form-control" id="ocuvanostKombo" data-bind="jqAuto: { autoFocus: true },
+    jqAutoSource: $root.Selects().tbl_T_Ocuvanosti,
+    jqTerm: $root.dodajTerm,
+    jqTermTablica: $root.dodajTermTablica,
+    jqTablica: 'tbl_T_Ocuvanosti',
+    jqModul: 'Ocuvanosti',
+    jqAutoValue: OCU_IDT_Ocuvanost,
+    jqAutoSourceLabel: 'Pojam',
+    jqAutoSourceInputValue: 'Pojam',
+    jqAutoSourceValue: 'IDT' " />*@
                         </div>
                         <div class="row noMargin labelsHolder">Datum</div>
                         <div class="row noMargin shaded autoHeight">
@@ -186,7 +193,10 @@
                 </div>
                 <div class="row noMargin">
                     <div class="col-lg-10">
-                        <input class="form-control" data-bind=" jqAuto: { autoFocus: true },
+                        <input class="form-control" data-bind="
+    upitiAutocomplete: {accValue: KRT_IDT_Nabava_oblik, tablica:'tbl_T_Pribavljanje'}    " />
+
+                        @*<input class="form-control" data-bind=" jqAuto: { autoFocus: true },
                                 jqAutoSource: $root.Selects().tbl_T_Pribavljanje,
                                 jqTerm: $root.dodajTerm,
                                 jqTermTablica: $root.dodajTermTablica,
@@ -195,7 +205,7 @@
                                 jqAutoValue: KRT_IDT_Nabava_oblik,
                                 jqAutoSourceLabel: 'Pojam',
                                 jqAutoSourceInputValue: 'Pojam',
-                                jqAutoSourceValue: 'IDT' " />
+                                jqAutoSourceValue: 'IDT' " />*@
                     </div>
                     <div class="col-lg-8">
                         <input id="inputDatumNabave" type="text" class="form-control" data-bind="value: KRT_Nabava_datum" />
@@ -212,7 +222,10 @@
                 </div>
                 <div class="row noMargin">
                     <div class="col-lg-12">
-                        <input class="form-control" data-bind=" jqAuto: { autoFocus: true },
+                        <input class="form-control" data-bind="
+    upitiAutocomplete: {accValue: KRT_ID_Nabava_Izvor, tablica:'vw_T_Izvori_nabave'}    " />
+
+                        @*<input class="form-control" data-bind=" jqAuto: { autoFocus: true },
                             jqAutoSource: $root.Selects().vw_T_Izvori_nabave,
                             jqTerm: $root.dodajTerm,
                             jqTermTablica: $root.dodajTermTablica,
@@ -221,13 +234,16 @@
                             jqAutoValue: KRT_ID_Nabava_Izvor,
                             jqAutoSourceLabel: 'Pojam',
                             jqAutoSourceInputValue: 'Pojam',
-                            jqAutoSourceValue: 'IDT' " />
+                            jqAutoSourceValue: 'IDT' " />*@
                     </div>
                     <div class="col-lg-12">
                         <input id="inputAdresa" type="text" class="form-control" data-bind="value: KRT_Institucija_Adresa" />
                     </div>
                     <div class="col-lg-12">
-                        <input class="form-control" data-bind=" jqAuto: { autoFocus: true },
+                        <input class="form-control" data-bind="
+    upitiAutocomplete: {accValue: KRT_IDT_Nabava_mjesto, tablica:'tbl_T_Mjesta'}    " />
+
+                        @*<input class="form-control" data-bind=" jqAuto: { autoFocus: true },
                                                             jqAutoSource: $root.Selects().tbl_T_Mjesta,
                                                             jqTerm: $root.dodajTerm,
                                                             jqTermTablica: $root.dodajTermTablica,
@@ -236,7 +252,7 @@
                                                             jqAutoValue: KRT_IDT_Nabava_mjesto,
                                                             jqAutoSourceLabel: 'Pojam',
                                                             jqAutoSourceInputValue: 'Pojam',
-                                                            jqAutoSourceValue: 'IDT' " />
+                                                            jqAutoSourceValue: 'IDT' " />*@
                     </div>
                 </div>
 
@@ -339,7 +355,9 @@
             <div class="row noMargin" data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
             @*<div class="row noMargin" data-bind="click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
                 <div class="col col-lg-36">
-                    <input class="form-control" id="Text2" data-bind="jqAuto: { autoFocus: true },
+                    <input class="form-control" data-bind="
+    upitiAutocomplete: {accValue: KLJ_IDT_Kljucna_rijec, tablica:'tbl_T_Kljucne_rijeci'}    " />
+                    @*<input class="form-control" id="Text2" data-bind="jqAuto: { autoFocus: true },
                 jqAutoSource: $root.Selects().tbl_T_Kljucne_rijeci,
                 jqTerm: $root.dodajTerm,
                 jqTermTablica: $root.dodajTermTablica,
@@ -348,7 +366,7 @@
                 jqAutoValue: KLJ_IDT_Kljucna_rijec,
                 jqAutoSourceLabel: 'Pojam',
                 jqAutoSourceInputValue: 'Pojam',
-                jqAutoSourceValue: 'IDT' " />
+                jqAutoSourceValue: 'IDT' " />*@
                 </div>
             </div>
 
@@ -412,7 +430,9 @@
              <div class="row noMargin" data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
             @*<div class="row noMargin" data-bind="click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
                 <div class="col-lg-11">
-                    <input class="form-control" id="filter" data-bind="jqAuto: { autoFocus: true },
+                    <input class="form-control" data-bind="
+    upitiAutocomplete: {accValue: U_IDT_Materijal, tablica:'tbl_T_Materijali'}    " />
+                    @*<input class="form-control" id="filter" data-bind="jqAuto: { autoFocus: true },
                     jqAutoSource: $root.Selects().tbl_T_Materijali,
                     jqTerm: $root.dodajTerm,
                     jqTermTablica: $root.dodajTermTablica,
@@ -421,10 +441,12 @@
                     jqAutoValue: U_IDT_Materijal,
                     jqAutoSourceLabel: 'Pojam',
                     jqAutoSourceInputValue: 'Pojam',
-                    jqAutoSourceValue: 'IDT' " />
+                    jqAutoSourceValue: 'IDT' " />*@
                 </div>
                 <div class="col-lg-11">
-                    <input class="form-control" id="Text1" data-bind="jqAuto: { autoFocus: true },
+                    <input class="form-control" data-bind="
+    upitiAutocomplete: {accValue: U_IDT_Tehnika, tablica:'tbl_T_Tehnike'}    " />
+                    @*<input class="form-control" id="Text1" data-bind="jqAuto: { autoFocus: true },
                     jqAutoSource: $root.Selects().tbl_T_Tehnike,
                     jqTerm: $root.dodajTerm,
                     jqTermTablica: $root.dodajTermTablica,
@@ -433,7 +455,7 @@
                     jqAutoValue: U_IDT_Tehnika,
                     jqAutoSourceLabel: 'Pojam',
                     jqAutoSourceInputValue: 'Pojam',
-                    jqAutoSourceValue: 'IDT' " />
+                    jqAutoSourceValue: 'IDT' " />*@
                 </div>
                 <div class="col-lg-14 styled-select">
                     <div><select class="form-control form-control2" data-bind="options: $root.Selects().tbl_T_Dijelovi, optionsText: 'Pojam', optionsValue: 'IDT', value: U_IDT_Dio_predmeta"></select></div>
@@ -466,7 +488,9 @@
     jqAutoSourceValue: 'IDT' " />
                     </div>
                     <div class="col col-lg-28" data-bind="visible: $root.kojiSadrzaj('mjesto', $data)">
-                        <input class="form-control" data-bind="attr: { id: 'inputSadrzajMjesto_' + ID() }, jqAuto: { autoFocus: true },
+                        <input class="form-control" data-bind="
+    upitiAutocomplete: {accValue: SDR_IDT_Predmet, tablica:'tbl_T_Mjesta'}    " />
+                        @*<input class="form-control" data-bind="attr: { id: 'inputSadrzajMjesto_' + ID() }, jqAuto: { autoFocus: true },
     jqAutoSource: $root.Selects().tbl_T_Mjesta,
     jqTerm: $root.dodajTerm,
     jqTermTablica: $root.dodajTermTablica,
@@ -475,7 +499,7 @@
     jqAutoValue: SDR_IDT_Predmet,
     jqAutoSourceLabel: 'Pojam',
     jqAutoSourceInputValue: 'Pojam',
-    jqAutoSourceValue: 'IDT' " />
+    jqAutoSourceValue: 'IDT' " />*@
                     </div>
                     <div class="col col-lg-28" data-bind="visible: $root.kojiSadrzaj('sadrzaj', $data)">
                         <input class="form-control" data-bind="attr: { id: 'inputSadrzaj_' + ID() }, jqAuto: { autoFocus: true },
@@ -521,7 +545,9 @@
                         <div><select class="form-control" data-bind="options: $root.Selects().tbl_T_Vrste_odgovornosti, optionsText: 'Pojam', optionsValue: 'IDT', value: IZR_IDT_Vrsta_odgovornosti, optionsCaption: 'Please select...'"></select></div>
                     </div>
                     <div class="col col-lg-16">
-                        <input class="form-control" data-bind="attr: { id: 'selectAutor_' + ID() }, jqAuto: { autoFocus: true },
+                        <input class="form-control" data-bind="
+    upitiAutocomplete: {accValue: IZR_ID_Autor, tablica:'vw_T_Autori'}    " />
+                        @*<input class="form-control" data-bind="attr: { id: 'selectAutor_' + ID() }, jqAuto: { autoFocus: true },
                         jqAutoSource: $root.Selects().vw_T_Autori,
                         jqTerm: $root.dodajTerm,
                         jqTermTablica: $root.dodajTermTablica,
@@ -530,7 +556,7 @@
                         jqAutoValue: IZR_ID_Autor,
                         jqAutoSourceLabel: 'Pojam',
                         jqAutoSourceInputValue: 'Pojam',
-                        jqAutoSourceValue: 'IDT' " />
+                        jqAutoSourceValue: 'IDT' " />*@
                     </div>
                     <div class="col col-lg-14 styled-select">
                         <div><select id="selectUloga_23102" class="form-control form-control2" data-bind="attr: { id: 'selectUloga_' + ID() }, options: $root.Selects().tbl_T_Uloge_autora, optionsText: 'Pojam', optionsValue: 'IDT', value: IZR_IDT_Uloga, optionsCaption: 'Please select...'"></select></div>
@@ -543,7 +569,9 @@
                 </div>
                 <div class="row noMargin" style="height: auto;" data-bind="attr: { id: 'tbl_Izrada_Mjesto' + ID() }"> <!--, click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">-->
                     <div class="col col-lg-10">
-                        <input class="form-control" data-bind="attr: { id: 'inputMjesto_' + ID() }, jqAuto: { autoFocus: true },
+                        <input class="form-control" data-bind="
+    upitiAutocomplete: {accValue: IZR_IDT_Mjesto, tablica:'tbl_T_Mjesta'}    " />
+                        @*<input class="form-control" data-bind="attr: { id: 'inputMjesto_' + ID() }, jqAuto: { autoFocus: true },
                         jqAutoSource: $root.Selects().tbl_T_Mjesta,
                         jqTerm: $root.dodajTerm,
                         jqTermTablica: $root.dodajTermTablica,
@@ -552,7 +580,7 @@
                         jqAutoValue: IZR_IDT_Mjesto,
                         jqAutoSourceLabel: 'Pojam',
                         jqAutoSourceInputValue: 'Pojam',
-                        jqAutoSourceValue: 'IDT' " />
+                        jqAutoSourceValue: 'IDT' " />*@
                     </div>
                     <div class="col col-lg-26 shaded autoHeight">
                         <div class="col col-lg-36">

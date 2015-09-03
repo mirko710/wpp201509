@@ -468,6 +468,8 @@
                 init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
                     var allBindings = allBindingsAccessor();
                     var bigTablica = ko.observable();
+                    var bigZbirkaIDT = ko.observable();
+                    var poZbirci = allBindings.upitiAutocomplete.poZbirci || false;
                     if (ko.isObservable(allBindings.upitiAutocomplete.tablica)) {
                         bigTablica(allBindings.upitiAutocomplete.tablica() || 'tbl_T_Nazivi');
                         allBindings.upitiAutocomplete.tablica.subscribe(function (newValue) {
@@ -477,16 +479,33 @@
                         bigTablica(allBindings.upitiAutocomplete.tablica);
                     }
 
+
+                    if (poZbirci) {
+
+                        if (ko.isObservable(allBindings.upitiAutocomplete.zbirkaIDT)) {
+                            bigZbirkaIDT(allBindings.upitiAutocomplete.zbirkaIDT() || -1);
+                            allBindings.upitiAutocomplete.zbirkaIDT.subscribe(function (newValue) {
+                                bigZbirkaIDT(newValue);
+                            })
+
+                        } else {
+                            bigZbirkaIDT(allBindings.upitiAutocomplete.zbirkaIDT);
+                        }
+                    }
  
 
                     var accValue = allBindings.upitiAutocomplete.accValue || '';
 
                     var getJsonAutocomplete = function (tablicaPojam, returnVal) {
 
+                        var tmpUrl = "/api/WebApiSQL/?tablica=" + bigTablica() + "&term=" + encodeURIComponent(tablicaPojam.pojam);
+                        if (poZbirci) {
+                            tmpUrl = "/api/WebApiSQL/?tablica=" + bigTablica() + "&term=" + encodeURIComponent(tablicaPojam.pojam) + "&zbirkaIDT=" + bigZbirkaIDT();
+                        }
                         //tablica = 'tbl_T_Nazivi';"Content-Type", "text/plain;charset=UTF-8"
                         var req = $.ajax({
                             type: 'GET',
-                            url: "/api/WebApiSQL/?tablica=" + bigTablica() + "&term=" + encodeURIComponent(tablicaPojam.pojam),
+                            url: tmpUrl,
                             dataType: 'json',
                             contentType: 'application/json;charset=UTF-8',
                             success: function (response, text) {
@@ -502,6 +521,7 @@
                     }
 
                     var getJsonDlookup = function (IDT, returnVal) {
+                        //console.log("dlookup " + bigTablica());
                         var propIDT = -1;
                         //tablica = 'tbl_T_Nazivi';
                         if (ko.isObservable(IDT)) {
@@ -547,6 +567,11 @@
             
             }
             
+
+
+ 
+
+
            
 
             ko.bindingHandlers.jqAutoAJAX = {

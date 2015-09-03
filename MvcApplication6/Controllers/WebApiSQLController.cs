@@ -49,10 +49,18 @@ namespace WMpp.Controllers
         }
 
         [HttpGet]
-      public List<SEClasses.termDropDown> zaAutocomplete(string tablica, string term)
+        public List<SEClasses.termDropDown> zaAutocomplete(string tablica, string term)
         {
             var s1 = new List<SEClasses.termDropDown>();
             s1 = SEC.GetAutocomplete(conn,tablica,term);
+            return s1;
+        }
+
+        [HttpGet]
+        public List<SEClasses.termDropDown> zaAutocompleteNaziviZbirka(string tablica, string term,int zbirkaIDT)
+        {
+            var s1 = new List<SEClasses.termDropDown>();
+            s1 = SEC.GetAutocompleteZaZbirku(conn, tablica, term,zbirkaIDT);
             return s1;
         }
 
@@ -280,7 +288,7 @@ namespace WMpp.Controllers
             if (gAO == getApiOpcije.getTermBucketUpis)
             {
                 var bucket = new Dictionary<string, List<SEClasses.termDropDown>>();
-                bucket = SEC.GetTerms(conn, " 1=1 ");
+                bucket = SEC.GetTerms(conn, " (ime!='Nazivi' and ime!='Tehnike'  and ime!='Materijali'  and ime!='Mjesta'  and ime!='upitAutori'   and ime!='Kljucne_rijeci')");
                 returnObject = bucket;
             }
 

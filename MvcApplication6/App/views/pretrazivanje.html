@@ -40,12 +40,7 @@
                             <span data-bind="text: Pojam"></span>
                             <span data-bind="text: ' (' + brojZapisa + ')', attr: { class: 'floatRight' }"></span>
                         </a>
-                    
-
-
-
-
-
+  
                 </div>
             </div>
             <!-- /ko -->
@@ -54,6 +49,7 @@
 
     <div class="container glavni scrollable">
         <div class="contentBoxHeader breadCrumbsHolder">
+
             <span class="prevCrumb icon icon-home"> Dashboard</span>
             <span class="crumbDivider">></span>
             <span class="crumb"> Pretraživanje</span>
@@ -61,6 +57,7 @@
 
         <div class="row noMargin marginTop">
 
+                                        
             <div class="col col-lg-25 contentBox noPadding" id="tabPretrazivanje">
                 <div class="col col col-lg-36 contentBoxHeader">
                     <div class="col col-lg-8 link dropdownLink link-subtle right" data-bind="click: $root.openSearchHistory, css: searchHistoryOpened() == true ? 'opened' : ''">
@@ -96,11 +93,18 @@
                         </div>
                         <div class="col col-lg-8 styled-select noPadding paddingRightSmall">
                             <div>
-                                <select class="form-control" data-bind=" options: $root.redakKombo(), optionsText: 'Pojam', optionsValue: 'IDT', value: poljeIDT, event: { change: function () { $root.promjenaPolja($index, $data); } }"></select>
-                                <!--<input class="form-control" data-bind="attr: { id: 'upitRed_' + $index()},
-    jqAuto: {value:poljeIDT, source:$root.redakKombo(),valueProp:'IDT',labelProp:'Pojam',inputProp:'Pojam' ,  change: function () { $root.promjenaPolja($index, $data); }} " />-->
-                            </div>
+                                <!--<select class="form-control" style="display:none" data-bind=" options: $root.redakKombo(), optionsText: 'Pojam', optionsValue: 'IDT', value: poljeIDT, event: { change: function () {alert('dd'); $root.promjenaPolja($index, $data); } }"></select>-->
+                                
+                                <input class="form-control" data-bind="attr: { id: 'upitKomboPoljeRed_' + $index()},jqAutoOG: { autoFocus: true,minLength:0 },
+                                        jqAutoSource: $root.redakKombo(),
+                                        jqAutoValue: poljeIDT,
+                                        jqAutoSourceLabel: 'Pojam',
+                                        jqAutoSourceInputValue: 'Pojam',
+                                        jqAutoSourceValue: 'IDT', event: { change: function () { $root.promjenaPolja($index, $data); } }" />
+                                 
+                               </div>
                         </div>
+                        
                         <div class="col col-lg-3 styled-select noPadding">
                             <div>
                                 <!--<select class="form-control" data-bind=" options: operatori, value: upitOperator, event: { change: function () { $root.changeOperator($index, $data); } }"></select>-->
@@ -114,7 +118,7 @@
                                 <!--/ko-->
                                 <!-- ko if: combo() == 2  -->
                                 <input class="form-control" data-bind="attr: { id: 'upitRed_' + $index()},
-    upitiAutocomplete: {accValue:vrijednost2, tablica:termTablica}    " />
+                                    upitiAutocomplete: {accValue:vrijednost2, tablica:termTablica}    " />
                                 <!--/ko-->
                                 <!-- ko if: combo() == 3  -->
                                 <div class="styled-select">

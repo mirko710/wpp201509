@@ -186,10 +186,9 @@
         fillTreeNodes();
     }
  
-
- 
+   
     var vm = {
-        
+           
         activate: activate,
         canDeactivate: canDeactivate,
         testCLR:testCLR,

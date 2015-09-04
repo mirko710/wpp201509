@@ -128,6 +128,9 @@
                 }
             }
 
+
+
+
             // if there is local data, then try to determine the appropriate value for the input
             if ($.isArray(sources) && propNames.value) {
                 value = ko.utils.arrayFirst(sources, function (opt) {
@@ -179,6 +182,15 @@
                         //element.value = null;
                     }
                 }
+
+                if (options.options != undefined) {
+                    if (typeof options.options.afterUpdate === "function" && !ko.isObservable(options.options.afterUpdate)) {
+                        var xValue = options.value();
+                        var retVal = ko.observable();
+                        options.options.afterUpdate.call(this, xValue, retVal)
+                    }
+                }
+
             }
  
 

@@ -362,7 +362,20 @@
             //jqAutoSourceInputValue -- the property that should be displayed in the input box
             //jqAutoSourceValue -- the property to use for the value
 
-
+            ko.bindingHandlers.autoCompleteCatchUpdate = {
+                init: function (element, valueAccessor) {
+                    $(element).change(function () {
+                        capitalize(element);
+                        var value = valueAccessor()
+                        value($(element).val());
+                    });
+            
+                },
+                update: function (element, valueAccessor) {
+                    $(element).val(ko.unwrap(valueAccessor()));
+                    capitalize(element);
+                }
+            };
 
 
             ko.bindingHandlers.jqAutoUpit = {
@@ -374,8 +387,8 @@
                         source = allBindings.jqAutoSource,
                         valueProp = allBindings.jqAutoSourceValue,
                         inputValueProp = allBindings.jqAutoSourceInputValue || valueProp,
-                        labelProp = allBindings.jqAutoSourceLabel || valueProp;
-                    selectsSource = allBindings.jqAutoSelectsSource;
+                        labelProp = allBindings.jqAutoSourceLabel || valueProp,
+                        selectsSource = allBindings.jqAutoSelectsSource;
                     
 
                     //function that is shared by both select and change event handlers
@@ -470,6 +483,10 @@
                     var bigTablica = ko.observable();
                     var bigZbirkaIDT = ko.observable();
                     var poZbirci = allBindings.upitiAutocomplete.poZbirci || false;
+                    var afterUpdate= null;
+                    if(allBindings.upitiAutocomplete.options){
+                         afterUpdate=allBindings.upitiAutocomplete.options.afterUpdate || null;
+                    }
                     if (ko.isObservable(allBindings.upitiAutocomplete.tablica)) {
                         bigTablica(allBindings.upitiAutocomplete.tablica() || 'tbl_T_Nazivi');
                         allBindings.upitiAutocomplete.tablica.subscribe(function (newValue) {
@@ -510,9 +527,6 @@
                         }
                     }
 
-
-
-
                     var getJsonAutocomplete = function (tablicaPojam, returnVal) {
 
                         var tmpUrl = "/api/WebApiSQL/?tablica=" + bigTablica() + "&term=" + encodeURIComponent(tablicaPojam.pojam);
@@ -527,7 +541,6 @@
                             contentType: 'application/json;charset=UTF-8',
                             success: function (response, text) {
                                 returnVal(response);
-
                             },
                             error: function (text, error) {
                                 console.log(error);
@@ -538,6 +551,7 @@
                         return req;
                     }
 
+                    
                     var getJsonDlookup = function (IDT, returnVal) {
                         //console.log("dlookup " + bigTablica());
                         var propIDT = -1;
@@ -572,6 +586,7 @@
                                 options: {
                                     dodajTermin: dodajTermin,
                                     dlookup: getJsonDlookup,
+                                    afterUpdate:afterUpdate,
                                     tablica: bigTablica || 'tbl_T_Nazivi'
                                 },
                                 value: accValue,
@@ -705,258 +720,116 @@
 
 
 
-            //jqAuto -- main binding (should contain additional options to pass to autocomplete)
-            //jqAutoSource -- the array to populate with choices (needs to be an observableArray)
-            //jqAutoQuery -- function to return choices
-            //jqAutoValue -- where to write the selected value
-            //jqAutoSourceLabel -- the property that should be displayed in the possible choices
-            //jqAutoSourceInputValue -- the property that should be displayed in the input box
-            //jqAutoSourceValue -- the property to use for the value
-            ko.bindingHandlers.jqAutoOLD = {
-                init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-                    var options = valueAccessor() || {},
-                        allBindings = allBindingsAccessor(),
-                        unwrap = ko.utils.unwrapObservable,
-                        modelValue = allBindings.jqAutoValue,
-                        source = allBindings.jqAutoSource,
-                        query = allBindings.jqAutoQuery,
-                        dodajTerm = allBindings.jqTerm,
-                        dodajTermTablica = allBindings.jqTermTablica,
-                        imeTablice = allBindings.jqTablica,
-                        imeModula = allBindings.jqModul,
-                        valueProp = allBindings.jqAutoSourceValue,
-                        inputValueProp = allBindings.jqAutoSourceInputValue || valueProp,
-                        labelProp = allBindings.jqAutoSourceLabel || inputValueProp;
+//jqAuto -- main binding (should contain additional options to pass to autocomplete)
+//jqAutoSource -- the array of choices
+//jqAutoValue -- where to write the selected value
+//jqAutoSourceLabel -- the property that should be displayed in the possible choices
+//jqAutoSourceInputValue -- the property that should be displayed in the input box
+//jqAutoSourceValue -- the property to use for the value
+ko.bindingHandlers.jqAutoOG = {
+    init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+        var options = valueAccessor() || {},
+            allBindings = allBindingsAccessor(),
+            unwrap = ko.utils.unwrapObservable,
+            modelValue = allBindings.jqAutoValue,
+            source = allBindings.jqAutoSource,
+            valueProp = allBindings.jqAutoSourceValue,
+            inputValueProp = allBindings.jqAutoSourceInputValue || valueProp,
+            labelProp = allBindings.jqAutoSourceLabel || valueProp;
 
-                    //function that is shared by both select and change event handlers
-                     function writeValueToModel(valueToWrite) {
-                        
-                        if (ko.isWriteableObservable(modelValue)) {
-                            //alert('ritetomodl' + valueToWrite);
-                            modelValue(valueToWrite);
-                        } else {  //write to non-observable
-                            alert(valueToWrite);
-                            if (allBindings['_ko_property_writers'] && allBindings['_ko_property_writers']['jqAutoValue']) {
-                                allBindings['_ko_property_writers']['jqAutoValue'](valueToWrite);
-                            }
-                        }
-                    }
-
-                     function intraFix() {
-                         //return funk('tbl_T_Materijali', $(element).val(), 'Materijali');
-                         //return Q.fcall(function () { dataService.dMax('IDT', 'Materijali'); });
-                         if (imeTablice == 'tbl_T_Autori' || imeTablice == 'tbl_T_Osobe_i_inst_odrednice' || imeTablice == 'tbl_T_Sakupljaci' || imeTablice == 'tbl_T_Izvori_nabave') {
-                             return Q.fcall(function () { return dataService.createOsoba(imeTablice, $(element).val(), imeModula); });
-                             
-                         } else {
-                             //alert('idemo Autori');
-                             return Q.fcall(function () { return dataService.createTermin(imeTablice, $(element).val(), imeModula); });
-                             //return Q.fail();
-                         }
-                     }
-
-
-                     options.response = function (event, ui) {
-
-                         //extra feature!! terminologija autocomplete
-                         //if (ui.content.length < 5) {
-                         //    //alert($(element).val());
-                         //    var zaSearch = $(element).val();
-                         //    var bbc = ko.utils.arrayFilter(dataService.Selects.tbl_T_Mjesta, function (item) {
-                         //        var rez = item.Pojam.toLowerCase().lastIndexOf(zaSearch.toLowerCase());
- 
-                         //        return rez>-1;
-                         //    })
-                         //    if (bbc.length > 0) {
-                         //        ko.utils.arrayForEach(bbc, function (item) {
-                         //            ui.content.push({ actualValue: item.IDT, label: 'Nije u zbirci! ' + item.Pojam, value: item.Pojam });
-                         //        })
-                         //    }
-
-                         //}
-
-
-
-
-                         if (ui.content.length === 0 && imeTablice) {
-                             $(element).css('background-color', 'red');
-                             $(element).css('font-weight', 'bold');
-                             var noviTemp = { actualValue: 999999, label: 'Nije u Terminološkoj! ' + $(element).val(), value: $(element).val() };
-                             ui.content.push(noviTemp);
-                             dodajTerm();
-                             dodajTermTablica(imeTablice);
-                         } else {
-                             $(element).css('background-color', '');
-                             $(element).css('font-weight', 'normal');
-                         }
-                    }
-
-                    //on a selection write the proper value to the model
-                     options.select = function (event, ui) {
-
-                         if (ui.item.actualValue == 999999)
-                         {
-                             //alert('nijenašo');
-
-                             dodajTerm('');
-                             dodajTermTablica('');
-                             //$("#dodajTerm").modal('show');
-                             var x = confirm('Želite li spremiti ' + $(element).val() + ' u terminološku?');
-                             if (x) {
-
-                                 intraFix().then(function (n) {
-                                     //console.log(n);
-                                     console.log(n);
-                                     source.push(n);
-                                     
-                                     if (imeTablice != 'tbl_T_Autori' && imeTablice != 'tbl_T_Osobe_i_inst_odrednice' && imeTablice != 'tbl_T_Sakupljaci') {
-                                         writeValueToModel(n.IDT);
-                                     } else {
-                                         //alert('idemo Autori');
-                                         writeValueToModel(n.IDT);
-                                         //return Q.fail();
-                                     }
-                                     $(element).css('background-color', '');
-                                     $(element).css('font-weight', 'normal');
-                                 }).fail(function () { alert('nespremaj'); });
-                             }
-                             else
-                             {
-                                 writeValueToModel(null);
-                                 $(element).val('');
-                                 $(element).css('background-color', '');
-                                 $(element).css('font-weight', 'normal');
-                                 ui.item.actualValue = null;
-                                 //alert('upiši null1 ' + $(element).val());
-                             }
-                         } else {
-                             writeValueToModel(ui.item ? ui.item.actualValue : null);
-                             //alert('upiši null2' + ' ' + ui.item.actualValue);
-                         }
-
-                        //writeValueToModel(ui.item ? ui.item.actualValue : null);
-                    }
-
-                    //on a change, make sure that it is a valid value or clear out the model value
-                     options.change = function (event, ui) {
-                         //alert('change');
-                        var currentValue = $(element).val();
-                        var matchingItem = ko.utils.arrayFirst(unwrap(source), function (item) {
-                            //alert('spremio');
-                            return unwrap(inputValueProp ? item[inputValueProp] : item) === currentValue;
-                        });
-                        //alert($(element).val());
-                        if (!matchingItem && $(element).val() != '') {
-
-                            $(element).css('background-color', 'red');
-                            $(element).css('font-weight', 'bold');
-
-                        } else {
-                            $(element).css('background-color', '');
-                            $(element).css('font-weight', 'normal');
-                            
-                            if (matchingItem === null) {
-                                writeValueToModel(null);
-                                
-                            };
-                            //dodajTerm('');
-                            //dodajTermTablica('');
-                            ////$("#dodajTerm").modal('show');
-                            //var x = confirm('Želite li spremiti ' + $(element).val() + ' u terminološku?');
-                            //if (x) {
-                                    
-                            //    intraFix().then(function (n) {
-                            //        //console.log(n);
-                            //        console.log(n);
-                            //        source.push(n);
-                            //        if (imeTablice != 'tbl_T_Autori') {
-                            //            writeValueToModel(n.IDT);
-                            //        } else {
-                            //            //alert('idemo Autori');
-                            //            writeValueToModel(n.ID);
-                            //            //return Q.fail();
-                            //        }
-                            //        $(element).css('background-color', 'white');
-                            //        $(element).css('font-weight', 'normal');
-                            //    }).fail(function (){alert('nespremaj');});
-                            //}
-                            //else {
-                            //    // writeValueToModel(null);
-                            //}
-                        }; 
-                    }
-
-
-                    //hold the autocomplete current response
-                    var currentResponse = null;
-
-                    //handle the choices being updated in a DO, to decouple value updates from source (options) updates
-                    var mappedSource = ko.dependentObservable({
-                        read: function () {
-                            mapped = ko.utils.arrayMap(unwrap(source), function (item) {
-                                var result = {};
-                                result.label = labelProp ? unwrap(item[labelProp]) : unwrap(item).toString();  //show in pop-up choices
-                                result.value = inputValueProp ? unwrap(item[inputValueProp]) : unwrap(item).toString();  //show in input box
-                                result.actualValue = valueProp ? unwrap(item[valueProp]) : item;  //store in model
-                                return result;
-                            })
-                            return mapped;
-                        },
-                        write: function (newValue) {
-                            source(newValue);  //update the source observableArray, so our mapped value (above) is correct
-                            if (currentResponse) {
-                                currentResponse(mappedSource());
-                            }
-                        },
-                        disposeWhenNodeIsRemoved: element
-                    })
-
-                    if (query) {
-                        options.source = function (request, response) {
-                            currentResponse = response;
-                            query.call(this, { tablica: source, pojam: request.term }, mappedSource);
-                        }
-                    } else {
-                        //whenever the items that make up the source are updated, make sure that autocomplete knows it
-                        mappedSource.subscribe(function (newValue) {
-                            //alert('updejted');
-                            $(element).autocomplete("option", "source", newValue);
-                        });
-
-                        options.source = mappedSource();
-                    }
-                    
-
-                    //initialize autocomplete
-                    $(element).autocomplete(options);
-                },
-
- 
-
-                update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-                    //update value based on a model change
-                    var allBindings = allBindingsAccessor(),
-                        unwrap = ko.utils.unwrapObservable,
-                        modelValue = unwrap(allBindings.jqAutoValue) || '',
-                        valueProp = allBindings.jqAutoSourceValue,
-                        inputValueProp = allBindings.jqAutoSourceInputValue || valueProp;
-
-                    //if we are writing a different property to the input than we are writing to the model, then locate the object
-                    if (valueProp && inputValueProp !== valueProp) {
-                        var source = unwrap(allBindings.jqAutoSource) || [];
-                        var modelValue = ko.utils.arrayFirst(source, function (item) {
-                            return unwrap(item[valueProp]) === modelValue;
-                        }) || {};
-                    }
-
-                    //update the element with the value that should be shown in the input
-                    $(element).val(modelValue && inputValueProp !== valueProp ? unwrap(modelValue[inputValueProp]) : modelValue.toString());
-                }
+        //function that is shared by both select and change event handlers
+        function writeValueToModel(valueToWrite) {
+            if (ko.isWriteableObservable(modelValue)) {
+               modelValue(valueToWrite );  
+            } else {  //write to non-observable
+               if (allBindings['_ko_property_writers'] && allBindings['_ko_property_writers']['jqAutoValue'])
+                        allBindings['_ko_property_writers']['jqAutoValue'](valueToWrite );    
             }
+        }
+        
+        //on a selection write the proper value to the model
+        options.select = function(event, ui) {
+            writeValueToModel(ui.item ? ui.item.actualValue : null);
+            //alert("option.select");
+        };
+            
+        //on a change, make sure that it is a valid value or clear out the model value
+        options.change = function(event, ui) {
+            var currentValue = $(element).val();
+            var matchingItem =  ko.utils.arrayFirst(unwrap(source), function(item) {
+               return unwrap(item[inputValueProp]) === currentValue;  
+            });
+            
+            if (!matchingItem) {
+               writeValueToModel(131);
+               $(element).val(modelValue && inputValueProp !== valueProp ? unwrap(modelValue[inputValueProp]) : modelValue.toString());
+               //alert("upiši null");
+            }    
+            //alert("option.change");
+        }
+        
+        
+        //handle the choices being updated in a DO, to decouple value updates from source (options) updates
+        var mappedSource = ko.dependentObservable(function() {
+                mapped = ko.utils.arrayMap(unwrap(source), function(item) {
+                    var result = {};
+                    result.label = labelProp ? unwrap(item[labelProp]) : unwrap(item).toString();  //show in pop-up choices
+                    result.value = inputValueProp ? unwrap(item[inputValueProp]) : unwrap(item).toString();  //show in input box
+                    result.actualValue = valueProp ? unwrap(item[valueProp]) : item;  //store in model
+                    return result;
+            });
+            return mapped;                
+        });
+        
+        //whenever the items that make up the source are updated, make sure that autocomplete knows it
+        mappedSource.subscribe(function(newValue) {
+           $(element).autocomplete("option", "source", newValue); 
+        });
+        modelValue.subscribe(function(newValue){
+            // alert($(element).val());
+            if (newValue) {
+                $(element).trigger("change");
+            }
+        });
+        
+           $(element).click(function() {
+ 
+                        if ($(element).autocomplete("widget").is(":visible")) {
+                             $(element).autocomplete( "close" );
+                            return;
+                        }
+                        $(element).autocomplete("search", " ");
+                        $(element).focus(); 
+                    });
+        
+        
+        options.source = mappedSource();
+        
+        //initialize autocomplete
+        $(element).autocomplete(options);
+    },
+    update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+       //update value based on a model change
+       var allBindings = allBindingsAccessor(),
+           unwrap = ko.utils.unwrapObservable,
+           modelValue = unwrap(allBindings.jqAutoValue) || '', 
+           valueProp = allBindings.jqAutoSourceValue,
+           inputValueProp = allBindings.jqAutoSourceInputValue || valueProp;
+        
+       //if we are writing a different property to the input than we are writing to the model, then locate the object
+       if (valueProp && inputValueProp !== valueProp) {
+           var source = unwrap(allBindings.jqAutoSource) || [];
+           var modelValue = ko.utils.arrayFirst(source, function(item) {
+                 return unwrap(item[valueProp]) === modelValue;
+           }) || {};  //probably don't need the || {}, but just protect against a bad value          
+       } 
 
+       //update the element with the value that should be shown in the input
+       $(element).val(modelValue && inputValueProp !== valueProp ? unwrap(modelValue[inputValueProp]) : modelValue.toString());    
+    }
+};
 
-
-
+  
 
             ko.bindingHandlers.file = {
                 init: function (element, valueAccessor) {

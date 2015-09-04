@@ -150,7 +150,6 @@
         brisiRedak: redakUpitaService.brisiRedak,
 
         selectUpit: selectUpit,
-        upitiMenu: upitiMenu,
         promjenaMenuUpiti: promjenaMenuUpiti,
  
 
@@ -181,7 +180,7 @@
 
         Selects: data.SelectsPretrazivanje,//[],
         upitiMenu: upitiMenu,
-
+        
         
         searchHistoryOpened: searchHistoryOpened,
         myMessage: myMessage,

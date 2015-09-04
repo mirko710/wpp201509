@@ -76,6 +76,7 @@
         promjenaPolja: promjenaPolja,
         changeOperator: changeOperator,
 
+        brisiRedak: brisiRedak,
         noviRedak:noviRedak,
         zoviDialog: zoviDialog,
 
@@ -407,7 +408,7 @@
     function  promjenaPolja(index,tmpRedakUpita,vrijednost2) {
         //console.log(tada);
         var ferd = Q.defer()
-        
+      
         if (!tmpRedakUpita) {
             ferd.resolve(false);
         } else {
@@ -416,8 +417,6 @@
                 return item.IDT === tmpRedakUpita.poljeIDT();
             })
 
-
-            var tablicaDef = defStrukturaRedak.T_Tbl;
 
             tmpRedakUpita.tablica(defStrukturaRedak.Tablica);
             tmpRedakUpita.polje(defStrukturaRedak.Naziv);

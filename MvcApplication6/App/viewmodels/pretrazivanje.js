@@ -14,8 +14,8 @@
     }
 
     var odabranUpitID=ko.observable(-1);
-    var test= ko.observable(false);
-    var rowOpenDialog = ko.observable(-1);
+    // var test= ko.observable(false);
+    // var rowOpenDialog = ko.observable(-1);
 
     var firstPass = true;
 
@@ -57,21 +57,21 @@
     var pageIndex= ko.observable(0);
     var recordCount= ko.observable(0);
     var sifra= ko.observable("x");
-    var polja= ['tbl_Izrada.IZR_IDT_Mjesto', 'tbl_Nazivi.NAZ_IDT_Naziv_predmeta', 'tbl_Inventarizacija.INV_ID_Inventirao'];
+/*    var polja= ['tbl_Izrada.IZR_IDT_Mjesto', 'tbl_Nazivi.NAZ_IDT_Naziv_predmeta', 'tbl_Inventarizacija.INV_ID_Inventirao'];
     var operatori= ['<', '>', '=', '<=', '=>', 'sadrži'];
     
     var redOperatori = [' AND ', ' OR '];
     var currentPolje= ko.observable('tbl_Izrada.IZR_IDT_Mjesto');
     var currentVrijednost= ko.observableArray([]);
     var currentTTablica= ko.observable('Mjesta');
-    var vrijednostPolja= ko.observable(7510);
+    var vrijednostPolja= ko.observable(7510);*/
     var rezultati= ko.observableArray([]);
     var totalCount= ko.observable(0);
-    var tabIndex= ko.observable(1);
+    // var tabIndex= ko.observable(1);
     var checkAll= ko.observable(true);
-    var firstload= true;
+    // var firstload= true;
     var odabrano= ko.observableArray([]);
-    var podIDT= ko.observableArray([]);
+    // var podIDT= ko.observableArray([]);
 
     var paginationColCount = ko.observable(4);
     var paginationColWidth = ko.observable(11);

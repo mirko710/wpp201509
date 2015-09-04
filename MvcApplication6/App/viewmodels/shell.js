@@ -761,7 +761,7 @@ ko.bindingHandlers.jqAutoOG = {
             });
             
             if (!matchingItem) {
-               writeValueToModel(131);
+              // writeValueToModel(131);
                $(element).val(modelValue && inputValueProp !== valueProp ? unwrap(modelValue[inputValueProp]) : modelValue.toString());
                //alert("upiši null");
             }    
@@ -771,7 +771,7 @@ ko.bindingHandlers.jqAutoOG = {
         
         //handle the choices being updated in a DO, to decouple value updates from source (options) updates
         var mappedSource = ko.dependentObservable(function() {
-                mapped = ko.utils.arrayMap(unwrap(source), function(item) {
+                var mapped = ko.utils.arrayMap(unwrap(source), function(item) {
                     var result = {};
                     result.label = labelProp ? unwrap(item[labelProp]) : unwrap(item).toString();  //show in pop-up choices
                     result.value = inputValueProp ? unwrap(item[inputValueProp]) : unwrap(item).toString();  //show in input box

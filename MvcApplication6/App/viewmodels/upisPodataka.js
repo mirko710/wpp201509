@@ -22,6 +22,9 @@
     var currentBrojid = ko.observable(43);
     
     
+    var newTermTablica=ko.observable();
+    var newTermPojam=ko.observable();
+    
     var recIndex = ko.observable(0);
     var recMax = ko.observable(0);
     var zbIndex = ko.observable(-1);
@@ -167,6 +170,13 @@
         //rUserName: data.realUserName,
         //rIsAuth: data.realIsAuth,
         //rUserRoles: data.realUserRoles,
+        
+        newTermTablica:data.newTermTablica,
+        newTermPojam:data.newTermPojam,
+        newTermNadIDT:data.newTermNadIDT,
+        newTermNapomena:data.newTermNapomena,     
+        spremiTerminPopUp :data.spremiTerminPopUp,
+        
         attached: attached,
         compositionComplete: compositionComplete,
         openNewRecordDialog: openNewRecordDialog

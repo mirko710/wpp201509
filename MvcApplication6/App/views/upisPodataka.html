@@ -192,7 +192,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-bind="    click: function () { $root.newRec($root.zbNewIndex()); $('#addNewZapis').modal('hide'); }">Novi</button>
+                    <button type="button" class="btn btn-primary" data-bind="    click: function () { alert('ee');$root.spremiTerminPopUp(); $('#addNewZapis').modal('hide'); }">Novi</button>
                 </div>
             </div>
         </div>
@@ -205,15 +205,18 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="H1">Dodaj termin</h4>
                 </div>
-                <div class="modal-body">
-                    <!-- <input type="text" style="width:300px" class="form-control" data-bind="value: prijedlogInvBroja" />
-                    <select class="form-control" style="width:500px" data-bind="options: $root.Selects().Zbirke, optionsText: 'Pojam', optionsValue: 'IDT', value: zbNewIndex"></select>
-                    <button id="Button6" data-bind="    click: $root.dodajTermin" >Dodaj</button>-->
-                    dodaj <span data-bind="text: $root.dodajTerm()"></span>u <span data-bind="    text: $root.dodajTermTablica()"></span>
+                <div class="modal-body ui-front">
+                    <span>Pojam:</span><span data-bind="text: newTermPojam" />
+                    <span>Nad pojam:</span><input class=" form-control" data-bind="
+                                        upitiAutocomplete: {accValue: newTermNadIDT, tablica:'tbl_T_Nazivi'}    "
+                    />
+                    <!--<select class="form-control" style="width:500px" data-bind="options: $root.Selects().Zbirke, optionsText: 'Pojam', optionsValue: 'IDT', value: zbNewIndex"></select>
+                                    <button id="Button6" data-bind="    click: $root.dodajTermin" >Dodaj</button>-->
+                    <span>Napomena:</span><input type="text" data-bind="textValue:newTermNapomena"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-bind=" click: function () { $root.dodajTermin; $('#dodajTerm').modal('hide'); }">Novi</button>
+                    <button type="button" class="btn btn-primary" data-bind=" click: function () { $root.spremiTerminPopUp(); $('#dodajTerm').modal('hide'); }">Novi</button>
                 </div>
             </div>
         </div>

@@ -150,12 +150,12 @@
 
                         if (options.options != undefined) {
                             if (typeof options.options.dlookup === "function" && !ko.isObservable(options.options.dodajTermin)) {
-                                var xValue = element.value;
-                                var retVal = ko.observable();
+                                // var xValue = element.value;
+                                // var retVal = ko.observable();
                                 options.options.dodajTermin.call(this, xValue, retVal)
                                     .then(function (response) {
                                        // value = response;
-                                        element.value = response;
+                                        element.value =response;
                                         //options
 
                                         //options.options.dlookup.call(this, value, retVal)

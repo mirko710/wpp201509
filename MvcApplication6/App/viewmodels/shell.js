@@ -13,6 +13,7 @@
             rUserRoles: dataService.realUserRoles,
             enterLogin: enterLogin,
             testUserName: testUserName,
+           // openNewTermDialog:dataService.openNewTermDialog,
             loadedTerminologyUpiti: dataService.loadedTerminologyUpiti,
             loadedTerminologyUpis: dataService.loadedTerminologyUpis,
            
@@ -466,7 +467,6 @@
                         //my.vm.Selects[source()]
                         var source = unwrap(selectsSource[allBindings.jqAutoSource()]) || []; //unwrap(my.vm.Selects[allBindings.jqAutoSource()]) || [];
                         var modelValue = ko.utils.arrayFirst(source, function (item) {
-
                             return unwrap(item[valueProp]) === modelValue;
                         }) || {};  //probably don't need the || {}, but just protect against a bad value          
                     }
@@ -476,16 +476,19 @@
                 }
             };
 
-
+//PRAVI ZA DODAVANJA TERMINOLOŠKIH
             ko.bindingHandlers.upitiAutocomplete = {
                 init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
                     var allBindings = allBindingsAccessor();
                     var bigTablica = ko.observable();
                     var bigZbirkaIDT = ko.observable();
+                    var zadnjiDlookupIDT=ko.observable(null);
+                    var zadnjiDlookupPojam=ko.observable(null);
+                    var tablicaID =ko.observable();// allBindings.upitiAutocomplete.tablicaID() || null;
                     var poZbirci = allBindings.upitiAutocomplete.poZbirci || false;
                     var afterUpdate= null;
                     if(allBindings.upitiAutocomplete.options){
-                         afterUpdate=allBindings.upitiAutocomplete.options.afterUpdate || null;
+                        afterUpdate=allBindings.upitiAutocomplete.options.afterUpdate || null;
                     }
                     if (ko.isObservable(allBindings.upitiAutocomplete.tablica)) {
                         bigTablica(allBindings.upitiAutocomplete.tablica() || 'tbl_T_Nazivi');
@@ -496,6 +499,14 @@
                         bigTablica(allBindings.upitiAutocomplete.tablica);
                     }
 
+                    if (ko.isObservable(allBindings.upitiAutocomplete.tablicaID)) {
+                        tablicaID(allBindings.upitiAutocomplete.tablicaID() || null);
+                        allBindings.upitiAutocomplete.tablicaID.subscribe(function (newValue) {
+                            tablicaID(newValue);
+                        })
+                    } else {
+                        tablicaID(allBindings.upitiAutocomplete.tablicaID);
+                    }
 
                     if (poZbirci) {
 
@@ -515,16 +526,25 @@
 
 
                     var dodajTermin = function (tablicaPojam, returnVal) {
-                        var x = confirm('Želite li spremiti ' + $(element).val() + ' u terminološku?');
-                        if (x) {
-                            if (bigTablica() != 'wv_T_Autori') {
-                                return dataService.createTermin(bigTablica(), tablicaPojam, bigTablica());
-                            } else {
+                        //$("#dodajTerm").modal('show');
+                        //termTablica,pojam,id,tablica
+                        dataService.openNewTermDialog(bigTablica(),$(element).val(),tablicaID(),"tbl_Nazivi");
+                        // var x = confirm('Želite li spremiti ' + $(element).val() + ' u terminološku?');
+                        // if (x) {
+                        //     if (bigTablica() != 'wv_T_Autori') {
+                        //         return dataService.createTermin(bigTablica(), tablicaPojam, bigTablica());
+                        //     } else {
+                        //         return dataService.createOsoba(bigTablica(), tablicaPojam, bigTablica());
+                        //     }
+                        // } else {
 
-                                return dataService.createOsoba(bigTablica(), tablicaPojam, bigTablica());
+                        return dataService.undoTermin("tbl_Nazivi", tablicaID());
 
-                            }
-                        }
+
+                        //var deref=Q.defer();
+                        //deref.resolve(zadnjiDlookupPojam());
+                        //return deref.promise;
+                        // }
                     }
 
                     var getJsonAutocomplete = function (tablicaPojam, returnVal) {
@@ -554,6 +574,7 @@
                     
                     var getJsonDlookup = function (IDT, returnVal) {
                         //console.log("dlookup " + bigTablica());
+                        zadnjiDlookupIDT(IDT);
                         var propIDT = -1;
                         //tablica = 'tbl_T_Nazivi';
                         if (ko.isObservable(IDT)) {
@@ -569,6 +590,7 @@
                             dataType: 'json',
                             contentType: 'application/json',
                             success: function (response, text) {
+                                zadnjiDlookupPojam(response);
                                 returnVal(response);
                             },
                             error: function (text, error) {

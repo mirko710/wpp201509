@@ -38,8 +38,8 @@ namespace WMpp
             string conn = ConfigurationManager.ConnectionStrings["M_DATA"].ToString();
             korisniciIzBaze = SEClasses.GetUserNames(conn);
 
-            
-            string pathConfig = HttpContext.Current.Server.MapPath("userConfig.txt");
+            //"C:\\Users\\jsuflaj\\Documents\\Visual Studio 2012\\Projects\\WMpp.v01.net4\\MvcApplication6\\api\\userConfig.txt"
+            string pathConfig = HttpContext.Current.Server.MapPath("/userConfig.txt");
             if (File.Exists(pathConfig))
             {
 

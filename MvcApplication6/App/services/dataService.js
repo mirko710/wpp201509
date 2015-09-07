@@ -34,6 +34,12 @@ $(function () {
             isLoaded = false,
             testLoader = ko.observable(88),
             tempBrojid = ko.observable(-1);
+            var newTermTablica=ko.observable();
+            var newTermPojam=ko.observable();
+            var newTermID=ko.observable();
+            var newTermIDTablica=ko.observable();     
+            var newTermNadIDT=ko.observable(null);
+            var newTermNapomena=ko.observable(null);            
             var Selects = ko.observableArray([]);
             var SelectsPretrazivanje = [];
 
@@ -168,9 +174,9 @@ $(function () {
                                       { 'imePolja': 'IZR_Vrijeme_do', 'vrijednost': null },
                                       { 'imePolja': 'IZR_Vrijeme_opis2', 'vrijednost': null },
                                       { 'imePolja': 'IZR_Vrijeme_vrijednost2', 'vrijednost': null },
-                                      { 'imePolja': 'IZR_Vrijeme_jedinica2', 'vrijednost': null },
                                       { 'imePolja': 'IZR_Period', 'vrijednost': null },
-                                      { 'imePolja': 'IZR_Period_do', 'vrijednost': null }
+                                      { 'imePolja': 'IZR_Period_do', 'vrijednost': null },
+                                      { 'imePolja': 'IZR_Vrijeme_jedinica2', 'vrijednost': null },
                             ]
             }
 
@@ -252,7 +258,59 @@ $(function () {
                 }
                 return ferdef.promise;
             }
+            var  openNewTermDialog=function(termTablica,pojam,id,tablica) {
+                    newTermTablica(termTablica);
+                    newTermPojam(pojam);
+                    newTermID(id);
+                    newTermIDTablica(tablica);
+                    $("#dodajTerm").modal('show');
+        
+                //dialogNewRecord.show();
+            }
+            
+            
+            
+            var spremiTerminPopUp=function(){
+                
+                return dMax('IDT', newTermTablica())
+                .then(function (nIDT) { return makeItSo(nIDT); })
+                .then(function (uIDT) {return saveUTablici(uIDT);});
 
+                    function makeItSo(nIDT) {
+                        var deref=Q.defer();
+                        var newCust = my.em.createEntity(newTermTablica(), { IDT: nIDT + 1, Pojam: newTermPojam(),Nad_IDT:newTermNadIDT(),Napomena:newTermNapomena() });
+                        var z = [];
+                        z.push(newCust);
+                        my.em.saveChanges(z);
+                        //return { IDT: nIDT + 1, Pojam: pojam }
+                        deref.resolve(nIDT+1);
+                        return deref.promise;
+                    }
+                    
+                    
+                    function saveUTablici(uIDT) {
+                       
+                        var query=breeze.EntityQuery.from(newTermIDTablica())
+                        .where("ID","eq",newTermID())
+
+                            return my.em.executeQuery(query)
+                                    .then(querySucceeded)
+                                    .fail(queryFailed);
+                            function querySucceeded(data) {
+            
+                                return data.results[0]['NAZ_IDT_Naziv_predmeta'](uIDT);
+            
+                            }
+                            function queryFailed(error) {
+                                alert("Query failed: " + error.message);
+                            }
+
+                         }      
+                        
+  
+                    
+            }
+         
 
             var loadTerminologyWebWorker = function () {
                 var myWorker = new Worker("../App/services/webWorker.js"); // Init Worker
@@ -1275,7 +1333,24 @@ $(function () {
                 }
             }
  
+            var undoTermin = function (entity, ID) {
 
+                var query = breeze.EntityQuery.from(entity)
+                    .where("ID", "eq", ID);
+
+                return my.em.executeQuery(query)
+                        .then(querySucceeded)
+                        .fail(queryFailed);
+                function querySucceeded(data) {
+
+                    return data.results[0].entityAspect.rejectChanges();
+
+                }
+                function queryFailed(error) {
+                    alert("Query failed: " + error.message);
+                }
+
+            }
             var dMax = function (polje, ime) {
             
                 var query = breeze.EntityQuery.from(ime)
@@ -1455,6 +1530,9 @@ $(function () {
                     return { IDT: nIDT + 1, Pojam: pojam }
                 }
             }
+
+
+
 
             var createTermin = function (entity, pojam, ime) {
             
@@ -1833,7 +1911,14 @@ $(function () {
                 stazaSlike: stazaSlike,
                 getJsonRefreshGridPage: getJsonRefreshGridPage,
                 getZbirka: getZbirka,
-                getPocetnaZbirka: getPocetnaZbirka
+                getPocetnaZbirka: getPocetnaZbirka,
+                undoTermin: undoTermin,
+                newTermTablica:newTermTablica,
+                newTermPojam:newTermPojam,
+                newTermNadIDT:newTermNadIDT,
+                newTermNapomena:newTermNapomena,
+                openNewTermDialog:openNewTermDialog,
+                spremiTerminPopUp:spremiTerminPopUp
             }
 
             return dataService;

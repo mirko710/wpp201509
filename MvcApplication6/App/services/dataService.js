@@ -34,36 +34,49 @@ $(function () {
             isLoaded = false,
             testLoader = ko.observable(88),
             tempBrojid = ko.observable(-1);
+            
             var newTermTablica=ko.observable();
             var newTermPojam=ko.observable();
             var newTermID=ko.observable();
             var newTermIDTablica=ko.observable();     
             var newTermNadIDT=ko.observable(null);
-            var newTermNapomena=ko.observable(null);            
+            var newTermNapomena=ko.observable(null);
+                        
             var Selects = ko.observableArray([]);
             var SelectsPretrazivanje = [];
-
-            var parametriModel = function () {
+            
+            var NewTermModel=function(termTablica,pojam,tablicaID,tablica,nadIDT,napomena,polje){
+                this.newTermTablica=ko.observable(termTablica || null);
+                this.newTermPojam=ko.observable(pojam || null);
+                this.newTermID=ko.observable(tablicaID || null);
+                this.newTermIDTablica=ko.observable(tablica || null);     
+                this.newTermNadIDT=ko.observable(nadIDT || null);
+                this.newTermNapomena=ko.observable(napomena || null);
+                this.newTermPolje=ko.observable(polje || null);
+            }
+            
+            var objektZaTerminoloske=new NewTermModel();
+                
+            var ParametriModel = function () {
                 that = this;
                 this.parametriZaKorisnika = [];
 
 
                 this.Vrijednost = function (imeParametra) {
-                    var returnValue = false;//možda -1 ako ne nađe parametar
+                    var returnValueB = false;//možda -1 ako ne nađe parametar
                     $.each(that.parametriZaKorisnika, function (i, v) {
                         if (v.Parametar().toUpperCase() === imeParametra.toUpperCase()) {
-                            returnValue = v.Vrijednost();
+                            var returnValue = v.Vrijednost();
                             if (returnValue === 'DA') {
-                                returnValue = true;
+                                returnValueB = true;
                             }
                             if (returnValue === 'NE') {
-                                returnValue = false;
+                                returnValueB = false;
                             }
                            return false;
                         }
-                    
                     });
-                    return returnValue;
+                    return returnValueB;
                 }
 
 
@@ -128,7 +141,7 @@ $(function () {
 
 
             }
-            var parametri = new parametriModel();
+            var parametri = new ParametriModel();
 
             var zadnjiIDT = -1;
             var Vremena = [{ 'tekst': 'Vrijeme:', 'vrijednost': false }, { 'tekst': 'Vrijeme od:', 'vrijednost': true }];
@@ -259,10 +272,11 @@ $(function () {
                 return ferdef.promise;
             }
             var  openNewTermDialog=function(termTablica,pojam,id,tablica) {
-                    newTermTablica(termTablica);
-                    newTermPojam(pojam);
-                    newTermID(id);
-                    newTermIDTablica(tablica);
+                    objektZaTerminoloske.newTermTablica(termTablica);
+                    objektZaTerminoloske.newTermPojam(pojam);
+                    objektZaTerminoloske.newTermID(id);
+                    objektZaTerminoloske.newTermIDTablica(tablica);
+                    objektZaTerminoloske.newTermNapomena(null);
                     $("#dodajTerm").modal('show');
         
                 //dialogNewRecord.show();
@@ -278,7 +292,11 @@ $(function () {
 
                     function makeItSo(nIDT) {
                         var deref=Q.defer();
-                        var newCust = my.em.createEntity(newTermTablica(), { IDT: nIDT + 1, Pojam: newTermPojam(),Nad_IDT:newTermNadIDT(),Napomena:newTermNapomena() });
+                        var newCust = my.em.createEntity(objektZaTerminoloske.newTermTablica(),
+                             { IDT: nIDT + 1, 
+                                 Pojam: objektZaTerminoloske.newTermPojam(),
+                                 Nad_IDT:objektZaTerminoloske.newTermNadIDT(),
+                                 Napomena:objektZaTerminoloske.newTermNapomena()});
                         var z = [];
                         z.push(newCust);
                         my.em.saveChanges(z);
@@ -290,16 +308,14 @@ $(function () {
                     
                     function saveUTablici(uIDT) {
                        
-                        var query=breeze.EntityQuery.from(newTermIDTablica())
+                        var query=breeze.EntityQuery.from(objektZaTerminoloske.newTermIDTablica())
                         .where("ID","eq",newTermID())
 
                             return my.em.executeQuery(query)
                                     .then(querySucceeded)
                                     .fail(queryFailed);
                             function querySucceeded(data) {
-            
-                                return data.results[0]['NAZ_IDT_Naziv_predmeta'](uIDT);
-            
+                                return data.results[0][objektZaTerminoloske.newTermPolje()](uIDT);
                             }
                             function queryFailed(error) {
                                 alert("Query failed: " + error.message);
@@ -1918,7 +1934,8 @@ $(function () {
                 newTermNadIDT:newTermNadIDT,
                 newTermNapomena:newTermNapomena,
                 openNewTermDialog:openNewTermDialog,
-                spremiTerminPopUp:spremiTerminPopUp
+                spremiTerminPopUp:spremiTerminPopUp,
+                objektZaTerminoloske:objektZaTerminoloske
             }
 
             return dataService;

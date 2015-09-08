@@ -35,13 +35,7 @@ $(function () {
             testLoader = ko.observable(88),
             tempBrojid = ko.observable(-1);
             
-            var newTermTablica=ko.observable();
-            var newTermPojam=ko.observable();
-            var newTermID=ko.observable();
-            var newTermIDTablica=ko.observable();     
-            var newTermNadIDT=ko.observable(null);
-            var newTermNapomena=ko.observable(null);
-                        
+                       
             var Selects = ko.observableArray([]);
             var SelectsPretrazivanje = [];
             
@@ -271,12 +265,13 @@ $(function () {
                 }
                 return ferdef.promise;
             }
-            var  openNewTermDialog=function(termTablica,pojam,id,tablica) {
+            var  openNewTermDialog=function(termTablica,pojam,id,tablica,imePolja) {
                     objektZaTerminoloske.newTermTablica(termTablica);
                     objektZaTerminoloske.newTermPojam(pojam);
                     objektZaTerminoloske.newTermID(id);
                     objektZaTerminoloske.newTermIDTablica(tablica);
                     objektZaTerminoloske.newTermNapomena(null);
+                    objektZaTerminoloske.newTermPolje(imePolja);
                     $("#dodajTerm").modal('show');
         
                 //dialogNewRecord.show();
@@ -286,7 +281,7 @@ $(function () {
             
             var spremiTerminPopUp=function(){
                 
-                return dMax('IDT', newTermTablica())
+                return dMax('IDT', objektZaTerminoloske.newTermTablica())
                 .then(function (nIDT) { return makeItSo(nIDT); })
                 .then(function (uIDT) {return saveUTablici(uIDT);});
 
@@ -309,7 +304,7 @@ $(function () {
                     function saveUTablici(uIDT) {
                        
                         var query=breeze.EntityQuery.from(objektZaTerminoloske.newTermIDTablica())
-                        .where("ID","eq",newTermID())
+                        .where("ID", "eq", objektZaTerminoloske.newTermID())
 
                             return my.em.executeQuery(query)
                                     .then(querySucceeded)
@@ -1121,7 +1116,7 @@ $(function () {
             }
 
 
-            var getExportFullKartica = function (brojid, karticaFull) {
+            var getExportFullKarticaNoLocalFirst = function (brojid, karticaFull) {
                 karticaFull([]);
                 //nazivi([]);
                 var query = breeze.EntityQuery.from("tbl_Kartica")
@@ -1144,6 +1139,40 @@ $(function () {
             }
 
 
+            var getExportFullKartica = function (brojid, karticaFull) {
+                karticaFull([]);
+                //nazivi([]);
+                
+                setTimeout(function(){console.log("w");},1000);
+                return my.em.fetchEntityByKey('tbl_Kartica', brojid, true)
+                
+                // var query = breeze.EntityQuery.from("tbl_Kartica")
+                //     .where('ID_Broj', 'eq', brojid)
+                //     //.expand('tbl_Media_collector,tbl_Kljucne_rijeci,tbl_Inventarizacija,tbl_Izrada,tbl_Naslovi,tbl_Nazivi,tbl_Mjere,tbl_U_Materijali_u_dijelovima,tbl_Kataloska_jedinica,tbl_Sadrzaj')
+                // //.select('ID_Broj,KRT_Inventarni_broj,KRT_IDT_Zbirka,tbl_Izrada,tbl_Naslovi,tbl_Nazivi,tbl_Mjere,tbl_U_Materijali_u_dijelovima')
+                // 
+                // var tryLocal=my.em.executeQueryLocally(query);
+                // if (tryLocal.length > 0) {
+                //     karticaFull(tryLocal[0]());
+                //     var n=Q.defer();
+                //     n.resolve(karticaFull());
+                //     return n.promise; 
+                // }                    
+                
+                //return my.em.executeQuery(query)
+                        .then(querySucceeded)
+                        .fail(queryFailed);
+                function querySucceeded(data) {
+                    my.vm.fullkartica(data.entity);
+                    karticaFull(my.vm.fullkartica());
+                    // nazivi(karticaFull()[0]['tbl_Nazivi']());
+                    //alert('kartica Export');
+
+                }
+                function queryFailed(error) {
+                    alert("Query failed(getExportFullKartica): " + error.message);
+                }
+            }
 
 
 
@@ -1929,10 +1958,6 @@ $(function () {
                 getZbirka: getZbirka,
                 getPocetnaZbirka: getPocetnaZbirka,
                 undoTermin: undoTermin,
-                newTermTablica:newTermTablica,
-                newTermPojam:newTermPojam,
-                newTermNadIDT:newTermNadIDT,
-                newTermNapomena:newTermNapomena,
                 openNewTermDialog:openNewTermDialog,
                 spremiTerminPopUp:spremiTerminPopUp,
                 objektZaTerminoloske:objektZaTerminoloske

@@ -208,11 +208,10 @@
                 <div class="modal-body ui-front">
                     <span>Pojam:</span><span data-bind="text: newTermPojam" />
                     <span>Nad pojam:</span><input class=" form-control" data-bind="
-                                        upitiAutocomplete: {accValue: newTermNadIDT, tablica:'tbl_T_Nazivi'}    "
+                                        upitiAutocomplete: {accValue: newTermNadIDT, tablica:'tbl_T_Nazivi'} "
                     />
-                    <!--<select class="form-control" style="width:500px" data-bind="options: $root.Selects().Zbirke, optionsText: 'Pojam', optionsValue: 'IDT', value: zbNewIndex"></select>
-                                    <button id="Button6" data-bind="    click: $root.dodajTermin" >Dodaj</button>-->
-                    <span>Napomena:</span><input type="text" data-bind="textValue:newTermNapomena"/>
+
+                    <span>Napomena:</span><textarea data-bind="value:newTermNapomena"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

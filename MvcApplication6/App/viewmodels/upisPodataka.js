@@ -47,6 +47,7 @@
     var displayName= 'upisPodataka';
     var firstLoad = true;
     var forme = ko.observableArray([]);
+    var formeCopy = ko.observableArray([]);
     var photke = ko.observableArray([]);
     var title = 'WM++';
     var vm = {
@@ -171,10 +172,10 @@
         //rIsAuth: data.realIsAuth,
         //rUserRoles: data.realUserRoles,
         
-        newTermTablica:data.newTermTablica,
-        newTermPojam:data.newTermPojam,
-        newTermNadIDT:data.newTermNadIDT,
-        newTermNapomena:data.newTermNapomena,     
+        newTermTablica:data.objektZaTerminoloske.newTermTablica,
+        newTermPojam: data.objektZaTerminoloske.newTermPojam,
+        newTermNadIDT: data.objektZaTerminoloske.newTermNadIDT,
+        newTermNapomena:data.objektZaTerminoloske.newTermNapomena,     
         spremiTerminPopUp :data.spremiTerminPopUp,
         
         attached: attached,
@@ -417,6 +418,7 @@
                                             tmpForm.buttonBox());
 
             vm.forme.push(tmpFormE);
+            formeCopy.push(tmpFormE);
             //alert(tmpForm().title);
             
         })
@@ -741,30 +743,36 @@
             brojid = y;// startID();
         }
 
+
+
          ///Napuni podatke za forme
         ////sve kaj je vezano za tbl_Kartica ide preko nje...
+
+
         $.each(vm.forme(), function (i, p) {
             //alert(i + vm.forme()[i]['title']());
 
             if (p['tablica']() != "tbl_Kartica") {
-                p['data'](transferKartica()[0][p['tablica']()]());
+                //p['data'](transferKartica()[0][p['tablica']()]());
+                //p['data'](transferKartica()[p['tablica']()]());
                 if (p['tablica']() == "tbl_Media_collector") {
                     selMmedia(p['data']());//posebno za identity fotku sa strane
                 }
                 p['recordCount'](p['data']().length);
             } else {
-                    p['recordCount'](1);
-
+                p['recordCount'](1);
             }
 
         });
 
         //posebno za K1 katalošku
-        if (!transferKartica()[0]['tbl_Kataloska_jedinica']()) {
+        //if (!transferKartica()[0]['tbl_Kataloska_jedinica']()) {
+        if (!transferKartica()['tbl_Kataloska_jedinica']()) {
             var k1=ko.observable('');
             selK1('');
         } else {
-            selK1(transferKartica()[0]['tbl_Kataloska_jedinica']().k1());
+            //selK1(transferKartica()[0]['tbl_Kataloska_jedinica']().k1());
+            selK1(transferKartica()['tbl_Kataloska_jedinica']().k1());
         }
 
  //// dio ua upis Navigaciju
@@ -785,10 +793,13 @@
 
 
         manualNav = false;
+        var tmpKartica = ko.observable();
+        tmpKartica(transferKartica());
 
         fullKartica(transferKartica());
         isLoading(false);
-        if (fullKartica().length > 0) {
+        //if (fullKartica().length > 0) {
+        if (fullKartica()) {
             ber.resolve(true)
         } else {
             ber.resolve(false);

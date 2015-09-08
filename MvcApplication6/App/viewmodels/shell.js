@@ -482,8 +482,8 @@
                     var allBindings = allBindingsAccessor();
                     var bigTablica = ko.observable();
                     var bigZbirkaIDT = ko.observable();
-                    var zadnjiDlookupIDT=ko.observable(null);
-                    var zadnjiDlookupPojam=ko.observable(null);
+                    var imePolja = allBindings.upitiAutocomplete.imePolja || null;
+                    var imeTablice = allBindings.upitiAutocomplete.imeTablice || null;
                     var tablicaID =ko.observable();// allBindings.upitiAutocomplete.tablicaID() || null;
                     var poZbirci = allBindings.upitiAutocomplete.poZbirci || false;
                     var afterUpdate= null;
@@ -501,6 +501,7 @@
 
                     if (ko.isObservable(allBindings.upitiAutocomplete.tablicaID)) {
                         tablicaID(allBindings.upitiAutocomplete.tablicaID() || null);
+         
                         allBindings.upitiAutocomplete.tablicaID.subscribe(function (newValue) {
                             tablicaID(newValue);
                         })
@@ -526,32 +527,15 @@
 
 
                     var dodajTermin = function (tablicaPojam, returnVal) {
-                        //$("#dodajTerm").modal('show');
-                        //termTablica,pojam,id,tablica
-                        dataService.openNewTermDialog(bigTablica(),$(element).val(),tablicaID(),"tbl_Nazivi");
-                        // var x = confirm('Želite li spremiti ' + $(element).val() + ' u terminološku?');
-                        // if (x) {
-                        //     if (bigTablica() != 'wv_T_Autori') {
-                        //         return dataService.createTermin(bigTablica(), tablicaPojam, bigTablica());
-                        //     } else {
-                        //         return dataService.createOsoba(bigTablica(), tablicaPojam, bigTablica());
-                        //     }
-                        // } else {
-
-                        return dataService.undoTermin("tbl_Nazivi", tablicaID());
-
-
-                        //var deref=Q.defer();
-                        //deref.resolve(zadnjiDlookupPojam());
-                        //return deref.promise;
-                        // }
+                        dataService.openNewTermDialog(bigTablica(),$(element).val(),tablicaID(),imeTablice,imePolja);
+                        return dataService.undoTermin(imeTablice, tablicaID());
                     }
 
                     var getJsonAutocomplete = function (tablicaPojam, returnVal) {
 
                         var tmpUrl = "/api/WebApiSQL/?tablica=" + bigTablica() + "&term=" + encodeURIComponent(tablicaPojam.pojam);
                         if (poZbirci) {
-                            tmpUrl = "/api/WebApiSQL/?tablica=" + bigTablica() + "&term=" + encodeURIComponent(tablicaPojam.pojam) + "&zbirkaIDT=" + bigZbirkaIDT();
+                           tmpUrl = "/api/WebApiSQL/?tablica=" + bigTablica() + "&term=" + encodeURIComponent(tablicaPojam.pojam) + "&zbirkaIDT=" + bigZbirkaIDT();
                         }
                         //tablica = 'tbl_T_Nazivi';"Content-Type", "text/plain;charset=UTF-8"
                         var req = $.ajax({
@@ -574,7 +558,6 @@
                     
                     var getJsonDlookup = function (IDT, returnVal) {
                         //console.log("dlookup " + bigTablica());
-                        zadnjiDlookupIDT(IDT);
                         var propIDT = -1;
                         //tablica = 'tbl_T_Nazivi';
                         if (ko.isObservable(IDT)) {
@@ -590,7 +573,6 @@
                             dataType: 'json',
                             contentType: 'application/json',
                             success: function (response, text) {
-                                zadnjiDlookupPojam(response);
                                 returnVal(response);
                             },
                             error: function (text, error) {
@@ -624,8 +606,20 @@
             }
             
 
-
- 
+            ko.bindingHandlers.logger = {
+                    update: function(element, valueAccessor, allBindings) {
+                        //store a counter with this element
+                        var count = ko.utils.domData.get(element, "_ko_logger") || 0,
+                            data = ko.toJS(valueAccessor() || allBindings());
+            
+                        ko.utils.domData.set(element, "_ko_logger", ++count);
+            
+                        if (window.console && console.log) {
+                            console.log(count, element, data);
+                        }
+                    }
+                };
+    
 
 
            

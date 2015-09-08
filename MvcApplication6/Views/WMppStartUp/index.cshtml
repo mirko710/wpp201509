@@ -46,13 +46,22 @@
             <div class="col col-lg-30">Naziv</div>
             <div class="col col-lg-6">Vrsta naziva</div>
         </div>
-        <div id="Nazivi" data-bind="foreach: data">
+        <div id="Nazivi" data-bind="foreach: $root.fullKartica().tbl_Nazivi">
             <div class="row noMargin" data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
             @*<div class="row noMargin" data-bind="click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
                 
                 <div class="col col-lg-30">
+                    
                     <input class="form-control" data-bind="
-    upitiAutocomplete: {accValue: NAZ_IDT_Naziv_predmeta,tablicaID:ID, tablica:'tbl_T_Nazivi',zbirkaIDT:$root.zbNewIndex, poZbirci:true}    " />
+                    upitiAutocomplete: {
+                    accValue: NAZ_IDT_Naziv_predmeta,
+                    imePolja: 'NAZ_IDT_Naziv_predmeta',
+                    imeTablice:'tbl_Nazivi',
+                    tablicaID:ID,
+                    tablica:'tbl_T_Nazivi',
+                    zbirkaIDT:$root.zbNewIndex, 
+                    poZbirci:true}    " />
+                    
                     @*<input class="form-control" id="Text24" data-bind="jqAuto: { autoFocus: true },
                 jqAutoSource: $root.Selects().tbl_T_Nazivi,
                 jqTerm: $root.dodajTerm,
@@ -65,7 +74,7 @@
                 jqAutoSourceValue: 'IDT' " />*@
                 </div>
                 <div class="col col-lg-6 styled-select">
-                    <div><select class="form-control form-control2" data-bind="options: $root.Selects().tbl_T_Vrste_naziva, optionsText: 'Pojam', optionsValue: 'IDT', value: NAZ_IDT_Vrsta_naziva, optionsCaption: '...'"></select></div>
+                    <div><select class="form-control form-control2" data-bind="logger: NAZ_IDT_Vrsta_naziva,options: $root.Selects().tbl_T_Vrste_naziva, optionsText: 'Pojam', optionsValue: 'IDT', value: NAZ_IDT_Vrsta_naziva, optionsCaption: '...'"></select></div>
                 </div>
             </div>
 
@@ -86,7 +95,7 @@
     </script>
 
     <script type="text/html" id="tmpInventarizacija">
-        <div id="Inventarizacija" class="repetitive" data-bind="foreach: data">
+        <div id="Inventarizacija" class="repetitive" data-bind="foreach: $root.fullKartica().tbl_Inventarizacija">
             <div data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
                 <div class="row noMargin">
                 @*<div class="row noMargin autoHeight" data-bind="click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
@@ -110,7 +119,7 @@
     </script>
 
     <script type="text/html" id="tmpStanje">
-        <div id="Oocuvanost" class="repetitive" data-bind="foreach: data">
+        <div id="Oocuvanost" class="repetitive" data-bind="foreach: $root.fullKartica().tbl_Ocuvanost">
             <div  data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
                 <div class="row noMargin labelsHolder">
                     <div class="col-lg-18 datalabelrow">Stanje</div>
@@ -183,6 +192,7 @@
 
 
     <script type="text/html" id="tmpNabava">
+        <div style="display:none" data-bind="visible : true">
         <div id="Nabava" data-bind="foreach: $root.fullKartica">
             <div class="row noMargin autoHeight">
             @*<div class="row noMargin autoHeight" data-bind="click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
@@ -285,6 +295,7 @@
                 </div>
             </div>
         </div>
+        </div>
     </script>
 
 
@@ -351,7 +362,7 @@
         <div class="row noMargin labelsHolder">
             <div class="col col-lg-36">Razdoblje / stil</div>
         </div>
-        <div id="KljucneRijeci" data-bind="foreach: data">
+        <div id="KljucneRijeci" data-bind="foreach: $root.fullKartica().tbl_Kljucne_rijeci">
             <div class="row noMargin" data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
             @*<div class="row noMargin" data-bind="click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
                 <div class="col col-lg-36">
@@ -380,7 +391,7 @@
             <div class="col col-lg-6">Jezik naslova</div>
         </div>
 
-        <div id="Naslovi" data-bind="foreach: data">
+        <div id="Naslovi" data-bind="foreach: $root.fullKartica().tbl_Naslovi">
             <div class="row noMargin" data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
             @*<div class="row noMargin" data-bind="attr: { id: 'tbl_Naslovi_' + ID() }, click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
                 <div class="col col-lg-24">
@@ -402,7 +413,7 @@
             <div class="col col-lg-9">Jedinica</div>
             <div class="col col-lg-12">Dio</div>
         </div>
-        <div id="Mjere" data-bind="foreach: data">
+        <div id="Mjere" data-bind="foreach: $root.fullKartica().tbl_Mjere">
             <div class="row noMargin" data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
             @*<div class="row noMargin" data-bind="click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
                 <div class="col col-lg-9 styled-select">
@@ -426,7 +437,7 @@
             <div class="col col-lg-11">Tehnika</div>
             <div class="col col-lg-14">Dio</div>
         </div>
-        <div id="Materijali" data-bind="foreach: data">
+        <div id="Materijali" data-bind="foreach: $root.fullKartica().tbl_U_Materijali_u_dijelovima">
              <div class="row noMargin" data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
             @*<div class="row noMargin" data-bind="click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
                 <div class="col-lg-11">
@@ -467,7 +478,7 @@
 
 
     <script type="text/html" id="tmpSadrzaj">
-        <div id="Sadrzaj" data-bind="foreach: data">
+        <div id="Sadrzaj" data-bind="foreach: $root.fullKartica().tbl_Sadrzaj">
 
             <div class="row noMargin" data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
                 <div class="row noMargin" data-bind="attr: { id: 'tbl_Sadrzaj_' + ID() }">
@@ -532,7 +543,7 @@
 
 
     <script type="text/html" id="tmpIzrada">
-        <div id="Izrada" class="repetitive" data-bind="foreach: data">
+        <div id="Izrada" class="repetitive" data-bind="foreach: $root.fullKartica().tbl_Izrada">
             <div data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
                 <!--OVO JE HACK ZA INLINE-BLOCK PADDING NA DNU-->
                 <div class="row noMargin labelsHolder">

@@ -793,8 +793,6 @@
 
 
         manualNav = false;
-        var tmpKartica = ko.observable();
-        tmpKartica(transferKartica());
 
         fullKartica(transferKartica());
         isLoading(false);

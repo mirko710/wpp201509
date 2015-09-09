@@ -904,8 +904,8 @@ ko.bindingHandlers.jqAutoOG = {
                 { route: '', moduleId: 'home', title: 'Početna stranica', nav: true },
                 { route: 'upisPodataka:id', moduleId: 'upisPodataka', title: 'Upis podataka', nav: true },
 
-                { route: 'pretrazivanje', moduleId: 'pretrazivanje', title: 'Pretraživanje', nav: true }
-                //{ route: 'grid', moduleId: 'grid', title: 'Grid', nav: true },
+                { route: 'pretrazivanje', moduleId: 'pretrazivanje', title: 'Pretraživanje', nav: true },
+                { route: 'grid', moduleId: 'grid', title: 'Grid', nav: true }
 
                 
             ];

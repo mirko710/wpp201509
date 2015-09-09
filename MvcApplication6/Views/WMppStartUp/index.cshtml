@@ -74,7 +74,7 @@
                 jqAutoSourceValue: 'IDT' " />*@
                 </div>
                 <div class="col col-lg-6 styled-select">
-                    <div><select class="form-control form-control2" data-bind="logger: NAZ_IDT_Vrsta_naziva,options: $root.Selects().tbl_T_Vrste_naziva, optionsText: 'Pojam', optionsValue: 'IDT', value: NAZ_IDT_Vrsta_naziva, optionsCaption: '...'"></select></div>
+                    <div><select class="form-control form-control2" data-bind="options: $root.Selects().tbl_T_Vrste_naziva, optionsText: 'Pojam', optionsValue: 'IDT', value: NAZ_IDT_Vrsta_naziva, optionsCaption: '...'"></select></div>
                 </div>
             </div>
 
@@ -84,10 +84,10 @@
 
     <script type="text/html" id="tmpOpis">
 
-        <div id="Opis" data-bind="foreach: $root.fullKartica">
+        <div id="Opis"> <!--- data-bind="foreach: $root.fullKartica">-->
             <div class="row noMargin autoHeight" >
                 <div class="col-lg-36 autoHeight">
-                    <textarea rows="5" wrap="soft" style="width: 100%;" data-bind="textInput: KRT_Opis_Fizicki_opis" />
+                    <textarea rows="5" wrap="soft" style="width: 100%;" data-bind="textInput: $root.fullKartica().KRT_Opis_Fizicki_opis" />
                 </div>
             </div>
 
@@ -192,8 +192,8 @@
 
 
     <script type="text/html" id="tmpNabava">
-        <div style="display:none" data-bind="visible : true">
-        <div id="Nabava" data-bind="foreach: $root.fullKartica">
+        
+        <div id="Nabava"> <!--- data-bind="foreach: $root.fullKartica">-->
             <div class="row noMargin autoHeight">
             @*<div class="row noMargin autoHeight" data-bind="click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
                 <div class="row noMargin labelsHolder ">
@@ -204,7 +204,7 @@
                 <div class="row noMargin">
                     <div class="col-lg-10">
                         <input class="form-control" data-bind="
-    upitiAutocomplete: {accValue: KRT_IDT_Nabava_oblik, tablica:'tbl_T_Pribavljanje'}    " />
+    upitiAutocomplete: {accValue: $root.fullKartica().KRT_IDT_Nabava_oblik, tablica:'tbl_T_Pribavljanje'}    " />
 
                         @*<input class="form-control" data-bind=" jqAuto: { autoFocus: true },
                                 jqAutoSource: $root.Selects().tbl_T_Pribavljanje,
@@ -218,10 +218,10 @@
                                 jqAutoSourceValue: 'IDT' " />*@
                     </div>
                     <div class="col-lg-8">
-                        <input id="inputDatumNabave" type="text" class="form-control" data-bind="value: KRT_Nabava_datum" />
+                        <input id="inputDatumNabave" type="text" class="form-control" data-bind="value: $root.fullKartica().KRT_Nabava_datum" />
                     </div>
                     <div class="col-lg-8">
-                        <input type="text" id="inputUrBr" class="form-control" data-bind="value: KRT_Nabava_Broj_spisa" />
+                        <input type="text" id="inputUrBr" class="form-control" data-bind="value: $root.fullKartica().KRT_Nabava_Broj_spisa" />
                     </div>
                 </div>
 
@@ -233,7 +233,7 @@
                 <div class="row noMargin">
                     <div class="col-lg-12">
                         <input class="form-control" data-bind="
-    upitiAutocomplete: {accValue: KRT_ID_Nabava_Izvor, tablica:'vw_T_Izvori_nabave'}    " />
+    upitiAutocomplete: {accValue: $root.fullKartica().KRT_ID_Nabava_Izvor, tablica:'vw_T_Izvori_nabave'}    " />
 
                         @*<input class="form-control" data-bind=" jqAuto: { autoFocus: true },
                             jqAutoSource: $root.Selects().vw_T_Izvori_nabave,
@@ -247,11 +247,11 @@
                             jqAutoSourceValue: 'IDT' " />*@
                     </div>
                     <div class="col-lg-12">
-                        <input id="inputAdresa" type="text" class="form-control" data-bind="value: KRT_Institucija_Adresa" />
+                        <input id="inputAdresa" type="text" class="form-control" data-bind="value: $root.fullKartica().KRT_Institucija_Adresa" />
                     </div>
                     <div class="col-lg-12">
                         <input class="form-control" data-bind="
-    upitiAutocomplete: {accValue: KRT_IDT_Nabava_mjesto, tablica:'tbl_T_Mjesta'}    " />
+    upitiAutocomplete: {accValue: $root.fullKartica().KRT_IDT_Nabava_mjesto, tablica:'tbl_T_Mjesta'}    " />
 
                         @*<input class="form-control" data-bind=" jqAuto: { autoFocus: true },
                                                             jqAutoSource: $root.Selects().tbl_T_Mjesta,
@@ -275,7 +275,7 @@
                     <div class="col-lg-12">
                         <div class="row">
                             <div class="col-lg-36">
-                                <input id="cijenaNabava" type="text" class="form-control" data-bind="value: KRT_Nabava_cijena" />
+                                <input id="cijenaNabava" type="text" class="form-control" data-bind="value: $root.fullKartica().KRT_Nabava_cijena" />
                             </div>
                         </div>
                         <div class="row labelsHolder">
@@ -284,18 +284,18 @@
                         <div class="row">
                             <div class="col-lg-36 styled-select">
                                 <div>
-                                    <select id="nabavaKomboValuta" class="form-control form-control2" data-bind=" options: $root.Selects().tbl_T_Valute, optionsText: 'Pojam', optionsValue: 'IDT', value: KRT_IDT_Nabava_valuta, optionsCaption: '...'"></select>
+                                    <select id="nabavaKomboValuta" class="form-control form-control2" data-bind=" options: $root.Selects().tbl_T_Valute, optionsText: 'Pojam', optionsValue: 'IDT', value: $root.fullKartica().KRT_IDT_Nabava_valuta, optionsCaption: '...'"></select>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-24">
-                        <textarea rows="4" wrap="soft" style="width: 100%"; data-bind=" value :KRT_Nabava_Napomena" />
+                        <textarea rows="4" wrap="soft" style="width: 100%"; data-bind=" value: $root.fullKartica().KRT_Nabava_Napomena" />
                     </div>
                 </div>
             </div>
         </div>
-        </div>
+        
     </script>
 
 
@@ -308,7 +308,7 @@
             <div class="col-lg-10">Trenutačni smještaj</div>
             <div class="col-lg-6">Datum</div>
         </div>
-        <div id="Smjestaj" data-bind="foreach: $root.fullKartica">
+        <div id="Smjestaj">  <!--- data-bind="foreach: $root.fullKartica">-->
             @*ne treba postavljat hasfocus
             <div class="row noMargin" data-bind="click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
                 <div class="row noMargin">
@@ -319,7 +319,7 @@
     jqTermTablica: $root.dodajTermTablica,
     jqTablica: 'tbl_T_Smjestaj_stalni',
     jqModul: 'Smjestaj_stalni',
-    jqAutoValue: KRT_IDT_Smjestaj_Stalni,
+    jqAutoValue: $root.fullKartica().KRT_IDT_Smjestaj_Stalni,
     jqAutoSourceLabel: 'Pojam',
     jqAutoSourceInputValue: 'Pojam',
     jqAutoSourceValue: 'IDT' " />
@@ -331,7 +331,7 @@
     jqTermTablica: $root.dodajTermTablica,
     jqTablica: 'tbl_T_Smjestaj_privremeni_vrsta',
     jqModul: 'Smjestaj_privremeni_vrsta',
-    jqAutoValue: KRT_IDT_Smjestaj_Privremeni_vrsta,
+    jqAutoValue: $root.fullKartica().KRT_IDT_Smjestaj_Privremeni_vrsta,
     jqAutoSourceLabel: 'Pojam',
     jqAutoSourceInputValue: 'Pojam',
     jqAutoSourceValue: 'IDT' " />
@@ -344,14 +344,14 @@
     jqTermTablica: $root.dodajTermTablica,
     jqTablica: 'tbl_T_Smjestaj_privremeni',
     jqModul: 'Smjestaj_privremeni_vrsta',
-    jqAutoValue: KRT_IDT_Smjestaj_Privremeni,
+    jqAutoValue: $root.fullKartica().KRT_IDT_Smjestaj_Privremeni,
     jqAutoSourceLabel: 'Pojam',
     jqAutoSourceInputValue: 'Pojam',
     jqAutoSourceValue: 'IDT' " />
                 </div>
 
                 <div class="col col-lg-6">
-                    <input id="inputDatumStatus" type="text" class="form-control" data-bind="value: KRT_Smjestaj_privremeni_datum" />
+                    <input id="inputDatumStatus" type="text" class="form-control" data-bind="value: $root.fullKartica().KRT_Smjestaj_privremeni_datum" />
                 </div>
 
             </div>
@@ -647,7 +647,7 @@
         </div>
     </script>
     <script type="text/html" id="tmpMedia">
-        <div class="row noMargin autoHeight" data-bind="foreach: data">
+        <div class="row noMargin autoHeight" data-bind="foreach: $root.fullKartica().tbl_Media_collector">
             <div class="col-lg-9 mmediaItem" data-bind="attr: { id: 'tbl_Media_Collector_' + AutoBroj() }, click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
                 <div class="col-lg-36 mmediaImgHolder">
                     <img class="mmedia-thumbnail" data-bind="attr: { src: $root.stazaSlike($data.MC_Staza_slike) }" />
@@ -669,7 +669,7 @@
     </script>
 
     <script type="text/html" id="tmpNalazista">
-        <div data-bind="foreach: $root.fullKartica">
+        <div> <!--- data-bind="foreach: $root.fullKartica">-->
             <div class="row noMargin autoHeight" data-bind="attr: { id: 'Nalaziste_' + AutoBroj() }">
                 <div class="col-lg-18">
                     <div class="row noMargin labelsHolder">
@@ -682,7 +682,7 @@
                         jqTermTablica: $root.dodajTermTablica,
                         jqTablica: 'tbl_T_Nalaziste',
                         jqModul: 'Nalazista',
-                        jqAutoValue: KRT_IDT_Prikupljanje_Nalaziste,
+                        jqAutoValue: $root.fullKartica().KRT_IDT_Prikupljanje_Nalaziste,
                         jqAutoSourceLabel: 'Pojam',
                         jqAutoSourceInputValue: 'Pojam',
                         jqAutoSourceValue: 'IDT' " />
@@ -691,7 +691,7 @@
                         <div class="col col-lg-36">Sezona: (TBD) + sredisezone...</div>
                     </div>
                     <div class="col-lg-36">
-                        <input class="form-control" data-bind="value: KRT_IDT_Prikupljanje_Nalaziste_sezona" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_IDT_Prikupljanje_Nalaziste_sezona" />
                     </div>
                     <div class="row noMargin labelsHolder">
                         <div class="col col-lg-36">Sakupljač</div>
@@ -703,7 +703,7 @@
                         jqTermTablica: $root.dodajTermTablica,
                         jqTablica: 'tbl_T_Sakupljaci',
                         jqModul: 'Sakupljaci',
-                        jqAutoValue: KRT_ID_Prikupljanje_Sakupljac,
+                        jqAutoValue: $root.fullKartica().KRT_ID_Prikupljanje_Sakupljac,
                         jqAutoSourceLabel: 'Pojam',
                         jqAutoSourceInputValue: 'Pojam',
                         jqAutoSourceValue: 'IDT' " />
@@ -718,7 +718,7 @@
                         jqTermTablica: $root.dodajTermTablica,
                         jqTablica: 'tbl_T_Nacini_prikupljanja',
                         jqModul: 'Nacini_prikupljanja',
-                        jqAutoValue: KRT_IDT_Prikupljanje_Nacin,
+                        jqAutoValue: $root.fullKartica().KRT_IDT_Prikupljanje_Nacin,
                         jqAutoSourceLabel: 'Pojam',
                         jqAutoSourceInputValue: 'Pojam',
                         jqAutoSourceValue: 'IDT' " />
@@ -728,16 +728,16 @@
                         <div class="col col-lg-18">Datum kraj</div>
                     </div>
                     <div class="col-lg-18">
-                        <input class="form-control" data-bind="value: KRT_Prikupljanje_Datum" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_Prikupljanje_Datum" />
                     </div>
                     <div class="col-lg-18">
-                        <input class="form-control" data-bind="value: KRT_Prikupljanje_datum_kraj" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_Prikupljanje_datum_kraj" />
                     </div>
                     <div class="row noMargin labelsHolder">
                         <div class="col col-lg-36">Položaj</div>
                     </div>
                     <div class="col-lg-36">
-                        <input class="form-control" data-bind="value: KRT_Prikupljanje_Polozaj" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_Prikupljanje_Polozaj" />
                     </div>
                     <div class="row noMargin labelsHolder">
                         <div class="col col-lg-3">GIS</div>
@@ -747,73 +747,73 @@
                     </div>
                     <div class="col-lg-3"></div>
                     <div class="col-lg-11">
-                        <input class="form-control" data-bind="value: KRT_Prikupljanje_Koordinata_X" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_Prikupljanje_Koordinata_X" />
                     </div>
                     <div class="col-lg-11">
-                        <input class="form-control" data-bind="value: KRT_Prikupljanje_Koordinata_Y" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_Prikupljanje_Koordinata_Y" />
                     </div>
                     <div class="col-lg-11">
-                        <input class="form-control" data-bind="value: KRT_Prikupljanje_Koordinata_Z" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_Prikupljanje_Koordinata_Z" />
                     </div>
                     <div class="row noMargin labelsHolder">
                         <div class="col col-lg-36">Koordinate(UTM)</div>
                     </div>
                     <div class="col-lg-36">
-                        <input class="form-control" data-bind="value: KRT_Prikupljanje_Koordinate" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_Prikupljanje_Koordinate" />
                     </div>
                     <div class="row noMargin labelsHolder">
                         <div class="col col-lg-36">Koordinate(UTM)</div>
                     </div>
                     <div class="col-lg-36">
-                        <input class="form-control" data-bind="value: KRT_Prikupljanje_Sonda_Blok" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_Prikupljanje_Sonda_Blok" />
                     </div>
                     <div class="row noMargin labelsHolder">
                         <div class="col col-lg-36">Kvadrant</div>
                     </div>
                     <div class="col-lg-36">
-                        <input class="form-control" data-bind="value: KRT_Prikupljanje_Kvadrant" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_Prikupljanje_Kvadrant" />
                     </div>
                     <div class="row noMargin labelsHolder">
                         <div class="col col-lg-36">Dubina</div>
                     </div>
                     <div class="col-lg-36">
-                        <input class="form-control" data-bind="value: KRT_Prikupljanje_Dubina" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_Prikupljanje_Dubina" />
                     </div>
                     <div class="row noMargin labelsHolder">
                         <div class="col col-lg-36">Stratigrafska jed.</div>
                     </div>
                     <div class="col-lg-36">
-                        <input class="form-control" data-bind="value: KRT_Prikupljanje_Stratigrafska_jedinica" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_Prikupljanje_Stratigrafska_jedinica" />
                     </div>
                     <div class="row noMargin labelsHolder">
                         <div class="col col-lg-36">Grob (broj)</div>
                     </div>
                     <div class="col-lg-36">
-                        <input class="form-control" data-bind="value: KRT_Prikupljanje_Grob" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_Prikupljanje_Grob" />
                     </div>
                     <div class="row noMargin labelsHolder">
                         <div class="col col-lg-36">Sloj</div>
                     </div>
                     <div class="col-lg-36">
-                        <input class="form-control" data-bind="value: KRT_Prikupljanje_sloj" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_Prikupljanje_sloj" />
                     </div>
                     <div class="row noMargin labelsHolder">
                         <div class="col col-lg-36">Horizont</div>
                     </div>
                     <div class="col-lg-36">
-                        <input class="form-control" data-bind="value: KRT_Prikupljanje_horizont" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_Prikupljanje_horizont" />
                     </div>
                     <div class="row noMargin labelsHolder">
                         <div class="col col-lg-36">Sektor</div>
                     </div>
                     <div class="col-lg-36">
-                        <input class="form-control" data-bind="value: KRT_Prikupljanje_sektor" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_Prikupljanje_sektor" />
                     </div>
                     <div class="row noMargin labelsHolder">
                         <div class="col col-lg-36">Kutija</div>
                     </div>
                     <div class="col-lg-36">
-                        <input class="form-control" data-bind="value: KRT_Prikupljanje_kutija" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_Prikupljanje_kutija" />
                     </div>
                 </div>
                 <div class="col-lg-18">
@@ -821,31 +821,31 @@
                         <div class="col col-lg-36">Boja</div>
                     </div>
                     <div class="col col-lg-36">
-                        <input class="form-control" data-bind="value: KRT_Prikupljanje_boja" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_Prikupljanje_boja" />
                     </div>
                     <div class="row noMargin labelsHolder">
                         <div class="col col-lg-36">Faktura</div>
                     </div>
                     <div class="col col-lg-36">
-                        <input class="form-control" data-bind="value: KRT_Prikupljanje_faktura" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_Prikupljanje_faktura" />
                     </div>
                     <div class="row noMargin labelsHolder">
                         <div class="col col-lg-36">Površina</div>
                     </div>
                     <div class="col col-lg-36">
-                        <input class="form-control" data-bind="value: KRT_Prikupljanje_povrsina" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_Prikupljanje_povrsina" />
                     </div>
                     <div class="row noMargin labelsHolder">
                         <div class="col col-lg-36">Okolnosti nalaženja</div>
                     </div>
                     <div class="col col-lg-36">
-                        <input class="form-control" data-bind="value: KRT_Prikupljanje_Okolnosti" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_Prikupljanje_Okolnosti" />
                     </div>
                     <div class="row noMargin labelsHolder">
                         <div class="col col-lg-36">Napomena sakupljača</div>
                     </div>
                     <div class="col col-lg-36">
-                        <input class="form-control" data-bind="value: KRT_Prikupljanje_Opis" />
+                        <input class="form-control" data-bind="value: $root.fullKartica().KRT_Prikupljanje_Opis" />
                     </div>
                 </div>
 

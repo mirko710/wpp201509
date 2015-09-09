@@ -1,0 +1,168 @@
+USE [M_DATA_PPMHP_WEB]
+GO
+/****** Object:  StoredProcedure [dbo].[getNaziviPoZbirci]    Script Date: 09/09/2015 17:41:02 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[getNaziviPoZbirci] 
+	@IDT_Zbirka int
+	
+AS
+BEGIN
+
+		select DISTINCT z.NAZ_IDT_Naziv_predmeta as IDT,t.Pojam from dbo.tbl_nazivi z 
+		left join dbo.tbl_T_Nazivi t on (z.NAZ_IDT_Naziv_predmeta=t.IDT)
+		where ID_Broj in (select ID_Broj from dbo.tbl_Kartica where KRT_IDT_Zbirka=@IDT_Zbirka)
+		order by t.Pojam
+
+END
+
+
+USE [M_DATA_PPMHP_WEB]
+GO
+
+/****** Object:  UserDefinedFunction [dbo].[autocompletePoZbirci]    Script Date: 09/09/2015 17:42:16 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE FUNCTION [dbo].[autocompletePoZbirci] (@tablica nvarchar(50), @zbirkaIDT int,@trazi nvarchar(50) )
+
+RETURNS
+ 
+ @returnList TABLE ([IDT] INT ,[Pojam][nvarchar](255),[Nad_IDT][int])
+AS
+BEGIN
+
+DECLARE @retVal int
+	
+	begin
+		INSERT INTO @returnList
+		select DISTINCT TOP 30 t.IDT,Ltrim(t.Pojam),t.Nad_IDT from dbo.tbl_nazivi z 
+		left join dbo.tbl_T_Nazivi t on (z.NAZ_IDT_Naziv_predmeta=t.IDT)
+		where z.ID_Broj in (select ID_Broj from dbo.tbl_Kartica where KRT_IDT_Zbirka=@zbirkaIDT)
+		and t.Pojam LIKE N'%' + @trazi +'%'
+		order by Ltrim(t.Pojam)
+	end
+	
+
+	SELECT @retVal = COUNT(*) FROM @returnList
+		
+	if (@retVal<30)
+	begin
+
+		INSERT INTO @returnList
+		select DISTINCT TOP (30-@retVal) t.IDT,Ltrim(t.Pojam),t.Nad_IDT from dbo.tbl_T_Nazivi t 
+		WHERE t.Pojam LIKE N'%' + @trazi +'%'
+		and t.IDT not in (select IDT from @returnList)
+		order by Ltrim(t.Pojam)
+	end
+	SELECT @retVal = COUNT(*) FROM @returnList
+	if ( @retVal=0)
+		begin
+			INSERT INTO @returnList
+			select -9999,N'dodaj u terminološku: ' + @trazi,-1 FROM dbo.tbl_T_Zbirke where IDT=1000
+		end	
+
+ RETURN
+END
+
+
+GO
+
+USE [M_DATA_PPMHP_WEB]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_zaAutocompleteDlookup]    Script Date: 09/09/2015 17:42:49 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_zaAutocompleteDlookup] 
+	@tablica nvarchar(200),
+	@IDT int
+AS
+BEGIN
+
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+    DECLARE @sSQL nvarchar(500);
+	
+	
+	--SELECT @preTrazi= @trazi 
+    SELECT @sSQL = N'SELECT Pojam FROM dbo.' + QUOTENAME(@tablica) + N' WHERE IDT = @IDT' ;
+    
+	--print @sSQL
+	--print @preTrazi
+
+    EXECUTE sp_executesql @sSQL,N'@IDT int',@IDT=@IDT
+	--print @trazi
+
+END
+GO
+
+USE [M_DATA_PPMHP_WEB]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_zaAutocomplete]    Script Date: 09/09/2015 17:43:00 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_zaAutocomplete] 
+	@tablica nvarchar(200),
+	@trazi nvarchar(200)
+AS
+BEGIN
+
+
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+    DECLARE @sSQL nvarchar(500);
+	declare @preTrazi nvarchar(200);
+	SELECT @preTrazi=N'%' + @trazi + N'%'
+	--SELECT @preTrazi= @trazi 
+    SELECT @sSQL = N'SELECT IDT,Pojam,Nad_IDT FROM dbo.' + QUOTENAME(@tablica) + N' WHERE Pojam LIKE @trazi Order by Pojam' ;
+    
+	print @sSQL
+	print @preTrazi
+
+    EXECUTE sp_executesql @sSQL,N'@trazi nvarchar(200)',@trazi=@preTrazi
+	print @trazi
+
+END
+
+
+
+
+
+GO
+

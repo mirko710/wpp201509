@@ -133,18 +133,18 @@
                             <span class="glyphicon glyphicon-chevron-up buttonSecondary hideIt" data-bind="click: $root.minimize"></span>
                         </div>
                         <div class="col col-lg-36 contentBoxBody">
-                            <div class="row noMargin autoHeight" data-bind="foreach: fullKartica">
+                            <div class="row noMargin autoHeight"><!-- data-bind="foreach: fullKartica">-->
                                 <div class="row noMargin labelsHolder">
                                     <div class="col col-lg-36">Inv. oznaka</div>
                                 </div>
                                 <div class="row noMargin">
-                                    <input id="invOznaka" type="text" class="form-control" data-bind="value: KRT_Inventarni_broj" />
+                                    <input id="invOznaka" type="text" class="form-control" data-bind="value: fullKartica().KRT_Inventarni_broj" />
                                 </div>
                                 <div class="row noMargin labelsHolder">
                                     <div class="col col-lg-36">Zbirka</div>
                                 </div>
                                 <div class="row noMargin styled-select">
-                                    <div><select id="selZbirka" class="form-control form-control2" data-bind="options: $root.Selects().tbl_T_Zbirke, optionsText: 'Pojam', optionsValue: 'IDT', value: KRT_IDT_Zbirka"></select></div>
+                                    <div><select id="selZbirka" class="form-control form-control2" data-bind="options: $root.Selects().tbl_T_Zbirke, optionsText: 'Pojam', optionsValue: 'IDT', value: fullKartica().KRT_IDT_Zbirka"></select></div>
                                 </div>
                             </div>
                         </div>

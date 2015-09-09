@@ -1143,7 +1143,7 @@ $(function () {
                 karticaFull([]);
                 //nazivi([]);
                 
-                setTimeout(function(){console.log("w");},1000);
+                //setTimeout(function(){console.log("w");},1000);
                 return my.em.fetchEntityByKey('tbl_Kartica', brojid, true)
                 
                 // var query = breeze.EntityQuery.from("tbl_Kartica")

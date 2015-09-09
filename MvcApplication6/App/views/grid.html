@@ -188,7 +188,7 @@
                                                     </td>
                                                     <td>
                                                         <span class="labelopis">Preporučeni pojam</span>
-                                                        <input class="form-control" id="Text24" data-bind="value:$root.tekstPreporuceniPojam, valueUpdate:['afterkeydown','propertychange','input'], jqAutoUpit: { autoFocus: true },
+                                                        <input class="form-control" id="Text24" data-bind="value:$root.tekstPreporuceniPojam, valueUpdate:['afterkeydown','propertychange','input'], jqAutoUpitTerm: { autoFocus: true },
                                                     jqAutoSource: $root.stavkePreporuceniPojam,
                                                     jqAutoValue: Preporuceni_IDT,
                                                     jqAutoSourceLabel: 'Pojam',
@@ -200,7 +200,7 @@
                                                         <div data-bind="foreach: NadPojmovi().slice(1, NadPojmovi().length), visible: NadPojmovi().length>1">
                                                             <input class="form-control" data-bind="value: Pojam" readonly="readonly" />
                                                         </div>
-                                                        <input class="form-control" id="Text24" data-bind="value:$root.tekstNadredeniPojam, valueUpdate:['afterkeydown','propertychange','input'], jqAutoUpit: { autoFocus: true },
+                                                        <input class="form-control" id="Text24" data-bind="value:$root.tekstNadredeniPojam, valueUpdate:['afterkeydown','propertychange','input'], jqAutoUpitTerm: { autoFocus: true },
                                             jqAutoSource: $root.stavkeNadredeniPojam,
                                             jqAutoValue: Nad_IDT,
                                             jqAutoSourceLabel: 'Pojam',

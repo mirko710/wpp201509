@@ -47,7 +47,6 @@
     var displayName= 'upisPodataka';
     var firstLoad = true;
     var forme = ko.observableArray([]);
-    var formeCopy = ko.observableArray([]);
     var photke = ko.observableArray([]);
     var title = 'WM++';
     var vm = {
@@ -399,9 +398,9 @@
 
         }
 
-
+        var deref = Q.defer();
         var redoslijedFormi = prefForm.split("#");
-
+        var tmpFormArray = ko.observableArray([]);
         $.each(redoslijedFormi, function (index, value) {
             //var tmpForm = ko.utils.arrayFirst(data.protoForme(), function (kitem) {
             var tmpForm = ko.utils.arrayFirst(forme, function (kitem) {
@@ -417,11 +416,16 @@
                                             tmpForm.recordCount(),
                                             tmpForm.buttonBox());
 
-            vm.forme.push(tmpFormE);
-            formeCopy.push(tmpFormE);
+            //vm.forme.push(tmpFormE);
+            tmpFormArray.push(tmpFormE);
             //alert(tmpForm().title);
+            if (index == redoslijedFormi.length-1) {
+                deref.resolve(true);
+            }
             
         })
+        vm.forme(tmpFormArray());
+        return deref.promise;
 
 
 }
@@ -758,7 +762,8 @@
                 if (p['tablica']() == "tbl_Media_collector") {
                     selMmedia(p['data']());//posebno za identity fotku sa strane
                 }
-                p['recordCount'](p['data']().length);
+                p['recordCount'](transferKartica()[p['tablica']()]().length);
+               // p['recordCount'](p['data']().length);
             } else {
                 p['recordCount'](1);
             }

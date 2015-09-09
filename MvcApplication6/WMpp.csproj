@@ -1395,6 +1395,7 @@
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="SQL\skripte.txt" />
     <Content Include="userConfig.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

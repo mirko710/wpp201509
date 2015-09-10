@@ -28,7 +28,13 @@
             ////
             if (options.options != undefined) {
                 if (typeof options.options.dlookup === "function" && !ko.isObservable(options.options.dlookup)) {
-                    var xValue = options.value();
+                    var xValue = null;
+                    if(ko.isObservable(options.value)){
+                        xValue =options.value();
+                    }else{
+                        xValue =options.value;
+                    }
+                    //var xValue = options.value();
                     var retVal = ko.observable();
                     options.options.dlookup.call(this, xValue, retVal)
                         .then(function (response) {
@@ -145,7 +151,13 @@
                     element.value = value[propNames.input];
                 }
                 else {
-                    if (options.value() == -9999) {
+                    var checkValue = null;
+                    if (ko.isObservable(options.value)) {
+                        checkValue = options.value();
+                    } else {
+                        xValue = options.value;
+                    }
+                    if (checkValue == -9999) {
                         //alert("dodaj termin");
 
                         if (options.options != undefined) {
@@ -170,7 +182,12 @@
                     }
                     if (options.options != undefined) {
                         if (typeof options.options.dlookup === "function" && !ko.isObservable(options.options.dlookup)) {
-                            var xValue = options.value();
+                            var xValue = null;
+                            if (ko.isObservable(options.value)) {
+                                xValue = options.value();
+                            } else {
+                                xValue = options.value;
+                            }
                             var retVal = ko.observable();
                             options.options.dlookup.call(this, xValue, retVal)
                                 .then(function (response) {

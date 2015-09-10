@@ -46,7 +46,8 @@
             <div class="col col-lg-30">Naziv</div>
             <div class="col col-lg-6">Vrsta naziva</div>
         </div>
-        <div id="Nazivi" data-bind="foreach: $root.fullKartica().tbl_Nazivi">
+        @*<div id="Nazivi" data-bind="foreach: fullKartica().tbl_Nazivi">*@
+        <div id="Nazivi" data-bind="foreach: data">
             <div class="row noMargin" data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
             @*<div class="row noMargin" data-bind="click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
                 
@@ -95,7 +96,8 @@
     </script>
 
     <script type="text/html" id="tmpInventarizacija">
-        <div id="Inventarizacija" class="repetitive" data-bind="foreach: $root.fullKartica().tbl_Inventarizacija">
+        <div id="Inventarizacija" class="repetitive" data-bind="foreach: data">
+        @*<div id="Inventarizacija" class="repetitive" data-bind="foreach: $root.fullKartica().tbl_Inventarizacija">*@
             <div data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
                 <div class="row noMargin">
                 @*<div class="row noMargin autoHeight" data-bind="click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
@@ -119,75 +121,76 @@
     </script>
 
     <script type="text/html" id="tmpStanje">
-        <div id="Oocuvanost" class="repetitive" data-bind="foreach: $root.fullKartica().tbl_Ocuvanost">
-            <div  data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
-                <div class="row noMargin labelsHolder">
-                    <div class="col-lg-18 datalabelrow">Stanje</div>
-                    <div class="col-lg-18 datalabelrow">Napomena</div>
-                </div>
-                <div class="row noMargin autoHeight" data-bind="attr: { id: 'tbl_Ocuvanost_' + ID() }">
-                    <div class="col-lg-18">
-                        <div class="row noMargin">
+        <div id="Oocuvanost" class="repetitive" data-bind="foreach: data">
+            @*<div id="Oocuvanost" class="repetitive" data-bind="foreach: $root.fullKartica().tbl_Ocuvanost">*@
+                <div data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
+                    <div class="row noMargin labelsHolder">
+                        <div class="col-lg-18 datalabelrow">Stanje</div>
+                        <div class="col-lg-18 datalabelrow">Napomena</div>
+                    </div>
+                    <div class="row noMargin autoHeight" data-bind="attr: { id: 'tbl_Ocuvanost_' + ID() }">
+                        <div class="col-lg-18">
+                            <div class="row noMargin">
 
-                            <input class="form-control" data-bind="
+                                <input class="form-control" data-bind="
     upitiAutocomplete: {accValue: OCU_IDT_Ocuvanost, tablica:'tbl_T_Ocuvanosti'}    " />
 
-                            @*<input class="form-control" id="ocuvanostKombo" data-bind="jqAuto: { autoFocus: true },
-    jqAutoSource: $root.Selects().tbl_T_Ocuvanosti,
-    jqTerm: $root.dodajTerm,
-    jqTermTablica: $root.dodajTermTablica,
-    jqTablica: 'tbl_T_Ocuvanosti',
-    jqModul: 'Ocuvanosti',
-    jqAutoValue: OCU_IDT_Ocuvanost,
-    jqAutoSourceLabel: 'Pojam',
-    jqAutoSourceInputValue: 'Pojam',
-    jqAutoSourceValue: 'IDT' " />*@
-                        </div>
-                        <div class="row noMargin labelsHolder">Datum</div>
-                        <div class="row noMargin shaded autoHeight">
-                            <div class="col col-lg-36">
-                                <div class="col-lg-8 styled-select">
-                                    <div><select class="form-control form-control2" data-bind="attr: { id: 'OCU_komboPeriod_' + ID() }, options: $root.Vremena, optionsText: 'tekst', optionsValue: 'vrijednost', value: OCU_Period"></select></div>
-                                </div>
+                                @*<input class="form-control" id="ocuvanostKombo" data-bind="jqAuto: { autoFocus: true },
+                                jqAutoSource: $root.Selects().tbl_T_Ocuvanosti,
+                                jqTerm: $root.dodajTerm,
+                                jqTermTablica: $root.dodajTermTablica,
+                                jqTablica: 'tbl_T_Ocuvanosti',
+                                jqModul: 'Ocuvanosti',
+                                jqAutoValue: OCU_IDT_Ocuvanost,
+                                jqAutoSourceLabel: 'Pojam',
+                                jqAutoSourceInputValue: 'Pojam',
+                                jqAutoSourceValue: 'IDT' " />*@
+                            </div>
+                            <div class="row noMargin labelsHolder">Datum</div>
+                            <div class="row noMargin shaded autoHeight">
+                                <div class="col col-lg-36">
+                                    <div class="col-lg-8 styled-select">
+                                        <div><select class="form-control form-control2" data-bind="attr: { id: 'OCU_komboPeriod_' + ID() }, options: $root.Vremena, optionsText: 'tekst', optionsValue: 'vrijednost', value: OCU_Period"></select></div>
+                                    </div>
 
-                                <div class="col col-lg-11 styled-select">
-                                    <div><select class="form-control form-control2" data-bind="attr: { id: 'OCU_komboVrijemeOpis1_' + ID() }, options: $root.VrijemeOpis, value: OCU_Vrijeme_opis, optionsCaption: '...'"></select></div>
-                                </div>
+                                    <div class="col col-lg-11 styled-select">
+                                        <div><select class="form-control form-control2" data-bind="attr: { id: 'OCU_komboVrijemeOpis1_' + ID() }, options: $root.VrijemeOpis, value: OCU_Vrijeme_opis, optionsCaption: '...'"></select></div>
+                                    </div>
 
-                                <div class="col col-lg-9">
-                                    <input class="form-control form-control-text-right" data-bind="attr: { id: 'OCU_inputVrijeme_' + ID() }, value: OCU_Vrijeme_vrijednost" />
-                                </div>
+                                    <div class="col col-lg-9">
+                                        <input class="form-control form-control-text-right" data-bind="attr: { id: 'OCU_inputVrijeme_' + ID() }, value: OCU_Vrijeme_vrijednost" />
+                                    </div>
 
-                                <div class="col col-lg-8 styled-select">
-                                    <div><select class="form-control form-control2" data-bind="attr: { id: 'OCU_komboVrijemeJedinica_' + ID() }, options: $root.VrijemeJedinica, value: OCU_Vrijeme_jedinica, optionsCaption: '...'"></select></div>
+                                    <div class="col col-lg-8 styled-select">
+                                        <div><select class="form-control form-control2" data-bind="attr: { id: 'OCU_komboVrijemeJedinica_' + ID() }, options: $root.VrijemeJedinica, value: OCU_Vrijeme_jedinica, optionsCaption: '...'"></select></div>
+                                    </div>
+                                </div>
+                                <div class="col col-lg-36" data-bind="visible: OCU_Period">
+                                    <div class="col col-lg-8 styled-select2">
+                                        <div><span class="form-control form-control2" style="line-height: 24px;">Vrijeme do:</span></div>
+                                    </div>
+
+                                    <div class="col col-lg-11 styled-select">
+                                        <div><select id="OCU_komboVrijemeOpis2" class="form-control form-control2" data-bind="attr: { id: 'OCU_komboVrijemeOpis2_' + ID() }, options: $root.VrijemeOpis, value: OCU_Vrijeme_opis2, optionsCaption: '...'"></select></div>
+                                    </div>
+
+                                    <div class="col col-lg-9">
+                                        <input class="form-control form-control-text-right" data-bind="attr: { id: 'OCU_inputVrijeme2_' + ID() }, value: OCU_Vrijeme_vrijednost2" />
+                                    </div>
+
+                                    <div class="col col-lg-8 styled-select">
+                                        <div><select class="form-control form-control2" data-bind="attr: { id: 'OCU_komboVrijemeJedinica2_' + ID() }, options: $root.VrijemeJedinica, value: OCU_Vrijeme_jedinica2, optionsCaption: '...'"></select></div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col col-lg-36" data-bind="visible: OCU_Period">
-                                <div class="col col-lg-8 styled-select2">
-                                    <div><span class="form-control form-control2" style="line-height: 24px;">Vrijeme do:</span></div>
-                                </div>
-
-                                <div class="col col-lg-11 styled-select">
-                                    <div><select id="OCU_komboVrijemeOpis2" class="form-control form-control2" data-bind="attr: { id: 'OCU_komboVrijemeOpis2_' + ID() }, options: $root.VrijemeOpis, value: OCU_Vrijeme_opis2, optionsCaption: '...'"></select></div>
-                                </div>
-
-                                <div class="col col-lg-9">
-                                    <input class="form-control form-control-text-right" data-bind="attr: { id: 'OCU_inputVrijeme2_' + ID() }, value: OCU_Vrijeme_vrijednost2" />
-                                </div>
-
-                                <div class="col col-lg-8 styled-select">
-                                    <div><select class="form-control form-control2" data-bind="attr: { id: 'OCU_komboVrijemeJedinica2_' + ID() }, options: $root.VrijemeJedinica, value: OCU_Vrijeme_jedinica2, optionsCaption: '...'"></select></div>
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                    <div class="col col-lg-18">
-                        <textarea rows="6" wrap="soft" style="width: 100%;" data-bind="value: OCU_Ocuvanost_sazetak" />
+                        <div class="col col-lg-18">
+                            <textarea rows="6" wrap="soft" style="width: 100%;" data-bind="value: OCU_Ocuvanost_sazetak" />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </script>
+</script>
 
 
 
@@ -362,27 +365,28 @@
         <div class="row noMargin labelsHolder">
             <div class="col col-lg-36">Razdoblje / stil</div>
         </div>
-        <div id="KljucneRijeci" data-bind="foreach: $root.fullKartica().tbl_Kljucne_rijeci">
-            <div class="row noMargin" data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
-            @*<div class="row noMargin" data-bind="click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
-                <div class="col col-lg-36">
-                    <input class="form-control" data-bind="
+        @*<div id="KljucneRijeci" data-bind="foreach: $root.fullKartica().tbl_Kljucne_rijeci">*@
+          <div id="KljucneRijeci" data-bind="foreach: data">
+                <div class="row noMargin" data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
+                    @*<div class="row noMargin" data-bind="click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
+                    <div class="col col-lg-36">
+                        <input class="form-control" data-bind="
     upitiAutocomplete: {accValue: KLJ_IDT_Kljucna_rijec, tablica:'tbl_T_Kljucne_rijeci'}    " />
-                    @*<input class="form-control" id="Text2" data-bind="jqAuto: { autoFocus: true },
-                jqAutoSource: $root.Selects().tbl_T_Kljucne_rijeci,
-                jqTerm: $root.dodajTerm,
-                jqTermTablica: $root.dodajTermTablica,
-                jqTablica: 'tbl_T_Kljucne_rijeci',
-                jqModul: 'Kljucne_rijeci',
-                jqAutoValue: KLJ_IDT_Kljucna_rijec,
-                jqAutoSourceLabel: 'Pojam',
-                jqAutoSourceInputValue: 'Pojam',
-                jqAutoSourceValue: 'IDT' " />*@
+                        @*<input class="form-control" id="Text2" data-bind="jqAuto: { autoFocus: true },
+                        jqAutoSource: $root.Selects().tbl_T_Kljucne_rijeci,
+                        jqTerm: $root.dodajTerm,
+                        jqTermTablica: $root.dodajTermTablica,
+                        jqTablica: 'tbl_T_Kljucne_rijeci',
+                        jqModul: 'Kljucne_rijeci',
+                        jqAutoValue: KLJ_IDT_Kljucna_rijec,
+                        jqAutoSourceLabel: 'Pojam',
+                        jqAutoSourceInputValue: 'Pojam',
+                        jqAutoSourceValue: 'IDT' " />*@
+                    </div>
                 </div>
-            </div>
 
-        </div>
-    </script>
+            </div>
+</script>
 
     <script type="text/html" id="tmpNaslovi">
         <div class="row noMargin labelsHolder">
@@ -390,10 +394,10 @@
             <div class="col col-lg-6">Vrsta naslova</div>
             <div class="col col-lg-6">Jezik naslova</div>
         </div>
-
-        <div id="Naslovi" data-bind="foreach: $root.fullKartica().tbl_Naslovi">
+        <div id="Naslovi" data-bind="foreach: data">
+            @*<div id="Naslovi" data-bind="foreach: $root.fullKartica().tbl_Naslovi">*@
             <div class="row noMargin" data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
-            @*<div class="row noMargin" data-bind="attr: { id: 'tbl_Naslovi_' + ID() }, click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
+                @*<div class="row noMargin" data-bind="attr: { id: 'tbl_Naslovi_' + ID() }, click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
                 <div class="col col-lg-24">
                     <input id="inputNaslov" type="text" class="form-control" data-bind="value: NSL_Naslov" />
                 </div>
@@ -414,23 +418,24 @@
             <div class="col col-lg-12">Dio</div>
         </div>
         <div id="Mjere" data-bind="foreach: $root.fullKartica().tbl_Mjere">
-            <div class="row noMargin" data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
-            @*<div class="row noMargin" data-bind="click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
-                <div class="col col-lg-9 styled-select">
-                    <div><select class="form-control form-control2" data-bind="options: $root.Selects().tbl_T_Dimenzije, optionsText: 'Pojam', optionsValue: 'IDT', value: MJR_IDT_Dimenzija, optionsCaption: 'Please select...'"></select></div>
-                </div>
-                <div class="col col-lg-6">
-                    <input class="form-control form-control-text-right" type="text" data-bind="value: MJR_Mjera" />
-                </div>
-                <div class="col col-lg-9 styled-select">
-                    <div><select class="form-control form-control2" data-bind="options: $root.Selects().tbl_T_Jedinice_Mjere, optionsText: 'Pojam', optionsValue: 'IDT', value: MJR_IDT_Jedinica_mjere, optionsCaption: 'Please select...'"></select></div>
-                </div>
-                <div class="col col-lg-12 styled-select">
-                    <div><select class="form-control form-control2" data-bind="options: $root.Selects().tbl_T_Dijelovi, optionsText: 'Pojam', optionsValue: 'IDT', value: MJR_IDT_Mjereni_dio, optionsCaption: 'Please select...'"></select></div>
+            @*<div id="Mjere" data-bind="foreach: $root.fullKartica().tbl_Mjere">*@
+                <div class="row noMargin" data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
+                    @*<div class="row noMargin" data-bind="click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
+                    <div class="col col-lg-9 styled-select">
+                        <div><select class="form-control form-control2" data-bind="options: $root.Selects().tbl_T_Dimenzije, optionsText: 'Pojam', optionsValue: 'IDT', value: MJR_IDT_Dimenzija, optionsCaption: 'Please select...'"></select></div>
+                    </div>
+                    <div class="col col-lg-6">
+                        <input class="form-control form-control-text-right" type="text" data-bind="value: MJR_Mjera" />
+                    </div>
+                    <div class="col col-lg-9 styled-select">
+                        <div><select class="form-control form-control2" data-bind="options: $root.Selects().tbl_T_Jedinice_Mjere, optionsText: 'Pojam', optionsValue: 'IDT', value: MJR_IDT_Jedinica_mjere, optionsCaption: 'Please select...'"></select></div>
+                    </div>
+                    <div class="col col-lg-12 styled-select">
+                        <div><select class="form-control form-control2" data-bind="options: $root.Selects().tbl_T_Dijelovi, optionsText: 'Pojam', optionsValue: 'IDT', value: MJR_IDT_Mjereni_dio, optionsCaption: 'Please select...'"></select></div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </script>
+</script>
     <script type="text/html" id="tmpMaterijali">
         <div class="row noMargin labelsHolder">
             <div class="col col-lg-11">Materijal</div>
@@ -438,56 +443,58 @@
             <div class="col col-lg-14">Dio</div>
         </div>
         <div id="Materijali" data-bind="foreach: $root.fullKartica().tbl_U_Materijali_u_dijelovima">
-             <div class="row noMargin" data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
-            @*<div class="row noMargin" data-bind="click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
-                <div class="col-lg-11">
-                    <input class="form-control" data-bind="
+            @*<div id="Materijali" data-bind="foreach: $root.fullKartica().tbl_U_Materijali_u_dijelovima">*@
+                <div class="row noMargin" data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
+                    @*<div class="row noMargin" data-bind="click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">*@
+                    <div class="col-lg-11">
+                        <input class="form-control" data-bind="
     upitiAutocomplete: {accValue: U_IDT_Materijal, tablica:'tbl_T_Materijali'}    " />
-                    @*<input class="form-control" id="filter" data-bind="jqAuto: { autoFocus: true },
-                    jqAutoSource: $root.Selects().tbl_T_Materijali,
-                    jqTerm: $root.dodajTerm,
-                    jqTermTablica: $root.dodajTermTablica,
-                    jqTablica: 'tbl_T_Materijali',
-                    jqModul: 'Materijali',
-                    jqAutoValue: U_IDT_Materijal,
-                    jqAutoSourceLabel: 'Pojam',
-                    jqAutoSourceInputValue: 'Pojam',
-                    jqAutoSourceValue: 'IDT' " />*@
-                </div>
-                <div class="col-lg-11">
-                    <input class="form-control" data-bind="
+                        @*<input class="form-control" id="filter" data-bind="jqAuto: { autoFocus: true },
+                        jqAutoSource: $root.Selects().tbl_T_Materijali,
+                        jqTerm: $root.dodajTerm,
+                        jqTermTablica: $root.dodajTermTablica,
+                        jqTablica: 'tbl_T_Materijali',
+                        jqModul: 'Materijali',
+                        jqAutoValue: U_IDT_Materijal,
+                        jqAutoSourceLabel: 'Pojam',
+                        jqAutoSourceInputValue: 'Pojam',
+                        jqAutoSourceValue: 'IDT' " />*@
+                    </div>
+                    <div class="col-lg-11">
+                        <input class="form-control" data-bind="
     upitiAutocomplete: {accValue: U_IDT_Tehnika, tablica:'tbl_T_Tehnike'}    " />
-                    @*<input class="form-control" id="Text1" data-bind="jqAuto: { autoFocus: true },
-                    jqAutoSource: $root.Selects().tbl_T_Tehnike,
-                    jqTerm: $root.dodajTerm,
-                    jqTermTablica: $root.dodajTermTablica,
-                    jqTablica: 'tbl_T_Tehnike',
-                    jqModul: 'Tehnike',
-                    jqAutoValue: U_IDT_Tehnika,
-                    jqAutoSourceLabel: 'Pojam',
-                    jqAutoSourceInputValue: 'Pojam',
-                    jqAutoSourceValue: 'IDT' " />*@
-                </div>
-                <div class="col-lg-14 styled-select">
-                    <div><select class="form-control form-control2" data-bind="options: $root.Selects().tbl_T_Dijelovi, optionsText: 'Pojam', optionsValue: 'IDT', value: U_IDT_Dio_predmeta"></select></div>
+                        @*<input class="form-control" id="Text1" data-bind="jqAuto: { autoFocus: true },
+                        jqAutoSource: $root.Selects().tbl_T_Tehnike,
+                        jqTerm: $root.dodajTerm,
+                        jqTermTablica: $root.dodajTermTablica,
+                        jqTablica: 'tbl_T_Tehnike',
+                        jqModul: 'Tehnike',
+                        jqAutoValue: U_IDT_Tehnika,
+                        jqAutoSourceLabel: 'Pojam',
+                        jqAutoSourceInputValue: 'Pojam',
+                        jqAutoSourceValue: 'IDT' " />*@
+                    </div>
+                    <div class="col-lg-14 styled-select">
+                        <div><select class="form-control form-control2" data-bind="options: $root.Selects().tbl_T_Dijelovi, optionsText: 'Pojam', optionsValue: 'IDT', value: U_IDT_Dio_predmeta"></select></div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </script>
+</script>
 
 
 
     <script type="text/html" id="tmpSadrzaj">
         <div id="Sadrzaj" data-bind="foreach: $root.fullKartica().tbl_Sadrzaj">
-
-            <div class="row noMargin" data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
-                <div class="row noMargin" data-bind="attr: { id: 'tbl_Sadrzaj_' + ID() }">
-                    <div class="col col-lg-8 styled-select">
-                        <div>
-                            <select class="form-control form-control2" data-bind="options: $root.Selects().tbl_T_Vrste_sadrzaja, optionsText: 'Pojam', optionsValue: 'IDT', value: SDR_IDT_Vrsta, optionsCaption: 'Please select...'"></select></div>
-                    </div>
-                    <div class="col col-lg-28" data-bind="visible: $root.kojiSadrzaj('oiio', $data)">
-                        <input class="form-control" data-bind="attr: { id: 'selectOsobe_i_inst_odrednice_' + ID() }, jqAuto: { autoFocus: true },
+            @*<div id="Sadrzaj" data-bind="foreach: $root.fullKartica().tbl_Sadrzaj">*@
+                <div class="row noMargin" data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
+                    <div class="row noMargin" data-bind="attr: { id: 'tbl_Sadrzaj_' + ID() }">
+                        <div class="col col-lg-8 styled-select">
+                            <div>
+                                <select class="form-control form-control2" data-bind="options: $root.Selects().tbl_T_Vrste_sadrzaja, optionsText: 'Pojam', optionsValue: 'IDT', value: SDR_IDT_Vrsta, optionsCaption: 'Please select...'"></select>
+                            </div>
+                        </div>
+                        <div class="col col-lg-28" data-bind="visible: $root.kojiSadrzaj('oiio', $data)">
+                            <input class="form-control" data-bind="attr: { id: 'selectOsobe_i_inst_odrednice_' + ID() }, jqAuto: { autoFocus: true },
     jqAutoSource: $root.Selects().vw_T_Osobe_i_inst_odrednice,
     jqTerm: $root.dodajTerm,
     jqTermTablica: $root.dodajTermTablica,
@@ -497,23 +504,23 @@
     jqAutoSourceLabel: 'Pojam',
     jqAutoSourceInputValue: 'Pojam',
     jqAutoSourceValue: 'IDT' " />
-                    </div>
-                    <div class="col col-lg-28" data-bind="visible: $root.kojiSadrzaj('mjesto', $data)">
-                        <input class="form-control" data-bind="
+                        </div>
+                        <div class="col col-lg-28" data-bind="visible: $root.kojiSadrzaj('mjesto', $data)">
+                            <input class="form-control" data-bind="
     upitiAutocomplete: {accValue: SDR_IDT_Predmet, tablica:'tbl_T_Mjesta'}    " />
-                        @*<input class="form-control" data-bind="attr: { id: 'inputSadrzajMjesto_' + ID() }, jqAuto: { autoFocus: true },
-    jqAutoSource: $root.Selects().tbl_T_Mjesta,
-    jqTerm: $root.dodajTerm,
-    jqTermTablica: $root.dodajTermTablica,
-    jqTablica: 'tbl_T_Mjesta',
-    jqModul: 'Mjesta',
-    jqAutoValue: SDR_IDT_Predmet,
-    jqAutoSourceLabel: 'Pojam',
-    jqAutoSourceInputValue: 'Pojam',
-    jqAutoSourceValue: 'IDT' " />*@
-                    </div>
-                    <div class="col col-lg-28" data-bind="visible: $root.kojiSadrzaj('sadrzaj', $data)">
-                        <input class="form-control" data-bind="attr: { id: 'inputSadrzaj_' + ID() }, jqAuto: { autoFocus: true },
+                            @*<input class="form-control" data-bind="attr: { id: 'inputSadrzajMjesto_' + ID() }, jqAuto: { autoFocus: true },
+                        jqAutoSource: $root.Selects().tbl_T_Mjesta,
+                        jqTerm: $root.dodajTerm,
+                        jqTermTablica: $root.dodajTermTablica,
+                        jqTablica: 'tbl_T_Mjesta',
+                        jqModul: 'Mjesta',
+                        jqAutoValue: SDR_IDT_Predmet,
+                        jqAutoSourceLabel: 'Pojam',
+                        jqAutoSourceInputValue: 'Pojam',
+                        jqAutoSourceValue: 'IDT' " />*@
+                        </div>
+                        <div class="col col-lg-28" data-bind="visible: $root.kojiSadrzaj('sadrzaj', $data)">
+                            <input class="form-control" data-bind="attr: { id: 'inputSadrzaj_' + ID() }, jqAuto: { autoFocus: true },
     jqAutoSource: $root.Selects().tbl_T_Sadrzaj_predmet,
     jqTerm: $root.dodajTerm,
     jqTermTablica: $root.dodajTermTablica,
@@ -523,9 +530,9 @@
     jqAutoSourceLabel: 'Pojam',
     jqAutoSourceInputValue: 'Pojam',
     jqAutoSourceValue: 'IDT' " />
-                    </div>
-                    <div class="col col-lg-28" data-bind="visible: $root.kojiSadrzaj('vremenska', $data)">
-                        <input class="form-control" data-bind="attr: { id: 'inputVremenska_' + ID() }, jqAuto: { autoFocus: true },
+                        </div>
+                        <div class="col col-lg-28" data-bind="visible: $root.kojiSadrzaj('vremenska', $data)">
+                            <input class="form-control" data-bind="attr: { id: 'inputVremenska_' + ID() }, jqAuto: { autoFocus: true },
     jqAutoSource: $root.Selects().tbl_T_Vremenske_odrednice,
     jqTerm: $root.dodajTerm,
     jqTermTablica: $root.dodajTermTablica,
@@ -535,30 +542,31 @@
     jqAutoSourceLabel: 'Pojam',
     jqAutoSourceInputValue: 'Pojam',
     jqAutoSourceValue: 'IDT' " />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
     </script>
 
 
     <script type="text/html" id="tmpIzrada">
-        <div id="Izrada" class="repetitive" data-bind="foreach: $root.fullKartica().tbl_Izrada">
-            <div data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
-                <!--OVO JE HACK ZA INLINE-BLOCK PADDING NA DNU-->
-                <div class="row noMargin labelsHolder">
-                    <div class="col col-lg-6">Vrsta autorstva</div>
-                    <div class="col col-lg-16">Autor</div>
-                    <div class="col col-lg-14">Uloga autora</div>
-                </div>
-                <div class="row noMargin" data-bind="attr: { id: 'tbl_Izrada_' + ID() }">
-                    <div class="col col-lg-6 styled-select">
-                        <div><select class="form-control" data-bind="options: $root.Selects().tbl_T_Vrste_odgovornosti, optionsText: 'Pojam', optionsValue: 'IDT', value: IZR_IDT_Vrsta_odgovornosti, optionsCaption: 'Please select...'"></select></div>
+        <div id="Izrada" class="repetitive" data-bind="foreach: data">
+            @*<div id="Izrada" class="repetitive" data-bind="foreach: $root.fullKartica().tbl_Izrada">*@
+                <div data-bind="click: function () { $parent.odabrano($index()); }, css: { hasFocus: $parent.odabrano() == $index() }">
+                    <!--OVO JE HACK ZA INLINE-BLOCK PADDING NA DNU-->
+                    <div class="row noMargin labelsHolder">
+                        <div class="col col-lg-6">Vrsta autorstva</div>
+                        <div class="col col-lg-16">Autor</div>
+                        <div class="col col-lg-14">Uloga autora</div>
                     </div>
-                    <div class="col col-lg-16">
-                        <input class="form-control" data-bind="
+                    <div class="row noMargin" data-bind="attr: { id: 'tbl_Izrada_' + ID() }">
+                        <div class="col col-lg-6 styled-select">
+                            <div><select class="form-control" data-bind="options: $root.Selects().tbl_T_Vrste_odgovornosti, optionsText: 'Pojam', optionsValue: 'IDT', value: IZR_IDT_Vrsta_odgovornosti, optionsCaption: 'Please select...'"></select></div>
+                        </div>
+                        <div class="col col-lg-16">
+                            <input class="form-control" data-bind="
     upitiAutocomplete: {accValue: IZR_ID_Autor, tablica:'vw_T_Autori'}    " />
-                        @*<input class="form-control" data-bind="attr: { id: 'selectAutor_' + ID() }, jqAuto: { autoFocus: true },
+                            @*<input class="form-control" data-bind="attr: { id: 'selectAutor_' + ID() }, jqAuto: { autoFocus: true },
                         jqAutoSource: $root.Selects().vw_T_Autori,
                         jqTerm: $root.dodajTerm,
                         jqTermTablica: $root.dodajTermTablica,
@@ -568,21 +576,22 @@
                         jqAutoSourceLabel: 'Pojam',
                         jqAutoSourceInputValue: 'Pojam',
                         jqAutoSourceValue: 'IDT' " />*@
+                        </div>
+                        <div class="col col-lg-14 styled-select">
+                            <div><select id="selectUloga_23102" class="form-control form-control2" data-bind="attr: { id: 'selectUloga_' + ID() }, options: $root.Selects().tbl_T_Uloge_autora, optionsText: 'Pojam', optionsValue: 'IDT', value: IZR_IDT_Uloga, optionsCaption: 'Please select...'"></select></div>
+                        </div>
                     </div>
-                    <div class="col col-lg-14 styled-select">
-                        <div><select id="selectUloga_23102" class="form-control form-control2" data-bind="attr: { id: 'selectUloga_' + ID() }, options: $root.Selects().tbl_T_Uloge_autora, optionsText: 'Pojam', optionsValue: 'IDT', value: IZR_IDT_Uloga, optionsCaption: 'Please select...'"></select></div>
-                    </div>
-                </div>
-                <div class="row noMargin labelsHolder labelsHolder2">
-                    <div class="col col-lg-10">Mjesto izrade</div>
-                    <div class="col col-lg-26">Vrijeme izrade</div>
+                    <div class="row noMargin labelsHolder labelsHolder2">
+                        <div class="col col-lg-10">Mjesto izrade</div>
+                        <div class="col col-lg-26">Vrijeme izrade</div>
 
-                </div>
-                <div class="row noMargin" style="height: auto;" data-bind="attr: { id: 'tbl_Izrada_Mjesto' + ID() }"> <!--, click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">-->
-                    <div class="col col-lg-10">
-                        <input class="form-control" data-bind="
+                    </div>
+                    <div class="row noMargin" style="height: auto;" data-bind="attr: { id: 'tbl_Izrada_Mjesto' + ID() }">
+                        <!--, click: function () { $root.setSelected($index(), $parentContext.$index()); }, visible: $root.subformRowVisible($index(), $parentContext.$index())">-->
+                        <div class="col col-lg-10">
+                            <input class="form-control" data-bind="
     upitiAutocomplete: {accValue: IZR_IDT_Mjesto, tablica:'tbl_T_Mjesta'}    " />
-                        @*<input class="form-control" data-bind="attr: { id: 'inputMjesto_' + ID() }, jqAuto: { autoFocus: true },
+                            @*<input class="form-control" data-bind="attr: { id: 'inputMjesto_' + ID() }, jqAuto: { autoFocus: true },
                         jqAutoSource: $root.Selects().tbl_T_Mjesta,
                         jqTerm: $root.dodajTerm,
                         jqTermTablica: $root.dodajTermTablica,
@@ -592,46 +601,46 @@
                         jqAutoSourceLabel: 'Pojam',
                         jqAutoSourceInputValue: 'Pojam',
                         jqAutoSourceValue: 'IDT' " />*@
-                    </div>
-                    <div class="col col-lg-26 shaded autoHeight">
-                        <div class="col col-lg-36">
-                            <div class="col-lg-8 styled-select">
-                                <div><select class="form-control form-control2" data-bind="attr: { id: 'komboPeriod_' + ID() },options: $root.Vremena, optionsText: 'tekst', optionsValue: 'vrijednost', value: IZR_Period"></select></div>
-                            </div>
-
-                            <div class="col-lg-11 styled-select">
-                                <div><select class="form-control form-control2" data-bind="attr: { id: 'komboVrijemeOpis1_' + ID() }, options: $root.VrijemeOpis, value: IZR_Vrijeme_opis, optionsCaption: '...'"></select></div>
-                            </div>
-
-                            <div class="col-lg-9">
-                                <input class="form-control form-control-text-right" data-bind="attr: { id: 'inputVrijeme_' + ID() },value: IZR_Vrijeme_vrijednost" />
-                            </div>
-
-                            <div class="col-lg-8 styled-select">
-                                <div><select class="form-control form-control2" data-bind="attr: { id: 'komboVrijemeJedinica_' + ID() },options: $root.VrijemeJedinica, value: IZR_Vrijeme_jedinica, optionsCaption: '...'"></select></div>
-                            </div>
                         </div>
-                        <div class="col col-lg-36" data-bind="visible: IZR_Period">
-                            <div class="col-lg-8 styled-select2">
-                                <div><span class="form-control form-control2" style="line-height: 24px;">Vrijeme do:</span></div>
-                            </div>
+                        <div class="col col-lg-26 shaded autoHeight">
+                            <div class="col col-lg-36">
+                                <div class="col-lg-8 styled-select">
+                                    <div><select class="form-control form-control2" data-bind="attr: { id: 'komboPeriod_' + ID() },options: $root.Vremena, optionsText: 'tekst', optionsValue: 'vrijednost', value: IZR_Period"></select></div>
+                                </div>
 
-                            <div class="col-lg-11 styled-select">
-                                <div><select id="komboVrijemeOpis2" class="form-control form-control2" data-bind="attr: { id: 'komboVrijemeOpis2_' + ID() },options: $root.VrijemeOpis, value: IZR_Vrijeme_opis2, optionsCaption: '...'"></select></div>
-                            </div>
+                                <div class="col-lg-11 styled-select">
+                                    <div><select class="form-control form-control2" data-bind="attr: { id: 'komboVrijemeOpis1_' + ID() }, options: $root.VrijemeOpis, value: IZR_Vrijeme_opis, optionsCaption: '...'"></select></div>
+                                </div>
 
-                            <div class="col-lg-9">
-                                <input class="form-control form-control-text-right" data-bind="attr: { id: 'inputVrijeme2_' + ID() },value: IZR_Vrijeme_vrijednost2" />
-                            </div>
+                                <div class="col-lg-9">
+                                    <input class="form-control form-control-text-right" data-bind="attr: { id: 'inputVrijeme_' + ID() },value: IZR_Vrijeme_vrijednost" />
+                                </div>
 
-                            <div class="col-lg-8 styled-select">
-                                <div><select class="form-control form-control2" data-bind="attr: { id: 'komboVrijemeJedinica2_' + ID() }, options: $root.VrijemeJedinica, value: IZR_Vrijeme_jedinica2, optionsCaption: '...'"></select></div>
+                                <div class="col-lg-8 styled-select">
+                                    <div><select class="form-control form-control2" data-bind="attr: { id: 'komboVrijemeJedinica_' + ID() },options: $root.VrijemeJedinica, value: IZR_Vrijeme_jedinica, optionsCaption: '...'"></select></div>
+                                </div>
+                            </div>
+                            <div class="col col-lg-36" data-bind="visible: IZR_Period">
+                                <div class="col-lg-8 styled-select2">
+                                    <div><span class="form-control form-control2" style="line-height: 24px;">Vrijeme do:</span></div>
+                                </div>
+
+                                <div class="col-lg-11 styled-select">
+                                    <div><select id="komboVrijemeOpis2" class="form-control form-control2" data-bind="attr: { id: 'komboVrijemeOpis2_' + ID() },options: $root.VrijemeOpis, value: IZR_Vrijeme_opis2, optionsCaption: '...'"></select></div>
+                                </div>
+
+                                <div class="col-lg-9">
+                                    <input class="form-control form-control-text-right" data-bind="attr: { id: 'inputVrijeme2_' + ID() },value: IZR_Vrijeme_vrijednost2" />
+                                </div>
+
+                                <div class="col-lg-8 styled-select">
+                                    <div><select class="form-control form-control2" data-bind="attr: { id: 'komboVrijemeJedinica2_' + ID() }, options: $root.VrijemeJedinica, value: IZR_Vrijeme_jedinica2, optionsCaption: '...'"></select></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </script>
 
 

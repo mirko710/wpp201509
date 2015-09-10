@@ -1116,7 +1116,7 @@ $(function () {
             }
 
 
-            var getExportFullKarticaNoLocalFirst = function (brojid, karticaFull) {
+            var getExportFullKarticaoldnolocal = function (brojid, karticaFull) {
                 karticaFull([]);
                 //nazivi([]);
                 var query = breeze.EntityQuery.from("tbl_Kartica")
@@ -1128,7 +1128,7 @@ $(function () {
                         .fail(queryFailed);
                 function querySucceeded(data) {
                     my.vm.fullkartica(data.results);
-                    karticaFull(my.vm.fullkartica());
+                    karticaFull(my.vm.fullkartica()[0]);
                     // nazivi(karticaFull()[0]['tbl_Nazivi']());
                     //alert('kartica Export');
 

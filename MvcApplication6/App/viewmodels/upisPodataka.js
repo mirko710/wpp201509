@@ -15,7 +15,7 @@
     var dialogNewRecord = null;
     var selMmedia = ko.observableArray([]);
     var selPodOznake = ko.observableArray([]);
-    var fullKartica = ko.observableArray([]);
+    var fullKartica = ko.observable([]);
     var transferKartica = ko.observableArray([]);
     var selZaKomboOdabirInvBroja = ko.observableArray([]);
     var mmediaFormaIndex =-1;
@@ -420,11 +420,13 @@
             tmpFormArray.push(tmpFormE);
             //alert(tmpForm().title);
             if (index == redoslijedFormi.length-1) {
-                deref.resolve(true);
+                deref.resolve(tmpFormArray());
             }
             
         })
-        vm.forme(tmpFormArray());
+        //vm.forme(tmpFormArray());
+        //vm.forme.push.apply(vm.forme, tmpFormArray());
+        console.log("jeldošo");
         return deref.promise;
 
 
@@ -451,121 +453,68 @@
                         regNav.init();
                     }
                     ucitajParametreZaKorisnike();
-
+ 
                     data.getDefForme()
                         .then(function (forme) {
-                            postaviForme(forme);
-                        });
+                            postaviForme(forme)
+                            .then(function (tmpFormArray) {
+                                vm.forme.push.apply(vm.forme, tmpFormArray);
+                                startID(-1);
 
-                    startID(-1);
 
+                                firstLoad = false;
 
-                    firstLoad = false;
-                    //console.log(data.Selects.Kljucne_rijeci[0]);
+                                //console.log(data.Selects.Kljucne_rijeci[0]);
 
            
-
-                    zbIndex.subscribe(function (newValue) {
-                        isLoading(false);
-                        //console.log('promjena zbirke');
-                        if (newValue && newValue != -1) {
-                            return data.getPrviIzZbirke(newValue)
-                                .then(function (data) {
-                                    if (data > 0) {
-                                        currentBrojid(data);
-                                        upisNavigator.ulazIDBroj(data);
-                                    }
-                                    //regNav.ulazIDBroj(data);
-                                })
-                        }
-                    })
-
-                    komboIDBroj.subscribe(function(newValue){
-                        if (newValue && newValue>-1)  {
-                            currentBrojid(newValue);
-                            upisNavigator.ulazIDBroj(newValue);
-                            regNav.ulazIDBroj(newValue);
-                            setTimeoutKomboIDBroj();
-                            //komboIDBroj(-1);
-                        }
-
-                    })
-
-                    currentBrojid.subscribe(function (newValue) {
-
-                        if (!isLoading()) {
-                            isLoading(true); console.log('subscribe' + newValue);
-                            if (!newValue) {
-                                currentBrojid(curBrojidUndo);
-                            } else {
-                                if (newValue != undefined) {
-                                    //data.rejectSejv;///// or save or check and ask to be saved
-                                    data.saveChanges();
-                                    if (!isNaN(parseInt(newValue))) {
-                                        //alert(parseInt(id) + ' ' + currentBrojid());
-                                        startID(parseInt(newValue));
-                                        curBrojidUndo = startID();
-                                    }
-                                };
-                                //alert(parseInt(id) + ' testttZero');
-                                $(".Overlay").addClass("visible");
-                                return data.getExportFullKartica(startID(), transferKartica)
-                                    .then(function () {
-                                        getKartica(startID()).then(function () {
-
-                                            router.navigate(adresaZaUpis + +startID(), false);
-                                            lockInput();
-                                            $(".Overlay").removeClass("visible");
-                                        })
-                                    })
-                                    .fail(function (error) { alert("Query failed1: " + error.message); });
-                            }
-               
-                        }
-                    });
-
- 
-
+                                zaZbIndexSubscribe();
+                                zaKomboIDBrojSubscribe();
+                                
+                                zaCurrentIDBrojSubscribe();
      
             
-                    if (id != undefined) {
+                                if (id != undefined) {
                
                 
-                        if (!isNaN(parseInt(id))) {
+                                    if (!isNaN(parseInt(id))) {
 
                     
-                            startID(parseInt(id));
-                            // alert(parseInt(id) + ' uno');
-                            currentBrojid(startID());
-                            upisNavigator.ulazIDBroj(startID());
-                            regNav.ulazIDBroj(startID());
-                            //promijeniZapis(startID(), "error2");
-
-                        } else {
-                            if (startID() == -1) {
-                                var prviIzZbirke = data.getPrviIzZbirke(zbIndex())
-                                    .then(function (ydata) {
-
-                                        currentBrojid(ydata);
-                                        upisNavigator.ulazIDBroj(ydata);
+                                        startID(parseInt(id));
+                                        // alert(parseInt(id) + ' uno');
+                                        currentBrojid(startID());
+                                        upisNavigator.ulazIDBroj(startID());
                                         regNav.ulazIDBroj(startID());
-                                    })
-                            }
-                            else {
-                                upisNavigator.ulazIDBroj(startID());
-                                regNav.ulazIDBroj(startID());
-                                promijeniZapis(startID(), "error4");
-                            }
+                                        //promijeniZapis(startID(), "error2");
 
-                        }
-                    } else {
-                        upisNavigator.ulazIDBroj(startID());
-                        regNav.ulazIDBroj(startID());
-                        promijeniZapis(startID(),"error5");
-                    }
+                                    } else {
+                                        if (startID() == -1) {
+                                            var prviIzZbirke = data.getPrviIzZbirke(zbIndex())
+                                                .then(function (ydata) {
+
+                                                    currentBrojid(ydata);
+                                                    upisNavigator.ulazIDBroj(ydata);
+                                                    regNav.ulazIDBroj(ydata);
+                                                })
+                                        }
+                                        else {
+                                            upisNavigator.ulazIDBroj(startID());
+                                            regNav.ulazIDBroj(startID());
+                                            promijeniZapis(startID(), "error4");
+                                        }
+
+                                    }
+                                } else {
+                                    upisNavigator.ulazIDBroj(startID());
+                                    regNav.ulazIDBroj(startID());
+                                    promijeniZapis(startID(),"error5");
+                                }
  
-                    upisNavigator.currentZbirkaIDT(zbIndex);
-                });
+                                upisNavigator.currentZbirkaIDT(zbIndex);
+                            });  
+                         });
+                    });
+
+
         } else {
 
 
@@ -610,6 +559,7 @@
  
     }
 
+
     //function refresh() {
             
     //     return data.getExportFullKartica(43,fullKartica);
@@ -617,6 +567,71 @@
         //}
 
 
+    function zaCurrentIDBrojSubscribe() {
+        currentBrojid.subscribe(function (newValue) {
+
+            if (!isLoading()) {
+                isLoading(true); console.log('subscribe' + newValue);
+                if (!newValue) {
+                    currentBrojid(curBrojidUndo);
+                } else {
+                    if (newValue != undefined) {
+                        //data.rejectSejv;///// or save or check and ask to be saved
+                        data.saveChanges();
+                        if (!isNaN(parseInt(newValue))) {
+                            //alert(parseInt(id) + ' ' + currentBrojid());
+                            startID(parseInt(newValue));
+                            curBrojidUndo = startID();
+                        }
+                    };
+                    //alert(parseInt(id) + ' testttZero');
+                    $(".Overlay").addClass("visible");
+                    return data.getExportFullKartica(startID(), transferKartica)
+                        .then(function () {
+                            getKartica(startID()).then(function () {
+
+                                router.navigate(adresaZaUpis + +startID(), false);
+                                lockInput();
+                                $(".Overlay").removeClass("visible");
+                            })
+                        })
+                        .fail(function (error) { alert("Query failed1: " + error.message); });
+                }
+
+            }
+        });
+    }
+    function zaZbIndexSubscribe() {
+
+        zbIndex.subscribe(function (newValue) {
+            isLoading(false);
+            //console.log('promjena zbirke');
+            if (newValue && newValue != -1) {
+                return data.getPrviIzZbirke(newValue)
+                    .then(function (data) {
+                        if (data > 0) {
+                            currentBrojid(data);
+                            upisNavigator.ulazIDBroj(data);
+                        }
+                        //regNav.ulazIDBroj(data);
+                    })
+            }
+        })
+        function zaKomboIDBrojSubscribe() {
+            komboIDBroj.subscribe(function (newValue) {
+                if (newValue && newValue > -1) {
+                    currentBrojid(newValue);
+                    upisNavigator.ulazIDBroj(newValue);
+                    regNav.ulazIDBroj(newValue);
+                    setTimeoutKomboIDBroj();
+                    //komboIDBroj(-1);
+                }
+
+            })
+
+        }
+
+    }
     function setTimeoutKomboIDBroj() {
             setTimeout(function () {
                 komboIDBroj(null);
@@ -751,19 +766,19 @@
 
          ///Napuni podatke za forme
         ////sve kaj je vezano za tbl_Kartica ide preko nje...
-
+        fullKartica(transferKartica());
 
         $.each(vm.forme(), function (i, p) {
             //alert(i + vm.forme()[i]['title']());
 
             if (p['tablica']() != "tbl_Kartica") {
                 //p['data'](transferKartica()[0][p['tablica']()]());
-                //p['data'](transferKartica()[p['tablica']()]());
+                p['data'](transferKartica()[p['tablica']()]());
                 if (p['tablica']() == "tbl_Media_collector") {
                     selMmedia(p['data']());//posebno za identity fotku sa strane
                 }
-                p['recordCount'](transferKartica()[p['tablica']()]().length);
-               // p['recordCount'](p['data']().length);
+                //p['recordCount'](transferKartica()[p['tablica']()]().length);
+                p['recordCount'](p['data']().length);
             } else {
                 p['recordCount'](1);
             }
@@ -796,10 +811,11 @@
         };
 
 
+        console.log(fullKartica());
 
         manualNav = false;
 
-        fullKartica(transferKartica());
+
         isLoading(false);
         //if (fullKartica().length > 0) {
         if (fullKartica()) {
@@ -1345,7 +1361,7 @@
     function kojiSadrzaj(p1, data) {
         var retVar = false;
         //alert(p1 + data);
-        console.log(data);
+        //console.log(data);
         if (p1 == 'mjesto' && data['SDR_IDT_Vrsta']() == 3) retVar = true;
         if (p1 == 'sadrzaj' && data['SDR_IDT_Vrsta']() == 6) retVar = true;
         if (p1 == 'vremenska' && data['SDR_IDT_Vrsta']() == 2) retVar = true;

@@ -166,3 +166,24 @@ END
 
 GO
 
+USE [M_DATA_PPMHP_WEB]
+GO
+
+/****** Object:  View [dbo].[vw_Zbirke_prva_zadnja_zbroj_novo]    Script Date: 09/10/2015 17:04:30 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[vw_Zbirke_prva_zadnja_zbroj_novo]
+AS
+SELECT     TOP (100) PERCENT dbo.vw_Zbirke_prva_zadnja_zbroj_PRIM.zbroj, tbl_Kartica_1.ID_Broj AS prvi, dbo.tbl_Kartica.ID_Broj AS zadnji, dbo.tbl_T_Zbirke.Pojam, dbo.tbl_T_Zbirke.Nad_IDT, 
+                      dbo.tbl_T_Zbirke.IDT
+FROM         dbo.vw_Zbirke_prva_zadnja_zbroj_PRIM INNER JOIN
+                      dbo.tbl_Kartica AS tbl_Kartica_1 ON dbo.vw_Zbirke_prva_zadnja_zbroj_PRIM.prvi = tbl_Kartica_1.KRT_SORT_Inv_br INNER JOIN
+                      dbo.tbl_Kartica ON dbo.vw_Zbirke_prva_zadnja_zbroj_PRIM.zadnji = dbo.tbl_Kartica.KRT_SORT_Inv_br LEFT OUTER JOIN
+                      dbo.tbl_T_Zbirke ON dbo.vw_Zbirke_prva_zadnja_zbroj_PRIM.KRT_IDT_Zbirka = dbo.tbl_T_Zbirke.IDT
+ORDER BY dbo.tbl_T_Zbirke.Pojam
+
+GO

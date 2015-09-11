@@ -242,7 +242,7 @@ define(['services/dataService', 'services/registracijaNavigator'],
                 }
 
             } else {
-                feder.resolve(-1);
+                feder.resolve(internalNavigator()[recIndex()]['ID_Broj']);
             }
             return feder.promise;
         }

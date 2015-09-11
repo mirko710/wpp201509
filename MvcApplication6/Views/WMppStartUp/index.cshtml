@@ -679,7 +679,7 @@
 
     <script type="text/html" id="tmpNalazista">
         <div> <!--- data-bind="foreach: $root.fullKartica">-->
-            <div class="row noMargin autoHeight" data-bind="attr: { id: 'Nalaziste_' + AutoBroj() }">
+            <div class="row noMargin autoHeight" data-bind="attr: { id: 'Nalaziste_' +  $root.fullKartica().AutoBroj }">
                 <div class="col-lg-18">
                     <div class="row noMargin labelsHolder">
                         <div class="col col-lg-36">Lokalitet</div>

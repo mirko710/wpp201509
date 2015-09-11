@@ -547,8 +547,8 @@
                     data.saveChanges();
                     currentBrojid(parseInt(id));
                     //upisNavigator.currentZbirkaIDT(zbIndex);
-                    upisNavigator.ulazIDBroj(parseInt(id))
-                    regNav.ulazIDBroj(parseInt(id))
+                   // upisNavigator.ulazIDBroj(parseInt(id))
+                    //regNav.ulazIDBroj(parseInt(id))
                     //return data.getExportFullKartica(startID, fullKartica).then(getKartica);
                 } else {
                     return;
@@ -589,8 +589,9 @@
                     return data.getExportFullKartica(startID(), transferKartica)
                         .then(function () {
                             getKartica(startID()).then(function () {
-
-                                router.navigate(adresaZaUpis + +startID(), false);
+                                upisNavigator.ulazIDBroj(startID())
+                                regNav.ulazIDBroj(startID())
+                                router.navigate(adresaZaUpis  +startID(), false);
                                 lockInput();
                                 $(".Overlay").removeClass("visible");
                             })
@@ -617,19 +618,21 @@
                     })
             }
         })
-        function zaKomboIDBrojSubscribe() {
-            komboIDBroj.subscribe(function (newValue) {
-                if (newValue && newValue > -1) {
-                    currentBrojid(newValue);
-                    upisNavigator.ulazIDBroj(newValue);
-                    regNav.ulazIDBroj(newValue);
-                    setTimeoutKomboIDBroj();
-                    //komboIDBroj(-1);
-                }
 
-            })
 
-        }
+    }
+
+    function zaKomboIDBrojSubscribe() {
+        komboIDBroj.subscribe(function (newValue) {
+            if (newValue && newValue > -1) {
+                currentBrojid(newValue);
+                upisNavigator.ulazIDBroj(newValue);
+                regNav.ulazIDBroj(newValue);
+                setTimeoutKomboIDBroj();
+                //komboIDBroj(-1);
+            }
+
+        })
 
     }
     function setTimeoutKomboIDBroj() {

@@ -187,3 +187,118 @@ FROM         dbo.vw_Zbirke_prva_zadnja_zbroj_PRIM INNER JOIN
 ORDER BY dbo.tbl_T_Zbirke.Pojam
 
 GO
+
+USE [M_DATA_PPMHP_WEB]
+GO
+/****** Object:  StoredProcedure [dbo].[postaviIdentity]    Script Date: 09/11/2015 14:08:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[usp_popraviSort] 
+	-- Add the parameters for the stored procedure here
+	@sifra nvarchar(50)
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	WITH RowNumbers AS 
+	(
+		select   *,
+				 RowNum = row_number() OVER ( order by sort )
+		from     [M_DATA_PPMHP_WEB].[dbo].[tbl_temp_pretrazivanje_odabrano] 
+		where sifra=@sifra
+	)
+	UPDATE  RowNumbers
+	SET     sort = RowNum
+	
+	select @@ROWCOUNT as polje
+END
+
+go
+
+USE [M_DATA_PPMHP_WEB]
+GO
+/****** Object:  Table [dbo].[tbl_Def_Struktura_upiti_refiners]    Script Date: 09/11/2015 15:05:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tbl_Def_Struktura_upiti_refiners](
+	[IDT] [int] NOT NULL,
+	[Pojam] [nvarchar](150) NULL,
+	[Naziv] [nvarchar](150) NULL,
+	[T_Tbl] [nvarchar](150) NULL,
+	[loadTable] [nvarchar](50) NULL,
+	[Napomena] [nvarchar](150) NULL,
+	[Tablica] [nvarchar](150) NULL,
+	[filter] [nvarchar](50) NULL,
+	[template] [nvarchar](50) NULL,
+	[title] [nvarchar](50) NULL,
+	[refiner] [bit] NOT NULL,
+	[ID_Broj_polje] [nvarchar](50) NULL,
+	[ime] [nvarchar](50) NULL,
+	[dIme] [nvarchar](50) NULL,
+	[refinerSort] [int] NULL,
+ CONSTRAINT [PK_tbl_Def_Struktura_upiti_refiners] PRIMARY KEY CLUSTERED 
+(
+	[IDT] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (100, N'Odgovorna osoba za upis', N'INV_ID_Inventirao', N'vw_T_Kustosi', N'select', N'=;<>', N'tbl_Inventarizacija', NULL, NULL, NULL, 0, NULL, N'Kustosi', N'kustosi', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (116, N'Mjesto izrade', N'IZR_IDT_Mjesto', N'tbl_T_Mjesta', N'remote', N'=;<>;upisan;sadrži', N'tbl_Izrada', N'MJESTA', N'refMjesta', N'Mjesta izrade', 1, NULL, N'Mjesta', N'mjesta', 4)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (117, N'Autor', N'IZR_ID_Autor', N'vw_T_Autori', N'remote', N'=;<>;upisan;sadrži', N'tbl_Izrada', N'AUTORI', N'refAutori', N'Autori', 1, NULL, N'upitAutori', N'upitAutori', 3)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (118, N'Uloga autora', N'IZR_IDT_Uloga', N'tbl_T_Uloge_autora', N'select', N'=;<>', N'tbl_Izrada', NULL, NULL, NULL, 0, NULL, N'Uloge_autora', N'uloge_autora', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (120, N'Datacija', N'datacija', NULL, NULL, N'upisan;sadrži', N'vw_Stuff_ALL', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (129, N'Vrsta odgovornosti', N'IZR_IDT_Vrsta_odgovornosti', N'tbl_T_Vrste_odgovornosti', N'select', N'=;<>', N'tbl_Izrada', NULL, NULL, NULL, 0, NULL, N'Vrste_odgovornosti', N'vrste_odgovornosti', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (131, N'Zbirka', N'KRT_IDT_Zbirka', N'tbl_T_Zbirke', N'select', N'=;<>', N'tbl_Kartica', N'ZBIRKE', N'refZbirke', N'Zbirke', 1, NULL, N'Zbirke', N'zbirke', 1)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (132, N'Inventarna oznaka', N'KRT_Inventarni_broj', NULL, NULL, N'=;<>;sadrži;>;<', N'tbl_Kartica', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (134, N'Ur. broj akta nabave', N'KRT_Nabava_Broj_spisa', NULL, NULL, N'sadrži', N'tbl_Kartica', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (135, N'Napomena uz nabavu', N'KRT_Nabava_Napomena', NULL, NULL, N'sadrži', N'tbl_Kartica', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (136, N'Datum nabave S', N'KRT_Nabava_datum_SORT', NULL, NULL, N'prije;poslije;izmeðu', N'tbl_Kartica', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (137, N'Cijena', N'KRT_Nabava_cijena', NULL, NULL, N'>;<;=', N'tbl_Kartica', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (138, N'Oblik nabave', N'KRT_IDT_Nabava_oblik', N'tbl_T_Pribavljanje', N'remote', N'=;<>', N'tbl_Kartica', NULL, NULL, NULL, 0, NULL, N'Pribavljanje', N'pribavljanje', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (139, N'Izvor nabave', N'KRT_ID_Nabava_Izvor', N'vw_T_Izvori_nabave', N'remote', N'=;<>', N'tbl_Kartica', NULL, NULL, NULL, 0, NULL, N'Izvori_nabave', N'izvor_nabave', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (140, N'Valuta', N'KRT_IDT_Nabava_valuta', N'tbl_T_Valute', N'select', N'=;<>', N'tbl_Kartica', NULL, NULL, NULL, 0, NULL, N'Valute', N'valute', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (141, N'Opis predmeta', N'KRT_Opis_Fizicki_opis', NULL, NULL, N'sadrži', N'tbl_Kartica', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (144, N'Sakupljaè', N'KRT_ID_Prikupljanje_Sakupljac', N'vw_T_Sakupljaci', N'remote', N'=;<>', N'tbl_Kartica', NULL, NULL, NULL, 0, NULL, N'Sakupljaci', N'sakupljaci', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (145, N'Naèin prikupljanja', N'KRT_IDT_Prikupljanje_Nacin', N'tbl_T_Nacini_prikupljanja', N'remote', N'=;<>', N'tbl_Kartica', NULL, NULL, NULL, 0, NULL, N'Nacini_prikupljanja', N'nacini_prikupljanja', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (146, N'Lokalitet/nalazište', N'KRT_IDT_Prikupljanje_Nalaziste', N'tbl_T_Nalaziste', N'remote', N'=;<>', N'tbl_Kartica', N'NALAZIŠTA', N'refNalazista', N'Nalazišta', 1, NULL, N'Nalaziste', N'nalaziste', 5)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (147, N'Stalni smještaj', N'KRT_IDT_Smjestaj_Stalni', N'tbl_T_Smjestaj_stalni', N'remote', N'=;<>', N'tbl_Kartica', NULL, NULL, NULL, 0, NULL, N'Smjestaj_stalni', N'smjestaj_stalni', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (149, N'Trenutaèni smještaj', N'KRT_IDT_Smjestaj_Privremeni', N'tbl_T_Smjestaj_privremeni', N'remote', N'=;<>', N'tbl_Kartica', NULL, NULL, NULL, 0, NULL, N'Smjestaj_privremeni', N'smjestaj_privremeni', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (150, N'Trenutaèni status', N'KRT_IDT_Smjestaj_Privremeni_vrsta', N'tbl_T_Smjestaj_privremeni_vrsta', N'remote', N'=;<>', N'tbl_Kartica', NULL, NULL, NULL, 0, NULL, N'Smjestaj_privremeni_vrsta', N'smjestaj_privremeni_vrsta', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (183, N'Razdoblje/stil', N'KLJ_IDT_Kljucna_rijec', N'tbl_T_Kljucne_rijeci', N'remote', N'=;<>', N'tbl_Kljucne_rijeci', N'RAZDOBLJA', N'refRazdoblja', N'Razdoblja', 1, NULL, N'Kljucne_rijeci', N'kljucne_rijeci', 8)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (185, N'Mjereni dio', N'MJR_IDT_Mjereni_dio', N'tbl_T_Dijelovi', N'upitSelect', N'=;<>', N'tbl_Mjere', NULL, NULL, NULL, 0, NULL, N'Dijelovi', N'dijelovi', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (186, N'Mjera', N'MJR_Mjera', NULL, NULL, N'=;<>;<;>;upisan;sadrži', N'tbl_Mjere', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (187, N'Dimenzija', N'MJR_IDT_Dimenzija', N'tbl_T_Dimenzije', N'upitSelect', N'=;<>', N'tbl_Mjere', NULL, NULL, NULL, 0, NULL, N'Dimenzije', N'dimenzije', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (188, N'Jedinica mjere', N'MJR_IDT_Jedinica_mjere', N'tbl_T_Jedinice_Mjere', N'upitSelect', N'=;<>', N'tbl_Mjere', NULL, NULL, NULL, 0, NULL, N'Jedinice', N'jedinice', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (190, N'Naslov', N'NSL_Naslov', NULL, NULL, N'upisan;sadrži', N'tbl_Naslovi', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (191, N'Vrsta naslova', N'NSL_IDT_Vrsta_naslova', N'tbl_T_Vrste_naslova', N'select', N'=;<>', N'tbl_Naslovi', NULL, NULL, NULL, 0, NULL, N'Vrste_naslova', N'vrste_naslova', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (193, N'Jezik', N'NSL_IDT_Jezik_naslova', N'tbl_T_Jezici', N'select', N'=;<>', N'tbl_Naslovi', NULL, NULL, NULL, 0, NULL, N'Jezici', N'Jezici', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (204, N'Vrsta naziva predmeta (knjiž./dijal.)', N'NAZ_IDT_Vrsta_naziva', N'tbl_T_Vrste_naziva', N'select', N'=;<>', N'tbl_Nazivi', NULL, NULL, NULL, 0, NULL, N'Vrste_naziva', N'vrste_naziva', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (207, N'Stanje', N'OCU_IDT_Ocuvanost', N'tbl_T_Ocuvanosti', N'remote', N'=;<>', N'tbl_Ocuvanost', NULL, NULL, NULL, 0, NULL, N'Ocuvanosti', N'ocuvanosti', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (260, N'Vrsta', N'SDR_IDT_Vrsta', N'tbl_T_Vrste_sadrzaja', N'select', N'=;<>', N'tbl_Sadrzaj', NULL, NULL, NULL, 0, NULL, N'Vrste_sadrzaja', N'vrste_sadrzaja', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (298, N'Dijelovi predmeta', N'U_IDT_Dio_predmeta', N'tbl_T_Dijelovi', N'upitSelect', N'=;<>', N'tbl_U_Materijali_u_dijelovima', NULL, NULL, NULL, 0, NULL, N'Dijelovi', N'dijelovi', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (299, N'Materijal', N'U_IDT_Materijal', N'tbl_T_Materijali', N'remote', N'=;<>;sadrži;upisan', N'tbl_U_Materijali_u_dijelovima', N'MATERIJALI', N'refMaterijali', N'Materijali', 1, NULL, N'Materijali', N'materijali', 6)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (300, N'Tehnika', N'U_IDT_Tehnika', N'tbl_T_Tehnike', N'remote', N'=;<>;sadrži;upisan', N'tbl_U_Materijali_u_dijelovima', N'TEHNIKE', N'refTehnike', N'Tehnike', 1, NULL, N'Tehnike', N'tehnike', 7)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (462, N'Vrsta / naziv predmeta', N'NAZ_IDT_Naziv_predmeta', N'tbl_T_Nazivi', N'remote', N'=;<>;sadrži;upisan', N'tbl_Nazivi', N'NAZIVI', N'refNazivi', N'Vrsta / Naziv', 1, NULL, N'Nazivi', N'nazivi', 2)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (463, N'Vremenske odrednice', N'SDR_IDT_Predmet', N'tbl_T_Vremenske_odrednice', N'remote', N'=;<>', N'tbl_Sadrzaj', NULL, NULL, NULL, 0, NULL, N'Vremenske_odrednice', N'vremenske_odrednice', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (464, N'Zemljopisne odrednice', N'SDR_IDT_Predmet', N'tbl_T_Mjesta', N'remote', N'=;<>', N'tbl_Sadrzaj', NULL, NULL, NULL, 0, NULL, N'Mjesta', N'mjesta', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (465, N'Tema, opæi pojam', N'SDR_IDT_Predmet', N'tbl_T_Sadrzaj_predmet', N'remote', N'=;<>', N'tbl_Sadrzaj', NULL, NULL, NULL, 0, NULL, N'Sadrzaj_predmet', N'sadrzaj_predmet', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (466, N'Osobe, tijela, obitelji', N'SDR_IDT_Predmet', N'vw_T_Osobe_i_inst_odrednice', N'remote', N'=;<>', N'tbl_Sadrzaj', NULL, NULL, NULL, 0, NULL, N'Osobe_i_inst_odrednice', N'osobe_i_inst_odrednice', NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (5554, N'Pridružena fotografija', N'MC_Staza_slike', NULL, NULL, N'pridružena', N'vw_Stuff_ALL', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (5555, N'Sve Upisano', N'SveUpisano', NULL, NULL, N'sadrži;upisan', N'vw_Stuff_ALL', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (8888, N'Mjera complex', N'mjera', NULL, NULL, N'=;manje od;veæe od;izmeðu', N'tbl_Mjere', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL)
+INSERT [dbo].[tbl_Def_Struktura_upiti_refiners] ([IDT], [Pojam], [Naziv], [T_Tbl], [loadTable], [Napomena], [Tablica], [filter], [template], [title], [refiner], [ID_Broj_polje], [ime], [dIme], [refinerSort]) VALUES (9999, N'Vrijeme izrade', N'datum', NULL, NULL, N'prije;poslije;izmeðu', N'tbl_Izrada', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL)
+/****** Object:  Default [DF_tbl_Def_Struktura_upiti_refiners_refiner]    Script Date: 09/11/2015 15:05:55 ******/
+ALTER TABLE [dbo].[tbl_Def_Struktura_upiti_refiners] ADD  CONSTRAINT [DF_tbl_Def_Struktura_upiti_refiners_refiner]  DEFAULT ((0)) FOR [refiner]
+GO

@@ -445,13 +445,17 @@
 
             if (defStrukturaRedak.T_Tbl) {
                 tmpRedakUpita.termTablica(defStrukturaRedak.T_Tbl);
-                tmpRedakUpita.combo(1);
+                tmpRedakUpita.combo(2);
+                if (tmpRedakUpita.upitOperator() != "=" && tmpRedakUpita.upitOperator() != "<>") {
+                    tmpRedakUpita.combo(1);
+                }
+
                 //$("#redakUpita_" + index)
             } else {
                 tmpRedakUpita.termTablica("tbl_T_Zbirke");
-                if(tmpRedakUpita.upitOperator()=="="){
+                //if(tmpRedakUpita.upitOperator()=="="){
                     tmpRedakUpita.combo(1);
-                }
+                //}
             }
             // alert("changePolje");
             if (tmpRedakUpita.poljeIDT() == 8888) {

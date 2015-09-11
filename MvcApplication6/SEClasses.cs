@@ -1371,8 +1371,25 @@ namespace WMpp
                     scom.CommandText = xValue;
                     scom.Parameters.AddRange(parametriZaUpit.ToArray());
                     s1.brojZapisa = scom.ExecuteNonQuery();
+                    bool nekiUvjet = false;
+                    if (nekiUvjet)
+                    {
+                        scom.Parameters.Clear();
+                        scom.CommandText = "DELETE FROM [dbo].tbl_temp_pretrazivanje_odabrano WHERE @sifra=N'" + sifra + "' and ID_Broj IN (Select ID_Broj From tbl_Kartica where KRT_IDT_Zbirka>999)";
+                        scom.Parameters.AddWithValue("@sifra", sifra);
+                        s1.brojZapisa -= scom.ExecuteNonQuery();
+                        //row_number() over(order by KRT_Sort_inv_br)
+                        scom.Parameters.Clear();
+                        scom.CommandType = CommandType.StoredProcedure;
+                        scom.CommandText = "dbo.usp_popraviSort";
+                        scom.Parameters.AddWithValue("@sifra", sifra);
+                    }
+                    //s1.brojZapisa = scom.ExecuteNonQuery();
 
-                    
+
+                    scom.Parameters.Clear();
+                    scom.CommandType = CommandType.Text;
+
                     string refinerQry = "SELECT * FROM [dbo].[naziviRefiner_odabrano] (N'" + sifra + "')";
                     //string refinerQry = "SELECT * FROM [dbo].[naziviRefiner_odabrano_top5] (N'" + sifra + "')";
                     var refi = new List<refinerModel>();

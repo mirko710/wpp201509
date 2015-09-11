@@ -657,6 +657,7 @@
 
     function  noviUpit() {
         var returnValue;
+        //ne to....  novi prazni upit, ne
         getJsonPOSTNoviUpit(-1,returnValue).then(function (rez) {
             selectUpit(rez.upitiLista);
             odabranUpitID(rez.upitID);

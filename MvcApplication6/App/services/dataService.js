@@ -1163,8 +1163,9 @@ $(function () {
                         .then(querySucceeded)
                         .fail(queryFailed);
                 function querySucceeded(data) {
-                    my.vm.fullkartica(data.entity);
-                    karticaFull(my.vm.fullkartica());
+                    //my.vm.fullkartica(data.entity);
+                    karticaFull(data.entity);
+                    console.log(karticaFull());
                     // nazivi(karticaFull()[0]['tbl_Nazivi']());
                     //alert('kartica Export');
 

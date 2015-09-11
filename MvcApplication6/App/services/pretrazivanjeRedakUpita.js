@@ -376,7 +376,7 @@
     function noviRedak(inputData) {
 
         var index = redakUpita.indexOf(inputData);
-        var redakUpitaNew = new redakUpitaModel()
+        var redakUpitaNew = new redakUpitaModel();
         redakUpitaNew.upitOperator("=");
         redakUpitaNew.vrijednost1(null);
         redakUpitaNew.vrijednost2(null);

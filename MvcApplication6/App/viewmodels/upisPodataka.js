@@ -1,297 +1,297 @@
 ﻿define(['plugins/http', 'durandal/app', 'services/dataService', 'services/logger', 'plugins/router', 'services/upisNavigator', 'services/registracijaNavigator'],
     function (http, app, data, logger, router, upisNavigator, regNav) {
-    //Note: This module exports an object.
-    //That means that every module that "requires" it will get the same object instance.
-    //If you wish to be able to create multiple instances, instead export a function.
-    //See the "welcome" module for an example of function export.
+        //Note: This module exports an object.
+        //That means that every module that "requires" it will get the same object instance.
+        //If you wish to be able to create multiple instances, instead export a function.
+        //See the "welcome" module for an example of function export.
 
-    //var podaciZaRegistraciju = ko.observableArray([]);
+        //var podaciZaRegistraciju = ko.observableArray([]);
         //var cTest = ko.observable();
-    var komboIDBroj = ko.observable(null);
-    var fauxElement = ko.observable('');
-    var selK1 = ko.observable('');
-    var adresaZaUpis = "upisPodataka";
-    var katalogMode = false;
-    var dialogNewRecord = null;
-    var selMmedia = ko.observableArray([]);
-    var selPodOznake = ko.observableArray([]);
-    var fullKartica = ko.observable([]);
-    var transferKartica = ko.observableArray([]);
-    var selZaKomboOdabirInvBroja = ko.observableArray([]);
-    var mmediaFormaIndex =-1;
-    var currentBrojid = ko.observable(43);
+        var komboIDBroj = ko.observable(null);
+        var fauxElement = ko.observable('');
+        var selK1 = ko.observable('');
+        var adresaZaUpis = "upisPodataka";
+        var katalogMode = false;
+        var dialogNewRecord = null;
+        var selMmedia = ko.observableArray([]);
+        var selPodOznake = ko.observableArray([]);
+        var fullKartica = ko.observable([]);
+        var transferKartica = ko.observableArray([]);
+        var selZaKomboOdabirInvBroja = ko.observableArray([]);
+        var mmediaFormaIndex =-1;
+        var currentBrojid = ko.observable(null);
     
     
-    var newTermTablica=ko.observable();
-    var newTermPojam=ko.observable();
+        var newTermTablica=ko.observable();
+        var newTermPojam=ko.observable();
     
-    var recIndex = ko.observable(0);
-    var recMax = ko.observable(0);
-    var zbIndex = ko.observable(-1);
-    var dodajTerm = ko.observable('');
-    var dodajTermTablica = ko.observable('');
-    var prijedlogInvBroja = ko.observable('');
-    //var prijedlogInvBroja = ko.observable('noviBroj...');
-    var curBrojidUndo = 56932;
-    var isLoading = ko.observable(false);
-    var startID = ko.observable(56932);
-   // var zbNewIndex = ko.observable(null);
-    var forceSrediZbirka=ko.observable(true);
-    //var Selects = [];
-    var kojeVrijeme = ko.observable('Vrijeme:');
-    var prefForme =  "1#2#3#4#5#6#8#9#7";
+        var recIndex = ko.observable(0);
+        var recMax = ko.observable(0);
+        var zbIndex = ko.observable(-1);
+        var dodajTerm = ko.observable('');
+        var dodajTermTablica = ko.observable('');
+        var prijedlogInvBroja = ko.observable('');
+        //var prijedlogInvBroja = ko.observable('noviBroj...');
+        var curBrojidUndo = 56932;
+        var isLoading = ko.observable(false);
+        var startID = ko.observable(56932);
+        // var zbNewIndex = ko.observable(null);
+        var forceSrediZbirka=ko.observable(true);
+        //var Selects = [];
+        var kojeVrijeme = ko.observable('Vrijeme:');
+        var prefForme =  "1#2#3#4#5#6#8#9#7";
 
-    var daNeUmjestoCheck = [{ 'tekst': 'NE', 'vrijednost': false }, { 'tekst': 'DA', 'vrijednost': true }];
-    var manualNav = false;
-    var neIdiNaPrvi = false;
-    var displayName= 'upisPodataka';
-    var firstLoad = true;
-    var forme = ko.observableArray([]);
-    var photke = ko.observableArray([]);
-    var title = 'WM++';
-    var vm = {
+        var daNeUmjestoCheck = [{ 'tekst': 'NE', 'vrijednost': false }, { 'tekst': 'DA', 'vrijednost': true }];
+        var manualNav = false;
+        var neIdiNaPrvi = false;
+        var displayName= 'upisPodataka';
+        var firstLoad = true;
+        var forme = ko.observableArray([]);
+        var photke = ko.observableArray([]);
+        var title = 'WM++';
+        var vm = {
         
-        selK1 : selK1,
-        // selKataloska: selKataloska,
-        selMmedia:selMmedia,
-        kojiSadrzaj:kojiSadrzaj,
-        komboZbirkaChanged:komboZbirkaChanged,
-        promjenaIdentity: promjenaIdentity,
-        photke: photke,
+            selK1 : selK1,
+            // selKataloska: selKataloska,
+            selMmedia:selMmedia,
+            kojiSadrzaj:kojiSadrzaj,
+            komboZbirkaChanged:komboZbirkaChanged,
+            promjenaIdentity: promjenaIdentity,
+            photke: photke,
 
-        postaviFokus: postaviFokus,
-        postaviFokusUDF: postaviFokusUDF,
+            postaviFokus: postaviFokus,
+            postaviFokusUDF: postaviFokusUDF,
 
-        uploadImage: uploadImage,
+            uploadImage: uploadImage,
 
-        uploadStart:uploadStart,
-        forme: forme,
+            uploadStart:uploadStart,
+            forme: forme,
 
-        Vremena: data.Vremena,
-        VrijemeOpis: data.VrijemeOpis,
-        VrijemeJedinica: data.VrijemeJedinica,
-        kojeVrijeme: kojeVrijeme,
+            Vremena: data.Vremena,
+            VrijemeOpis: data.VrijemeOpis,
+            VrijemeJedinica: data.VrijemeJedinica,
+            kojeVrijeme: kojeVrijeme,
 
-        minimize:minimize,
-        stazaSlike: data.stazaSlike,
+            minimize:minimize,
+            stazaSlike: data.stazaSlike,
 
 
-        dodajTermTablica: dodajTermTablica,
-        dodajTerm: dodajTerm,
+            dodajTermTablica: dodajTermTablica,
+            dodajTerm: dodajTerm,
        
-        zbNewIndex: upisNavigator.currentZbirkaIDT,
+            zbNewIndex: upisNavigator.currentZbirkaIDT,
 
-        navFirst: navFirst,
-        navLast:navLast,
-        navPrev: navPrev,
-        navNext: navNext,
-        delRecord: delRecord,
-        saveChanges: data.saveChanges,
-        undoChanges: undoChanges,
+            navFirst: navFirst,
+            navLast:navLast,
+            navPrev: navPrev,
+            navNext: navNext,
+            delRecord: delRecord,
+            saveChanges: data.saveChanges,
+            undoChanges: undoChanges,
 
-        isLoading: isLoading,
-
-
-        canDeactivate: canDeactivate,
-        canActivate: canActivate,
-        activate: activate,
+            isLoading: isLoading,
 
 
-        fullKartica: fullKartica,
-
-        currentBrojid: currentBrojid,
-
-        Selects: data.Selects,
+            canDeactivate: canDeactivate,
+            canActivate: canActivate,
+            activate: activate,
 
 
-        newRec: newRec,
+            fullKartica: fullKartica,
 
-        //createZapisExt: data.createZapisExt,
+            currentBrojid: currentBrojid,
 
-        
+            Selects: data.Selects,
 
-        refreshNavigacijuZaRegistraciju: refreshNavigacijuZaRegistraciju,
-        
-        regPrev:regPrev,
-        regNext: regNext,
-        
-        selZaKomboOdabirInvBroja: upisNavigator.selZaKomboOdabirInvBroja,
 
-        title: title,
+            newRec: newRec,
 
-        komboIDBroj:komboIDBroj,
-
-        nextRow: nextRow,
-        prevRow: prevRow,
-        firstRow: firstRow,
-        lastRow: lastRow,
-
-        prijedlogInvBroja: prijedlogInvBroja,
-        recMax: upisNavigator.recMax,
-        recIndex: upisNavigator.recIndex,
-        zbIndex: zbIndex,
-        delRowByID:data.delRowByID,
-        //createZapis: data.createZapis,
-
-        createZapisSubform:createZapisSubform,
-        createTermin: data.createTermin,
-        //selectMaterijali: selectMaterijali,
+            //createZapisExt: data.createZapisExt,
 
         
-        mijenjanoFlag: data.mijenjanoFlag,
 
-        //setSelected: setSelected,
-
-
-        deleteZapisSubform: deleteZapisSubform,
-
-
-        //upload:upload,
-        displayName: displayName,
-
-        daNeUmjestoCheck: daNeUmjestoCheck,
-
-        podaciZaRegistraciju: regNav.podaciZaRegistraciju,
-
-        retTrue: retTrue,
+            refreshNavigacijuZaRegistraciju: refreshNavigacijuZaRegistraciju,
         
-        //selKljucneRijeci: selKljucneRijeci,
-        spremiForme: spremiForme,
-        formModel: formModel,
-        bindingComplete:bindingComplete,
+            regPrev:regPrev,
+            regNext: regNext,
+        
+            selZaKomboOdabirInvBroja: upisNavigator.selZaKomboOdabirInvBroja,
+
+            title: title,
+
+            komboIDBroj:komboIDBroj,
+
+            nextRow: nextRow,
+            prevRow: prevRow,
+            firstRow: firstRow,
+            lastRow: lastRow,
+
+            prijedlogInvBroja: prijedlogInvBroja,
+            recMax: upisNavigator.recMax,
+            recIndex: upisNavigator.recIndex,
+            zbIndex: zbIndex,
+            delRowByID:data.delRowByID,
+            //createZapis: data.createZapis,
+
+            createZapisSubform:createZapisSubform,
+            createTermin: data.createTermin,
+            //selectMaterijali: selectMaterijali,
+
+        
+            mijenjanoFlag: data.mijenjanoFlag,
+
+            //setSelected: setSelected,
+
+
+            deleteZapisSubform: deleteZapisSubform,
+
+
+            //upload:upload,
+            displayName: displayName,
+
+            daNeUmjestoCheck: daNeUmjestoCheck,
+
+            podaciZaRegistraciju: regNav.podaciZaRegistraciju,
+
+            retTrue: retTrue,
+        
+            //selKljucneRijeci: selKljucneRijeci,
+            spremiForme: spremiForme,
+            formModel: formModel,
+            bindingComplete:bindingComplete,
 
  
-        router: router,
-        //userName: data.userName,
-        //password: data.password,
-        //loginTry: loginTry,
-        //isAuth: isAuth,
-        logout: logout,
-        //rUserName: data.realUserName,
-        //rIsAuth: data.realIsAuth,
-        //rUserRoles: data.realUserRoles,
+            router: router,
+            //userName: data.userName,
+            //password: data.password,
+            //loginTry: loginTry,
+            //isAuth: isAuth,
+            logout: logout,
+            //rUserName: data.realUserName,
+            //rIsAuth: data.realIsAuth,
+            //rUserRoles: data.realUserRoles,
         
-        newTermTablica:data.objektZaTerminoloske.newTermTablica,
-        newTermPojam: data.objektZaTerminoloske.newTermPojam,
-        newTermNadIDT: data.objektZaTerminoloske.newTermNadIDT,
-        newTermNapomena:data.objektZaTerminoloske.newTermNapomena,     
-        spremiTerminPopUp :data.spremiTerminPopUp,
+            newTermTablica:data.objektZaTerminoloske.newTermTablica,
+            newTermPojam: data.objektZaTerminoloske.newTermPojam,
+            newTermNadIDT: data.objektZaTerminoloske.newTermNadIDT,
+            newTermNapomena:data.objektZaTerminoloske.newTermNapomena,     
+            spremiTerminPopUp :data.spremiTerminPopUp,
         
-        attached: attached,
-        compositionComplete: compositionComplete,
-        openNewRecordDialog: openNewRecordDialog
-    }
-    return vm;
-
-
-    function formModel(ID,title,tmpl,tablica,imaFokus,odabrano,recordCount,buttonBox,cont,data) {
-        var that = this;
-        that.ID = ko.observable(ID || null);
-        that.title = ko.observable(title || null);
-        that.tmpl = ko.observable(tmpl|| null);
-        that.tablica = ko.observable(tablica || null);
-        that.imaFokus = ko.observable(imaFokus || null);
-        that.odabrano = ko.observable(odabrano || 0);
-        that.recordCount = ko.observable(recordCount || 0);
-        that.buttonBox = ko.observable(buttonBox || true);
-        that.cont = ko.observable(cont || true);
-
-        that.data = ko.observableArray(data || []);
-        
-    };
-    ///za registracija Navigator
-
-
-///u upis navigator
-    function komboZbirkaChanged() {
-        var berko = upisNavigator.currentZbirkaIDT();
-       // zbNewIndex(null);
-        //alert(zbNewIndex());
-        if (upisNavigator.currentZbirkaIDT() != zbIndex()) {
-            forceSrediZbirka(true);
+            attached: attached,
+            compositionComplete: compositionComplete,
+            openNewRecordDialog: openNewRecordDialog
         }
-        //delayChange().then(function () { zbIndex(berko); });
-        zbIndex(berko);
+        return vm;
+
+
+        function formModel(ID,title,tmpl,tablica,imaFokus,odabrano,recordCount,buttonBox,cont,data) {
+            var that = this;
+            that.ID = ko.observable(ID || null);
+            that.title = ko.observable(title || null);
+            that.tmpl = ko.observable(tmpl|| null);
+            that.tablica = ko.observable(tablica || null);
+            that.imaFokus = ko.observable(imaFokus || null);
+            that.odabrano = ko.observable(odabrano || 0);
+            that.recordCount = ko.observable(recordCount || 0);
+            that.buttonBox = ko.observable(buttonBox || true);
+            that.cont = ko.observable(cont || true);
+
+            that.data = ko.observableArray(data || []);
         
-    }
-
-
-///u upis navigator
-    function delayChange() {
-        var ber = Q.defer();
-        Q.delay(1000);
-        if (upisNavigator.currentZbirkaIDT()) {
-            ber.resolve(true);
-        } else {
-            //zbNewIndex(null);
-            ber.resolve(true);
         };
-        return ber.promise;
-    }
-
-    function logout() {
-        data.logout()
-        .then(function () { data.isAuthenticated(); });
-        return true;
-    };
+        ///za registracija Navigator
 
 
-
-
-    function undoChanges() {
-        data.undoChanges();
-        getKartica();
-
-    }
-
-    function canDeactivate() {
-        //the router's activator calls this function to see if it can leave the screen
-        logger.log(title + ' View DEActivated', null, title, true);
-        data.rejectSejv;
-        return true;//app.showMessage('Are you sure you want to leave this page?', 'Navigate', ['Yes', 'No']);
-    }
-
-
-
-
-    function openNewRecordDialog() {
-        if (!katalogMode) {
-            $("#addNewZapis").modal('show');
+        ///u upis navigator
+        function komboZbirkaChanged() {
+            var berko = upisNavigator.currentZbirkaIDT();
+            // zbNewIndex(null);
+            //alert(zbNewIndex());
+            if (upisNavigator.currentZbirkaIDT() != zbIndex()) {
+                forceSrediZbirka(true);
+            }
+            //delayChange().then(function () { zbIndex(berko); });
+            zbIndex(berko);
+        
         }
-        //dialogNewRecord.show();
-    }
 
 
-
-    function lockInput() {
-
-        if (katalogMode) {
-            var inputi = $("#glavniUpis :input");
-            inputi.prop("disabled", true);
-            //kataloskaPrikaz
-            $("#kataloskaPrikaz").prop("disabled", false);
+        ///u upis navigator
+        function delayChange() {
+            var ber = Q.defer();
+            Q.delay(1000);
+            if (upisNavigator.currentZbirkaIDT()) {
+                ber.resolve(true);
+            } else {
+                //zbNewIndex(null);
+                ber.resolve(true);
+            };
+            return ber.promise;
         }
-    }
+
+        function logout() {
+            data.logout()
+            .then(function () { data.isAuthenticated(); });
+            return true;
+        };
 
 
-    function CallsaveChanges() {
-
-        data.saveChanges();
-
-    }
 
 
-    function compositionComplete() {
+        function undoChanges() {
+            data.undoChanges();
+            getKartica();
 
-        katalogMode = data.parametri.Vrijednost("B_KATALOG_MODE");
+        }
 
-        lockInput();
+        function canDeactivate() {
+            //the router's activator calls this function to see if it can leave the screen
+            logger.log(title + ' View DEActivated', null, title, true);
+            data.rejectSejv;
+            return true;//app.showMessage('Are you sure you want to leave this page?', 'Navigate', ['Yes', 'No']);
+        }
 
 
-         $(window).on('beforeunload', function (e) {
-             // nothing to confirm/alert
 
-             CallsaveChanges();
+
+        function openNewRecordDialog() {
+            if (!katalogMode) {
+                $("#addNewZapis").modal('show');
+            }
+            //dialogNewRecord.show();
+        }
+
+
+
+        function lockInput() {
+
+            if (katalogMode) {
+                var inputi = $("#glavniUpis :input");
+                inputi.prop("disabled", true);
+                //kataloskaPrikaz
+                $("#kataloskaPrikaz").prop("disabled", false);
+            }
+        }
+
+
+        function CallsaveChanges() {
+
+            data.saveChanges();
+
+        }
+
+
+        function compositionComplete() {
+
+            katalogMode = data.parametri.Vrijednost("B_KATALOG_MODE");
+
+            lockInput();
+
+
+            $(window).on('beforeunload', function (e) {
+                // nothing to confirm/alert
+
+                CallsaveChanges();
 
                 var hasUnsaveds = ko.observable(false);
                 if (!hasUnsaveds()) {
@@ -310,254 +310,336 @@
         
 
 
-        //dialogNewRecord = $("#addNewZapis");
-       // console.log("ww");
+            //dialogNewRecord = $("#addNewZapis");
+            // console.log("ww");
 
-    }
+        }
 
     
-    function canActivate() {
-        //alert($('input[name=__RequestVerificationToken]').val());
-        var deferred = $.Deferred();
-        return deferred.then(data.isAuthenticatedLocal().done(function (response) {
-            if (response) {
-                deferred.resolve(response);
+        function canActivate() {
+            //alert($('input[name=__RequestVerificationToken]').val());
+            var deferred = $.Deferred();
+            return deferred.then(data.isAuthenticatedLocal().done(function (response) {
+                if (response) {
+                    deferred.resolve(response);
+                } else {
+                    logger.logError('Ulogirajte se...', null, title, true);
+                    deferred.resolve({ 'redirect': '/' });
+                    $("#userName").focus();
+                }
+                return deferred.promise();
+            }));
+        }
+
+
+        function bindingComplete() {
+            //console.log(data.Selects);
+        }
+
+        function attached() {
+            if (true) {
+                //console.log('atačed');
+                //console.log($(".sidebar-wrapper"));
+                $(".sidebar-wrapper").slimScroll({
+                    scrollSize: '7px',
+                    scrollPosition: '250px',
+                    scrollTopPosition: '48px',
+                    size: "7px",
+                    opacity: "0.2",
+                    position: "right",
+                    alwaysVisible: true,
+                    //railVisible: true,
+                    disableFadeOut: true,
+                    width: '7px',
+                    distance: 0,
+                    wheelStep: 1,
+                    height: 'auto'
+                });
+            }
+        }
+
+
+
+        ///rafaktorirat
+        function ucitajParametreZaKorisnike() {
+
+ 
+            //def zbirka i za forme
+            var pocZbirka = null;
+
+            pocZbirka = data.parametri.Vrijednost("S_default_zbirka");
+
+            if (!pocZbirka) {
+                zbIndex(231);
             } else {
-                logger.logError('Ulogirajte se...', null, title, true);
-                deferred.resolve({ 'redirect': '/' });
-                $("#userName").focus();
+                if (pocZbirka.substr(0, 1) == "*") {
+                    zbIndex(parseInt(pocZbirka.substr(1)));
+                }
+                else {
+                    zbIndex(parseInt(pocZbirka.split('#')[1]));
+                }
             }
-            return deferred.promise();
-        }));
-    }
-
-
-    function bindingComplete() {
-        //console.log(data.Selects);
-    }
-
-    function attached() {
-        if (true) {
-            //console.log('atačed');
-            //console.log($(".sidebar-wrapper"));
-            $(".sidebar-wrapper").slimScroll({
-                scrollSize: '7px',
-                scrollPosition: '250px',
-                scrollTopPosition: '48px',
-                size: "7px",
-                opacity: "0.2",
-                position: "right",
-                alwaysVisible: true,
-                //railVisible: true,
-                disableFadeOut: true,
-                width: '7px',
-                distance: 0,
-                wheelStep: 1,
-                height: 'auto'
-            });
+            ////
         }
-    }
 
-
-
-    ///rafaktorirat
-    function ucitajParametreZaKorisnike() {
-
- 
-        //def zbirka i za forme
-        var pocZbirka = null;
-
-        pocZbirka = data.parametri.Vrijednost("S_default_zbirka");
-
-        if (!pocZbirka) {
-            zbIndex(231);
-        } else {
-            if (pocZbirka.substr(0, 1) == "*") {
-                zbIndex(parseInt(pocZbirka.substr(1)));
-            }
-            else {
-                zbIndex(parseInt(pocZbirka.split('#')[1]));
-            }
-        }
-        ////
-    }
-
-    function postaviForme(forme) {
-        //def zbirka i za forme
-        var prefForm = null;
-        var prefFormKOD = null;
+        function postaviForme(forme) {
+            //def zbirka i za forme
+            var prefForm = null;
+            var prefFormKOD = null;
         
 
-        prefForm = data.parametri.Vrijednost("S_WEB_FORME");
+            prefForm = data.parametri.Vrijednost("S_WEB_FORME");
         
-        if (!prefForm) {
-            prefForm = prefFormKOD;
-        }
-        if (!prefForm) {
-            prefForm = "14#2#1#4#5#8#6#9#3#10#11#12#13#7";
-
-        }
-
-        var deref = Q.defer();
-        var redoslijedFormi = prefForm.split("#");
-        var tmpFormArray = ko.observableArray([]);
-        $.each(redoslijedFormi, function (index, value) {
-            //var tmpForm = ko.utils.arrayFirst(data.protoForme(), function (kitem) {
-            var tmpForm = ko.utils.arrayFirst(forme, function (kitem) {
-                return kitem.ID() == value;
-            });
-
-            var tmpFormE = new vm.formModel(tmpForm.ID(),                                            
-                                            tmpForm.title(),
-                                            tmpForm.tmpl(),
-                                            tmpForm.tablica(),
-                                            tmpForm.imaFokus(),
-                                            tmpForm.odabrano(),
-                                            tmpForm.recordCount(),
-                                            tmpForm.buttonBox());
-
-            //vm.forme.push(tmpFormE);
-            tmpFormArray.push(tmpFormE);
-            //alert(tmpForm().title);
-            if (index == redoslijedFormi.length-1) {
-                deref.resolve(tmpFormArray());
+            if (!prefForm) {
+                prefForm = prefFormKOD;
             }
+            if (!prefForm) {
+                prefForm = "14#2#1#4#5#8#6#9#3#10#11#12#13#7";
+
+            }
+
+            var deref = Q.defer();
+            var redoslijedFormi = prefForm.split("#");
+            var tmpFormArray = ko.observableArray([]);
+            $.each(redoslijedFormi, function (index, value) {
+                //var tmpForm = ko.utils.arrayFirst(data.protoForme(), function (kitem) {
+                var tmpForm = ko.utils.arrayFirst(forme, function (kitem) {
+                    return kitem.ID() == value;
+                });
+
+                var tmpFormE = new vm.formModel(tmpForm.ID(),                                            
+                                                tmpForm.title(),
+                                                tmpForm.tmpl(),
+                                                tmpForm.tablica(),
+                                                tmpForm.imaFokus(),
+                                                tmpForm.odabrano(),
+                                                tmpForm.recordCount(),
+                                                tmpForm.buttonBox());
+
+                //vm.forme.push(tmpFormE);
+                tmpFormArray.push(tmpFormE);
+                //alert(tmpForm().title);
+                if (index == redoslijedFormi.length-1) {
+                    deref.resolve(tmpFormArray());
+                }
             
-        })
-        //vm.forme(tmpFormArray());
-        //vm.forme.push.apply(vm.forme, tmpFormArray());
-        console.log("jeldošo");
-        return deref.promise;
-
-
-}
-
-
-
-    function activate(id) {
-        self = this;
+            })
+            //vm.forme(tmpFormArray());
+            //vm.forme.push.apply(vm.forme, tmpFormArray());
         
-        //var startID=43;
-        if (firstLoad) {
+            return deref.promise;
 
-            //data.loadTerminologyWebWorkerUpis();
-            var DTO;
-            data.getWebAPISQL(10, DTO).then(
-                function (fDTO) {
-                    data.Selects(fDTO);
 
-                    if (upisNavigator.firstLoad) {
-                        upisNavigator.init();
-                    }
-                    if (regNav.firstLoad) {
-                        regNav.init();
-                    }
-                    ucitajParametreZaKorisnike();
+        }
+
+
+        function firstLoader() {
+            var deref = Q.defer();
+            if (firstLoad) {
+
+                //data.loadTerminologyWebWorkerUpis();
+                var DTO;
+                data.getWebAPISQL(10, DTO)
+                    .then(function (fDTO) {
+                        data.Selects(fDTO);
+
+                        if (upisNavigator.firstLoad) {
+                            upisNavigator.init();
+                        }
+                        if (regNav.firstLoad) {
+                            regNav.init();
+                        }
+                        ucitajParametreZaKorisnike();
+
+                        data.getDefForme()
+                            .then(function (forme) {
+                                postaviForme(forme)
+                                .then(function (tmpFormArray) {
+                                    vm.forme.push.apply(vm.forme, tmpFormArray);
  
-                    data.getDefForme()
-                        .then(function (forme) {
-                            postaviForme(forme)
-                            .then(function (tmpFormArray) {
-                                vm.forme.push.apply(vm.forme, tmpFormArray);
-                                startID(-1);
+                                    zaZbIndexSubscribe();
+                                    zaKomboIDBrojSubscribe();
 
+                                    zaCurrentIDBrojSubscribe();
+                                    deref.resolve(true);
+                                })
+                            })
+                    })
+            } else {
+                deref.resolve(true);
+            }
+            return deref.promise;
+        }
 
-                                firstLoad = false;
+        function praviID(ulazID) {
+            var deref=Q.defer();
+            var tmpID = -1;
 
-                                //console.log(data.Selects.Kljucne_rijeci[0]);
+            if (ulazID !== undefined) {
+                if (!isNaN(parseInt(ulazID))) {
+                    tmpID = parseInt(ulazID);
+                    deref.resolve(tmpID);
+                }
+            }
+            if (tmpID == -1) {
 
-           
-                                zaZbIndexSubscribe();
-                                zaKomboIDBrojSubscribe();
-                                
-                                zaCurrentIDBrojSubscribe();
-     
-            
-                                if (id != undefined) {
-               
-                
-                                    if (!isNaN(parseInt(id))) {
+                if (currentBrojid()) {
+                    tmpID = currentBrojid();
+                    defer.resolve(tmpID);
+                } else {
 
-                    
-                                        startID(parseInt(id));
-                                        // alert(parseInt(id) + ' uno');
-                                        currentBrojid(startID());
-                                        upisNavigator.ulazIDBroj(startID());
-                                        regNav.ulazIDBroj(startID());
-                                        //promijeniZapis(startID(), "error2");
+                    //prvi iz def zbirke ili ... nešto iz parametara
+                    tmpID = data.getPocetnaZbirka()
+                        .then(function (tmpZbIndex) {
+                            deref.resolve(getPrviIzZbirke(tmpZbIndex));
+                        })
+                }
 
-                                    } else {
-                                        if (startID() == -1) {
-                                            var prviIzZbirke = data.getPrviIzZbirke(zbIndex())
-                                                .then(function (ydata) {
+            }
 
-                                                    currentBrojid(ydata);
-                                                    upisNavigator.ulazIDBroj(ydata);
-                                                    regNav.ulazIDBroj(ydata);
-                                                })
-                                        }
-                                        else {
-                                            upisNavigator.ulazIDBroj(startID());
-                                            regNav.ulazIDBroj(startID());
-                                            promijeniZapis(startID(), "error4");
-                                        }
+            return deref.promise;
+        }
 
-                                    }
-                                } else {
-                                    upisNavigator.ulazIDBroj(startID());
-                                    regNav.ulazIDBroj(startID());
-                                    promijeniZapis(startID(),"error5");
-                                }
- 
-                                upisNavigator.currentZbirkaIDT(zbIndex);
-                            });  
-                         });
-                    });
-
-
-        } else {
-
-
-
-
-
+        function activate(id) {
+            self = this;
 
             katalogMode = data.parametri.Vrijednost("B_KATALOG_MODE");
+            startID(-1);
+
+            firstLoader()
+            .then(function () {
+                firstLoad = false;
             
-            if (id != undefined) {
-               
-                if (data.navigacijaIzPretrazivanja() != "-1") {
-                //alert(newValue);
-                    data.getNavRecordsUpit(upisNavigator.selZaKomboOdabirInvBroja).then(function () {
-                        recMax(upisNavigator.selZaKomboOdabirInvBroja().length);
-                            recIndex(1);
-//                            upisNavigator.currentZbirkaIDT(zbIndex);
-                            upisNavigator.ulazIDBroj(parseInt(id))
-                            regNav.ulazIDBroj(parseInt(id))
+                praviID(id)
+                .then(function(pID){
+                    currentBrojid(pID);
+                })
 
-                    })
 
-                //return true;
+            });
+        
+            //var startID=43;
+          //  if (false) {
 
-                }
+          //      //data.loadTerminologyWebWorkerUpis();
+          //      var DTO;
+          //      data.getWebAPISQL(10, DTO).then(
+          //          function (fDTO) {
+          //              data.Selects(fDTO);
 
-                if (!isNaN(parseInt(id))) {
-                    // alert(parseInt(id) + ' testtt');
-                   // zbNewIndex(null);
-                    data.saveChanges();
-                    currentBrojid(parseInt(id));
-                    //upisNavigator.currentZbirkaIDT(zbIndex);
-                   // upisNavigator.ulazIDBroj(parseInt(id))
-                    //regNav.ulazIDBroj(parseInt(id))
-                    //return data.getExportFullKartica(startID, fullKartica).then(getKartica);
-                } else {
-                    return;
-                }
-            }
-        }
-
+          //              if (upisNavigator.firstLoad) {
+          //                  upisNavigator.init();
+          //              }
+          //              if (regNav.firstLoad) {
+          //                  regNav.init();
+          //              }
+          //              ucitajParametreZaKorisnike();
  
-    }
+          //              data.getDefForme()
+          //                  .then(function (forme) {
+          //                      postaviForme(forme)
+          //                      .then(function (tmpFormArray) {
+          //                          vm.forme.push.apply(vm.forme, tmpFormArray);
+          //                          startID(-1);
+
+
+          //                          firstLoad = false;
+
+          //                          //console.log(data.Selects.Kljucne_rijeci[0]);
+
+           
+          //                          zaZbIndexSubscribe();
+          //                          zaKomboIDBrojSubscribe();
+                                
+          //                          zaCurrentIDBrojSubscribe();
+     
+            
+          //                          if (id != undefined) {
+               
+                
+          //                              if (!isNaN(parseInt(id))) {
+
+                    
+          //                                  startID(parseInt(id));
+          //                                  // alert(parseInt(id) + ' uno');
+          //                                  currentBrojid(startID());
+          //                                  upisNavigator.ulazIDBroj(startID());
+          //                                  regNav.ulazIDBroj(startID());
+          //                                  //promijeniZapis(startID(), "error2");
+
+          //                              } else {
+          //                                  if (startID() == -1) {
+          //                                      var prviIzZbirke = data.getPrviIzZbirke(zbIndex())
+          //                                          .then(function (ydata) {
+
+          //                                              currentBrojid(ydata);
+          //                                              upisNavigator.ulazIDBroj(ydata);
+          //                                              regNav.ulazIDBroj(ydata);
+          //                                          })
+          //                                  }
+          //                                  else {
+          //                                      upisNavigator.ulazIDBroj(startID());
+          //                                      regNav.ulazIDBroj(startID());
+          //                                      promijeniZapis(startID(), "error4");
+          //                                  }
+
+          //                              }
+          //                          } else {
+          //                              upisNavigator.ulazIDBroj(startID());
+          //                              regNav.ulazIDBroj(startID());
+          //                              promijeniZapis(startID(),"error5");
+          //                          }
+ 
+          //                          upisNavigator.currentZbirkaIDT(zbIndex);
+          //                      });  
+          //                  });
+          //          });
+
+
+          //  } 
+            
+
+
+
+
+
+          ////  katalogMode = data.parametri.Vrijednost("B_KATALOG_MODE");
+            
+          ////  if (id != undefined) {
+               
+          //      if (data.navigacijaIzPretrazivanja() != "-1") {
+          //          //alert(newValue);
+          //          data.getNavRecordsUpit(upisNavigator.selZaKomboOdabirInvBroja).then(function () {
+          //              recMax(upisNavigator.selZaKomboOdabirInvBroja().length);
+          //              recIndex(1);
+          //              //                            upisNavigator.currentZbirkaIDT(zbIndex);
+          //              upisNavigator.ulazIDBroj(parseInt(id))
+          //              regNav.ulazIDBroj(parseInt(id))
+
+          //          })
+
+          //          //return true;
+
+          //      }
+
+          //      if (!isNaN(parseInt(id))) {
+          //          // alert(parseInt(id) + ' testtt');
+          //          // zbNewIndex(null);
+          //          data.saveChanges();
+          //          currentBrojid(parseInt(id));
+          //          //upisNavigator.currentZbirkaIDT(zbIndex);
+          //          // upisNavigator.ulazIDBroj(parseInt(id))
+          //          //regNav.ulazIDBroj(parseInt(id))
+          //          //return data.getExportFullKartica(startID, fullKartica).then(getKartica);
+          //      } else {
+          //          return;
+          //      }
+          //  }
+        
+
+    
+}
+ 
 
 
     //function refresh() {
@@ -588,13 +670,14 @@
                     $(".Overlay").addClass("visible");
                     return data.getExportFullKartica(startID(), transferKartica)
                         .then(function () {
-                            getKartica(startID()).then(function () {
-                                upisNavigator.ulazIDBroj(startID())
-                                regNav.ulazIDBroj(startID())
-                                router.navigate(adresaZaUpis  +startID(), false);
-                                lockInput();
-                                $(".Overlay").removeClass("visible");
-                            })
+                            getKartica(startID())
+                                .then(function () {
+                                    upisNavigator.ulazIDBroj(startID())
+                                    regNav.ulazIDBroj(startID())
+                                    router.navigate(adresaZaUpis  +startID(), false);
+                                    lockInput();
+                                    $(".Overlay").removeClass("visible");
+                                })
                         })
                         .fail(function (error) { alert("Query failed1: " + error.message); });
                 }

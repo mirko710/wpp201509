@@ -42,12 +42,15 @@ define(['services/dataService', 'services/registracijaNavigator'],
             navPrev: navPrev,
             navNext: navNext,
             forceRefreshPoIDBroju: forceRefreshPoIDBroju,
+            komboZbirkaChanged: komboZbirkaChanged
         };
        // data.navigacijaIzPretrazivanja() == "-1")
         return upisNavigator;
 
         function init() {
             if (firstLoad) {
+
+
                 dataService.zbIndex.subscribe(function (newValue) {
                     dataService.isLoading(false);
                     //console.log('promjena zbirke');
@@ -63,9 +66,11 @@ define(['services/dataService', 'services/registracijaNavigator'],
                     }
                 })
 
+
                 dataService.currentBrojid.subscribe(function (newValue) {
                     promjenaPoIDBroju();
                 })
+
 
                 ulazIDBroj.subscribe(function (newValue) {
                     if (newValue != currentIDBroj()) {
@@ -131,10 +136,8 @@ define(['services/dataService', 'services/registracijaNavigator'],
 
 
         function promjenaPoIDBroju() {
-
             var feder = Q.defer();
             var tmpIndex = findIndex(dataService.currentBrojid());
-
             if (tmpIndex < 0) {
                 dataService.getZbirka(dataService.currentBrojid()).then(function (promjenaZbirke) {
                     currentZbirkaIDT(promjenaZbirke);
@@ -149,18 +152,28 @@ define(['services/dataService', 'services/registracijaNavigator'],
                 recIndex(tmpIndex);
                 feder.resolve(true);
             }
-
             return feder.promise;
         }
 
 
         function promjenaPoSifriUpita() {
-            if (currentMode == 1) {
-                currentMode = 2;
+            var feder = Q.defer();
+            var tmpIndex = findIndex(dataService.currentBrojid());
+            if (tmpIndex < 0) {
+                dataService.getZbirka(dataService.currentBrojid()).then(function (promjenaZbirke) {
+                    currentZbirkaIDT(promjenaZbirke);
+                    dataService.getNavRecords(promjenaZbirke, internalNavigator).then(function () {
+                        recIndex(findIndex(dataService.currentBrojid()));
+                        recMax(internalNavigator().length);
+                        selZaKomboOdabirInvBroja(internalNavigator());
+                        feder.resolve(true);
+                    })
+                })
+            } else {
+                recIndex(tmpIndex);
+                feder.resolve(true);
             }
-            //puniNavigator
-            //postavi prvi ili 
-
+            return feder.promise;
         }
 
         function setupNavigator() {
@@ -289,14 +302,27 @@ define(['services/dataService', 'services/registracijaNavigator'],
 
 
         function komboZbirkaChanged() {
-            var berko = zbNewIndex();
-            zbNewIndex(-1);
+            var berko = currentZbirkaIDT();
+            // zbNewIndex(null);
             //alert(zbNewIndex());
-            forceSrediZbirka(true);
+            if (currentZbirkaIDT() != dataService.zbIndex()) {
+                forceSrediZbirka(true);
+            }
             //delayChange().then(function () { zbIndex(berko); });
-            zbIndex(berko);
+            dataService.zbIndex(berko);
 
-        };
+        }
+
+
+        //function komboZbirkaChanged() {
+        //    var berko = zbNewIndex();
+        //    zbNewIndex(-1);
+        //    //alert(zbNewIndex());
+        //    forceSrediZbirka(true);
+        //    //delayChange().then(function () { zbIndex(berko); });
+        //    zbIndex(berko);
+
+        //};
 
 
 

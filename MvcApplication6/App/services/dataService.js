@@ -1,4 +1,4 @@
-﻿define(function () {
+﻿define(['services/logger'],function (logger) {
 
 
     var my = my || {} // root namespace for my stuff
@@ -30,12 +30,12 @@ $(function () {
             mijenjanoFlag = ko.observable(false),
             autori = ko.observableArray([]),
             currentAutor = ko.observable(),
-            currentBrojid = ko.observable(),
+            //currentBrojid = ko.observable(),
             isLoaded = false,
             testLoader = ko.observable(88),
             tempBrojid = ko.observable(-1);
             
-            var timerZaBrowserSave = ko.observable(0);
+            var timerZaBrowserSave = ko.observable(false);
             var Selects = ko.observableArray([]);
             var SelectsPretrazivanje = [];
             var currentBrojid = ko.observable(null);
@@ -199,6 +199,13 @@ $(function () {
             my.em.hasChangesChanged.subscribe(function (eventArgs) {
                 //console.log(eventArgs);
                 mijenjanoFlag(my.em.hasChanges());
+                //if (!timerZaBrowserSave()) {
+                //    timerZaBrowserSave(true);
+                //    setTimeout(function () {
+                //        timerZaBrowserSave(false);
+                //        logger.log('Autosejvan zapis', null, "Spremanje", true);
+                //    }, 5000);
+                //}
             });
 
 
@@ -1167,7 +1174,7 @@ $(function () {
                         .then(querySucceeded)
                         .fail(queryFailed);
                 function querySucceeded(data) {
-                    //my.vm.fullkartica(data.entity);
+                    my.vm.fullkartica(data.entity);
                     karticaFull(data.entity);
                     console.log(karticaFull());
                     // nazivi(karticaFull()[0]['tbl_Nazivi']());
@@ -1812,6 +1819,18 @@ $(function () {
                     var action = changeArgs.entityAction;
 
                     if (action === breeze.EntityAction.PropertyChange) {
+                        if (!timerZaBrowserSave()) {
+                            timerZaBrowserSave(true);
+                            setTimeout(function () {
+                                timerZaBrowserSave(false);
+                               // var tmpEntity = my.em.fetchEntityByKey('tbl_Kartica', currentBrojid(), true);
+                                // exportData = my.em.exportEntities([my.vm.fullkartica], null, null, false);
+                                var entityType = my.em.metadataStore.getEntityType('tbl_Kartica');
+                                var exportData = my.em.exportEntities(my.em.getChanges([entityType] ));
+                                window.localStorage.setItem('SpremljenEntity_' + currentBrojid(), exportData);
+                                logger.log('Autosejvan zapis ' + changeArgs.args.propertyName, null, "Spremanje", true);
+                            }, 5000);
+                        }
                         var entity = changeArgs.entity;
                     
                         var propertyName = changeArgs.args.propertyName;
@@ -1869,7 +1888,16 @@ $(function () {
 
                 var saveChanges = function () {
                     var ber = Q.defer();
-                    my.em.saveChanges().then(function(){ber.resolve(true);}).fail(function (error) { alert("Failed save to server: " + error.message); });
+                    my.em.saveChanges()
+                        .then(function () {
+                            if (window.localStorage.length) {
+                                window.localStorage.removeItem('SpremljenEntity_' + currentBrojid());
+                            }
+                            ber.resolve(true);
+                        })
+                        .fail(function (error) {
+                            alert("Failed save to server: " + error.message);
+                        });
                     return ber.promise;
                 }
 

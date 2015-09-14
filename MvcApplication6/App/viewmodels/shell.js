@@ -20,7 +20,7 @@
             testUserName: testUserName,
             Selects:dataService.Selects,
             zbNewIndex: upisNavigator.currentZbirkaIDT,
-            komboZbirkaChanged: komboZbirkaChanged,
+            komboZbirkaChanged: upisNavigator.komboZbirkaChanged,
             selZaKomboOdabirInvBroja: upisNavigator.selZaKomboOdabirInvBroja,
            // openNewTermDialog:dataService.openNewTermDialog,
             loadedTerminologyUpiti: dataService.loadedTerminologyUpiti,
@@ -33,17 +33,7 @@
         
         return shell;
 
-        function komboZbirkaChanged() {
-            var berko = upisNavigator.currentZbirkaIDT();
-            // zbNewIndex(null);
-            //alert(zbNewIndex());
-            if (upisNavigator.currentZbirkaIDT() != dataService.zbIndex()) {
-                forceSrediZbirka(true);
-            }
-            //delayChange().then(function () { zbIndex(berko); });
-            dataService.zbIndex(berko);
 
-        }
 
         function setTimeoutKomboIDBroj() {
             setTimeout(function () {
@@ -143,12 +133,8 @@
             komboIDBroj.subscribe(function (newValue) {
                 if (newValue && newValue > -1) {
                     dataService.currentBrojid(newValue);
-                    //upisNavigator.ulazIDBroj(newValue);
-                    //regNav.ulazIDBroj(newValue);
                     setTimeoutKomboIDBroj();
-                    //komboIDBroj(-1);
                 }
-
             })
 
 

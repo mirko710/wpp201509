@@ -1,5 +1,5 @@
 define(['services/dataService'],
-    function (data) {
+    function (dataService) {
 
         var recIndex = ko.observable(88);
         var recMax = ko.observable(99);
@@ -29,10 +29,10 @@ define(['services/dataService'],
 
         function init() {
             if (firstLoad) {
-                ulazIDBroj.subscribe(function (newValue) {
+                dataService.currentBrojid.subscribe(function (newValue) {
                     if (newValue != currentIDBroj()) {
                         promjenaPoIDBroju().then(function () {
-                            currentIDBroj(ulazIDBroj());
+                            currentIDBroj(newValue);
                         })
                     }
 
@@ -61,18 +61,18 @@ define(['services/dataService'],
         function promjenaPoIDBroju() {
 
             var feder = Q.defer();
-            var tmpIndex = findIndex(ulazIDBroj());
+            var tmpIndex = findIndex(dataService.currentBrojid());
 
             if (tmpIndex < 0) {
-                data.getZbirka(ulazIDBroj()).then(function (promjenaZbirke) {
+                dataService.getZbirka(dataService.currentBrojid()).then(function (promjenaZbirke) {
                     currentZbirkaIDT(promjenaZbirke);
                     navigacijaZaRegistraciju(promjenaZbirke).then(function () {
-                        podaciZaRegistraciju()[0].sync(ulazIDBroj());
+                        podaciZaRegistraciju()[0].sync(dataService.currentBrojid());
                         feder.resolve(true);
                     })
                 })
             } else {
-                podaciZaRegistraciju()[0].sync(ulazIDBroj());
+                podaciZaRegistraciju()[0].sync(dataService.currentBrojid());
                 feder.resolve(true);
             }
 
@@ -86,6 +86,7 @@ define(['services/dataService'],
         function regPrev() {
             var ber = Q.defer();
             podaciZaRegistraciju()[0].movePrevNotPerfect().then(function (retVal) {
+                dataService.currentBrojid(retVal);
                 ber.resolve(retVal)
             })
             return ber.promise;
@@ -96,6 +97,7 @@ define(['services/dataService'],
 
             var ber = Q.defer();
             podaciZaRegistraciju()[0].moveNextNotPerfect().then(function (retVal) {
+                dataService.currentBrojid(retVal);
                 ber.resolve(retVal)
             })
             return ber.promise;
@@ -207,7 +209,7 @@ define(['services/dataService'],
             var ber = Q.defer();
   
 
-            data.getWebAPISQL(7,-1, returnVal)
+            dataService.getWebAPISQL(7,-1, returnVal)
                 .then(function (response) {
 
                     var bar = Q.defer();
@@ -232,7 +234,7 @@ define(['services/dataService'],
             var ber = Q.defer();
 
 
-            data.getWebAPISQL(9, zbirka, returnVal)
+            dataService.getWebAPISQL(9, zbirka, returnVal)
                 .then(function (response) {
 
                     var bar = Q.defer();

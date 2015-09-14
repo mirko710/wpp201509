@@ -1,10 +1,11 @@
 ﻿define(['durandal/system', 'plugins/router', 'services/logger', 'services/dataService', 'plugins/dialog',  'services/upisNavigator'],
     function (system, router, logger, dataService, dialog, upisNavigator) {
-
+        var title = "Shell";
         var komboIDBroj = ko.observable(2);
-        var zbIndex = ko.observable(2);
+        //var zbIndex = ko.observable(2);
         var forceSrediZbirka = ko.observable(false);
         var shell = {
+            title:title,
             activate: activate,
             router: router,
             userName: dataService.userName,
@@ -24,7 +25,9 @@
            // openNewTermDialog:dataService.openNewTermDialog,
             loadedTerminologyUpiti: dataService.loadedTerminologyUpiti,
             loadedTerminologyUpis: dataService.loadedTerminologyUpis,
-            komboIDBroj: komboIDBroj
+            komboIDBroj: komboIDBroj,
+            zbIndex: dataService.zbIndex,
+            navigacijaUShellu: dataService.navigacijaUShellu
 
         };
         
@@ -34,14 +37,19 @@
             var berko = upisNavigator.currentZbirkaIDT();
             // zbNewIndex(null);
             //alert(zbNewIndex());
-            if (upisNavigator.currentZbirkaIDT() != zbIndex()) {
+            if (upisNavigator.currentZbirkaIDT() != dataService.zbIndex()) {
                 forceSrediZbirka(true);
             }
             //delayChange().then(function () { zbIndex(berko); });
-            zbIndex(berko);
+            dataService.zbIndex(berko);
 
         }
 
+        function setTimeoutKomboIDBroj() {
+            setTimeout(function () {
+                komboIDBroj(null);
+            }, 0);
+        }
 
         function testUserName() {
             var b=null;
@@ -132,7 +140,16 @@
                 dataService.realUserName('');
             }
 
+            komboIDBroj.subscribe(function (newValue) {
+                if (newValue && newValue > -1) {
+                    dataService.currentBrojid(newValue);
+                    //upisNavigator.ulazIDBroj(newValue);
+                    //regNav.ulazIDBroj(newValue);
+                    setTimeoutKomboIDBroj();
+                    //komboIDBroj(-1);
+                }
 
+            })
 
 
             // za dodat bootstrap dialog

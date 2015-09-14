@@ -26,13 +26,13 @@
     
         var recIndex = ko.observable(0);
         var recMax = ko.observable(0);
-        var zbIndex = ko.observable(-1);
+        
         var dodajTerm = ko.observable('');
         var dodajTermTablica = ko.observable('');
         var prijedlogInvBroja = ko.observable('');
         //var prijedlogInvBroja = ko.observable('noviBroj...');
         var curBrojidUndo = 56932;
-        var isLoading = ko.observable(false);
+        
         var startID = ko.observable(56932);
         // var zbNewIndex = ko.observable(null);
         var forceSrediZbirka=ko.observable(true);
@@ -54,7 +54,7 @@
             // selKataloska: selKataloska,
             selMmedia:selMmedia,
             kojiSadrzaj:kojiSadrzaj,
-            komboZbirkaChanged:komboZbirkaChanged,
+            //komboZbirkaChanged:komboZbirkaChanged,
             promjenaIdentity: promjenaIdentity,
             photke: photke,
 
@@ -80,15 +80,15 @@
        
             zbNewIndex: upisNavigator.currentZbirkaIDT,
 
-            navFirst: navFirst,
-            navLast:navLast,
-            navPrev: navPrev,
-            navNext: navNext,
+            navFirst: upisNavigator.navFirst,
+            navLast: upisNavigator.navLast,
+            navPrev: upisNavigator.navPrev,
+            navNext: upisNavigator.navNext,
             delRecord: delRecord,
             saveChanges: dataService.saveChanges,
             undoChanges: undoChanges,
 
-            isLoading: isLoading,
+            //isLoading: isLoading,
 
 
             canDeactivate: canDeactivate,
@@ -111,8 +111,8 @@
 
             refreshNavigacijuZaRegistraciju: refreshNavigacijuZaRegistraciju,
         
-            regPrev:regPrev,
-            regNext: regNext,
+            regPrev: regNav.regPrev,
+            regNext: regNav.regNext,
         
             selZaKomboOdabirInvBroja: upisNavigator.selZaKomboOdabirInvBroja,
 
@@ -128,7 +128,7 @@
             prijedlogInvBroja: prijedlogInvBroja,
             recMax: upisNavigator.recMax,
             recIndex: upisNavigator.recIndex,
-            zbIndex: zbIndex,
+            //zbIndex: zbIndex,
             delRowByID: dataService.delRowByID,
             //createZapis: data.createZapis,
 
@@ -201,18 +201,7 @@
         ///za registracija Navigator
 
 
-        ///u upis navigator
-        function komboZbirkaChanged() {
-            var berko = upisNavigator.currentZbirkaIDT();
-            // zbNewIndex(null);
-            //alert(zbNewIndex());
-            if (upisNavigator.currentZbirkaIDT() != zbIndex()) {
-                forceSrediZbirka(true);
-            }
-            //delayChange().then(function () { zbIndex(berko); });
-            zbIndex(berko);
-        
-        }
+
 
 
         ///u upis navigator
@@ -246,6 +235,7 @@
         function canDeactivate() {
             //the router's activator calls this function to see if it can leave the screen
             logger.log(title + ' View DEActivated', null, title, true);
+            dataService.navigacijaUShellu(false);
             dataService.rejectSejv;
             return true;//app.showMessage('Are you sure you want to leave this page?', 'Navigate', ['Yes', 'No']);
         }
@@ -369,13 +359,13 @@
             pocZbirka = dataService.parametri.Vrijednost("S_default_zbirka");
 
             if (!pocZbirka) {
-                zbIndex(231);
+                dataService.zbIndex(231);
             } else {
                 if (pocZbirka.substr(0, 1) == "*") {
-                    zbIndex(parseInt(pocZbirka.substr(1)));
+                    dataService.zbIndex(parseInt(pocZbirka.substr(1)));
                 }
                 else {
-                    zbIndex(parseInt(pocZbirka.split('#')[1]));
+                    dataService.zbIndex(parseInt(pocZbirka.split('#')[1]));
                 }
             }
             ////
@@ -456,7 +446,7 @@
                                 .then(function (tmpFormArray) {
                                     vm.forme.push.apply(vm.forme, tmpFormArray);
  
-                                    zaZbIndexSubscribe();
+                                    //zaZbIndexSubscribe();
                                     zaKomboIDBrojSubscribe();
 
                                     zaCurrentIDBrojSubscribe();
@@ -501,7 +491,7 @@
 
         function activate(id) {
             self = this;
-
+            dataService.navigacijaUShellu(true);
             katalogMode = dataService.parametri.Vrijednost("B_KATALOG_MODE");
             startID(-1);
 
@@ -531,8 +521,8 @@
     function zaCurrentIDBrojSubscribe() {
         dataService.currentBrojid.subscribe(function (newValue) {
 
-            if (!isLoading()) {
-                isLoading(true); console.log('subscribe' + newValue);
+            if (!dataService.isLoading()) {
+                dataService.isLoading(true); console.log('subscribe' + newValue);
                 if (!newValue) {
                     dataService.currentBrojid(curBrojidUndo);
                 } else {
@@ -551,8 +541,8 @@
                         .then(function () {
                             getKartica(startID())
                                 .then(function () {
-                                    upisNavigator.ulazIDBroj(startID())
-                                    regNav.ulazIDBroj(startID())
+                                    //upisNavigator.ulazIDBroj(startID())
+                                    //regNav.ulazIDBroj(startID())
                                     router.navigate(adresaZaUpis  +startID(), false);
                                     lockInput();
                                     $(".Overlay").removeClass("visible");
@@ -564,32 +554,14 @@
             }
         });
     }
-    function zaZbIndexSubscribe() {
 
-        zbIndex.subscribe(function (newValue) {
-            isLoading(false);
-            //console.log('promjena zbirke');
-            if (newValue && newValue != -1) {
-                return dataService.getPrviIzZbirke(newValue)
-                    .then(function (prviIDBrojIzZbirke) {
-                        if (prviIDBrojIzZbirke > 0) {
-                            dataService.currentBrojid(prviIDBrojIzZbirke);
-                            upisNavigator.ulazIDBroj(prviIDBrojIzZbirke);
-                        }
-                        //regNav.ulazIDBroj(data);
-                    })
-            }
-        })
-
-
-    }
 
     function zaKomboIDBrojSubscribe() {
         komboIDBroj.subscribe(function (newValue) {
             if (newValue && newValue > -1) {
                 dataService.currentBrojid(newValue);
-                upisNavigator.ulazIDBroj(newValue);
-                regNav.ulazIDBroj(newValue);
+                //upisNavigator.ulazIDBroj(newValue);
+                //regNav.ulazIDBroj(newValue);
                 setTimeoutKomboIDBroj();
                 //komboIDBroj(-1);
             }
@@ -657,57 +629,14 @@
 
 
 
+ 
     ///// za upis navigator
-    function navFirst() {
-        //manualNav = true;
-        //recIndex(0);
-        //currentBrojid(selZaKomboOdabirInvBroja()[recIndex()]['ID_Broj']);
-        upisNavigator.navFirst().then(function (brojid) {
-            dataService.currentBrojid(brojid);
-            regNav.ulazIDBroj(brojid);
-        })
-
-    }
-    ///// za upis navigator
-    function navLast() {
-        upisNavigator.navLast().then(function (brojid) {
-            dataService.currentBrojid(brojid);
-            regNav.ulazIDBroj(brojid);
-        })
-    }
-    ///// za upis navigator
-    function navPrev() {
-        upisNavigator.navPrev().then(function (brojid) {
-            dataService.currentBrojid(brojid);
-            regNav.ulazIDBroj(brojid);
-        })
-    }
-    ///// za upis navigator
-    function navNext() {
-        upisNavigator.navNext().then(function (brojid) {
-            dataService.currentBrojid(brojid);
-            regNav.ulazIDBroj(brojid);
-        })
-    }
 
 
 
 
-    function regPrev() {
-        
-        regNav.regPrev().then(function (brojid) {
-            dataService.currentBrojid(brojid);
-            upisNavigator.ulazIDBroj(brojid);
-        })
-    }
-        ///// za upis navigator
-    function regNext() {
-        regNav.regNext().then(function (brojid) {
-            dataService.currentBrojid(brojid);
-            upisNavigator.ulazIDBroj(brojid);
-        })
-    }
 
+ 
 
     ////////////////////////////////////////////////////////////
     function getKartica(y) {
@@ -763,7 +692,7 @@
  //// dio ua upis Navigaciju
         if (upisNavigator.selZaKomboOdabirInvBroja().length == 0 || !upisNavigator.selZaKomboOdabirInvBroja) {
             //alert("getnavrekordz" + zbIndex());
-            dataService.getNavRecords(zbIndex(), upisNavigator.selZaKomboOdabirInvBroja).then(function () { recMax(upisNavigator.selZaKomboOdabirInvBroja().length); });
+            dataService.getNavRecords(dataService.zbIndex(), upisNavigator.selZaKomboOdabirInvBroja).then(function () { recMax(upisNavigator.selZaKomboOdabirInvBroja().length); });
         };
 
 
@@ -781,7 +710,7 @@
         manualNav = false;
 
 
-        isLoading(false);
+        dataService.isLoading(false);
         //if (fullKartica().length > 0) {
         if (fullKartica()) {
             ber.resolve(true)
@@ -820,7 +749,7 @@
         .then(function (noviIDBroj) {
             //alert('gotov dataservice');
             forceSrediZbirka(true);
-            zbIndex(zb);
+            dataService.zbIndex(zb);
             
             dataService.currentBrojid(noviIDBroj);
 
@@ -1037,7 +966,7 @@
 
 
     function refreshNavigacijuZaRegistraciju() {
-        return regNav.navigacijaZaRegistraciju(zbIndex()).then(function () {
+        return regNav.navigacijaZaRegistraciju(dataService.zbIndex()).then(function () {
             regNav.podaciZaRegistraciju()[0].sync(dataService.currentBrojid());
         })
     }

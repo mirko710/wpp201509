@@ -39,6 +39,9 @@ $(function () {
             var Selects = ko.observableArray([]);
             var SelectsPretrazivanje = [];
             var currentBrojid = ko.observable(null);
+            var zbIndex = ko.observable(-1);
+            var navigacijaUShellu = ko.observable(false);
+            var isLoading = ko.observable(false);
             
             var NewTermModel=function(termTablica,pojam,tablicaID,tablica,nadIDT,napomena,polje){
                 this.newTermTablica=ko.observable(termTablica || null);
@@ -1963,7 +1966,10 @@ $(function () {
                 openNewTermDialog:openNewTermDialog,
                 spremiTerminPopUp:spremiTerminPopUp,
                 objektZaTerminoloske: objektZaTerminoloske,
-                currentBrojid: currentBrojid
+                currentBrojid: currentBrojid,
+                zbIndex: zbIndex,
+                navigacijaUShellu: navigacijaUShellu,
+                isLoading:isLoading
             }
 
             return dataService;

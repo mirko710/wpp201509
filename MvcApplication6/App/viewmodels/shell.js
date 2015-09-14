@@ -1,5 +1,9 @@
-﻿define(['durandal/system', 'plugins/router', 'services/logger','services/dataService','plugins/dialog'],
-    function (system, router, logger, dataService,dialog) {
+﻿define(['durandal/system', 'plugins/router', 'services/logger', 'services/dataService', 'plugins/dialog',  'services/upisNavigator'],
+    function (system, router, logger, dataService, dialog, upisNavigator) {
+
+        var komboIDBroj = ko.observable(2);
+        var zbIndex = ko.observable(2);
+        var forceSrediZbirka = ko.observable(false);
         var shell = {
             activate: activate,
             router: router,
@@ -13,16 +17,30 @@
             rUserRoles: dataService.realUserRoles,
             enterLogin: enterLogin,
             testUserName: testUserName,
+            Selects:dataService.Selects,
+            zbNewIndex: upisNavigator.currentZbirkaIDT,
+            komboZbirkaChanged: komboZbirkaChanged,
+            selZaKomboOdabirInvBroja: upisNavigator.selZaKomboOdabirInvBroja,
            // openNewTermDialog:dataService.openNewTermDialog,
             loadedTerminologyUpiti: dataService.loadedTerminologyUpiti,
             loadedTerminologyUpis: dataService.loadedTerminologyUpis,
-           
+            komboIDBroj: komboIDBroj
+
         };
         
         return shell;
 
+        function komboZbirkaChanged() {
+            var berko = upisNavigator.currentZbirkaIDT();
+            // zbNewIndex(null);
+            //alert(zbNewIndex());
+            if (upisNavigator.currentZbirkaIDT() != zbIndex()) {
+                forceSrediZbirka(true);
+            }
+            //delayChange().then(function () { zbIndex(berko); });
+            zbIndex(berko);
 
-
+        }
 
 
         function testUserName() {

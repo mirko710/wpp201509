@@ -21,7 +21,6 @@
         var mmediaFormaIndex =-1;
         var currentBrojid = ko.observable(null);
     
-    
         var newTermTablica=ko.observable();
         var newTermPojam=ko.observable();
     
@@ -517,126 +516,6 @@
 
 
             });
-        
-            //var startID=43;
-          //  if (false) {
-
-          //      //data.loadTerminologyWebWorkerUpis();
-          //      var DTO;
-          //      data.getWebAPISQL(10, DTO).then(
-          //          function (fDTO) {
-          //              data.Selects(fDTO);
-
-          //              if (upisNavigator.firstLoad) {
-          //                  upisNavigator.init();
-          //              }
-          //              if (regNav.firstLoad) {
-          //                  regNav.init();
-          //              }
-          //              ucitajParametreZaKorisnike();
- 
-          //              data.getDefForme()
-          //                  .then(function (forme) {
-          //                      postaviForme(forme)
-          //                      .then(function (tmpFormArray) {
-          //                          vm.forme.push.apply(vm.forme, tmpFormArray);
-          //                          startID(-1);
-
-
-          //                          firstLoad = false;
-
-          //                          //console.log(data.Selects.Kljucne_rijeci[0]);
-
-           
-          //                          zaZbIndexSubscribe();
-          //                          zaKomboIDBrojSubscribe();
-                                
-          //                          zaCurrentIDBrojSubscribe();
-     
-            
-          //                          if (id != undefined) {
-               
-                
-          //                              if (!isNaN(parseInt(id))) {
-
-                    
-          //                                  startID(parseInt(id));
-          //                                  // alert(parseInt(id) + ' uno');
-          //                                  currentBrojid(startID());
-          //                                  upisNavigator.ulazIDBroj(startID());
-          //                                  regNav.ulazIDBroj(startID());
-          //                                  //promijeniZapis(startID(), "error2");
-
-          //                              } else {
-          //                                  if (startID() == -1) {
-          //                                      var prviIzZbirke = data.getPrviIzZbirke(zbIndex())
-          //                                          .then(function (ydata) {
-
-          //                                              currentBrojid(ydata);
-          //                                              upisNavigator.ulazIDBroj(ydata);
-          //                                              regNav.ulazIDBroj(ydata);
-          //                                          })
-          //                                  }
-          //                                  else {
-          //                                      upisNavigator.ulazIDBroj(startID());
-          //                                      regNav.ulazIDBroj(startID());
-          //                                      promijeniZapis(startID(), "error4");
-          //                                  }
-
-          //                              }
-          //                          } else {
-          //                              upisNavigator.ulazIDBroj(startID());
-          //                              regNav.ulazIDBroj(startID());
-          //                              promijeniZapis(startID(),"error5");
-          //                          }
- 
-          //                          upisNavigator.currentZbirkaIDT(zbIndex);
-          //                      });  
-          //                  });
-          //          });
-
-
-          //  } 
-            
-
-
-
-
-
-          ////  katalogMode = data.parametri.Vrijednost("B_KATALOG_MODE");
-            
-          ////  if (id != undefined) {
-               
-          //      if (data.navigacijaIzPretrazivanja() != "-1") {
-          //          //alert(newValue);
-          //          data.getNavRecordsUpit(upisNavigator.selZaKomboOdabirInvBroja).then(function () {
-          //              recMax(upisNavigator.selZaKomboOdabirInvBroja().length);
-          //              recIndex(1);
-          //              //                            upisNavigator.currentZbirkaIDT(zbIndex);
-          //              upisNavigator.ulazIDBroj(parseInt(id))
-          //              regNav.ulazIDBroj(parseInt(id))
-
-          //          })
-
-          //          //return true;
-
-          //      }
-
-          //      if (!isNaN(parseInt(id))) {
-          //          // alert(parseInt(id) + ' testtt');
-          //          // zbNewIndex(null);
-          //          data.saveChanges();
-          //          currentBrojid(parseInt(id));
-          //          //upisNavigator.currentZbirkaIDT(zbIndex);
-          //          // upisNavigator.ulazIDBroj(parseInt(id))
-          //          //regNav.ulazIDBroj(parseInt(id))
-          //          //return data.getExportFullKartica(startID, fullKartica).then(getKartica);
-          //      } else {
-          //          return;
-          //      }
-          //  }
-        
-
     
 }
  

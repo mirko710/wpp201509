@@ -49,6 +49,9 @@ define(['services/dataService', 'services/registracijaNavigator'],
         function init() {
             if (firstLoad) {
 
+                data.mijenjanoFlag.subscribe(function (newValue) {
+                    alert("izUpisNavigator!");
+                })
                 ulazIDBroj.subscribe(function (newValue) {
                     if (newValue != currentIDBroj()) {
                         promjenaPoIDBroju().then(function(){

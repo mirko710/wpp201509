@@ -35,7 +35,7 @@ $(function () {
             testLoader = ko.observable(88),
             tempBrojid = ko.observable(-1);
             
-                       
+            var timerZaBrowserSave = ko.observable(0);
             var Selects = ko.observableArray([]);
             var SelectsPretrazivanje = [];
             
@@ -120,7 +120,7 @@ $(function () {
                             //alert(newCust()[0]['ID_Broj']());
                         } else {
                             //alert('upisi novi parametar');
-                            var newCust = my.em.createEntity("tbl_Parametri_za_korisnike", { Institucija_ID: "AMZ", Korisnik_UserName: realUserName(), Parametar: parametar, Vrijednost: vrijednost });
+                            var newCust = my.em.createEntity("tbl_Parametri_za_korisnike", { Institucija_ID: "pri", Korisnik_UserName: realUserName(), Parametar: parametar, Vrijednost: vrijednost });
 
                             //srediID_Broj;
                         }

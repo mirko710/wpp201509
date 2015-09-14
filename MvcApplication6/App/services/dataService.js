@@ -38,6 +38,7 @@ $(function () {
             var timerZaBrowserSave = ko.observable(0);
             var Selects = ko.observableArray([]);
             var SelectsPretrazivanje = [];
+            var currentBrojid = ko.observable(null);
             
             var NewTermModel=function(termTablica,pojam,tablicaID,tablica,nadIDT,napomena,polje){
                 this.newTermTablica=ko.observable(termTablica || null);
@@ -1961,7 +1962,8 @@ $(function () {
                 undoTermin: undoTermin,
                 openNewTermDialog:openNewTermDialog,
                 spremiTerminPopUp:spremiTerminPopUp,
-                objektZaTerminoloske:objektZaTerminoloske
+                objektZaTerminoloske: objektZaTerminoloske,
+                currentBrojid: currentBrojid
             }
 
             return dataService;

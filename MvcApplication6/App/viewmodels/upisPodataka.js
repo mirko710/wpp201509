@@ -1,5 +1,5 @@
 ﻿define(['plugins/http', 'durandal/app', 'services/dataService', 'services/logger', 'plugins/router', 'services/upisNavigator', 'services/registracijaNavigator'],
-    function (http, app, data, logger, router, upisNavigator, regNav) {
+    function (http, app, dataService, logger, router, upisNavigator, regNav) {
         //Note: This module exports an object.
         //That means that every module that "requires" it will get the same object instance.
         //If you wish to be able to create multiple instances, instead export a function.
@@ -19,7 +19,7 @@
         var transferKartica = ko.observableArray([]);
         var selZaKomboOdabirInvBroja = ko.observableArray([]);
         var mmediaFormaIndex =-1;
-        var currentBrojid = ko.observable(null);
+
     
         var newTermTablica=ko.observable();
         var newTermPojam=ko.observable();
@@ -66,13 +66,13 @@
             uploadStart:uploadStart,
             forme: forme,
 
-            Vremena: data.Vremena,
-            VrijemeOpis: data.VrijemeOpis,
-            VrijemeJedinica: data.VrijemeJedinica,
+            Vremena: dataService.Vremena,
+            VrijemeOpis: dataService.VrijemeOpis,
+            VrijemeJedinica: dataService.VrijemeJedinica,
             kojeVrijeme: kojeVrijeme,
 
             minimize:minimize,
-            stazaSlike: data.stazaSlike,
+            stazaSlike: dataService.stazaSlike,
 
 
             dodajTermTablica: dodajTermTablica,
@@ -85,7 +85,7 @@
             navPrev: navPrev,
             navNext: navNext,
             delRecord: delRecord,
-            saveChanges: data.saveChanges,
+            saveChanges: dataService.saveChanges,
             undoChanges: undoChanges,
 
             isLoading: isLoading,
@@ -98,9 +98,9 @@
 
             fullKartica: fullKartica,
 
-            currentBrojid: currentBrojid,
+            currentBrojid: dataService.currentBrojid,
 
-            Selects: data.Selects,
+            Selects: dataService.Selects,
 
 
             newRec: newRec,
@@ -129,15 +129,15 @@
             recMax: upisNavigator.recMax,
             recIndex: upisNavigator.recIndex,
             zbIndex: zbIndex,
-            delRowByID:data.delRowByID,
+            delRowByID: dataService.delRowByID,
             //createZapis: data.createZapis,
 
             createZapisSubform:createZapisSubform,
-            createTermin: data.createTermin,
+            createTermin: dataService.createTermin,
             //selectMaterijali: selectMaterijali,
 
         
-            mijenjanoFlag: data.mijenjanoFlag,
+            mijenjanoFlag: dataService.mijenjanoFlag,
 
             //setSelected: setSelected,
 
@@ -170,11 +170,11 @@
             //rIsAuth: data.realIsAuth,
             //rUserRoles: data.realUserRoles,
         
-            newTermTablica:data.objektZaTerminoloske.newTermTablica,
-            newTermPojam: data.objektZaTerminoloske.newTermPojam,
-            newTermNadIDT: data.objektZaTerminoloske.newTermNadIDT,
-            newTermNapomena:data.objektZaTerminoloske.newTermNapomena,     
-            spremiTerminPopUp :data.spremiTerminPopUp,
+            newTermTablica: dataService.objektZaTerminoloske.newTermTablica,
+            newTermPojam: dataService.objektZaTerminoloske.newTermPojam,
+            newTermNadIDT: dataService.objektZaTerminoloske.newTermNadIDT,
+            newTermNapomena: dataService.objektZaTerminoloske.newTermNapomena,
+            spremiTerminPopUp: dataService.spremiTerminPopUp,
         
             attached: attached,
             compositionComplete: compositionComplete,
@@ -229,8 +229,8 @@
         }
 
         function logout() {
-            data.logout()
-            .then(function () { data.isAuthenticated(); });
+            dataService.logout()
+            .then(function () { dataService.isAuthenticated(); });
             return true;
         };
 
@@ -238,7 +238,7 @@
 
 
         function undoChanges() {
-            data.undoChanges();
+            dataService.undoChanges();
             getKartica();
 
         }
@@ -246,7 +246,7 @@
         function canDeactivate() {
             //the router's activator calls this function to see if it can leave the screen
             logger.log(title + ' View DEActivated', null, title, true);
-            data.rejectSejv;
+            dataService.rejectSejv;
             return true;//app.showMessage('Are you sure you want to leave this page?', 'Navigate', ['Yes', 'No']);
         }
 
@@ -275,14 +275,14 @@
 
         function CallsaveChanges() {
 
-            data.saveChanges();
+            dataService.saveChanges();
 
         }
 
 
         function compositionComplete() {
 
-            katalogMode = data.parametri.Vrijednost("B_KATALOG_MODE");
+            katalogMode = dataService.parametri.Vrijednost("B_KATALOG_MODE");
 
             lockInput();
 
@@ -318,7 +318,7 @@
         function canActivate() {
             //alert($('input[name=__RequestVerificationToken]').val());
             var deferred = $.Deferred();
-            return deferred.then(data.isAuthenticatedLocal().done(function (response) {
+            return deferred.then(dataService.isAuthenticatedLocal().done(function (response) {
                 if (response) {
                     deferred.resolve(response);
                 } else {
@@ -366,7 +366,7 @@
             //def zbirka i za forme
             var pocZbirka = null;
 
-            pocZbirka = data.parametri.Vrijednost("S_default_zbirka");
+            pocZbirka = dataService.parametri.Vrijednost("S_default_zbirka");
 
             if (!pocZbirka) {
                 zbIndex(231);
@@ -387,7 +387,7 @@
             var prefFormKOD = null;
         
 
-            prefForm = data.parametri.Vrijednost("S_WEB_FORME");
+            prefForm = dataService.parametri.Vrijednost("S_WEB_FORME");
         
             if (!prefForm) {
                 prefForm = prefFormKOD;
@@ -438,9 +438,9 @@
 
                 //data.loadTerminologyWebWorkerUpis();
                 var DTO;
-                data.getWebAPISQL(10, DTO)
+                dataService.getWebAPISQL(10, DTO)
                     .then(function (fDTO) {
-                        data.Selects(fDTO);
+                        dataService.Selects(fDTO);
 
                         if (upisNavigator.firstLoad) {
                             upisNavigator.init();
@@ -450,7 +450,7 @@
                         }
                         ucitajParametreZaKorisnike();
 
-                        data.getDefForme()
+                        dataService.getDefForme()
                             .then(function (forme) {
                                 postaviForme(forme)
                                 .then(function (tmpFormArray) {
@@ -482,13 +482,13 @@
             }
             if (tmpID == -1) {
 
-                if (currentBrojid()) {
-                    tmpID = currentBrojid();
+                if (dataService.currentBrojid()) {
+                    tmpID = dataService.currentBrojid();
                     defer.resolve(tmpID);
                 } else {
 
                     //prvi iz def zbirke ili ... nešto iz parametara
-                    tmpID = data.getPocetnaZbirka()
+                    tmpID = dataService.getPocetnaZbirka()
                         .then(function (tmpZbIndex) {
                             deref.resolve(getPrviIzZbirke(tmpZbIndex));
                         })
@@ -502,7 +502,7 @@
         function activate(id) {
             self = this;
 
-            katalogMode = data.parametri.Vrijednost("B_KATALOG_MODE");
+            katalogMode = dataService.parametri.Vrijednost("B_KATALOG_MODE");
             startID(-1);
 
             firstLoader()
@@ -511,7 +511,7 @@
             
                 praviID(id)
                 .then(function(pID){
-                    currentBrojid(pID);
+                    dataService.currentBrojid(pID);
                 })
 
 
@@ -529,16 +529,16 @@
 
 
     function zaCurrentIDBrojSubscribe() {
-        currentBrojid.subscribe(function (newValue) {
+        dataService.currentBrojid.subscribe(function (newValue) {
 
             if (!isLoading()) {
                 isLoading(true); console.log('subscribe' + newValue);
                 if (!newValue) {
-                    currentBrojid(curBrojidUndo);
+                    dataService.currentBrojid(curBrojidUndo);
                 } else {
                     if (newValue != undefined) {
                         //data.rejectSejv;///// or save or check and ask to be saved
-                        data.saveChanges();
+                        dataService.saveChanges();
                         if (!isNaN(parseInt(newValue))) {
                             //alert(parseInt(id) + ' ' + currentBrojid());
                             startID(parseInt(newValue));
@@ -547,7 +547,7 @@
                     };
                     //alert(parseInt(id) + ' testttZero');
                     $(".Overlay").addClass("visible");
-                    return data.getExportFullKartica(startID(), transferKartica)
+                    return dataService.getExportFullKartica(startID(), transferKartica)
                         .then(function () {
                             getKartica(startID())
                                 .then(function () {
@@ -570,11 +570,11 @@
             isLoading(false);
             //console.log('promjena zbirke');
             if (newValue && newValue != -1) {
-                return data.getPrviIzZbirke(newValue)
-                    .then(function (data) {
-                        if (data > 0) {
-                            currentBrojid(data);
-                            upisNavigator.ulazIDBroj(data);
+                return dataService.getPrviIzZbirke(newValue)
+                    .then(function (prviIDBrojIzZbirke) {
+                        if (prviIDBrojIzZbirke > 0) {
+                            dataService.currentBrojid(prviIDBrojIzZbirke);
+                            upisNavigator.ulazIDBroj(prviIDBrojIzZbirke);
                         }
                         //regNav.ulazIDBroj(data);
                     })
@@ -587,7 +587,7 @@
     function zaKomboIDBrojSubscribe() {
         komboIDBroj.subscribe(function (newValue) {
             if (newValue && newValue > -1) {
-                currentBrojid(newValue);
+                dataService.currentBrojid(newValue);
                 upisNavigator.ulazIDBroj(newValue);
                 regNav.ulazIDBroj(newValue);
                 setTimeoutKomboIDBroj();
@@ -612,9 +612,9 @@
 
     function promijeniZapis(noviIDBroj, funkError) {
         $(".Overlay").addClass("visible");
-        data.saveChanges();
-        currentBrojid(noviIDBroj);
-        return data.getExportFullKartica(noviIDBroj, transferKartica)
+        dataService.saveChanges();
+        dataService.currentBrojid(noviIDBroj);
+        return dataService.getExportFullKartica(noviIDBroj, transferKartica)
             .then(function () {
                 getKartica(noviIDBroj).then(function () {
                     router.navigate(adresaZaUpis + noviIDBroj, false);
@@ -663,7 +663,7 @@
         //recIndex(0);
         //currentBrojid(selZaKomboOdabirInvBroja()[recIndex()]['ID_Broj']);
         upisNavigator.navFirst().then(function (brojid) {
-            currentBrojid(brojid);
+            dataService.currentBrojid(brojid);
             regNav.ulazIDBroj(brojid);
         })
 
@@ -671,21 +671,21 @@
     ///// za upis navigator
     function navLast() {
         upisNavigator.navLast().then(function (brojid) {
-            currentBrojid(brojid);
+            dataService.currentBrojid(brojid);
             regNav.ulazIDBroj(brojid);
         })
     }
     ///// za upis navigator
     function navPrev() {
         upisNavigator.navPrev().then(function (brojid) {
-            currentBrojid(brojid);
+            dataService.currentBrojid(brojid);
             regNav.ulazIDBroj(brojid);
         })
     }
     ///// za upis navigator
     function navNext() {
         upisNavigator.navNext().then(function (brojid) {
-            currentBrojid(brojid);
+            dataService.currentBrojid(brojid);
             regNav.ulazIDBroj(brojid);
         })
     }
@@ -696,14 +696,14 @@
     function regPrev() {
         
         regNav.regPrev().then(function (brojid) {
-            currentBrojid(brojid);
+            dataService.currentBrojid(brojid);
             upisNavigator.ulazIDBroj(brojid);
         })
     }
         ///// za upis navigator
     function regNext() {
         regNav.regNext().then(function (brojid) {
-            currentBrojid(brojid);
+            dataService.currentBrojid(brojid);
             upisNavigator.ulazIDBroj(brojid);
         })
     }
@@ -714,12 +714,12 @@
         var ber = Q.defer();
         var brojid = y;
        
-        console.log('getKartica' + currentBrojid());
+        console.log('getKartica' + dataService.currentBrojid());
         ////u upisNavigator!!
-        if (currentBrojid() != undefined) {
-            if (!isNaN(parseInt(currentBrojid()))) {
+        if (dataService.currentBrojid() != undefined) {
+            if (!isNaN(parseInt(dataService.currentBrojid()))) {
               
-                brojid = parseInt(currentBrojid());
+                brojid = parseInt(dataService.currentBrojid());
               // alert("parseInt " + brojid);
             }
         } else {
@@ -763,7 +763,7 @@
  //// dio ua upis Navigaciju
         if (upisNavigator.selZaKomboOdabirInvBroja().length == 0 || !upisNavigator.selZaKomboOdabirInvBroja) {
             //alert("getnavrekordz" + zbIndex());
-            data.getNavRecords(zbIndex(), upisNavigator.selZaKomboOdabirInvBroja).then(function () { recMax(upisNavigator.selZaKomboOdabirInvBroja().length); });
+            dataService.getNavRecords(zbIndex(), upisNavigator.selZaKomboOdabirInvBroja).then(function () { recMax(upisNavigator.selZaKomboOdabirInvBroja().length); });
         };
 
 
@@ -772,7 +772,7 @@
        // alert(manualNav);
         if (!manualNav) {
             //alert('ček malo broj zapisa...');
-            recIndex(findFirst(upisNavigator.selZaKomboOdabirInvBroja(), currentBrojid()));
+            recIndex(findFirst(upisNavigator.selZaKomboOdabirInvBroja(), dataService.currentBrojid()));
         };
 
 
@@ -816,13 +816,13 @@
         var neIdiNaPrvi = true;
         //alert(!neIdiNaPrvi + " st1");
             
-        data.postCreateNoviZapis(zb, inv)
+        dataService.postCreateNoviZapis(zb, inv)
         .then(function (noviIDBroj) {
             //alert('gotov dataservice');
             forceSrediZbirka(true);
             zbIndex(zb);
             
-            currentBrojid(noviIDBroj);
+            dataService.currentBrojid(noviIDBroj);
 
             
         }).then(function () { neIdiNaPrvi = false; });
@@ -968,7 +968,7 @@
         if (katalogMode || upisNavigator.recMax()==1) return false;
         var x = confirm('Želite li izbrisati zapis?');
         if (x) {
-            var oldIDBroj = currentBrojid();
+            var oldIDBroj = dataService.currentBrojid();
 
             if (upisNavigator.recIndex() > 1) {
                 navPrev();
@@ -978,11 +978,11 @@
  
             var tablice = ['tbl_Izrada', 'tbl_Mjere', 'tbl_Nazivi', 'tbl_Inventarizacija', 'tbl_Kataloska_jedinica', 'tbl_Kljucne_rijeci', 'tbl_Knjiga_ulaska', 'tbl_Media_collector', 'tbl_Naslovi', 'tbl_Natpisi_i_oznake', 'tbl_Ocuvanost', 'tbl_Pripadnosti', 'tbl_Reference', 'tbl_Sadrzaj', 'tbl_Vrijednosti', 'tbl_U_Materijali_u_dijelovima'];
             $.each(tablice, function (indes,pData) {
-                data.delRowsByID(pData, oldIDBroj);
+                dataService.delRowsByID(pData, oldIDBroj);
             })
 
-            data.delRowByID("tbl_Kartica", oldIDBroj).then(function () {
-                data.saveChanges().then(function () {
+            dataService.delRowByID("tbl_Kartica", oldIDBroj).then(function () {
+                dataService.saveChanges().then(function () {
                     upisNavigator.forceRefreshPoIDBroju();
                 })
             })
@@ -1026,7 +1026,7 @@
             } else {
                 id = x.data()[odabrano]['ID']();
             }
-            data.delRowByID(tablica, id).then(function () { ber.resolve(true) });
+            dataService.delRowByID(tablica, id).then(function () { ber.resolve(true) });
 
             return ber.promise;
         }
@@ -1038,7 +1038,7 @@
 
     function refreshNavigacijuZaRegistraciju() {
         return regNav.navigacijaZaRegistraciju(zbIndex()).then(function () {
-            regNav.podaciZaRegistraciju()[0].sync(currentBrojid());
+            regNav.podaciZaRegistraciju()[0].sync(dataService.currentBrojid());
         })
     }
 
@@ -1091,7 +1091,7 @@
                    .then(function (x) { return saveX(x); })
                    //.then(function (x) { return treciDio(x); })
                    //.then(function (x) { return saveX(x); })
-                   .then(function () { return data.getFullMmedia(currentBrojid(), selMmedia); }).then(function () { postaviPrviMedia();return true; });
+                   .then(function () { return dataService.getFullMmedia(dataService.currentBrojid(), selMmedia); }).then(function () { postaviPrviMedia(); return true; });
             }
 
 
@@ -1131,7 +1131,7 @@
            var pro = Q.defer();
            //alert('saveX');
            getEntities().then(function (n) {
-               data.saveChangesLimited(n).then(function () {
+               dataService.saveChangesLimited(n).then(function () {
                    pro.resolve(x);
                });
            }).fail(function () { alert('kriivoo'); });
@@ -1258,7 +1258,7 @@
         function popraviMmediju() {
             var ber = Q.defer();
             //alert('idempopravljat');
-            data.fixMmediju(currentBrojid()).then(function (reza) {  ber.resolve(reza); }).fail(function () { alert('nijeprošo'); });
+            dataService.fixMmediju(dataService.currentBrojid()).then(function (reza) { ber.resolve(reza); }).fail(function () { alert('nijeprošo'); });
             return ber.promise;
         }
 
@@ -1266,7 +1266,7 @@
             var ber = Q.defer();
             // alert('idemspremat');
             imeZbirke().then(function (imeZ) {
-                data.createMmediju(currentBrojid(), imeZ[0]['Zbirka'], photke)
+                dataService.createMmediju(dataService.currentBrojid(), imeZ[0]['Zbirka'], photke)
                     .then(function () { ber.resolve(true); })
                     .fail(function () { alert('nijeprošo'); });
             })
@@ -1302,7 +1302,7 @@
             i++;
         })
 
-        data.parametri.upisiParametar("S_WEB_FORME", tmpForme);
+        dataService.parametri.upisiParametar("S_WEB_FORME", tmpForme);
 
         lockInput();
     }
@@ -1314,7 +1314,7 @@
     function imeZbirke() {
         var ferd = Q.defer();
         var imeZ=ko.observable("");
-        data.getImeZbirke(currentBrojid(), imeZ)
+        dataService.getImeZbirke(dataService.currentBrojid(), imeZ)
         .then(function () { ferd.resolve(imeZ()); })
         
 
@@ -1369,7 +1369,7 @@
                 $("#uploadStart").modal('show');
                 ber.resolve(false);
             } else {
-                data.createZapisExt(x.tablica(), currentBrojid(), x.data).then(ber.resolve(true));
+                dataService.createZapisExt(x.tablica(), dataService.currentBrojid(), x.data).then(ber.resolve(true));
             }
             return ber.promise;
         }
